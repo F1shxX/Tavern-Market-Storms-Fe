@@ -46,7 +46,7 @@ button {
 
 #app {
   width: min(100%, 430px);
-  min-height: 100dvh;
+  height: 100dvh;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -71,8 +71,10 @@ button {
 .screen {
   position: relative;
   z-index: 1;
-  min-height: 100dvh;
-  padding: 16px 14px 92px;
+  height: 100dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 14px 118px;
 }
 
 .screen.no-nav {
@@ -173,7 +175,7 @@ button {
 
 .panel {
   padding: 14px;
-  margin: 12px 0;
+  margin: 10px 0;
 }
 
 .notice-panel {
@@ -184,7 +186,7 @@ button {
   display: flex;
   gap: 8px;
   align-items: flex-start;
-  margin: 7px 0;
+  margin: 5px 0;
   font-size: 14px;
   font-weight: 900;
   line-height: 1.35;
@@ -200,7 +202,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin: 14px 0 8px;
+  margin: 12px 0 8px;
 }
 
 .section-title {
@@ -227,7 +229,7 @@ button {
 }
 
 .stat-box {
-  min-height: 132px;
+  min-height: 112px;
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -242,7 +244,7 @@ button {
 
 .stat-main {
   margin-top: 8px;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 1000;
   line-height: 1.1;
 }
@@ -267,6 +269,10 @@ button {
   grid-template-columns: 95px 1fr;
   gap: 12px;
   align-items: center;
+}
+
+.home-streamer {
+  padding: 10px;
 }
 
 .speech {
@@ -303,6 +309,12 @@ button {
   width: 108px;
   height: 108px;
   border-radius: 22px;
+}
+
+.home-streamer .avatar.large {
+  width: 84px;
+  height: 84px;
+  border-radius: 18px;
 }
 
 .market-list {

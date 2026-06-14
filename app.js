@@ -357,7 +357,7 @@ function renderHome() {
         </div>
       </div>
 
-      <div class="panel streamer-wall">
+      <div class="panel streamer-wall home-streamer">
         <img class="avatar large" src="${holdingTarget.avatar}" alt="${holdingTarget.name}" />
         <div>
           <div class="section-title">主播便墙</div>
