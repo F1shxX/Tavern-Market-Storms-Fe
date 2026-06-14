@@ -13,8 +13,16 @@ const { chromium } = require("playwright");
   });
   await page.waitForTimeout(250);
   const after = await page.locator(".market-row").first().boundingBox();
+  const nav = await page.locator(".nav").boundingBox();
+  const detailButton = await page.getByRole("button", { name: "详情" }).first().boundingBox();
   if (!before || !after || after.y >= before.y) {
     throw new Error("Home market list did not move upward after scrolling.");
+  }
+  if (!nav || nav.y < 740) {
+    throw new Error("Bottom navigation is not fixed near the viewport bottom.");
+  }
+  if (detailButton && nav && detailButton.y + detailButton.height > nav.y) {
+    throw new Error("Bottom navigation overlaps the first market row action buttons.");
   }
   await page.screenshot({ path: "demo-home-scroll-check.png", fullPage: true });
   await browser.close();
