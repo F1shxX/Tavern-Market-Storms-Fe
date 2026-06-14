@@ -1,0 +1,12 @@
+{
+  "name": "tavern-market-storms-fe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "python -m http.server 5178",
+    "verify": "node scripts/verify-demo.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
+  }
+}
