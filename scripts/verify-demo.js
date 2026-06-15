@@ -25,7 +25,7 @@ const { chromium } = require("playwright");
   await page.getByRole("button", { name: "← 返回" }).click();
   await page.getByRole("button", { name: "持仓", exact: true }).click();
   await page.getByText("总资产").waitFor({ timeout: 3000 });
-  await page.getByRole("button", { name: "收益", exact: true }).click();
+  await page.getByRole("button", { name: "排名", exact: true }).click();
   await page.getByText("玩家收益榜").waitFor({ timeout: 3000 });
   await page.screenshot({ path: "demo-mobile-check.png", fullPage: true });
 

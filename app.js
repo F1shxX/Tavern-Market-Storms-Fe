@@ -71,6 +71,76 @@ const seedTargets = [
     avatar: "./assets/avatars/stormbard.svg",
     quote: "大盘领唱位，短线情绪最强。",
     trend: [16.8, 17.2, 16.95, 17.5, 17.7, 18.0, 18.4]
+  },
+  {
+    id: "ravenmage",
+    code: "TM-006",
+    name: "寒鸦法师",
+    alias: "Ravenmage",
+    price: 8.9,
+    prevClose: 9.42,
+    score: 8900,
+    volume: 2940,
+    heat: 58,
+    avatar: "./assets/avatars/moonfox.svg",
+    quote: "节奏暂缓，观望情绪明显。",
+    trend: [9.8, 9.62, 9.54, 9.4, 9.22, 9.05, 8.9]
+  },
+  {
+    id: "barrelguard",
+    code: "TM-007",
+    name: "秘银酒桶",
+    alias: "Barrel Guard",
+    price: 13.2,
+    prevClose: 13.65,
+    score: 13200,
+    volume: 3380,
+    heat: 61,
+    avatar: "./assets/avatars/bronzebeard.svg",
+    quote: "防守局偏多，短线热度回落。",
+    trend: [14.1, 13.95, 13.82, 13.6, 13.5, 13.35, 13.2]
+  },
+  {
+    id: "alleypriest",
+    code: "TM-008",
+    name: "暗巷牧师",
+    alias: "Alley Priest",
+    price: 6.4,
+    prevClose: 6.9,
+    score: 6400,
+    volume: 2450,
+    heat: 49,
+    avatar: "./assets/avatars/evenlock.svg",
+    quote: "夜场失手，粉丝等下一轮反弹。",
+    trend: [7.1, 7.0, 6.92, 6.85, 6.72, 6.58, 6.4]
+  },
+  {
+    id: "frostcook",
+    code: "TM-009",
+    name: "霜锅厨娘",
+    alias: "Frost Cook",
+    price: 10.1,
+    prevClose: 10.52,
+    score: 10100,
+    volume: 3020,
+    heat: 55,
+    avatar: "./assets/avatars/embercat.svg",
+    quote: "整活未达预期，热度小幅降温。",
+    trend: [10.9, 10.74, 10.62, 10.48, 10.34, 10.2, 10.1]
+  },
+  {
+    id: "fogrogue",
+    code: "TM-010",
+    name: "雾港盗贼",
+    alias: "Fog Rogue",
+    price: 11.2,
+    prevClose: 11.64,
+    score: 11200,
+    volume: 3180,
+    heat: 57,
+    avatar: "./assets/avatars/stormbard.svg",
+    quote: "连败后调整阵容，等待明日开盘。",
+    trend: [12.0, 11.86, 11.72, 11.6, 11.46, 11.33, 11.2]
   }
 ];
 
@@ -303,11 +373,11 @@ function renderTopbar(title, subtitle = "Streamer Stock Trade") {
 
 function renderNav() {
   const tabs = [
-    ["home", "首页"],
+    ["home", "交易"],
     ["markets", "行情"],
     ["holdings", "持仓"],
-    ["rankings", "收益"],
-    ["announcements", "公告"]
+    ["rankings", "排名"],
+    ["announcements", "社区"]
   ];
   return `
     <nav class="nav">
@@ -322,58 +392,36 @@ function renderNav() {
 }
 
 function renderHome() {
-  const holding = topHolding();
-  const holdingTarget = holding ? getTarget(holding.id) : getTarget("evenlock");
-  const leaders = [...targets()].sort((a, b) => changePercent(b) - changePercent(a)).slice(0, 3);
+  const gainers = topGainers();
+  const losers = topLosers();
+  const indexValue = totalMarketIndex();
+  const indexMove = marketMove();
   return `
-    <section class="screen">
-      ${renderTopbar("Tavern<br>Market", "炉市风云 Demo")}
-      <div class="panel notice-panel">
-        <div class="section-title">官方公告</div>
-        <div class="notice-line"><b>【成盟总结】</b><span>今日大盘波动 ${price(marketMove())}% ，收盘术领发。</span></div>
-        <div class="notice-line"><b>【停牌通知】</b><span>TM-003 数据异常，已切换人工复核。</span></div>
-        <div class="notice-line"><b>【活动】</b><span>完成首次交易，赠送 1000 金币体验金。</span></div>
-      </div>
-
-      <div class="section-heading">
-        <div class="section-title">玩家晒单区</div>
-        <button class="mini-btn" data-action="simulate">刷新行情</button>
-      </div>
-      <div class="dashboard-grid">
-        <div class="panel stat-box">
-          <div class="stat-label">持仓图览</div>
-          <div class="stat-main">${holding ? holding.holding.quantity : 0}<span style="font-size:18px">股</span></div>
-          <div class="stat-note">${holdingTarget.name}</div>
-          <div class="${holding && holding.profit >= 0 ? "profit" : "loss"} stat-note">收益：${holding ? formatSignedCoins(holding.profit) : "0 金币"}</div>
+    <section class="screen home-screen">
+      <header class="market-header">
+        <button class="mini-btn back-chip" data-action="simulate">刷新</button>
+        <div class="home-title gold-text">炉石股神</div>
+        <div class="home-date">2026.06.15</div>
+        <div class="home-balance">
+          <span>${money(state.balance)}</span>
+          <strong>金币</strong>
         </div>
-        <div class="panel stat-box">
-          <div class="stat-label">收益榜</div>
-          ${leaders
-            .map(
-              (item, index) =>
-                `<div class="notice-line"><b>${index + 1}</b><span>${item.name}<br><strong class="value-gold">${money(item.score)} 金币</strong></span></div>`
-            )
-            .join("")}
+      </header>
+
+      <div class="panel market-board">
+        <div class="index-card">
+          <div class="index-label gold-text">实时大盘总指数</div>
+          <div class="index-value">${price(indexValue)}</div>
+          <div class="index-change ${indexMove >= 0 ? "up" : "down"}">${indexMove >= 0 ? "+" : ""}${price(indexMove)}% ${indexMove >= 0 ? "⬆" : "⬇"}</div>
+        </div>
+        <div class="home-rank-grid">
+          ${renderHomeRankList("涨幅榜", "TOP5", gainers, "up")}
+          ${renderHomeRankList("跌幅榜", "TOP5", losers, "down")}
         </div>
       </div>
 
-      <div class="panel streamer-wall home-streamer">
-        <img class="avatar large" src="${holdingTarget.avatar}" alt="${holdingTarget.name}" />
-        <div>
-          <div class="section-title">主播便墙</div>
-          <div class="speech">${holdingTarget.name}：${holdingTarget.quote}</div>
-        </div>
-      </div>
-
-      <div class="section-heading">
-        <div class="section-title">热门标的</div>
-        <button class="mini-btn" data-action="tab" data-tab="markets">全部行情</button>
-      </div>
-      <div class="market-list">
-        ${targets()
-          .slice(0, 3)
-          .map((target) => renderMarketRow(target))
-          .join("")}
+      <div class="home-disclaimer">
+        纯娱乐模拟数据，不涉及充值、提现或真实金融交易。
       </div>
       ${renderNav()}
       ${renderToast()}
@@ -381,9 +429,45 @@ function renderHome() {
   `;
 }
 
+function totalMarketIndex() {
+  const avgPrice = targets().reduce((sum, target) => sum + target.price, 0) / targets().length;
+  return avgPrice * 100;
+}
+
 function marketMove() {
   const avg = targets().reduce((sum, target) => sum + changePercent(target), 0) / targets().length;
   return avg;
+}
+
+function topGainers() {
+  return [...targets()].sort((a, b) => changePercent(b) - changePercent(a)).slice(0, 5);
+}
+
+function topLosers() {
+  const negative = targets().filter((target) => changePercent(target) < 0);
+  const source = negative.length >= 5 ? negative : targets();
+  return [...source].sort((a, b) => changePercent(a) - changePercent(b)).slice(0, 5);
+}
+
+function renderHomeRankList(title, badge, items, tone) {
+  return `
+    <section class="home-rank-panel ${tone}">
+      <div class="home-rank-title"><span>${title}</span><b>${badge}</b></div>
+      ${items
+        .map((item, index) => {
+          const change = changePercent(item);
+          return `
+            <button class="home-rank-item" data-action="detail" data-id="${item.id}">
+              <span class="home-rank-index">${index + 1}.</span>
+              <span class="home-rank-name">${item.name}</span>
+              <span class="home-rank-price">${price(item.price)}</span>
+              <span class="home-rank-change">${change >= 0 ? "+" : ""}${price(change)}%</span>
+            </button>
+          `;
+        })
+        .join("")}
+    </section>
+  `;
 }
 
 function formatSignedCoins(value) {

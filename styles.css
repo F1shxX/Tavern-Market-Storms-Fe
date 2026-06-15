@@ -81,6 +81,11 @@ button {
   padding-bottom: 28px;
 }
 
+.home-screen {
+  padding-top: 14px;
+  overflow: hidden;
+}
+
 .topbar {
   min-height: 54px;
   display: flex;
@@ -180,6 +185,204 @@ button {
 
 .notice-panel {
   padding: 14px 16px;
+}
+
+.market-header {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  grid-template-areas:
+    "back title balance"
+    "back date balance";
+  align-items: center;
+  gap: 4px 10px;
+  margin: 2px 0 12px;
+}
+
+.back-chip {
+  grid-area: back;
+  align-self: start;
+  min-height: 34px;
+}
+
+.home-title {
+  grid-area: title;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 1000;
+}
+
+.home-date {
+  grid-area: date;
+  color: #fff5bd;
+  font-size: 16px;
+  font-weight: 1000;
+  text-shadow: 0 2px 0 #5b2913;
+}
+
+.home-balance {
+  grid-area: balance;
+  text-align: right;
+  color: var(--gold-1);
+  text-shadow: 0 2px 0 #5b2913;
+}
+
+.home-balance span,
+.home-balance strong {
+  display: block;
+  font-weight: 1000;
+}
+
+.home-balance span {
+  font-size: 27px;
+  line-height: 1;
+}
+
+.home-balance strong {
+  font-size: 18px;
+}
+
+.market-board {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 24px;
+}
+
+.index-card {
+  min-height: 164px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  margin-bottom: 12px;
+  border: 2px solid rgba(116, 189, 250, 0.48);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(4, 26, 62, 0.72), rgba(13, 55, 111, 0.84));
+  box-shadow: inset 0 0 24px rgba(110, 189, 255, 0.22);
+}
+
+.index-label {
+  font-size: 24px;
+  font-weight: 1000;
+}
+
+.index-value {
+  color: var(--gold-2);
+  font-size: clamp(54px, 18vw, 78px);
+  line-height: 0.98;
+  font-weight: 1000;
+  text-shadow:
+    0 4px 0 #6b3212,
+    0 0 16px rgba(255, 214, 106, 0.35);
+}
+
+.index-change {
+  margin-top: 2px;
+  font-size: 27px;
+  font-weight: 1000;
+}
+
+.home-rank-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.home-rank-panel {
+  min-width: 0;
+  padding: 0 0 8px;
+  overflow: hidden;
+  border: 2px solid rgba(72, 146, 214, 0.5);
+  border-radius: 16px;
+  background: rgba(2, 19, 48, 0.58);
+  box-shadow: inset 0 0 18px rgba(52, 136, 219, 0.2);
+}
+
+.home-rank-title {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(1, 13, 34, 0.74);
+  color: var(--gold-1);
+  text-shadow: 0 2px 0 #5b2913;
+}
+
+.home-rank-title span {
+  font-size: 21px;
+  font-weight: 1000;
+}
+
+.home-rank-title b {
+  font-size: 15px;
+}
+
+.home-rank-item {
+  width: 100%;
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-template-areas:
+    "idx name"
+    "idx data";
+  gap: 0 4px;
+  align-items: center;
+  padding: 6px 8px;
+  border-top: 1px solid rgba(109, 181, 241, 0.16);
+  background: transparent;
+  text-align: left;
+}
+
+.home-rank-index {
+  grid-area: idx;
+  align-self: start;
+  padding-top: 4px;
+  font-size: 21px;
+  font-weight: 1000;
+}
+
+.home-rank-name {
+  grid-area: name;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 1000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-rank-price,
+.home-rank-change {
+  grid-area: data;
+  font-size: 13px;
+  font-weight: 1000;
+}
+
+.home-rank-price {
+  color: #fff5bd;
+}
+
+.home-rank-change {
+  justify-self: end;
+}
+
+.home-rank-panel.up .home-rank-index,
+.home-rank-panel.up .home-rank-change {
+  color: var(--red);
+}
+
+.home-rank-panel.down .home-rank-index,
+.home-rank-panel.down .home-rank-change {
+  color: var(--green);
+}
+
+.home-disclaimer {
+  margin-top: 9px;
+  color: rgba(216, 235, 255, 0.76);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
 }
 
 .notice-line {

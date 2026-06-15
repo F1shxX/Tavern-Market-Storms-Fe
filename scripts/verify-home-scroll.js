@@ -6,23 +6,19 @@ const { chromium } = require("playwright");
   });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true });
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
-  await page.getByText("热门标的").waitFor({ timeout: 3000 });
-  const before = await page.locator(".market-row").first().boundingBox();
-  await page.locator(".screen").evaluate((node) => {
-    node.scrollTop = node.scrollHeight;
-  });
-  await page.waitForTimeout(250);
-  const after = await page.locator(".market-row").first().boundingBox();
-  const nav = await page.locator(".nav").boundingBox();
-  const detailButton = await page.getByRole("button", { name: "详情" }).first().boundingBox();
-  if (!before || !after || after.y >= before.y) {
-    throw new Error("Home market list did not move upward after scrolling.");
+  await page.getByText("实时大盘总指数").waitFor({ timeout: 3000 });
+  await page.getByText("涨幅榜").waitFor({ timeout: 3000 });
+  await page.getByText("跌幅榜").waitFor({ timeout: 3000 });
+  await page.getByRole("button", { name: "排名", exact: true }).waitFor({ timeout: 3000 });
+  if (await page.getByText("官方公告").count()) {
+    throw new Error("Home screen should not show official announcement block.");
   }
+  if (await page.getByText("玩家晒单区").count()) {
+    throw new Error("Home screen should not show personal sharing block.");
+  }
+  const nav = await page.locator(".nav").boundingBox();
   if (!nav || nav.y < 740) {
     throw new Error("Bottom navigation is not fixed near the viewport bottom.");
-  }
-  if (detailButton && nav && detailButton.y + detailButton.height > nav.y) {
-    throw new Error("Bottom navigation overlaps the first market row action buttons.");
   }
   await page.screenshot({ path: "demo-home-scroll-check.png", fullPage: true });
   await browser.close();
