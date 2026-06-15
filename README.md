@@ -8,6 +8,7 @@ Frontend repository for Tavern Market Storms.
 - [Development Schedule](docs/DEVELOPMENT_SCHEDULE.md)
 - [Asset Requirements](docs/ASSET_REQUIREMENTS.md)
 - [API Contract Draft](docs/API_CONTRACT_DRAFT.md)
+- [OpenSpec Workflow](docs/OPENSPEC_WORKFLOW.md)
 
 ## Demo
 
