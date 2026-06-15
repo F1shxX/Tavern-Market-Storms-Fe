@@ -1,157 +1,809 @@
-const STORAGE_KEY = "tavern-market-storms-demo-state-v1";
+const STORAGE_KEY = "tavern-market-storms-demo-state-v2";
 const FEE_RATE = 0.001;
 
 const seedTargets = [
   {
-    id: "evenlock",
-    code: "TM-001",
-    name: "夜契术士",
-    alias: "Evenlock",
-    price: 12.5,
-    prevClose: 12.35,
-    score: 12500,
-    volume: 5240,
-    heat: 85,
-    avatar: "./assets/avatars/evenlock.svg",
-    quote: "酒馆夜场拉满，控场节奏稳定。",
-    trend: [10.8, 11.9, 12.25, 12.05, 11.7, 12.18, 12.5]
+    "id": "stock-001",
+    "code": "TM-001",
+    "name": "豆豆农场",
+    "alias": "炉石豆哥",
+    "price": 7.38,
+    "prevClose": 7.56,
+    "score": 7380,
+    "volume": 2630,
+    "heat": 55,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "炉石豆哥 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      7.19,
+      7.28,
+      7.37,
+      7.39,
+      7.48,
+      7.57,
+      7.38
+    ]
   },
   {
-    id: "bronzebeard",
-    code: "TM-002",
-    name: "铜须酒保",
-    alias: "Bronze Tap",
-    price: 9.8,
-    prevClose: 10.22,
-    score: 9800,
-    volume: 4210,
-    heat: 72,
-    avatar: "./assets/avatars/bronzebeard.svg",
-    quote: "今日手气偏冷，粉丝仍在加仓观望。",
-    trend: [10.5, 10.35, 10.2, 10.4, 10.1, 9.95, 9.8]
+    "id": "stock-002",
+    "code": "TM-002",
+    "name": "可可林业",
+    "alias": "林可",
+    "price": 8.56,
+    "prevClose": 9.24,
+    "score": 8560,
+    "volume": 3060,
+    "heat": 62,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "林可 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      8.92,
+      9.0,
+      9.01,
+      9.1,
+      9.18,
+      9.27,
+      8.56
+    ]
   },
   {
-    id: "moonfox",
-    code: "TM-003",
-    name: "月狐占星",
-    alias: "Moonfox",
-    price: 15.2,
-    prevClose: 14.62,
-    score: 15200,
-    volume: 6820,
-    heat: 94,
-    avatar: "./assets/avatars/moonfox.svg",
-    quote: "连胜预言命中，弹幕热度飙升。",
-    trend: [13.8, 14.2, 14.0, 14.6, 14.9, 14.75, 15.2]
+    "id": "stock-003",
+    "code": "TM-003",
+    "name": "风和电力",
+    "alias": "郭风荷",
+    "price": 9.74,
+    "prevClose": 8.99,
+    "score": 9740,
+    "volume": 3490,
+    "heat": 69,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "郭风荷 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      8.8,
+      8.79,
+      8.85,
+      8.91,
+      8.97,
+      8.96,
+      9.74
+    ]
   },
   {
-    id: "embercat",
-    code: "TM-004",
-    name: "烬尾猫团",
-    alias: "Embercat",
-    price: 7.6,
-    prevClose: 7.48,
-    score: 7600,
-    volume: 3150,
-    heat: 66,
-    avatar: "./assets/avatars/embercat.svg",
-    quote: "低位反弹，适合小额试水。",
-    trend: [7.1, 7.24, 7.18, 7.4, 7.32, 7.55, 7.6]
+    "id": "stock-004",
+    "code": "TM-004",
+    "name": "L灯业",
+    "alias": "lighting",
+    "price": 10.92,
+    "prevClose": 10.79,
+    "score": 10920,
+    "volume": 3920,
+    "heat": 76,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "lighting 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      10.63,
+      10.68,
+      10.72,
+      10.77,
+      10.74,
+      10.78,
+      10.92
+    ]
   },
   {
-    id: "stormbard",
-    code: "TM-005",
-    name: "风暴吟游",
-    alias: "Stormbard",
-    price: 18.4,
-    prevClose: 17.62,
-    score: 18400,
-    volume: 7580,
-    heat: 97,
-    avatar: "./assets/avatars/stormbard.svg",
-    quote: "大盘领唱位，短线情绪最强。",
-    trend: [16.8, 17.2, 16.95, 17.5, 17.7, 18.0, 18.4]
+    "id": "stock-005",
+    "code": "TM-005",
+    "name": "幻领IT",
+    "alias": "幻林",
+    "price": 12.1,
+    "prevClose": 11.82,
+    "score": 12100,
+    "volume": 3050,
+    "heat": 83,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "幻林 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      11.1,
+      11.26,
+      11.42,
+      11.51,
+      11.67,
+      11.83,
+      12.1
+    ]
   },
   {
-    id: "ravenmage",
-    code: "TM-006",
-    name: "寒鸦法师",
-    alias: "Ravenmage",
-    price: 8.9,
-    prevClose: 9.42,
-    score: 8900,
-    volume: 2940,
-    heat: 58,
-    avatar: "./assets/avatars/moonfox.svg",
-    quote: "节奏暂缓，观望情绪明显。",
-    trend: [9.8, 9.62, 9.54, 9.4, 9.22, 9.05, 8.9]
+    "id": "stock-006",
+    "code": "TM-006",
+    "name": "达安集团",
+    "alias": "大安庄园",
+    "price": 13.28,
+    "prevClose": 14.01,
+    "score": 13280,
+    "volume": 3480,
+    "heat": 90,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "大安庄园 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      13.35,
+      13.5,
+      13.58,
+      13.73,
+      13.88,
+      14.04,
+      13.28
+    ]
   },
   {
-    id: "barrelguard",
-    code: "TM-007",
-    name: "秘银酒桶",
-    alias: "Barrel Guard",
-    price: 13.2,
-    prevClose: 13.65,
-    score: 13200,
-    volume: 3380,
-    heat: 61,
-    avatar: "./assets/avatars/bronzebeard.svg",
-    quote: "防守局偏多，短线热度回落。",
-    trend: [14.1, 13.95, 13.82, 13.6, 13.5, 13.35, 13.2]
+    "id": "stock-007",
+    "code": "TM-007",
+    "name": "俺的你男装",
+    "alias": "安德罗妮",
+    "price": 14.46,
+    "prevClose": 13.34,
+    "score": 14460,
+    "volume": 3910,
+    "heat": 50,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "安德罗妮 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      12.89,
+      12.93,
+      13.04,
+      13.16,
+      13.27,
+      13.31,
+      14.46
+    ]
   },
   {
-    id: "alleypriest",
-    code: "TM-008",
-    name: "暗巷牧师",
-    alias: "Alley Priest",
-    price: 6.4,
-    prevClose: 6.9,
-    score: 6400,
-    volume: 2450,
-    heat: 49,
-    avatar: "./assets/avatars/evenlock.svg",
-    quote: "夜场失手，粉丝等下一轮反弹。",
-    trend: [7.1, 7.0, 6.92, 6.85, 6.72, 6.58, 6.4]
+    "id": "stock-008",
+    "code": "TM-008",
+    "name": "风二动漫",
+    "alias": "风的二次救赎",
+    "price": 15.64,
+    "prevClose": 16.02,
+    "score": 15640,
+    "volume": 4340,
+    "heat": 57,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "风的二次救赎 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      15.61,
+      15.7,
+      15.8,
+      15.89,
+      15.92,
+      16.01,
+      15.64
+    ]
   },
   {
-    id: "frostcook",
-    code: "TM-009",
-    name: "霜锅厨娘",
-    alias: "Frost Cook",
-    price: 10.1,
-    prevClose: 10.52,
-    score: 10100,
-    volume: 3020,
-    heat: 55,
-    avatar: "./assets/avatars/embercat.svg",
-    quote: "整活未达预期，热度小幅降温。",
-    trend: [10.9, 10.74, 10.62, 10.48, 10.34, 10.2, 10.1]
+    "id": "stock-009",
+    "code": "TM-009",
+    "name": "呆呆动物园",
+    "alias": "呆呆兽",
+    "price": 6.75,
+    "prevClose": 6.83,
+    "score": 6750,
+    "volume": 4770,
+    "heat": 64,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "呆呆兽 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      6.74,
+      6.77,
+      6.81,
+      6.77,
+      6.8,
+      6.84,
+      6.75
+    ]
   },
   {
-    id: "fogrogue",
-    code: "TM-010",
-    name: "雾港盗贼",
-    alias: "Fog Rogue",
-    price: 11.2,
-    prevClose: 11.64,
-    score: 11200,
-    volume: 3180,
-    heat: 57,
-    avatar: "./assets/avatars/stormbard.svg",
-    quote: "连败后调整阵容，等待明日开盘。",
-    trend: [12.0, 11.86, 11.72, 11.6, 11.46, 11.33, 11.2]
+    "id": "stock-010",
+    "code": "TM-010",
+    "name": "隽籽教育",
+    "alias": "学妹",
+    "price": 7.93,
+    "prevClose": 7.86,
+    "score": 7930,
+    "volume": 3900,
+    "heat": 71,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "学妹 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      7.4,
+      7.51,
+      7.55,
+      7.66,
+      7.77,
+      7.89,
+      7.93
+    ]
+  },
+  {
+    "id": "stock-011",
+    "code": "TM-011",
+    "name": "黄香蕉果业",
+    "alias": "黄香蕉",
+    "price": 9.11,
+    "prevClose": 9.0,
+    "score": 9110,
+    "volume": 4330,
+    "heat": 78,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "黄香蕉 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      8.59,
+      8.63,
+      8.73,
+      8.84,
+      8.94,
+      8.97,
+      9.11
+    ]
+  },
+  {
+    "id": "stock-012",
+    "code": "TM-012",
+    "name": "AgO科技",
+    "alias": "阿尔法go",
+    "price": 10.29,
+    "prevClose": 10.85,
+    "score": 10290,
+    "volume": 4760,
+    "heat": 85,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "阿尔法go 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      10.43,
+      10.53,
+      10.62,
+      10.72,
+      10.74,
+      10.84,
+      10.29
+    ]
+  },
+  {
+    "id": "stock-013",
+    "code": "TM-013",
+    "name": "离伤传媒",
+    "alias": "虎牙终离殇",
+    "price": 11.47,
+    "prevClose": 10.74,
+    "score": 11470,
+    "volume": 5190,
+    "heat": 92,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "虎牙终离殇 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      10.47,
+      10.54,
+      10.61,
+      10.61,
+      10.68,
+      10.75,
+      11.47
+    ]
+  },
+  {
+    "id": "stock-014",
+    "code": "TM-014",
+    "name": "激速赛车",
+    "alias": "激情速八",
+    "price": 12.65,
+    "prevClose": 13.12,
+    "score": 12650,
+    "volume": 5620,
+    "heat": 52,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "激情速八 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      12.97,
+      13.02,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      12.65
+    ]
+  },
+  {
+    "id": "stock-015",
+    "code": "TM-015",
+    "name": "荣耀菜刀",
+    "alias": "刀锋上的荣耀",
+    "price": 13.83,
+    "prevClose": 14.17,
+    "score": 13830,
+    "volume": 4750,
+    "heat": 59,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "刀锋上的荣耀 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      13.35,
+      13.46,
+      13.65,
+      13.84,
+      14.03,
+      14.14,
+      13.83
+    ]
+  },
+  {
+    "id": "stock-016",
+    "code": "TM-016",
+    "name": "小浪宠物",
+    "alias": "小狼",
+    "price": 15.01,
+    "prevClose": 15.19,
+    "score": 15010,
+    "volume": 5180,
+    "heat": 66,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "小狼 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      14.43,
+      14.6,
+      14.76,
+      14.93,
+      15.02,
+      15.18,
+      15.01
+    ]
+  },
+  {
+    "id": "stock-017",
+    "code": "TM-017",
+    "name": "杰弗英语",
+    "alias": "jeff",
+    "price": 16.19,
+    "prevClose": 16.05,
+    "score": 16190,
+    "volume": 5610,
+    "heat": 73,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "jeff 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      15.46,
+      15.6,
+      15.73,
+      15.79,
+      15.93,
+      16.06,
+      16.19
+    ]
+  },
+  {
+    "id": "stock-018",
+    "code": "TM-018",
+    "name": "不如死保险",
+    "alias": "布鲁斯",
+    "price": 7.3,
+    "prevClose": 7.7,
+    "score": 7300,
+    "volume": 6040,
+    "heat": 80,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "布鲁斯 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      7.52,
+      7.58,
+      7.56,
+      7.62,
+      7.67,
+      7.73,
+      7.3
+    ]
+  },
+  {
+    "id": "stock-019",
+    "code": "TM-019",
+    "name": "尖尖运动",
+    "alias": "尖尖箭",
+    "price": 8.48,
+    "prevClose": 8.28,
+    "score": 8480,
+    "volume": 6470,
+    "heat": 87,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "尖尖箭 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      8.21,
+      8.17,
+      8.21,
+      8.25,
+      8.29,
+      8.25,
+      8.48
+    ]
+  },
+  {
+    "id": "stock-020",
+    "code": "TM-020",
+    "name": "贰呜呜传媒",
+    "alias": "211",
+    "price": 9.66,
+    "prevClose": 9.32,
+    "score": 9660,
+    "volume": 5600,
+    "heat": 94,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "211 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      8.73,
+      8.86,
+      8.99,
+      9.12,
+      9.18,
+      9.31,
+      9.66
+    ]
+  },
+  {
+    "id": "stock-021",
+    "code": "TM-021",
+    "name": "溪间旅业",
+    "alias": "溪流萤间",
+    "price": 10.84,
+    "prevClose": 10.15,
+    "score": 10840,
+    "volume": 6030,
+    "heat": 54,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "溪流萤间 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      9.65,
+      9.77,
+      9.88,
+      9.93,
+      10.04,
+      10.16,
+      10.84
+    ]
+  },
+  {
+    "id": "stock-022",
+    "code": "TM-022",
+    "name": "马乐邦体育",
+    "alias": "小马",
+    "price": 12.02,
+    "prevClose": 12.32,
+    "score": 12020,
+    "volume": 6460,
+    "heat": 61,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "小马 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      11.89,
+      11.99,
+      12.03,
+      12.13,
+      12.24,
+      12.35,
+      12.02
+    ]
+  },
+  {
+    "id": "stock-023",
+    "code": "TM-023",
+    "name": "基哥娱乐",
+    "alias": "基格沃斯",
+    "price": 13.2,
+    "prevClose": 13.36,
+    "score": 13200,
+    "volume": 6890,
+    "heat": 68,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "基格沃斯 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      13.07,
+      13.08,
+      13.16,
+      13.24,
+      13.32,
+      13.33,
+      13.2
+    ]
+  },
+  {
+    "id": "stock-024",
+    "code": "TM-024",
+    "name": "炮炮婚庆",
+    "alias": "有局炮炮",
+    "price": 14.38,
+    "prevClose": 15.17,
+    "score": 14380,
+    "volume": 7320,
+    "heat": 75,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "有局炮炮 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      14.96,
+      15.02,
+      15.07,
+      15.12,
+      15.11,
+      15.16,
+      14.38
+    ]
+  },
+  {
+    "id": "stock-025",
+    "code": "TM-025",
+    "name": "不在乎时尚",
+    "alias": "在乎",
+    "price": 15.56,
+    "prevClose": 15.38,
+    "score": 15560,
+    "volume": 6450,
+    "heat": 82,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "在乎 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      14.45,
+      14.65,
+      14.85,
+      14.98,
+      15.19,
+      15.39,
+      15.56
+    ]
+  },
+  {
+    "id": "stock-026",
+    "code": "TM-026",
+    "name": "鹿知道母婴",
+    "alias": "炉指导",
+    "price": 16.74,
+    "prevClose": 16.35,
+    "score": 16740,
+    "volume": 6880,
+    "heat": 89,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "炉指导 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      15.57,
+      15.75,
+      15.85,
+      16.03,
+      16.2,
+      16.38,
+      16.74
+    ]
+  },
+  {
+    "id": "stock-027",
+    "code": "TM-027",
+    "name": "春野摄影",
+    "alias": "春日野琼",
+    "price": 7.85,
+    "prevClose": 7.24,
+    "score": 7850,
+    "volume": 7310,
+    "heat": 49,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "春日野琼 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      7.01,
+      7.0,
+      7.07,
+      7.14,
+      7.21,
+      7.21,
+      7.85
+    ]
+  },
+  {
+    "id": "stock-028",
+    "code": "TM-028",
+    "name": "梦方药业",
+    "alias": "梦境彼方",
+    "price": 9.03,
+    "prevClose": 9.37,
+    "score": 9030,
+    "volume": 7740,
+    "heat": 56,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "梦境彼方 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      9.12,
+      9.18,
+      9.24,
+      9.31,
+      9.3,
+      9.36,
+      9.03
+    ]
+  },
+  {
+    "id": "stock-029",
+    "code": "TM-029",
+    "name": "汽汁山羊奶",
+    "alias": "七只羊",
+    "price": 10.21,
+    "prevClose": 10.46,
+    "score": 10210,
+    "volume": 8170,
+    "heat": 63,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "七只羊 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      10.33,
+      10.37,
+      10.41,
+      10.38,
+      10.43,
+      10.47,
+      10.21
+    ]
+  },
+  {
+    "id": "stock-030",
+    "code": "TM-030",
+    "name": "瓦力拉重工",
+    "alias": "瓦莉拉",
+    "price": 11.39,
+    "prevClose": 12.01,
+    "score": 11390,
+    "volume": 7300,
+    "heat": 70,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "瓦莉拉 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      11.3,
+      11.46,
+      11.55,
+      11.71,
+      11.87,
+      12.04,
+      11.39
+    ]
+  },
+  {
+    "id": "stock-031",
+    "code": "TM-031",
+    "name": "俺的兔童装",
+    "alias": "安德罗妮的学徒",
+    "price": 12.57,
+    "prevClose": 12.46,
+    "score": 12570,
+    "volume": 7730,
+    "heat": 77,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "安德罗妮的学徒 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      11.89,
+      11.95,
+      12.09,
+      12.23,
+      12.37,
+      12.43,
+      12.57
+    ]
+  },
+  {
+    "id": "stock-032",
+    "code": "TM-032",
+    "name": "米奇公园",
+    "alias": "米奇",
+    "price": 13.75,
+    "prevClose": 13.59,
+    "score": 13750,
+    "volume": 8160,
+    "heat": 84,
+    "avatar": "./assets/avatars/bronzebeard.svg",
+    "quote": "米奇 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      13.07,
+      13.19,
+      13.31,
+      13.42,
+      13.47,
+      13.58,
+      13.75
+    ]
+  },
+  {
+    "id": "stock-033",
+    "code": "TM-033",
+    "name": "小糯食品",
+    "alias": "小糯米",
+    "price": 14.93,
+    "prevClose": 14.58,
+    "score": 14930,
+    "volume": 8590,
+    "heat": 91,
+    "avatar": "./assets/avatars/moonfox.svg",
+    "quote": "小糯米 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      14.22,
+      14.31,
+      14.4,
+      14.41,
+      14.5,
+      14.59,
+      14.93
+    ]
+  },
+  {
+    "id": "stock-034",
+    "code": "TM-034",
+    "name": "墩墩养身",
+    "alias": "墩墩盾",
+    "price": 16.11,
+    "prevClose": 14.97,
+    "score": 16110,
+    "volume": 9020,
+    "heat": 51,
+    "avatar": "./assets/avatars/embercat.svg",
+    "quote": "墩墩盾 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      14.8,
+      14.85,
+      14.84,
+      14.89,
+      14.94,
+      15.0,
+      16.11
+    ]
+  },
+  {
+    "id": "stock-035",
+    "code": "TM-035",
+    "name": "白白羽绒服",
+    "alias": "白羽",
+    "price": 17.29,
+    "prevClose": 17.94,
+    "score": 17290,
+    "volume": 8150,
+    "heat": 58,
+    "avatar": "./assets/avatars/stormbard.svg",
+    "quote": "白羽 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      16.89,
+      17.05,
+      17.29,
+      17.52,
+      17.75,
+      17.91,
+      17.29
+    ]
+  },
+  {
+    "id": "stock-036",
+    "code": "TM-036",
+    "name": "野炊夜店",
+    "alias": "吹哥",
+    "price": 8.4,
+    "prevClose": 8.86,
+    "score": 8400,
+    "volume": 8580,
+    "heat": 65,
+    "avatar": "./assets/avatars/evenlock.svg",
+    "quote": "吹哥 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "trend": [
+      8.41,
+      8.51,
+      8.61,
+      8.72,
+      8.75,
+      8.85,
+      8.4
+    ]
   }
 ];
 
 const defaultState = {
   balance: 100000,
   holdings: {
-    evenlock: { quantity: 100, averageCost: 11.25 }
+    "stock-001": { quantity: 100, averageCost: 7.1 }
   },
   orders: [],
   activeTab: "home",
-  selectedId: "evenlock",
+  selectedId: "stock-001",
   view: "home",
   toast: ""
 };
@@ -162,11 +814,11 @@ function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!saved) return structuredClone(defaultState);
-    return {
+    return normalizeState({
       ...structuredClone(defaultState),
       ...saved,
       targets: mergeTargets(saved.targets)
-    };
+    });
   } catch {
     return structuredClone(defaultState);
   }
@@ -183,6 +835,21 @@ function mergeTargets(savedTargets) {
 function targets() {
   if (!state.targets) state.targets = structuredClone(seedTargets);
   return state.targets;
+}
+
+function normalizeState(nextState) {
+  const validIds = new Set(seedTargets.map((target) => target.id));
+  const holdings = {};
+  for (const [id, holding] of Object.entries(nextState.holdings || {})) {
+    if (validIds.has(id) && holding.quantity > 0) {
+      holdings[id] = holding;
+    }
+  }
+  if (!validIds.has(nextState.selectedId)) {
+    nextState.selectedId = seedTargets[0].id;
+  }
+  nextState.holdings = holdings;
+  return nextState;
 }
 
 function saveState() {
