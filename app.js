@@ -1144,39 +1144,60 @@ function formatSignedCoins(value) {
   return "0 金币";
 }
 
-function renderMarketRow(target) {
+function renderMarketRow(target, index) {
   const change = changePercent(target);
+  const tone = change >= 0 ? "up" : "down";
   return `
-    <article class="market-row">
-      <img class="avatar" src="${target.avatar}" alt="${target.name}" />
-      <div>
-        <div class="market-name gold-text">${target.name}</div>
-        <div class="market-code">${target.code} · 热度 ${target.heat}</div>
-        <div class="quick-actions">
-          <button class="mini-btn" data-action="detail" data-id="${target.id}">详情</button>
-          <button class="mini-btn" data-action="trade" data-id="${target.id}">交易</button>
-        </div>
-      </div>
-      <div class="price-stack">
-        <div class="price">${price(target.price)}</div>
-        <div class="change ${change >= 0 ? "up" : "down"}">${change >= 0 ? "+" : ""}${price(change)}%</div>
-      </div>
-    </article>
+    <tr>
+      <td class="col-rank">${index + 1}</td>
+      <td class="col-name">
+        <button class="stock-name-btn" data-action="detail" data-id="${target.id}">
+          <strong>${target.name}</strong>
+          <span>${target.code}</span>
+        </button>
+      </td>
+      <td class="col-price">${price(target.price)}</td>
+      <td class="col-change ${tone}">${change >= 0 ? "+" : ""}${price(change)}%</td>
+      <td class="col-volume">${money(target.volume)}</td>
+      <td class="col-heat">${target.heat}</td>
+      <td class="col-actions">
+        <button class="table-action" data-action="detail" data-id="${target.id}">详情</button>
+        <button class="table-action primary" data-action="trade" data-id="${target.id}">交易</button>
+      </td>
+    </tr>
   `;
 }
 
 function renderMarkets() {
   return `
-    <section class="screen">
+    <section class="screen market-table-screen">
       ${renderTopbar("Market", "行情大厅")}
-      <div class="section-heading">
-        <div class="section-title">主播指数榜</div>
+      <div class="section-heading table-heading">
+        <div>
+          <div class="section-title">主播指数榜</div>
+          <div class="table-note">36 支暂定股票 · 表格模式</div>
+        </div>
         <button class="mini-btn" data-action="simulate">刷新行情</button>
       </div>
-      <div class="market-list">
-        ${targets()
-          .map((target) => renderMarketRow(target))
-          .join("")}
+      <div class="stock-table-wrap">
+        <table class="stock-table">
+          <thead>
+            <tr>
+              <th>序</th>
+              <th>股票</th>
+              <th>现价</th>
+              <th>涨跌</th>
+              <th>成交</th>
+              <th>热度</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${targets()
+              .map((target, index) => renderMarketRow(target, index))
+              .join("")}
+          </tbody>
+        </table>
       </div>
       ${renderNav()}
       ${renderToast()}
