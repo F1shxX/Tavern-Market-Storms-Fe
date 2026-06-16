@@ -72,16 +72,17 @@ button {
 .screen {
   position: relative;
   z-index: 1;
-  height: 100dvh;
+  height: calc(100dvh - 62px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 16px 14px 118px;
+  padding: 16px 14px 24px;
   background:
     radial-gradient(circle at 50% 0%, rgba(243, 183, 78, 0.14), transparent 14rem),
     linear-gradient(180deg, rgba(48, 25, 13, 0.54), rgba(8, 5, 4, 0.1));
 }
 
 .screen.no-nav {
+  height: 100dvh;
   padding-bottom: 28px;
 }
 
@@ -97,7 +98,7 @@ button {
     radial-gradient(circle at 50% 0%, rgba(243, 183, 78, 0.22), transparent 12rem),
     linear-gradient(180deg, rgba(65, 35, 18, 0.98), rgba(19, 11, 8, 0.98) 55%, rgba(7, 6, 8, 0.98)),
     #21110b;
-  padding: 14px 12px 118px;
+  padding: 14px 12px 24px;
 }
 
 .market-table-screen .topbar {
@@ -1408,6 +1409,265 @@ button {
 
 .toast.show {
   display: block;
+}
+
+/* Nav-art aligned fantasy board styling */
+:root {
+  --cream: #fff4bf;
+  --cream-bright: #fff9d8;
+  --ink-outline: #3b1d08;
+  --wood-dark: #2a140f;
+  --wood-mid: #5c3020;
+  --wood-light: #7d4726;
+  --gold-frame: #f8c45b;
+  --gold-frame-dark: #8d531b;
+  --gem-blue: #16147d;
+  --gem-red: #c9271e;
+  --gem-green: #075b09;
+  --gem-purple: #4b0878;
+  --gem-orange: #c97a00;
+  --text-outline:
+    -1px -1px 0 var(--ink-outline),
+    1px -1px 0 var(--ink-outline),
+    -1px 1px 0 var(--ink-outline),
+    1px 1px 0 var(--ink-outline),
+    0 3px 0 var(--ink-outline),
+    0 0 9px rgba(255, 232, 153, 0.18);
+  --text-outline-soft:
+    -1px 0 0 var(--ink-outline),
+    1px 0 0 var(--ink-outline),
+    0 1px 0 var(--ink-outline),
+    0 2px 0 var(--ink-outline);
+}
+
+body {
+  color: var(--cream);
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
+  font-weight: 900;
+}
+
+#app {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 190, 71, 0.22), transparent 14rem),
+    linear-gradient(180deg, #3a1e14 0%, #170b08 54%, #080403 100%);
+}
+
+#app::before {
+  opacity: 0.18;
+}
+
+.screen,
+.market-table-screen {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 197, 80, 0.16), transparent 12rem),
+    linear-gradient(180deg, rgba(76, 41, 22, 0.8), rgba(14, 7, 5, 0.4));
+}
+
+.gold-text,
+.section-title,
+.hero-title,
+.home-title,
+.index-label,
+.trade-title,
+.detail-name,
+.market-name,
+.stat-label,
+.announcement h3,
+.home-rank-title,
+.detail-group-title,
+.group-main span {
+  color: var(--cream-bright);
+  -webkit-text-stroke: 0.4px var(--ink-outline);
+  text-shadow: var(--text-outline);
+}
+
+.hero-title,
+.home-title {
+  letter-spacing: 0;
+}
+
+.brand h2,
+.table-note,
+.home-date,
+.detail-code,
+.market-code,
+.stat-note,
+.holding-card p,
+.announcement p,
+.notice-line,
+.detail-copy {
+  color: #f2d89c;
+  text-shadow: var(--text-outline-soft);
+}
+
+.topbar,
+.market-table-screen .topbar,
+.panel,
+.market-row,
+.holding-card,
+.trade-card,
+.announcement,
+.rank-row,
+.market-board,
+.stock-table-wrap,
+.group-card,
+.home-rank-panel,
+.detail-group-card {
+  border-color: rgba(255, 210, 91, 0.78);
+  background:
+    linear-gradient(180deg, rgba(126, 70, 35, 0.96), rgba(56, 28, 18, 0.98) 18%, rgba(25, 12, 9, 0.99)),
+    var(--wood-dark);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 236, 164, 0.35),
+    inset 0 -4px 0 rgba(39, 15, 8, 0.68),
+    inset 0 0 0 2px rgba(96, 43, 17, 0.62),
+    0 10px 23px rgba(0, 0, 0, 0.38);
+}
+
+.market-board,
+.index-card,
+.home-rank-panel,
+.stock-table-wrap,
+.group-card {
+  border-radius: 12px;
+}
+
+.balance-pill,
+.stat-box,
+.summary-pill,
+.trade-meta div {
+  border: 2px solid rgba(255, 210, 91, 0.66);
+  background:
+    linear-gradient(180deg, rgba(79, 35, 82, 0.9), rgba(35, 16, 36, 0.95));
+  box-shadow:
+    inset 0 2px 0 rgba(255, 236, 164, 0.22),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.balance-pill strong,
+.home-balance,
+.index-value,
+.detail-price,
+.price,
+.stat-main,
+.summary-pill strong,
+.trade-meta strong,
+.rank-score,
+.col-price {
+  color: var(--cream-bright) !important;
+  -webkit-text-stroke: 0.45px var(--ink-outline);
+  text-shadow: var(--text-outline);
+}
+
+.index-card {
+  border: 3px solid rgba(255, 215, 103, 0.7);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 243, 174, 0.14), transparent 8rem),
+    linear-gradient(180deg, rgba(37, 45, 91, 0.96), rgba(17, 31, 74, 0.98));
+}
+
+.home-rank-title,
+.stock-table th {
+  background:
+    linear-gradient(180deg, #8a4a24, #5a2c18 52%, #2a130d);
+}
+
+.home-rank-name,
+.stock-name-btn .stock-title-text,
+.stock-table td,
+.group-member-chip {
+  color: var(--cream);
+  text-shadow: var(--text-outline-soft);
+}
+
+.home-rank-index,
+.home-rank-change,
+.col-change,
+.change,
+.profit,
+.loss {
+  -webkit-text-stroke: 0.3px #241005;
+  text-shadow: 0 2px 0 #241005;
+}
+
+.mini-btn,
+.btn,
+.table-action,
+.qty-step {
+  border: 2px solid rgba(255, 231, 142, 0.82);
+  border-radius: 10px;
+  color: var(--cream-bright);
+  -webkit-text-stroke: 0.35px var(--ink-outline);
+  text-shadow: var(--text-outline-soft);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.26),
+    0 5px 13px rgba(0, 0, 0, 0.34);
+}
+
+.mini-btn,
+.btn-blue,
+.qty-step {
+  background: linear-gradient(180deg, #2421a0, #111064);
+}
+
+.btn-gold,
+.table-action.primary {
+  background: linear-gradient(180deg, #f5b332, #b65b13);
+  color: var(--cream-bright);
+}
+
+.btn-red {
+  background: linear-gradient(180deg, #df3227, #8e1712);
+}
+
+.group-card.group-blue,
+.stock-table tbody tr.group-blue td:first-child {
+  border-color: rgba(97, 153, 255, 0.78);
+}
+
+.group-card.group-yellow,
+.stock-table tbody tr.group-yellow td:first-child {
+  border-color: rgba(255, 226, 106, 0.85);
+}
+
+.group-card.group-green,
+.stock-table tbody tr.group-green td:first-child {
+  border-color: rgba(104, 225, 103, 0.82);
+}
+
+.group-badge {
+  border: 1px solid rgba(59, 29, 8, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.stock-table td {
+  border-bottom-color: rgba(255, 199, 92, 0.26);
+}
+
+.stock-table tbody tr:nth-child(even) td {
+  background: rgba(52, 25, 17, 0.96);
+}
+
+.stock-table tbody tr:nth-child(odd) td {
+  background: rgba(36, 18, 13, 0.98);
+}
+
+.stock-table tbody tr.group-index-row td {
+  background: rgba(80, 42, 22, 0.99);
+}
+
+.qty-row input {
+  border: 3px solid rgba(255, 217, 106, 0.86);
+  background: #fff3c2;
+  color: #3c1b07;
+  text-shadow: none;
+}
+
+.toast {
+  border: 2px solid rgba(255, 218, 101, 0.86);
+  background: #fff2b6;
+  color: #4d2109;
 }
 
 @media (max-width: 370px) {
