@@ -1362,18 +1362,21 @@ function renderTopbar(title, subtitle = "Streamer Stock Trade") {
 
 function renderNav() {
   const tabs = [
-    ["home", "交易"],
-    ["markets", "行情"],
-    ["holdings", "持仓"],
-    ["rankings", "排名"],
-    ["announcements", "社区"]
+    ["home", "交易", "./assets/nav/nav-trade.png"],
+    ["markets", "行情", "./assets/nav/nav-market.png"],
+    ["holdings", "持仓", "./assets/nav/nav-holdings.png"],
+    ["rankings", "排名", "./assets/nav/nav-rankings.png"],
+    ["announcements", "社区", "./assets/nav/nav-community.png"]
   ];
   return `
     <nav class="nav">
       ${tabs
         .map(
-          ([key, label]) =>
-            `<button class="${state.activeTab === key ? "active" : ""}" data-action="tab" data-tab="${key}">${label}</button>`
+          ([key, label, image]) => `
+            <button class="nav-image-button ${state.activeTab === key ? "active" : ""}" data-action="tab" data-tab="${key}" aria-label="${label}">
+              <img class="nav-button-img" src="${image}" alt="" />
+            </button>
+          `
         )
         .join("")}
     </nav>
