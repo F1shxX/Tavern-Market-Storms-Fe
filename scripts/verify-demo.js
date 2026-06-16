@@ -20,6 +20,18 @@ const { chromium } = require("playwright");
   if (initialBuyEstimate === updatedBuyEstimate) {
     throw new Error("Buy estimate did not update after changing quantity.");
   }
+  await page.locator("#buyQty").fill("999999");
+  const buyMax = Number(await page.locator("#buyQty").getAttribute("max"));
+  const clampedBuyQty = Number(await page.locator("#buyQty").inputValue());
+  if (clampedBuyQty !== buyMax) {
+    throw new Error(`Buy quantity should clamp to 25% exposure max ${buyMax}, got ${clampedBuyQty}.`);
+  }
+  const buyPrice = Number((await page.locator(".trade-card").first().locator(".trade-meta div").first().locator("strong").textContent()).replace(/,/g, ""));
+  const buyEstimate = Number((await page.locator("#buyEstimate").textContent()).replace(/[^\d]/g, ""));
+  if (buyEstimate > 25000) {
+    throw new Error(`Buy estimate should stay within the 25% single-stock limit, got ${buyEstimate} at price ${buyPrice}.`);
+  }
+  await page.locator("#buyQty").fill("20");
   await page.getByRole("button", { name: "买入" }).last().click();
   await page.getByText("买入成功").waitFor({ timeout: 3000 });
   await page.getByRole("button", { name: "卖出" }).click();

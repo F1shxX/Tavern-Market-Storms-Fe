@@ -17,9 +17,10 @@ const { chromium } = require("playwright");
 
   const rows = page.locator(".stock-table tbody tr");
   const rowCount = await rows.count();
-  if (rowCount !== 36) {
-    throw new Error(`Expected 36 table rows, found ${rowCount}.`);
+  if (rowCount !== 44) {
+    throw new Error(`Expected 44 table rows, found ${rowCount}.`);
   }
+  await page.getByText("44 支暂定股票").waitFor({ timeout: 3000 });
 
   const marketAvatars = await page.locator(".market-table-screen .avatar").count();
   if (marketAvatars !== 0) {
@@ -35,9 +36,11 @@ const { chromium } = require("playwright");
 
   await page.getByText("豆豆农场").waitFor({ timeout: 3000 });
   await page.getByText("俺的你男装").waitFor({ timeout: 3000 });
+  await page.getByText("吨吨养身").waitFor({ timeout: 3000 });
+  await page.getByText("婀姿美容").waitFor({ timeout: 3000 });
 
   const screen = page.locator(".screen");
-  const lastRow = rows.filter({ hasText: "野炊夜店" });
+  const lastRow = rows.filter({ hasText: "优巨集团" });
   await screen.evaluate((element) => {
     element.scrollTop = element.scrollHeight;
   });
@@ -49,13 +52,14 @@ const { chromium } = require("playwright");
     throw new Error("Could not measure market list scroll position.");
   }
   if (lastRowBox.bottom < screenBox.y || lastRowBox.y > screenBox.y + screenBox.height) {
-    throw new Error("The 36th stock is not reachable after scrolling the market page.");
+    throw new Error("The 44th stock is not reachable after scrolling the market page.");
   }
   await page.screenshot({ path: "demo-market-list-check.png", fullPage: true });
 
   await lastRow.locator(".stock-name-btn").click();
-  await page.getByText("野炊夜店").first().waitFor({ timeout: 3000 });
-  await page.getByText("代码：TM-036").waitFor({ timeout: 3000 });
+  await page.getByText("优巨集团").first().waitFor({ timeout: 3000 });
+  await page.getByText(/代码：TM-044/).waitFor({ timeout: 3000 });
+  await page.locator(".detail-code").filter({ hasText: "标绿股票的均值" }).waitFor({ timeout: 3000 });
 
   const desktop = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   await desktop.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });

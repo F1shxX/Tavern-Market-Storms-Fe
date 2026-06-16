@@ -732,9 +732,12 @@ button {
 }
 
 .stock-name-btn span {
+  overflow: hidden;
   color: #c99859;
   font-size: 9px;
   font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .col-price {
@@ -926,6 +929,8 @@ button {
   color: var(--muted);
   font-size: 15px;
   font-weight: 900;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .detail-price {
