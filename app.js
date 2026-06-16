@@ -883,6 +883,28 @@ function getHolding(id) {
   return state.holdings[id] || { quantity: 0, averageCost: 0 };
 }
 
+function buyMaxQuantity(target) {
+  return Math.max(0, Math.floor(state.balance / (target.price * (1 + FEE_RATE))));
+}
+
+function sellMaxQuantity(targetId) {
+  return Math.max(0, getHolding(targetId).quantity);
+}
+
+function clampQuantity(value, max, min = 1) {
+  const parsed = Math.floor(Number(value) || 0);
+  if (max <= 0) return 0;
+  return Math.max(min, Math.min(max, parsed));
+}
+
+function estimateBuy(target, quantity) {
+  return target.price * quantity * (1 + FEE_RATE);
+}
+
+function estimateSell(target, quantity) {
+  return target.price * quantity * (1 - FEE_RATE);
+}
+
 function changePercent(target) {
   return ((target.price - target.prevClose) / target.prevClose) * 100;
 }
@@ -931,7 +953,11 @@ function showToast(message) {
 
 function buy(targetId, quantity) {
   const target = getTarget(targetId);
-  const qty = Math.max(1, Math.floor(Number(quantity) || 0));
+  const qty = clampQuantity(quantity, buyMaxQuantity(target));
+  if (qty <= 0) {
+    showToast("金币不足，无法买入这笔委托。");
+    return;
+  }
   const gross = target.price * qty;
   const fee = gross * FEE_RATE;
   const cost = gross + fee;
@@ -962,9 +988,9 @@ function buy(targetId, quantity) {
 
 function sell(targetId, quantity) {
   const target = getTarget(targetId);
-  const qty = Math.max(1, Math.floor(Number(quantity) || 0));
   const holding = getHolding(targetId);
-  if (qty > holding.quantity) {
+  const qty = clampQuantity(quantity, holding.quantity);
+  if (qty <= 0) {
     showToast("持仓不足，无法卖出这笔委托。");
     return;
   }
@@ -1021,6 +1047,28 @@ function setView(view, tab = view, selectedId = state.selectedId) {
   state.selectedId = selectedId;
   saveState();
   render();
+}
+
+function tradeQuantityLimit(input) {
+  const target = getTarget(state.selectedId);
+  return input.dataset.side === "sell" ? sellMaxQuantity(target.id) : buyMaxQuantity(target);
+}
+
+function updateTradeEstimate(input, shouldClamp = false) {
+  if (!input || !input.dataset.estimate) return 0;
+  const target = getTarget(state.selectedId);
+  const max = tradeQuantityLimit(input);
+  const raw = Math.floor(Number(input.value) || 0);
+  const qty = shouldClamp || raw > max || raw < 0 ? clampQuantity(raw, max) : Math.max(0, raw);
+  if (shouldClamp || raw > max || raw < 0) {
+    input.value = qty;
+  }
+  const estimate = input.dataset.side === "sell" ? estimateSell(target, qty) : estimateBuy(target, qty);
+  const estimateElement = document.getElementById(input.dataset.estimate);
+  if (estimateElement) {
+    estimateElement.textContent = `${money(estimate)} 金币`;
+  }
+  return qty;
 }
 
 function renderTopbar(title, subtitle = "Streamer Stock Trade") {
@@ -1289,8 +1337,12 @@ function renderChart(target) {
 function renderTrade() {
   const target = getTarget(state.selectedId);
   const holding = getHolding(target.id);
-  const buyValue = target.price * 10 * (1 + FEE_RATE);
-  const sellValue = target.price * Math.min(10, holding.quantity) * (1 - FEE_RATE);
+  const maxBuyQty = buyMaxQuantity(target);
+  const maxSellQty = sellMaxQuantity(target.id);
+  const buyQty = clampQuantity(10, maxBuyQty);
+  const sellQty = clampQuantity(Math.min(10, maxSellQty), maxSellQty);
+  const buyValue = estimateBuy(target, buyQty);
+  const sellValue = estimateSell(target, sellQty);
   return `
     <section class="screen no-nav">
       <div class="topbar">
@@ -1310,12 +1362,12 @@ function renderTrade() {
           <div class="trade-title">买入</div>
           <div class="qty-row">
             <button class="qty-step" data-action="step" data-input="buyQty" data-step="-10">-</button>
-            <input id="buyQty" type="number" min="1" step="10" value="10" inputmode="numeric" />
+            <input id="buyQty" type="number" min="${maxBuyQty > 0 ? 1 : 0}" max="${maxBuyQty}" step="10" value="${buyQty}" inputmode="numeric" data-estimate="buyEstimate" data-side="buy" />
             <button class="qty-step" data-action="step" data-input="buyQty" data-step="10">+</button>
           </div>
           <div class="trade-meta">
             <div>价格<strong>${price(target.price)}</strong></div>
-            <div>预估消耗<strong>${money(buyValue)} 金币</strong></div>
+            <div>预估消耗<strong id="buyEstimate">${money(buyValue)} 金币</strong></div>
           </div>
           <button class="btn btn-gold btn-wide" data-action="buy" data-id="${target.id}">买入</button>
         </div>
@@ -1324,12 +1376,12 @@ function renderTrade() {
           <div class="trade-title">卖出</div>
           <div class="qty-row">
             <button class="qty-step" data-action="step" data-input="sellQty" data-step="-10">-</button>
-            <input id="sellQty" type="number" min="1" step="10" value="${Math.max(1, Math.min(10, holding.quantity || 10))}" inputmode="numeric" />
+            <input id="sellQty" type="number" min="${maxSellQty > 0 ? 1 : 0}" max="${maxSellQty}" step="10" value="${sellQty}" inputmode="numeric" data-estimate="sellEstimate" data-side="sell" />
             <button class="qty-step" data-action="step" data-input="sellQty" data-step="10">+</button>
           </div>
           <div class="trade-meta">
             <div>持仓<strong>${holding.quantity} 股</strong></div>
-            <div>预估到账<strong>${money(sellValue)} 金币</strong></div>
+            <div>预估到账<strong id="sellEstimate">${money(sellValue)} 金币</strong></div>
           </div>
           <button class="btn btn-red btn-wide" data-action="sell" data-id="${target.id}">卖出</button>
         </div>
@@ -1493,10 +1545,10 @@ document.addEventListener("click", (event) => {
     setView(state.activeTab || "home", state.activeTab || "home");
   }
   if (action === "buy") {
-    buy(id, document.getElementById("buyQty").value);
+    buy(id, updateTradeEstimate(document.getElementById("buyQty"), true));
   }
   if (action === "sell") {
-    sell(id, document.getElementById("sellQty").value);
+    sell(id, updateTradeEstimate(document.getElementById("sellQty"), true));
   }
   if (action === "simulate") {
     simulateMarket();
@@ -1507,7 +1559,20 @@ document.addEventListener("click", (event) => {
   if (action === "step") {
     const input = document.getElementById(element.dataset.input);
     const step = Number(element.dataset.step);
-    input.value = Math.max(1, (Number(input.value) || 0) + step);
+    input.value = (Number(input.value) || 0) + step;
+    updateTradeEstimate(input, true);
+  }
+});
+
+document.addEventListener("input", (event) => {
+  if (event.target.matches("[data-estimate]")) {
+    updateTradeEstimate(event.target);
+  }
+});
+
+document.addEventListener("change", (event) => {
+  if (event.target.matches("[data-estimate]")) {
+    updateTradeEstimate(event.target, true);
   }
 });
 

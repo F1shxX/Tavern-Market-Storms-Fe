@@ -14,10 +14,32 @@ const { chromium } = require("playwright");
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.locator(".stock-name-btn").first().click();
   await page.getByRole("button", { name: "买入" }).click();
+  const initialBuyEstimate = await page.locator("#buyEstimate").textContent();
   await page.locator("#buyQty").fill("20");
+  const updatedBuyEstimate = await page.locator("#buyEstimate").textContent();
+  if (initialBuyEstimate === updatedBuyEstimate) {
+    throw new Error("Buy estimate did not update after changing quantity.");
+  }
   await page.getByRole("button", { name: "买入" }).last().click();
   await page.getByText("买入成功").waitFor({ timeout: 3000 });
   await page.getByRole("button", { name: "卖出" }).click();
+  const initialSellEstimate = await page.locator("#sellEstimate").textContent();
+  await page.locator("#sellQty").fill("20");
+  const updatedSellEstimate = await page.locator("#sellEstimate").textContent();
+  if (initialSellEstimate === updatedSellEstimate) {
+    throw new Error("Sell estimate did not update after changing quantity.");
+  }
+  await page.locator("#sellQty").fill("999");
+  const sellMax = Number(await page.locator("#sellQty").getAttribute("max"));
+  const clampedSellQty = Number(await page.locator("#sellQty").inputValue());
+  if (clampedSellQty !== sellMax) {
+    throw new Error(`Sell quantity should clamp to holding max ${sellMax}, got ${clampedSellQty}.`);
+  }
+  await page.locator('[data-input="sellQty"][data-step="10"]').click();
+  const steppedSellQty = Number(await page.locator("#sellQty").inputValue());
+  if (steppedSellQty !== sellMax) {
+    throw new Error(`Sell plus button should not exceed holding max ${sellMax}, got ${steppedSellQty}.`);
+  }
   await page.locator("#sellQty").fill("10");
   await page.getByRole("button", { name: "卖出" }).last().click();
   await page.getByText("卖出成功").waitFor({ timeout: 3000 });
