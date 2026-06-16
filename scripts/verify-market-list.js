@@ -25,6 +25,13 @@ const { chromium } = require("playwright");
   if (marketAvatars !== 0) {
     throw new Error(`Market table should not render avatar images, found ${marketAvatars}.`);
   }
+  const actionCounts = await rows.evaluateAll((elements) =>
+    elements.map((element) => element.querySelectorAll(".col-actions button").length)
+  );
+  const invalidActionRow = actionCounts.findIndex((count) => count !== 1);
+  if (invalidActionRow !== -1) {
+    throw new Error(`Expected one action button per market row; row ${invalidActionRow + 1} has ${actionCounts[invalidActionRow]}.`);
+  }
 
   await page.getByText("豆豆农场").waitFor({ timeout: 3000 });
   await page.getByText("俺的你男装").waitFor({ timeout: 3000 });
@@ -46,7 +53,7 @@ const { chromium } = require("playwright");
   }
   await page.screenshot({ path: "demo-market-list-check.png", fullPage: true });
 
-  await lastRow.getByRole("button", { name: "详情" }).click();
+  await lastRow.locator(".stock-name-btn").click();
   await page.getByText("野炊夜店").first().waitFor({ timeout: 3000 });
   await page.getByText("代码：TM-036").waitFor({ timeout: 3000 });
 

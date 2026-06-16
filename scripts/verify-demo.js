@@ -12,7 +12,7 @@ const { chromium } = require("playwright");
 
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "行情", exact: true }).click();
-  await page.getByText("详情").first().click();
+  await page.locator(".stock-name-btn").first().click();
   await page.getByRole("button", { name: "买入" }).click();
   await page.locator("#buyQty").fill("20");
   await page.getByRole("button", { name: "买入" }).last().click();

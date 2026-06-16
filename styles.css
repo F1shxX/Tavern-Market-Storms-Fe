@@ -1,12 +1,12 @@
 :root {
-  --bg-0: #06152f;
-  --bg-1: #09285a;
-  --bg-2: #0d3c7a;
+  --bg-0: #160b07;
+  --bg-1: #2d170d;
+  --bg-2: #5a3218;
   --app-width: 430px;
-  --panel: rgba(5, 28, 68, 0.92);
-  --panel-bright: rgba(16, 74, 138, 0.74);
-  --line: #2a79bd;
-  --line-soft: rgba(91, 172, 242, 0.46);
+  --panel: rgba(39, 20, 13, 0.94);
+  --panel-bright: rgba(96, 54, 25, 0.8);
+  --line: #b77a32;
+  --line-soft: rgba(255, 203, 99, 0.5);
   --gold-1: #fff5a6;
   --gold-2: #ffd36a;
   --gold-3: #b7732a;
@@ -76,6 +76,9 @@ button {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: 16px 14px 118px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(243, 183, 78, 0.14), transparent 14rem),
+    linear-gradient(180deg, rgba(48, 25, 13, 0.54), rgba(8, 5, 4, 0.1));
 }
 
 .screen.no-nav {
@@ -147,6 +150,15 @@ button {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 10px;
+  padding: 8px 10px;
+  border: 2px solid rgba(255, 207, 112, 0.52);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(98, 55, 28, 0.88), rgba(35, 20, 13, 0.94));
+  box-shadow:
+    inset 0 2px 0 rgba(255, 233, 171, 0.18),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.24),
+    0 8px 18px rgba(0, 0, 0, 0.28);
 }
 
 .brand {
@@ -222,13 +234,13 @@ button {
 .announcement,
 .rank-row {
   border: 2px solid var(--line-soft);
-  border-radius: 18px;
+  border-radius: 14px;
   background:
-    linear-gradient(180deg, rgba(19, 78, 143, 0.88), rgba(4, 23, 58, 0.92)),
+    linear-gradient(180deg, rgba(82, 45, 23, 0.9), rgba(24, 13, 9, 0.96)),
     var(--panel);
   box-shadow:
-    inset 0 0 0 2px rgba(107, 186, 255, 0.11),
-    inset 0 12px 20px rgba(255, 255, 255, 0.055),
+    inset 0 0 0 2px rgba(95, 41, 18, 0.42),
+    inset 0 12px 20px rgba(255, 218, 137, 0.07),
     0 10px 24px rgba(0, 0, 0, 0.36);
 }
 
@@ -299,6 +311,9 @@ button {
   margin-top: 8px;
   padding: 12px;
   border-radius: 24px;
+  border-color: rgba(255, 203, 99, 0.64);
+  background:
+    linear-gradient(180deg, rgba(75, 40, 20, 0.96), rgba(20, 12, 9, 0.98));
 }
 
 .index-card {
@@ -307,10 +322,14 @@ button {
   place-items: center;
   align-content: center;
   margin-bottom: 12px;
-  border: 2px solid rgba(116, 189, 250, 0.48);
+  border: 2px solid rgba(255, 204, 95, 0.56);
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(4, 26, 62, 0.72), rgba(13, 55, 111, 0.84));
-  box-shadow: inset 0 0 24px rgba(110, 189, 255, 0.22);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 204, 93, 0.18), transparent 8rem),
+    linear-gradient(180deg, rgba(36, 84, 134, 0.72), rgba(13, 48, 88, 0.84));
+  box-shadow:
+    inset 0 0 24px rgba(255, 212, 111, 0.18),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.16);
 }
 
 .index-label {
@@ -344,10 +363,10 @@ button {
   min-width: 0;
   padding: 0 0 8px;
   overflow: hidden;
-  border: 2px solid rgba(72, 146, 214, 0.5);
+  border: 2px solid rgba(255, 203, 99, 0.42);
   border-radius: 16px;
-  background: rgba(2, 19, 48, 0.58);
-  box-shadow: inset 0 0 18px rgba(52, 136, 219, 0.2);
+  background: rgba(31, 16, 10, 0.72);
+  box-shadow: inset 0 0 18px rgba(255, 179, 67, 0.12);
 }
 
 .home-rank-title {
@@ -357,7 +376,8 @@ button {
   justify-content: space-between;
   gap: 6px;
   padding: 8px 10px;
-  background: rgba(1, 13, 34, 0.74);
+  background:
+    linear-gradient(180deg, rgba(81, 45, 23, 0.95), rgba(25, 14, 10, 0.95));
   color: var(--gold-1);
   text-shadow: 0 2px 0 #5b2913;
 }
@@ -472,9 +492,11 @@ button {
   padding: 6px 10px;
   border-radius: 12px;
   color: var(--white);
-  background: linear-gradient(180deg, #2e9cea, #0e4d91);
-  border: 1px solid rgba(157, 219, 255, 0.7);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25), 0 4px 12px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(180deg, #4d87bd, #163e6a);
+  border: 1px solid rgba(255, 224, 145, 0.6);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.28);
   font-size: 12px;
   font-weight: 900;
 }
@@ -491,6 +513,14 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.stat-box,
+.summary-pill,
+.trade-meta div {
+  background:
+    linear-gradient(180deg, rgba(58, 31, 17, 0.92), rgba(17, 10, 8, 0.94));
+  border: 1px solid rgba(255, 203, 99, 0.34);
 }
 
 .stat-label {
@@ -536,7 +566,7 @@ button {
   position: relative;
   padding: 12px;
   border-radius: 18px;
-  background: #fff8ee;
+  background: #fff0c8;
   color: #682111;
   font-size: 14px;
   font-weight: 900;
@@ -558,8 +588,8 @@ button {
   border-radius: 18px;
   border: 3px solid var(--gold-2);
   object-fit: cover;
-  box-shadow: 0 0 0 3px #163d76, 0 8px 18px rgba(0, 0, 0, 0.42);
-  background: #092a58;
+  box-shadow: 0 0 0 3px #5c2e13, 0 8px 18px rgba(0, 0, 0, 0.42);
+  background: #2a160e;
 }
 
 .avatar.large {
@@ -629,7 +659,7 @@ button {
 
 .stock-table th:nth-child(7),
 .stock-table td:nth-child(7) {
-  width: 66px;
+  width: 42px;
 }
 
 .stock-table th {
@@ -727,13 +757,14 @@ button {
 }
 
 .col-actions {
-  width: 88px;
+  width: 42px;
   text-align: center !important;
 }
 
 .table-action {
   min-height: 24px;
-  padding: 3px 4px;
+  width: 34px;
+  padding: 3px 2px;
   border: 1px solid rgba(255, 225, 145, 0.78);
   border-radius: 7px;
   background:
@@ -853,7 +884,7 @@ button {
 
 .btn-blue {
   background: linear-gradient(180deg, #2f9de5, #11518f);
-  border: 2px solid #67b9f3;
+  border: 2px solid rgba(255, 224, 145, 0.66);
 }
 
 .btn-gold {
@@ -864,8 +895,8 @@ button {
 }
 
 .btn-red {
-  background: linear-gradient(180deg, #ff5666, #c91625);
-  border: 2px solid #ff8f98;
+  background: linear-gradient(180deg, #ff5b61, #a91b20);
+  border: 2px solid #ffb1a1;
 }
 
 .btn-wide {
@@ -947,8 +978,6 @@ button {
 .summary-pill {
   padding: 12px;
   border-radius: 16px;
-  background: rgba(2, 19, 48, 0.62);
-  border: 1px solid rgba(95, 178, 242, 0.35);
   font-size: 14px;
   font-weight: 900;
 }
@@ -996,7 +1025,7 @@ button {
 .qty-row input {
   min-width: 0;
   height: 46px;
-  border: 2px solid rgba(146, 203, 255, 0.75);
+  border: 2px solid rgba(255, 211, 106, 0.75);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.94);
   color: #07152d;
@@ -1012,7 +1041,7 @@ button {
   color: var(--white);
   font-size: 20px;
   font-weight: 1000;
-  border: 1px solid rgba(145, 210, 255, 0.6);
+  border: 1px solid rgba(255, 217, 129, 0.6);
 }
 
 .trade-meta {
@@ -1025,7 +1054,6 @@ button {
 .trade-meta div {
   padding: 8px;
   border-radius: 12px;
-  background: rgba(2, 18, 44, 0.5);
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
@@ -1088,7 +1116,7 @@ button {
   display: grid;
   place-items: center;
   color: var(--gold-1);
-  background: rgba(8, 34, 78, 0.9);
+  background: rgba(45, 24, 14, 0.9);
   border: 2px solid rgba(255, 222, 130, 0.42);
   font-weight: 1000;
 }
@@ -1113,7 +1141,7 @@ button {
 
 .announcement p {
   margin: 0;
-  color: #fff8c6;
+  color: #ffe8b3;
   font-size: 14px;
   font-weight: 800;
   line-height: 1.4;

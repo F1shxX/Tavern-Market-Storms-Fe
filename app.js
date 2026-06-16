@@ -1161,7 +1161,6 @@ function renderMarketRow(target, index) {
       <td class="col-volume">${money(target.volume)}</td>
       <td class="col-heat">${target.heat}</td>
       <td class="col-actions">
-        <button class="table-action" data-action="detail" data-id="${target.id}">详情</button>
         <button class="table-action primary" data-action="trade" data-id="${target.id}">交易</button>
       </td>
     </tr>
