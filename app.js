@@ -1017,6 +1017,42 @@ const seedTargets = [
   }
 ];
 
+const marketGroups = [
+  {
+    id: "daan",
+    name: "达安集团",
+    shortName: "达安",
+    tone: "blue",
+    indexId: "stock-006",
+    memberIds: [
+      "stock-003",
+      "stock-005",
+      "stock-007",
+      "stock-009",
+      "stock-010",
+      "stock-011",
+      "stock-018",
+      "stock-027"
+    ]
+  },
+  {
+    id: "gaoci",
+    name: "高磁集团",
+    shortName: "高磁",
+    tone: "yellow",
+    indexId: "stock-039",
+    memberIds: ["stock-004", "stock-023", "stock-032"]
+  },
+  {
+    id: "youju",
+    name: "优巨集团",
+    shortName: "优巨",
+    tone: "green",
+    indexId: "stock-044",
+    memberIds: ["stock-016", "stock-024"]
+  }
+];
+
 const defaultState = {
   balance: 100000,
   holdings: {
@@ -1102,6 +1138,18 @@ function getTarget(id) {
 
 function getHolding(id) {
   return state.holdings[id] || { quantity: 0, averageCost: 0 };
+}
+
+function marketGroupForTarget(targetId) {
+  for (const group of marketGroups) {
+    if (group.indexId === targetId) return { group, role: "index" };
+    if (group.memberIds.includes(targetId)) return { group, role: "member" };
+  }
+  return null;
+}
+
+function groupMembers(group) {
+  return group.memberIds.map((id) => getTarget(id));
 }
 
 function buyMaxQuantity(target) {
@@ -1418,16 +1466,54 @@ function formatSignedCoins(value) {
   return "0 金币";
 }
 
+function renderMarketGroups() {
+  return `
+    <section class="group-board" aria-label="集团板块">
+      ${marketGroups.map((group) => renderMarketGroupCard(group)).join("")}
+    </section>
+  `;
+}
+
+function renderMarketGroupCard(group) {
+  const indexTarget = getTarget(group.indexId);
+  const members = groupMembers(group);
+  const avgMove = members.reduce((sum, target) => sum + changePercent(target), 0) / members.length;
+  return `
+    <article class="group-card group-${group.tone}">
+      <button class="group-main" data-action="detail" data-id="${indexTarget.id}">
+        <span>${group.name}</span>
+        <strong>${price(indexTarget.price)}</strong>
+        <em class="${avgMove >= 0 ? "up" : "down"}">${avgMove >= 0 ? "+" : ""}${price(avgMove)}%</em>
+        <small>${members.length} 支成员</small>
+      </button>
+      <div class="group-members" aria-label="${group.name}成员">
+        ${members
+          .map(
+            (member) => `
+              <button class="group-member-chip" data-action="detail" data-id="${member.id}" title="${member.name} · ${member.alias}">
+                ${member.name}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
 function renderMarketRow(target, index) {
   const change = changePercent(target);
   const tone = change >= 0 ? "up" : "down";
   const meta = target.gameName ? `${target.code} · ${target.gameName}` : target.code;
+  const groupInfo = marketGroupForTarget(target.id);
+  const groupLabel =
+    groupInfo && groupInfo.role === "index" ? `${groupInfo.group.shortName}指数` : groupInfo?.group.shortName;
   return `
-    <tr>
+    <tr class="${groupInfo ? `group-row group-${groupInfo.group.tone} ${groupInfo.role === "index" ? "group-index-row" : "group-member-row"}` : ""}">
       <td class="col-rank">${index + 1}</td>
       <td class="col-name">
         <button class="stock-name-btn" data-action="detail" data-id="${target.id}">
-          <strong>${target.name}</strong>
+          <strong><span class="stock-title-text">${target.name}</span>${groupInfo ? `<span class="group-badge ${groupInfo.group.tone}">${groupLabel}</span>` : ""}</strong>
           <span title="${meta}">${meta}</span>
         </button>
       </td>
@@ -1454,6 +1540,7 @@ function renderMarkets() {
         </div>
         <button class="mini-btn" data-action="simulate">刷新行情</button>
       </div>
+      ${renderMarketGroups()}
       <div class="stock-table-wrap">
         <table class="stock-table">
           <thead>
@@ -1485,6 +1572,7 @@ function renderDetail() {
   const holding = getHolding(target.id);
   const pnl = holdingProfit(target.id);
   const change = changePercent(target);
+  const groupInfo = marketGroupForTarget(target.id);
   return `
     <section class="screen no-nav">
       <div class="topbar">
@@ -1507,6 +1595,8 @@ function renderDetail() {
         <p class="detail-copy">${target.quote} | 场均热度 ${target.heat}</p>
       </div>
 
+      ${groupInfo ? renderDetailGroupContext(groupInfo) : ""}
+
       <div class="detail-actions">
         <button class="btn btn-gold" data-action="trade" data-id="${target.id}">买入</button>
         <button class="btn btn-red" data-action="trade" data-id="${target.id}">卖出</button>
@@ -1520,6 +1610,30 @@ function renderDetail() {
       </div>
       ${renderToast()}
     </section>
+  `;
+}
+
+function renderDetailGroupContext(groupInfo) {
+  const { group, role } = groupInfo;
+  const members = groupMembers(group);
+  return `
+    <div class="panel detail-group-card group-${group.tone}">
+      <div class="detail-group-title">
+        <span>${group.name}</span>
+        <strong>${role === "index" ? "集团指数股" : "集团成员股"}</strong>
+      </div>
+      <div class="detail-group-members">
+        ${members
+          .map(
+            (member) => `
+              <button class="group-member-chip" data-action="detail" data-id="${member.id}" title="${member.name} · ${member.alias}">
+                ${member.name}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
   `;
 }
 

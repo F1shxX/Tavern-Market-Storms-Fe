@@ -21,6 +21,12 @@ const { chromium } = require("playwright");
     throw new Error(`Expected 44 table rows, found ${rowCount}.`);
   }
   await page.getByText("44 支暂定股票").waitFor({ timeout: 3000 });
+  await page.locator(".group-card").filter({ hasText: "达安集团" }).waitFor({ timeout: 3000 });
+  await page.locator(".group-card").filter({ hasText: "高磁集团" }).waitFor({ timeout: 3000 });
+  await page.locator(".group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
+  await page.locator(".group-card").filter({ hasText: "达安集团" }).getByText("8 支成员").waitFor({ timeout: 3000 });
+  await page.locator(".group-card").filter({ hasText: "高磁集团" }).getByText("3 支成员").waitFor({ timeout: 3000 });
+  await page.locator(".group-card").filter({ hasText: "优巨集团" }).getByText("2 支成员").waitFor({ timeout: 3000 });
 
   const marketAvatars = await page.locator(".market-table-screen .avatar").count();
   if (marketAvatars !== 0) {
@@ -34,10 +40,14 @@ const { chromium } = require("playwright");
     throw new Error(`Expected one action button per market row; row ${invalidActionRow + 1} has ${actionCounts[invalidActionRow]}.`);
   }
 
-  await page.getByText("豆豆农场").waitFor({ timeout: 3000 });
-  await page.getByText("俺的你男装").waitFor({ timeout: 3000 });
-  await page.getByText("吨吨养身").waitFor({ timeout: 3000 });
-  await page.getByText("婀姿美容").waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "豆豆农场" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "俺的你男装" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "吨吨养身" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "婀姿美容" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "达安集团" }).locator(".group-badge").filter({ hasText: "达安指数" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "俺的你男装" }).locator(".group-badge").filter({ hasText: "达安" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "高磁集团" }).locator(".group-badge").filter({ hasText: "高磁指数" }).waitFor({ timeout: 3000 });
+  await rows.filter({ hasText: "优巨集团" }).locator(".group-badge").filter({ hasText: "优巨指数" }).waitFor({ timeout: 3000 });
 
   const screen = page.locator(".screen");
   const lastRow = rows.filter({ hasText: "优巨集团" });
@@ -60,6 +70,9 @@ const { chromium } = require("playwright");
   await page.getByText("优巨集团").first().waitFor({ timeout: 3000 });
   await page.getByText(/代码：TM-044/).waitFor({ timeout: 3000 });
   await page.locator(".detail-code").filter({ hasText: "标绿股票的均值" }).waitFor({ timeout: 3000 });
+  await page.locator(".detail-group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
+  await page.locator(".detail-group-card").filter({ hasText: "小浪宠物" }).waitFor({ timeout: 3000 });
+  await page.locator(".detail-group-card").filter({ hasText: "炮炮婚庆" }).waitFor({ timeout: 3000 });
 
   const desktop = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   await desktop.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
