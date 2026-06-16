@@ -54,15 +54,12 @@ const { chromium } = require("playwright");
   await desktop.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await desktop.getByRole("button", { name: "行情", exact: true }).click();
   await desktop.getByText("主播指数榜").waitFor({ timeout: 3000 });
-  const visibleRows = await desktop.locator(".stock-table tbody tr").evaluateAll((elements) => {
-    const viewportHeight = window.innerHeight;
-    return elements.filter((element) => {
-      const box = element.getBoundingClientRect();
-      return box.bottom > 0 && box.top < viewportHeight;
-    }).length;
-  });
-  if (visibleRows < 12) {
-    throw new Error(`Expected at least 12 visible rows on desktop, found ${visibleRows}.`);
+  const appBox = await desktop.locator("#app").boundingBox();
+  if (!appBox) {
+    throw new Error("Could not measure desktop app shell.");
+  }
+  if (appBox.width > 431) {
+    throw new Error(`Market page should stay mobile portrait width on desktop, found ${appBox.width}px.`);
   }
   await desktop.screenshot({ path: "demo-market-table-desktop-check.png", fullPage: true });
   await desktop.close();
