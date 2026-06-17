@@ -14,6 +14,27 @@ const { chromium } = require("playwright");
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.getByText("主播指数榜").waitFor({ timeout: 3000 });
+  await page.getByText(/已同步 .*第13赛季/).waitFor({ timeout: 20000 });
+  await page.getByText(/500名门槛/).waitFor({ timeout: 3000 });
+  const syncState = await page.evaluate(() => {
+    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
+    return {
+      marketSync: saved.marketSync,
+      outsideLeaks: saved.targets
+        .filter((target) => target.sync?.source === "outside-top-500")
+        .filter((target) => target.score >= saved.marketSync.floorScore)
+        .map((target) => ({ name: target.name, score: target.score }))
+    };
+  });
+  if (!syncState.marketSync || syncState.marketSync.status !== "synced") {
+    throw new Error("Market should store synced leaderboard metadata.");
+  }
+  if (syncState.marketSync.floorScore !== 11440 && syncState.marketSync.floorScore < 10000) {
+    throw new Error(`Unexpected leaderboard floor score: ${syncState.marketSync.floorScore}.`);
+  }
+  if (syncState.outsideLeaks.length) {
+    throw new Error(`Outside-top-500 stocks must stay below the floor score: ${JSON.stringify(syncState.outsideLeaks[0])}`);
+  }
 
   const rows = page.locator(".stock-table tbody tr");
   const rowCount = await rows.count();
@@ -42,7 +63,7 @@ const { chromium } = require("playwright");
   const leakedRowMeta = await page.locator(".stock-name-btn").evaluateAll((elements) =>
     elements
       .map((element, index) => ({ index: index + 1, text: element.textContent || "" }))
-      .filter((row) => /TM-\d{3}|炉石豆哥|标蓝股票的均值|标黄股票的均值|标绿股票的均值/.test(row.text))
+      .filter((row) => /TM-\d{3}|炉石豆哥|郭枫荷|Lighting|标蓝股票的均值|标黄股票的均值|标绿股票的均值/.test(row.text))
   );
   if (leakedRowMeta.length) {
     throw new Error(`Market rows should hide stock code and streamer/game metadata: ${JSON.stringify(leakedRowMeta[0])}`);
@@ -86,6 +107,7 @@ const { chromium } = require("playwright");
   await desktop.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await desktop.getByRole("button", { name: "行情", exact: true }).click();
   await desktop.getByText("主播指数榜").waitFor({ timeout: 3000 });
+  await desktop.getByText(/已同步 .*第13赛季/).waitFor({ timeout: 20000 });
   const appBox = await desktop.locator("#app").boundingBox();
   if (!appBox) {
     throw new Error("Could not measure desktop app shell.");

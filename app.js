@@ -1,6 +1,11 @@
 const STORAGE_KEY = "tavern-market-storms-demo-state-v3";
 const FEE_RATE = 0.001;
 const SINGLE_STOCK_BUY_LIMIT = 0.25;
+const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.hostname)
+  ? "http://127.0.0.1:3101"
+  : "";
+const API_BASE_URL = window.TMS_API_BASE_URL || LOCAL_API_BASE_URL;
+const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
 
 const seedTargets = [
   {
@@ -1053,6 +1058,26 @@ const marketGroups = [
   }
 ];
 
+const leaderboardNameAliases = {
+  "stock-003": ["郭枫荷", "郭风荷"],
+  "stock-004": ["lighting", "Lighting"],
+  "stock-007": ["无耻之徒", "虎牙安德罗妮", "安德罗妮"],
+  "stock-008": ["风的二次救赎"],
+  "stock-013": ["虎牙丶终离殇", "虎牙丨终离殇", "虎牙终离殇"],
+  "stock-016": ["抖音丨有局丨小狼", "抖音|有局|小狼", "有局小狼", "小狼"],
+  "stock-017": ["jeef", "jeff"],
+  "stock-019": ["虎牙丨尖尖箭", "虎牙|尖尖箭", "尖尖箭"],
+  "stock-020": ["呜呜呜呜呜呜"],
+  "stock-021": ["彩虹丨溪流萤间", "彩虹|溪流萤间", "溪流萤间"],
+  "stock-022": ["乐邦詹士"],
+  "stock-023": ["告辞丨基格沃斯", "告辞|基格沃斯", "基格沃斯"],
+  "stock-024": ["有局丨炮炮", "有局|炮炮", "炮炮"],
+  "stock-025": ["在乎"],
+  "stock-027": ["春日野穹", "春日野琼"],
+  "stock-031": ["抖音安德罗妮学徒", "安德罗妮学徒"],
+  "stock-035": ["抖音丨炉石白羽", "抖音|炉石白羽", "炉石白羽"]
+};
+
 const defaultState = {
   balance: 100000,
   holdings: {
@@ -1062,7 +1087,8 @@ const defaultState = {
   activeTab: "home",
   selectedId: "stock-001",
   view: "home",
-  toast: ""
+  toast: "",
+  marketSync: null
 };
 
 let state = loadState();
@@ -1119,6 +1145,7 @@ function saveState() {
       activeTab: state.activeTab,
       selectedId: state.selectedId,
       view: state.view,
+      marketSync: state.marketSync,
       targets: targets()
     })
   );
@@ -1130,6 +1157,55 @@ function money(value) {
 
 function price(value) {
   return Number(value).toFixed(2);
+}
+
+function normalizeLeaderboardName(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[|｜丨丶·\s_\-—–]/g, "");
+}
+
+function leaderboardNamesForTarget(target) {
+  return [
+    target.gameName,
+    target.alias,
+    target.name,
+    ...(leaderboardNameAliases[target.id] || [])
+  ]
+    .filter(Boolean)
+    .map(normalizeLeaderboardName)
+    .filter(Boolean);
+}
+
+function findLeaderboardRow(target, rowMap) {
+  const names = leaderboardNamesForTarget(target);
+  for (const name of names) {
+    if (rowMap.has(name)) return rowMap.get(name);
+  }
+  return null;
+}
+
+function deterministicOutsideScore(target, floorScore) {
+  const currentScore = Math.round((target.score || target.price * 1000 || 9000));
+  const safeFloor = Math.max(5000, Number(floorScore) || 11000);
+  const seed = [...target.id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  const swing = Math.round(Math.sin(Date.now() / 3600000 + seed) * 140 + (seed % 97) - 48);
+  const lower = Math.max(3000, safeFloor - Math.max(900, Math.round(safeFloor * 0.1)));
+  const next = Math.max(lower, Math.min(safeFloor - 1, currentScore + swing));
+  return Math.round(next);
+}
+
+function applyTargetScore(target, nextScore, syncMeta = {}) {
+  const prevPrice = target.price;
+  const nextPrice = Number(Math.max(3, nextScore / 1000).toFixed(2));
+  const swing = prevPrice ? (nextPrice - prevPrice) / prevPrice : 0;
+  target.prevClose = prevPrice;
+  target.price = nextPrice;
+  target.score = Math.round(nextScore);
+  target.volume = Math.max(900, Math.round(target.volume * (1 + Math.min(0.45, Math.abs(swing) * 5))));
+  target.heat = Math.max(35, Math.min(99, Math.round(target.heat + swing * 180)));
+  target.trend = [...target.trend.slice(-6), target.price];
+  target.sync = syncMeta;
 }
 
 function getTarget(id) {
@@ -1304,8 +1380,150 @@ function simulateMarket() {
     target.heat = Math.max(35, Math.min(99, Math.round(target.heat + swing * 120)));
     target.trend = [...target.trend.slice(-6), target.price];
   });
+  recalculateGroupIndexTargets();
   saveState();
   showToast("行情已刷新，K线和持仓收益已更新。");
+}
+
+function recalculateGroupIndexTargets() {
+  for (const group of marketGroups) {
+    const indexTarget = getTarget(group.indexId);
+    const members = groupMembers(group);
+    if (!indexTarget || !members.length) continue;
+    const nextScore = Math.round(members.reduce((sum, target) => sum + target.score, 0) / members.length);
+    applyTargetScore(indexTarget, nextScore, {
+      source: "group-average",
+      groupId: group.id,
+      matched: true
+    });
+  }
+}
+
+async function fetchLeaderboardSnapshot() {
+  if (API_BASE_URL) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/leaderboard/battlegrounds`);
+      if (!response.ok) {
+        throw new Error(`leaderboard ${response.status}`);
+      }
+      const payload = await response.json();
+      if (!payload.ok || !payload.data) {
+        throw new Error(payload.message || "leaderboard unavailable");
+      }
+      return payload.data;
+    } catch (error) {
+      console.warn("Backend leaderboard sync failed, trying static snapshot.", error);
+    }
+  }
+
+  const response = await fetch(`${STATIC_LEADERBOARD_URL}?v=${Date.now()}`, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`leaderboard snapshot ${response.status}`);
+  }
+  const payload = await response.json();
+  const data = payload.data || payload;
+  if (!data?.rows) {
+    throw new Error(payload.message || "leaderboard unavailable");
+  }
+  return data;
+}
+
+async function syncMarketFromLeaderboard({ silent = false } = {}) {
+  const snapshot = await fetchLeaderboardSnapshot();
+  const rowMap = new Map(
+    snapshot.rows.map((row) => [row.normalizedBattleTag || normalizeLeaderboardName(row.battleTag), row])
+  );
+  let matched = 0;
+  let unmatched = 0;
+
+  targets().forEach((target) => {
+    if (marketGroups.some((group) => group.indexId === target.id)) return;
+    const row = findLeaderboardRow(target, rowMap);
+    if (row) {
+      matched += 1;
+      applyTargetScore(target, row.score, {
+        source: "blizzard-cn",
+        matched: true,
+        rank: row.position,
+        battleTag: row.battleTag
+      });
+    } else {
+      unmatched += 1;
+      applyTargetScore(target, deterministicOutsideScore(target, snapshot.floorScore), {
+        source: "outside-top-500",
+        matched: false,
+        floorScore: snapshot.floorScore
+      });
+    }
+  });
+  recalculateGroupIndexTargets();
+  state.marketSync = {
+    status: "synced",
+    source: `${snapshot.modeLabel || "酒馆战棋"} ${snapshot.seasonLabel || "第13赛季"}`,
+    updatedAt: snapshot.updatedAt,
+    syncedAt: new Date().toISOString(),
+    matched,
+    unmatched,
+    floorScore: snapshot.floorScore,
+    floorRank: snapshot.floorRank,
+    cached: snapshot.cached
+  };
+  saveState();
+  if (!silent) {
+    showToast(`已同步官网积分：命中 ${matched} 支，500名门槛 ${money(snapshot.floorScore)}`);
+  } else {
+    render();
+  }
+  return state.marketSync;
+}
+
+async function refreshMarketData() {
+  try {
+    state.marketSync = {
+      status: "syncing",
+      message: "正在同步官网积分...",
+      syncedAt: new Date().toISOString()
+    };
+    saveState();
+    render();
+    await syncMarketFromLeaderboard();
+  } catch (error) {
+    console.warn("Leaderboard sync failed, using local simulation.", error);
+    state.marketSync = {
+      status: "fallback",
+      message: "官网同步失败，已使用本地随机行情",
+      syncedAt: new Date().toISOString()
+    };
+    simulateMarket();
+  }
+}
+
+function shouldAutoSyncMarket() {
+  if (state.marketSync?.status === "syncing") return false;
+  if (state.marketSync?.status !== "synced") return true;
+  const syncedAt = new Date(state.marketSync.syncedAt).getTime();
+  return !Number.isFinite(syncedAt) || Date.now() - syncedAt > 10 * 60 * 1000;
+}
+
+function maybeAutoSyncMarket() {
+  if (state.view !== "markets" || !shouldAutoSyncMarket()) return;
+  state.marketSync = {
+    status: "syncing",
+    message: "正在同步官网积分...",
+    syncedAt: new Date().toISOString()
+  };
+  saveState();
+  render();
+  syncMarketFromLeaderboard({ silent: true }).catch((error) => {
+    console.warn("Leaderboard auto sync failed.", error);
+    state.marketSync = {
+      status: "fallback",
+      message: "官网同步失败，保留本地演示行情",
+      syncedAt: new Date().toISOString()
+    };
+    saveState();
+    render();
+  });
 }
 
 function resetDemo() {
@@ -1321,6 +1539,7 @@ function setView(view, tab = view, selectedId = state.selectedId) {
   state.selectedId = selectedId;
   saveState();
   render();
+  maybeAutoSyncMarket();
 }
 
 function tradeQuantityLimit(input) {
@@ -1538,8 +1757,9 @@ function renderMarkets() {
         <div>
           <div class="section-title">主播指数榜</div>
           <div class="table-note">${stockCount} 支暂定股票 · 表格模式</div>
+          ${renderMarketSyncNote()}
         </div>
-        <button class="mini-btn" data-action="simulate">刷新行情</button>
+        <button class="mini-btn" data-action="simulate">同步官网积分</button>
       </div>
       ${renderMarketGroups()}
       <div class="stock-table-wrap">
@@ -1612,6 +1832,21 @@ function renderDetail() {
       ${renderToast()}
     </section>
   `;
+}
+
+function renderMarketSyncNote() {
+  const sync = state.marketSync;
+  if (!sync) {
+    return `<div class="market-sync-note">未同步官网积分 · 本地演示行情</div>`;
+  }
+  if (sync.status === "syncing") {
+    return `<div class="market-sync-note">正在同步官网积分...</div>`;
+  }
+  if (sync.status === "synced") {
+    const time = new Date(sync.syncedAt).toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
+    return `<div class="market-sync-note">已同步 ${sync.source} · 命中 ${sync.matched} 支 · 500名门槛 ${money(sync.floorScore)} · ${time}</div>`;
+  }
+  return `<div class="market-sync-note warn">${sync.message || "官网同步失败 · 本地演示行情"}</div>`;
 }
 
 function renderDetailGroupContext(groupInfo) {
@@ -1934,7 +2169,7 @@ document.addEventListener("click", (event) => {
     sell(id, updateTradeEstimate(document.getElementById("sellQty"), true));
   }
   if (action === "simulate") {
-    simulateMarket();
+    refreshMarketData();
   }
   if (action === "reset") {
     resetDemo();
@@ -1965,3 +2200,4 @@ if (!state.targets) {
 }
 
 render();
+maybeAutoSyncMarket();

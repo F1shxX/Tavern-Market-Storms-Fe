@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "python -m http.server 5178",
+    "snapshot:leaderboard": "node scripts/generate-leaderboard-snapshot.js",
     "verify": "node scripts/verify-demo.js && node scripts/verify-market-list.js",
     "verify:market": "node scripts/verify-market-list.js"
   },
