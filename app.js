@@ -1507,7 +1507,6 @@ function renderMarketGroupCard(group) {
 function renderMarketRow(target, index) {
   const change = changePercent(target);
   const tone = change >= 0 ? "up" : "down";
-  const meta = target.gameName ? `${target.code} · ${target.gameName}` : target.code;
   const groupInfo = marketGroupForTarget(target.id);
   const groupLabel =
     groupInfo && groupInfo.role === "index" ? `${groupInfo.group.shortName}指数` : groupInfo?.group.shortName;
@@ -1517,7 +1516,6 @@ function renderMarketRow(target, index) {
       <td class="col-name">
         <button class="stock-name-btn" data-action="detail" data-id="${target.id}">
           <strong><span class="stock-title-text">${target.name}</span>${groupInfo ? `<span class="group-badge ${groupInfo.group.tone}">${groupLabel}</span>` : ""}</strong>
-          <span title="${meta}">${meta}</span>
         </button>
       </td>
       <td class="col-price">${price(target.price)}</td>
@@ -1793,33 +1791,71 @@ function renderHoldingCard(target) {
   `;
 }
 
-function renderRankings() {
+function rankingRows() {
   const playerScore = Math.round(totalAssets());
-  const rows = [
+  return [
     { name: "张兰", score: 150000 },
     { name: "李四", score: 120000 },
-    { name: "我方酒客", score: playerScore },
     { name: "陈掌柜", score: 105600 },
-    { name: "月夜粉团", score: 98400 }
-  ].sort((a, b) => b.score - a.score);
+    { name: "夜航商人", score: 102400 },
+    { name: "我方酒客", score: playerScore, self: true },
+    { name: "月夜粉团", score: 98400 },
+    { name: "荧火掌柜", score: 96150 },
+    { name: "木桶旅人", score: 93520 },
+    { name: "晨星账房", score: 91080 },
+    { name: "铜杯骑士", score: 88700 }
+  ]
+    .sort((a, b) => b.score - a.score)
+    .map((row, index) => ({ ...row, rank: index + 1 }));
+}
+
+function nearbyRankingRows(rows, size = 5) {
+  const selfIndex = rows.findIndex((row) => row.self);
+  if (selfIndex === -1) return rows.slice(0, size);
+  let start = Math.max(0, selfIndex - Math.floor(size / 2));
+  let end = start + size;
+  if (end > rows.length) {
+    end = rows.length;
+    start = Math.max(0, end - size);
+  }
+  return rows.slice(start, end);
+}
+
+function maskedRankScore() {
+  return "XXXX<br>金币";
+}
+
+function renderRankRow(row, variant = "") {
+  return `
+    <article class="rank-row ${variant} ${row.self ? "self" : ""}">
+      <div class="rank-medal">${row.rank}</div>
+      <div>
+        <div class="market-name gold-text">${row.name}</div>
+        <div class="market-code">${row.self ? "当前账号" : "模拟玩家"}</div>
+      </div>
+      <div class="rank-score" aria-label="金币已隐藏">${maskedRankScore()}</div>
+    </article>
+  `;
+}
+
+function renderRankings() {
+  const rows = rankingRows();
+  const leaders = rows.slice(0, 3);
+  const nearby = nearbyRankingRows(rows);
   return `
     <section class="screen">
       ${renderTopbar("Ranking", "玩家收益榜")}
-      <div class="market-list">
-        ${rows
-          .map(
-            (row, index) => `
-              <article class="rank-row">
-                <div class="rank-medal">${index + 1}</div>
-                <div>
-                  <div class="market-name gold-text">${row.name}</div>
-                  <div class="market-code">${row.name === "我方酒客" ? "当前账号" : "模拟玩家"}</div>
-                </div>
-                <div class="rank-score">${money(row.score)}<br>金币</div>
-              </article>
-            `
-          )
-          .join("")}
+      <div class="ranking-section">
+        <div class="ranking-section-title">前三名</div>
+        <div class="rank-top-list">
+          ${leaders.map((row) => renderRankRow(row, "top-three")).join("")}
+        </div>
+      </div>
+      <div class="ranking-section">
+        <div class="ranking-section-title">我的附近排名</div>
+        <div class="rank-nearby-list">
+          ${nearby.map((row) => renderRankRow(row)).join("")}
+        </div>
       </div>
       ${renderNav()}
       ${renderToast()}

@@ -61,6 +61,35 @@ const { chromium } = require("playwright");
   await page.getByText("总资产").waitFor({ timeout: 3000 });
   await page.getByRole("button", { name: "排名", exact: true }).click();
   await page.getByText("玩家收益榜").waitFor({ timeout: 3000 });
+  await page.getByText("前三名").waitFor({ timeout: 3000 });
+  await page.getByText("我的附近排名").waitFor({ timeout: 3000 });
+
+  const topCount = await page.locator(".rank-top-list .rank-row").count();
+  if (topCount !== 3) {
+    throw new Error(`Expected 3 top ranking rows, found ${topCount}.`);
+  }
+  const nearbyRows = page.locator(".rank-nearby-list .rank-row");
+  const nearbyCount = await nearbyRows.count();
+  const selfIndex = await nearbyRows.evaluateAll((elements) =>
+    elements.findIndex((element) => element.classList.contains("self"))
+  );
+  if (selfIndex === -1) {
+    throw new Error("Nearby rankings should include the current account.");
+  }
+  if (nearbyCount >= 5 && selfIndex !== 2) {
+    throw new Error(`Current account should be centered in nearby rankings, found at index ${selfIndex}.`);
+  }
+  const scoreTexts = await page.locator(".rank-score").evaluateAll((elements) =>
+    elements.map((element) => (element.textContent || "").replace(/\s/g, ""))
+  );
+  const unmaskedScore = scoreTexts.find((text) => text !== "XXXX金币");
+  if (unmaskedScore) {
+    throw new Error(`Ranking score should be masked as XXXX金币, found ${unmaskedScore}.`);
+  }
+  const rankingText = await page.locator(".screen").textContent();
+  if (/150,?000|120,?000|105,?600|102,?400|98,?400/.test(rankingText)) {
+    throw new Error("Ranking page should not expose raw coin totals.");
+  }
   await page.screenshot({ path: "demo-mobile-check.png", fullPage: true });
 
   await browser.close();

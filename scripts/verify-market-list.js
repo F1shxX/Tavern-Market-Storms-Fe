@@ -39,6 +39,14 @@ const { chromium } = require("playwright");
   if (invalidActionRow !== -1) {
     throw new Error(`Expected one action button per market row; row ${invalidActionRow + 1} has ${actionCounts[invalidActionRow]}.`);
   }
+  const leakedRowMeta = await page.locator(".stock-name-btn").evaluateAll((elements) =>
+    elements
+      .map((element, index) => ({ index: index + 1, text: element.textContent || "" }))
+      .filter((row) => /TM-\d{3}|炉石豆哥|标蓝股票的均值|标黄股票的均值|标绿股票的均值/.test(row.text))
+  );
+  if (leakedRowMeta.length) {
+    throw new Error(`Market rows should hide stock code and streamer/game metadata: ${JSON.stringify(leakedRowMeta[0])}`);
+  }
 
   await rows.filter({ hasText: "豆豆农场" }).waitFor({ timeout: 3000 });
   await rows.filter({ hasText: "俺的你男装" }).waitFor({ timeout: 3000 });
