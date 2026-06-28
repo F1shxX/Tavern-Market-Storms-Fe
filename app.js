@@ -1,6 +1,7 @@
 const STORAGE_KEY = "tavern-market-storms-demo-state-v3";
 const FEE_RATE = 0.001;
 const SINGLE_STOCK_BUY_LIMIT = 0.25;
+const TREND_WINDOW = 7;
 const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.hostname)
   ? "http://127.0.0.1:3101"
   : "";
@@ -1229,8 +1230,39 @@ function deterministicOutsideScore(target, floorScore) {
   return Math.round(next);
 }
 
+function priceFromScore(score) {
+  return Number(Math.max(3, Number(score) / 1000).toFixed(2));
+}
+
+function normalizedScoreHistory(scores, fallbackScore) {
+  const values = Array.isArray(scores)
+    ? scores.map((score) => Number(score)).filter((score) => Number.isFinite(score) && score > 0)
+    : [];
+  const nextFallback = Number(fallbackScore);
+  if (Number.isFinite(nextFallback) && nextFallback > 0) values.push(nextFallback);
+  const recent = values.slice(-TREND_WINDOW);
+  if (!recent.length && Number.isFinite(nextFallback) && nextFallback > 0) return [nextFallback];
+  return recent;
+}
+
+function buildScoreTrend(target, scoreHistory, nextScore) {
+  if (scoreHistory.length >= 2) {
+    return scoreHistory.map(priceFromScore);
+  }
+  const currentPrice = target.price || priceFromScore(nextScore);
+  const nextPrice = priceFromScore(nextScore);
+  const span = TREND_WINDOW - 1;
+  return Array.from({ length: TREND_WINDOW }, (_, index) => {
+    const ratio = span ? index / span : 1;
+    const eased = ratio * ratio * (3 - 2 * ratio);
+    return Number((currentPrice + (nextPrice - currentPrice) * eased).toFixed(2));
+  });
+}
+
 function applyTargetScore(target, nextScore, syncMeta = {}) {
-  const prevPrice = target.price;
+  const scoreHistory = normalizedScoreHistory(syncMeta.scoreHistory, nextScore);
+  const nextTrend = buildScoreTrend(target, scoreHistory, nextScore);
+  const prevPrice = nextTrend.length > 1 ? nextTrend[nextTrend.length - 2] : target.price;
   const nextPrice = Number(Math.max(3, nextScore / 1000).toFixed(2));
   const swing = prevPrice ? (nextPrice - prevPrice) / prevPrice : 0;
   target.prevClose = prevPrice;
@@ -1238,8 +1270,8 @@ function applyTargetScore(target, nextScore, syncMeta = {}) {
   target.score = Math.round(nextScore);
   target.volume = Math.max(900, Math.round(target.volume * (1 + Math.min(0.45, Math.abs(swing) * 5))));
   target.heat = Math.max(35, Math.min(99, Math.round(target.heat + swing * 180)));
-  target.trend = [...target.trend.slice(-6), target.price];
-  target.sync = syncMeta;
+  target.trend = nextTrend;
+  target.sync = { ...syncMeta, scoreHistory };
 }
 
 function getTarget(id) {
@@ -1433,10 +1465,15 @@ function recalculateGroupIndexTargets() {
     const members = groupMembers(group);
     if (!indexTarget || !members.length) continue;
     const nextScore = Math.round(members.reduce((sum, target) => sum + target.score, 0) / members.length);
+    const scoreHistory = Array.from({ length: TREND_WINDOW }, (_, index) => {
+      const memberScores = members.map((target) => Math.round((target.trend?.[index] || target.price) * 1000));
+      return Math.round(memberScores.reduce((sum, score) => sum + score, 0) / memberScores.length);
+    });
     applyTargetScore(indexTarget, nextScore, {
       source: "group-average",
       groupId: group.id,
-      matched: true
+      matched: true,
+      scoreHistory
     });
   }
 }
@@ -1487,14 +1524,16 @@ async function syncMarketFromLeaderboard({ silent = false } = {}) {
         source: "blizzard-cn",
         matched: true,
         rank: row.position,
-        battleTag: row.battleTag
+        battleTag: row.battleTag,
+        scoreHistory: row.scoreHistory
       });
     } else {
       unmatched += 1;
       applyTargetScore(target, deterministicOutsideScore(target, snapshot.floorScore), {
         source: "outside-top-500",
         matched: false,
-        floorScore: snapshot.floorScore
+        floorScore: snapshot.floorScore,
+        scoreHistory: target.sync?.source === "outside-top-500" ? target.sync.scoreHistory : null
       });
     }
   });
@@ -1577,7 +1616,7 @@ function resetDemo() {
 
 function setView(view, tab = view, selectedId = state.selectedId) {
   state.view = view;
-  state.activeTab = tab;
+  state.activeTab = tab || state.activeTab || "home";
   state.selectedId = selectedId;
   saveState();
   render();
@@ -1837,7 +1876,7 @@ function renderDetail() {
   const change = changePercent(target);
   const groupInfo = marketGroupForTarget(target.id);
   return `
-    <section class="screen no-nav">
+    <section class="screen">
       <div class="topbar">
         <button class="btn btn-blue back-btn" data-action="back">← 返回</button>
         <button class="mini-btn" data-action="simulate">刷新行情</button>
@@ -1871,6 +1910,7 @@ function renderDetail() {
         <div class="summary-pill">今日成交<strong>${money(target.volume)} 手</strong></div>
         <div class="summary-pill">可用金币<strong>${money(state.balance)}</strong></div>
       </div>
+      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -1964,7 +2004,7 @@ function renderTrade() {
   const buyValue = estimateBuy(target, buyQty);
   const sellValue = estimateSell(target, sellQty);
   return `
-    <section class="screen no-nav">
+    <section class="screen">
       <div class="topbar">
         <button class="btn btn-blue back-btn" data-action="detail" data-id="${target.id}">← 返回</button>
       </div>
@@ -2014,6 +2054,7 @@ function renderTrade() {
         <div class="notice-line"><b>可用金币：</b><span>${money(state.balance)} 金币</span></div>
         <div class="notice-line"><b>当前持仓：</b><span>${holding.quantity} 股，均价 ${price(holding.averageCost)}</span></div>
       </div>
+      ${renderNav()}
       ${renderToast()}
     </section>
   `;

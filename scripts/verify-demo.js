@@ -14,6 +14,14 @@ const { chromium } = require("playwright");
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.locator(".stock-name-btn").first().click();
   await page.getByRole("button", { name: "买入" }).click();
+  const tradeNavImages = await page.locator(".nav .nav-button-img").count();
+  if (tradeNavImages !== 5) {
+    throw new Error(`Trade page should keep the 5 bottom navigation buttons visible, found ${tradeNavImages}.`);
+  }
+  await page.getByRole("button", { name: "行情", exact: true }).click();
+  await page.getByText("主播指数榜").waitFor({ timeout: 3000 });
+  await page.locator(".stock-name-btn").first().click();
+  await page.getByRole("button", { name: "买入" }).click();
   const initialBuyEstimate = await page.locator("#buyEstimate").textContent();
   await page.locator("#buyQty").fill("20");
   const updatedBuyEstimate = await page.locator("#buyEstimate").textContent();

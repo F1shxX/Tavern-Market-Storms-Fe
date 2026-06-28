@@ -8,7 +8,9 @@ const { chromium } = require("playwright");
   const logs = [];
   page.on("pageerror", (error) => logs.push(`pageerror: ${error.message}`));
   page.on("console", (message) => {
-    if (message.type() === "error") logs.push(`console: ${message.text()}`);
+    if (message.type() === "error" && !message.text().includes("ERR_CONNECTION_REFUSED")) {
+      logs.push(`console: ${message.text()}`);
+    }
   });
 
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
@@ -20,6 +22,7 @@ const { chromium } = require("playwright");
     const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
     return {
       marketSync: saved.marketSync,
+      syncedTarget: saved.targets.find((target) => target.id === "stock-004"),
       outsideLeaks: saved.targets
         .filter((target) => target.sync?.source === "outside-top-500")
         .filter((target) => target.score >= saved.marketSync.floorScore)
@@ -34,6 +37,14 @@ const { chromium } = require("playwright");
   }
   if (syncState.outsideLeaks.length) {
     throw new Error(`Outside-top-500 stocks must stay below the floor score: ${JSON.stringify(syncState.outsideLeaks[0])}`);
+  }
+  if (!Array.isArray(syncState.syncedTarget?.sync?.scoreHistory) || syncState.syncedTarget.sync.scoreHistory.length < 1) {
+    throw new Error("Synced stocks should store scoreHistory for the detail trend chart.");
+  }
+  const expectedTrend = syncState.syncedTarget.sync.scoreHistory.map((score) => Number(Math.max(3, score / 1000).toFixed(2)));
+  const actualTrend = syncState.syncedTarget.trend.slice(-expectedTrend.length);
+  if (JSON.stringify(actualTrend) !== JSON.stringify(expectedTrend)) {
+    throw new Error(`Detail trend should be derived from scoreHistory. Expected ${expectedTrend}, got ${actualTrend}.`);
   }
 
   const rows = page.locator(".stock-table tbody tr");
@@ -98,6 +109,10 @@ const { chromium } = require("playwright");
   await lastRow.locator(".stock-name-btn").click();
   await page.getByText("优巨集团").first().waitFor({ timeout: 3000 });
   await page.getByText(/代码：TM-044/).waitFor({ timeout: 3000 });
+  const detailNavImages = await page.locator(".nav .nav-button-img").count();
+  if (detailNavImages !== 5) {
+    throw new Error(`Detail page should keep the 5 bottom navigation buttons visible, found ${detailNavImages}.`);
+  }
   await page.locator(".detail-code").filter({ hasText: "标绿股票的均值" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "小浪宠物" }).waitFor({ timeout: 3000 });

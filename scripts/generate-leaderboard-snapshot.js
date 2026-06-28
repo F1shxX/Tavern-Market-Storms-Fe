@@ -7,11 +7,30 @@ const MODE_LABEL = "酒馆战棋";
 const SEASON_LABEL = "第13赛季";
 const PAGE_SIZE = 25;
 const TARGET_LIMIT = 500;
+const SCORE_HISTORY_LIMIT = 7;
 
 function normalizeBattleTag(value) {
   return String(value || "")
     .toLowerCase()
     .replace(/[|｜丨丶·\s_\-—–]/g, "");
+}
+
+async function readPreviousSnapshot(outPath) {
+  try {
+    const payload = JSON.parse(await fs.readFile(outPath, "utf8"));
+    return payload.data || payload;
+  } catch {
+    return null;
+  }
+}
+
+function scoreHistoryFor(row, previousRowsByName) {
+  const previous = previousRowsByName.get(row.normalizedBattleTag);
+  const previousScores = Array.isArray(previous?.scoreHistory) ? previous.scoreHistory : [];
+  return [...previousScores, row.score]
+    .map((score) => Number(score))
+    .filter((score) => Number.isFinite(score) && score > 0)
+    .slice(-SCORE_HISTORY_LIMIT);
 }
 
 async function fetchJson(url) {
@@ -55,6 +74,11 @@ async function fetchRankPage({ seasonId, page }) {
 }
 
 async function main() {
+  const outPath = path.join(__dirname, "..", "data", "battlegrounds-leaderboard.json");
+  const previousSnapshot = await readPreviousSnapshot(outPath);
+  const previousRowsByName = new Map(
+    (previousSnapshot?.rows || []).map((row) => [row.normalizedBattleTag || normalizeBattleTag(row.battleTag), row])
+  );
   const season = await resolveSeason();
   const firstPage = await fetchRankPage({ seasonId: season.seasonId, page: 1 });
   const total = Number(firstPage.total || 0);
@@ -73,6 +97,9 @@ async function main() {
     normalizedBattleTag: normalizeBattleTag(row.battle_tag),
     score: Number(row.score)
   }));
+  normalizedRows.forEach((row) => {
+    row.scoreHistory = scoreHistoryFor(row, previousRowsByName);
+  });
   const floorRow = normalizedRows[normalizedRows.length - 1] || null;
   const snapshot = {
     source: "blizzard-cn-static",
@@ -88,7 +115,6 @@ async function main() {
     rows: normalizedRows
   };
 
-  const outPath = path.join(__dirname, "..", "data", "battlegrounds-leaderboard.json");
   await fs.mkdir(path.dirname(outPath), { recursive: true });
   await fs.writeFile(outPath, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
   console.log(`Wrote ${outPath}: rows=${snapshot.rows.length}, floorScore=${snapshot.floorScore}`);
