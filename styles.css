@@ -593,6 +593,18 @@ button {
   background: #2a160e;
 }
 
+.avatar.portrait-avatar {
+  border-color: #ffe581;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 226, 122, 0.28), transparent 56%),
+    linear-gradient(180deg, #7b431f, #1c0d08);
+  box-shadow:
+    0 0 0 2px #fff0a8,
+    0 0 0 5px #65300f,
+    inset 0 0 18px rgba(255, 236, 164, 0.18),
+    0 10px 22px rgba(0, 0, 0, 0.46);
+}
+
 .avatar.large {
   width: 108px;
   height: 108px;

@@ -6,6 +6,29 @@ const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.h
   : "";
 const API_BASE_URL = window.TMS_API_BASE_URL || LOCAL_API_BASE_URL;
 const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
+const portraitAvatars = {
+  "stock-001": "./assets/portraits/stock-001.webp",
+  "stock-002": "./assets/portraits/stock-002.webp",
+  "stock-003": "./assets/portraits/stock-003.webp",
+  "stock-004": "./assets/portraits/stock-004.webp",
+  "stock-005": "./assets/portraits/stock-005.webp",
+  "stock-007": "./assets/portraits/stock-007.webp",
+  "stock-009": "./assets/portraits/stock-009.webp",
+  "stock-010": "./assets/portraits/stock-010.webp",
+  "stock-011": "./assets/portraits/stock-011.webp",
+  "stock-016": "./assets/portraits/stock-016.webp",
+  "stock-017": "./assets/portraits/stock-017.webp",
+  "stock-019": "./assets/portraits/stock-019.webp",
+  "stock-020": "./assets/portraits/stock-020.webp",
+  "stock-026": "./assets/portraits/stock-026.webp",
+  "stock-027": "./assets/portraits/stock-027.webp",
+  "stock-029": "./assets/portraits/stock-029.webp",
+  "stock-030": "./assets/portraits/stock-030.webp",
+  "stock-031": "./assets/portraits/stock-031.webp",
+  "stock-034": "./assets/portraits/stock-034.webp",
+  "stock-035": "./assets/portraits/stock-035.webp",
+  "stock-042": "./assets/portraits/stock-042.webp"
+};
 
 const seedTargets = [
   {
@@ -1223,6 +1246,14 @@ function getTarget(id) {
   return targets().find((target) => target.id === id) || targets()[0];
 }
 
+function avatarFor(target) {
+  return portraitAvatars[target.id] || target.avatar;
+}
+
+function avatarClassFor(target, extra = "") {
+  return `avatar${portraitAvatars[target.id] ? " portrait-avatar" : ""}${extra ? ` ${extra}` : ""}`;
+}
+
 function getHolding(id) {
   return state.holdings[id] || { quantity: 0, averageCost: 0 };
 }
@@ -1812,7 +1843,7 @@ function renderDetail() {
         <button class="mini-btn" data-action="simulate">刷新行情</button>
       </div>
       <div class="detail-head">
-        <img class="avatar large" src="${target.avatar}" alt="${target.name}" />
+        <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
         <div>
           <div class="detail-name gold-text">${target.name}</div>
           <div class="detail-code">代码：${target.code}${target.gameName ? ` · 对应：${target.gameName}` : ""}</div>
@@ -1938,7 +1969,7 @@ function renderTrade() {
         <button class="btn btn-blue back-btn" data-action="detail" data-id="${target.id}">← 返回</button>
       </div>
       <div class="trade-target panel">
-        <img class="avatar large" src="${target.avatar}" alt="${target.name}" />
+        <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
         <div>
           <div class="detail-name gold-text">${target.name}</div>
           <div class="detail-code">${target.code}${target.gameName ? ` · ${target.gameName}` : ""}</div>
@@ -2023,7 +2054,7 @@ function renderHoldingCard(target) {
   const pnl = holdingProfit(target.id);
   return `
     <article class="holding-card">
-      <img class="avatar" src="${target.avatar}" alt="${target.name}" />
+      <img class="${avatarClassFor(target)}" src="${avatarFor(target)}" alt="${target.name}" />
       <div>
         <h3 class="gold-text">${target.name}</h3>
         <p>${holding.quantity} 股 · 均价 ${price(holding.averageCost)} · 当前 ${price(target.price)}</p>
