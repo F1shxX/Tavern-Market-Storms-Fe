@@ -7,6 +7,8 @@ const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.h
   : "";
 const API_BASE_URL = window.TMS_API_BASE_URL || LOCAL_API_BASE_URL;
 const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
+const SITE_DOMAIN = "luzhidao123.cn";
+const ICP_BEIAN = "浙ICP备2026047968号-1";
 const portraitAvatars = {
   "stock-001": "./assets/portraits/stock-001.webp",
   "stock-002": "./assets/portraits/stock-002.webp",
@@ -1700,6 +1702,15 @@ function renderNav() {
   `;
 }
 
+function renderSiteFiling() {
+  return `
+    <footer class="site-filing">
+      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">${ICP_BEIAN}</a>
+      <span>${SITE_DOMAIN}</span>
+    </footer>
+  `;
+}
+
 function renderHome() {
   const gainers = topGainers();
   const losers = topLosers();
@@ -1732,6 +1743,7 @@ function renderHome() {
       <div class="home-disclaimer">
         纯娱乐模拟数据，不涉及充值、提现或真实金融交易。
       </div>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
@@ -1880,6 +1892,7 @@ function renderMarkets() {
           </tbody>
         </table>
       </div>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
@@ -1927,6 +1940,7 @@ function renderDetail() {
         <div class="summary-pill">今日成交<strong>${money(target.volume)} 手</strong></div>
         <div class="summary-pill">可用金币<strong>${money(state.balance)}</strong></div>
       </div>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
@@ -2071,6 +2085,7 @@ function renderTrade() {
         <div class="notice-line"><b>可用金币：</b><span>${money(state.balance)} 金币</span></div>
         <div class="notice-line"><b>当前持仓：</b><span>${holding.quantity} 股，均价 ${price(holding.averageCost)}</span></div>
       </div>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
@@ -2101,6 +2116,7 @@ function renderHoldings() {
             : `<div class="panel empty">暂无持仓，去行情页买入第一只标的。</div>`
         }
       </div>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
@@ -2192,6 +2208,7 @@ function renderRankings() {
           ${nearby.map((row) => renderRankRow(row)).join("")}
         </div>
       </div>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
@@ -2220,6 +2237,7 @@ function renderAnnouncements() {
         }</p>
       </article>
       <button class="btn btn-red btn-wide" data-action="reset">重置 Demo 数据</button>
+      ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
     </section>
