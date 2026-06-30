@@ -38,7 +38,10 @@ const buttonAssets = {
   marketTrade: "./assets/buttons/market-trade-lite.png",
   marketSync: "./assets/buttons/market-sync-lite.png",
   holdingDetail: "./assets/buttons/holding-detail-lite.png",
-  holdingTrade: "./assets/buttons/holding-trade-lite.png"
+  holdingTrade: "./assets/buttons/holding-trade-lite.png",
+  buy: "./assets/buttons/buy-wide-lite.png",
+  sell: "./assets/buttons/sell-wide-lite.png",
+  back: "./assets/buttons/back-blue-lite.png"
 };
 
 const seedTargets = [
@@ -1908,7 +1911,7 @@ function renderDetail() {
   return `
     <section class="screen">
       <div class="topbar">
-        <button class="btn btn-blue back-btn" data-action="back">← 返回</button>
+        ${renderImageButton({ className: "back-image-button", action: "back", label: "← 返回", image: buttonAssets.back })}
         ${renderImageButton({ className: "refresh-image-button", action: "simulate", label: "刷新行情", image: buttonAssets.refresh })}
       </div>
       <div class="detail-head">
@@ -1930,8 +1933,8 @@ function renderDetail() {
       ${groupInfo ? renderDetailGroupContext(groupInfo) : ""}
 
       <div class="detail-actions">
-        <button class="btn btn-gold" data-action="trade" data-id="${target.id}">买入</button>
-        <button class="btn btn-red" data-action="trade" data-id="${target.id}">卖出</button>
+        ${renderImageButton({ className: "trade-side-image-button", action: "trade", id: target.id, label: "买入", image: buttonAssets.buy })}
+        ${renderImageButton({ className: "trade-side-image-button", action: "trade", id: target.id, label: "卖出", image: buttonAssets.sell })}
       </div>
 
       <div class="holding-summary">
@@ -2037,7 +2040,7 @@ function renderTrade() {
   return `
     <section class="screen">
       <div class="topbar">
-        <button class="btn btn-blue back-btn" data-action="detail" data-id="${target.id}">← 返回</button>
+        ${renderImageButton({ className: "back-image-button", action: "detail", id: target.id, label: "← 返回", image: buttonAssets.back })}
       </div>
       <div class="trade-target panel">
         <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
@@ -2061,7 +2064,7 @@ function renderTrade() {
             <div>预估消耗<strong id="buyEstimate">${money(buyValue)} 金币</strong></div>
             <div>买入上限<strong>${maxBuyQty} 股</strong></div>
           </div>
-          <button class="btn btn-gold btn-wide" data-action="buy" data-id="${target.id}">买入</button>
+          ${renderImageButton({ className: "order-image-button", action: "buy", id: target.id, label: "买入", image: buttonAssets.buy })}
         </div>
 
         <div class="trade-card">
@@ -2075,7 +2078,7 @@ function renderTrade() {
             <div>持仓<strong>${holding.quantity} 股</strong></div>
             <div>预估到账<strong id="sellEstimate">${money(sellValue)} 金币</strong></div>
           </div>
-          <button class="btn btn-red btn-wide" data-action="sell" data-id="${target.id}">卖出</button>
+          ${renderImageButton({ className: "order-image-button", action: "sell", id: target.id, label: "卖出", image: buttonAssets.sell })}
         </div>
       </div>
 
