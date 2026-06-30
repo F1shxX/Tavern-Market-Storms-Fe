@@ -34,11 +34,11 @@ const portraitAvatars = {
 };
 
 const buttonAssets = {
-  refresh: "./assets/buttons/trade-refresh.png",
-  marketTrade: "./assets/buttons/market-trade.png",
-  marketSync: "./assets/buttons/market-sync.png",
-  holdingDetail: "./assets/buttons/holding-detail.png",
-  holdingTrade: "./assets/buttons/holding-trade.png"
+  refresh: "./assets/buttons/trade-refresh-lite.png",
+  marketTrade: "./assets/buttons/market-trade-lite.png",
+  marketSync: "./assets/buttons/market-sync-lite.png",
+  holdingDetail: "./assets/buttons/holding-detail-lite.png",
+  holdingTrade: "./assets/buttons/holding-trade-lite.png"
 };
 
 const seedTargets = [
@@ -1681,11 +1681,11 @@ function renderImageButton({ className = "", action, id = "", label, image }) {
 
 function renderNav() {
   const tabs = [
-    ["home", "交易", "./assets/nav/nav-trade.png"],
-    ["markets", "行情", "./assets/nav/nav-market.png"],
-    ["holdings", "持仓", "./assets/nav/nav-holdings.png"],
-    ["rankings", "排名", "./assets/nav/nav-rankings.png"],
-    ["announcements", "社区", "./assets/nav/nav-community.png"]
+    ["home", "交易", "./assets/nav/nav-trade-lite.png"],
+    ["markets", "行情", "./assets/nav/nav-market-lite.png"],
+    ["holdings", "持仓", "./assets/nav/nav-holdings-lite.png"],
+    ["rankings", "排名", "./assets/nav/nav-rankings-lite.png"],
+    ["announcements", "社区", "./assets/nav/nav-community-lite.png"]
   ];
   return `
     <nav class="nav">
