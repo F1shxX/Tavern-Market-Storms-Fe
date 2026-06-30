@@ -52,6 +52,7 @@ button {
   position: relative;
   overflow: hidden;
   background:
+    url("./assets/ui/app-background-frame.webp") center / 100% 100% no-repeat,
     radial-gradient(circle at 20% 12%, rgba(159, 91, 29, 0.33), transparent 12rem),
     linear-gradient(180deg, rgba(34, 18, 11, 0.98) 0%, rgba(9, 6, 5, 0.98) 100%);
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.62);
@@ -75,7 +76,7 @@ button {
   height: calc(100dvh - 74px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 16px 14px 24px;
+  padding: 16px 14px 36px;
   background:
     radial-gradient(circle at 50% 0%, rgba(243, 183, 78, 0.14), transparent 14rem),
     linear-gradient(180deg, rgba(48, 25, 13, 0.54), rgba(8, 5, 4, 0.1));
@@ -1515,6 +1516,56 @@ button {
   line-height: 1.4;
 }
 
+.interaction-dialog {
+  min-height: 164px;
+  margin: 12px 0;
+  padding: 34px 34px 28px;
+  border: 0;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(21, 13, 31, 0.82), rgba(55, 31, 72, 0.78)),
+    url("./assets/ui/dialog-frame.webp") center / 100% 100% no-repeat;
+  color: var(--cream-bright);
+  text-align: center;
+  text-shadow: var(--text-outline-soft);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+}
+
+.interaction-speaker {
+  color: var(--gold-1);
+  font-size: 18px;
+  font-weight: 1000;
+  text-shadow: var(--text-outline);
+}
+
+.interaction-dialog p {
+  margin: 10px auto 0;
+  max-width: 280px;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.interaction-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.interaction-choice {
+  min-width: 116px;
+  min-height: 30px;
+  padding: 5px 14px;
+  border: 1px solid rgba(255, 226, 106, 0.74);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(69, 40, 117, 0.95), rgba(35, 18, 67, 0.95));
+  color: var(--cream-bright);
+  font-size: 12px;
+  font-weight: 1000;
+  text-shadow: var(--text-outline-soft);
+  opacity: 0.82;
+}
+
 .empty {
   padding: 22px 14px;
   text-align: center;
@@ -1630,6 +1681,7 @@ body {
 
 #app {
   background:
+    url("./assets/ui/app-background-frame.webp") center / 100% 100% no-repeat,
     radial-gradient(circle at 50% 0%, rgba(255, 190, 71, 0.22), transparent 14rem),
     linear-gradient(180deg, #3a1e14 0%, #170b08 54%, #080403 100%);
 }

@@ -1714,6 +1714,18 @@ function renderSiteFiling() {
   `;
 }
 
+function renderInteractionDialog() {
+  return `
+    <section class="interaction-dialog" aria-label="互动对话">
+      <div class="interaction-speaker">旅店老板</div>
+      <p>后续互动内容将在这里展示：任务提示、股票事件、角色对话和确认操作都会使用这个文本框。</p>
+      <div class="interaction-actions">
+        <button class="interaction-choice" type="button" disabled>即将开放</button>
+      </div>
+    </section>
+  `;
+}
+
 function renderHome() {
   const gainers = topGainers();
   const losers = topLosers();
@@ -2239,6 +2251,7 @@ function renderAnnouncements() {
             : "暂无交易记录。"
         }</p>
       </article>
+      ${renderInteractionDialog()}
       <button class="btn btn-red btn-wide" data-action="reset">重置 Demo 数据</button>
       ${renderSiteFiling()}
       ${renderNav()}
