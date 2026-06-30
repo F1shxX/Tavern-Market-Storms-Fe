@@ -1503,6 +1503,7 @@ button {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1px;
+  height: 58px;
   padding: 3px;
   border-radius: 14px;
   background:
@@ -1514,9 +1515,11 @@ button {
 .nav button {
   width: 100%;
   min-width: 0;
-  min-height: 50px;
+  height: 52px;
+  min-height: 0;
   padding: 0;
   border-radius: 7px;
+  overflow: hidden;
   background: transparent;
   color: transparent;
   border: 0;
