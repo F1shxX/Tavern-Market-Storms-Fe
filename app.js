@@ -1479,21 +1479,21 @@ function showToast(message) {
 
 async function buy(targetId, quantity) {
   if (!state.auth?.token) {
-    showToast("?????????");
+    showToast("Please sign in with your phone first.");
     return;
   }
   const target = getTarget(targetId);
   const maxQty = buyMaxQuantity(target);
   const qty = clampQuantity(quantity, maxQty);
   if (qty <= 0) {
-    showToast("???? 25% ??????????");
+    showToast("Order exceeds the 25% limit or balance is insufficient.");
     return;
   }
   const gross = target.price * qty;
   const fee = gross * FEE_RATE;
   const cost = gross + fee;
   if (cost > state.balance) {
-    showToast("??????????????");
+    showToast("Insufficient balance.");
     return;
   }
 
@@ -1508,23 +1508,23 @@ async function buy(targetId, quantity) {
       })
     });
     applyPortfolio(data.portfolio);
-    showToast(`?????${target.name} ${qty} ?`);
+    showToast(`Buy filled: ${target.name} ${qty}`);
     render();
   } catch (error) {
-    showToast(error.message || "?????");
+    showToast(error.message || "Buy failed.");
   }
 }
 
 async function sell(targetId, quantity) {
   if (!state.auth?.token) {
-    showToast("?????????");
+    showToast("Please sign in with your phone first.");
     return;
   }
   const target = getTarget(targetId);
   const holding = getHolding(targetId);
   const qty = clampQuantity(quantity, holding.quantity);
   if (qty <= 0) {
-    showToast("??????????????");
+    showToast("Insufficient holding.");
     return;
   }
 
@@ -1539,10 +1539,10 @@ async function sell(targetId, quantity) {
       })
     });
     applyPortfolio(data.portfolio);
-    showToast(`?????${target.name} ${qty} ?`);
+    showToast(`Sell filled: ${target.name} ${qty}`);
     render();
   } catch (error) {
-    showToast(error.message || "?????");
+    showToast(error.message || "Sell failed.");
   }
 }
 
@@ -1828,10 +1828,10 @@ function renderTopbar(title, subtitle = "Streamer Stock Trade") {
     <div class="topbar">
       <div class="brand">
         <h1 class="hero-title">${title}</h1>
-        <h2>${player ? `${subtitle} ? ${player.displayName || player.phone}` : subtitle}</h2>
+        <h2>${player ? `${subtitle} - ${player.displayName || player.phone}` : subtitle}</h2>
       </div>
       <div class="balance-pill">
-        <span>????</span>
+        <span>Coins</span>
         <strong>${money(state.balance)}</strong>
       </div>
     </div>
@@ -1844,19 +1844,19 @@ function renderLogin() {
     <section class="screen login-screen">
       <div class="login-panel">
         <div class="login-brand">
-          <h1 class="hero-title">????</h1>
-          <h2>????????????</h2>
+          <h1 class="hero-title">Tavern Market</h1>
+          <h2>Sign in with phone to play</h2>
         </div>
         <label class="login-field">
-          <span>???</span>
-          <input id="loginPhone" class="login-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="??????" value="${state.loginPhone || ""}" />
+          <span>Phone</span>
+          <input id="loginPhone" class="login-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="Phone number" value="${state.loginPhone || ""}" />
         </label>
         ${
           state.authStep === "code"
             ? `
               <label class="login-field">
-                <span>???</span>
-                <input id="loginCode" class="login-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6 ????" />
+                <span>OTP</span>
+                <input id="loginCode" class="login-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code" />
               </label>
             `
             : ""
@@ -1864,12 +1864,12 @@ function renderLogin() {
         <div class="login-actions">
           ${
             state.authStep === "code"
-              ? `<button class="btn btn-green btn-wide" data-action="verify-otp" ${busy}>??</button>
-                 <button class="btn btn-blue btn-wide" data-action="request-otp" ${busy}>????</button>`
-              : `<button class="btn btn-green btn-wide" data-action="request-otp" ${busy}>?????</button>`
+              ? `<button class="btn btn-green btn-wide" data-action="verify-otp" ${busy}>Sign In</button>
+                 <button class="btn btn-blue btn-wide" data-action="request-otp" ${busy}>Resend Code</button>`
+              : `<button class="btn btn-green btn-wide" data-action="request-otp" ${busy}>Send Code</button>`
           }
         </div>
-        <p class="login-note">????????????????????????????</p>
+        <p class="login-note">Your account, coins, holdings, and orders are saved to the database.</p>
       </div>
       ${renderSiteFiling()}
       ${renderToast()}
@@ -2456,8 +2456,8 @@ function renderAnnouncements() {
         }</p>
       </article>
       ${renderInteractionDialog()}
-      <button class="btn btn-blue btn-wide" data-action="reload-profile">??????</button>
-      <button class="btn btn-red btn-wide" data-action="logout">????</button>
+      <button class="btn btn-blue btn-wide" data-action="reload-profile">Refresh Account</button>
+      <button class="btn btn-red btn-wide" data-action="logout">Sign Out</button>
       ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
