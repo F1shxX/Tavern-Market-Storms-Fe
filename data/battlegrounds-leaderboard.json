@@ -4,7 +4,7 @@
   "modeLabel": "酒馆战棋",
   "seasonId": 18,
   "seasonLabel": "第13赛季",
-  "updatedAt": "2026-07-04T19:47:18.209Z",
+  "updatedAt": "2026-07-04T21:07:12.836Z",
   "total": 500,
   "fetched": 500,
   "floorRank": 500,
@@ -16,11 +16,11 @@
       "normalizedBattleTag": "风的二次救赎",
       "score": 19034,
       "scoreHistory": [
-        18916,
         18883,
         18883,
         18953,
         18996,
+        19034,
         19034,
         19034
       ]
@@ -33,8 +33,8 @@
       "scoreHistory": [
         18723,
         18723,
-        18723,
         18664,
+        18704,
         18704,
         18704,
         18704
@@ -48,9 +48,9 @@
       "scoreHistory": [
         18650,
         18650,
-        18650,
         18686,
         18651,
+        18691,
         18691,
         18691
       ]
@@ -63,9 +63,9 @@
       "scoreHistory": [
         18019,
         18019,
-        18019,
         18103,
         18152,
+        18089,
         18089,
         18089
       ]
@@ -76,9 +76,9 @@
       "normalizedBattleTag": "douyinbruise",
       "score": 18057,
       "scoreHistory": [
-        17917,
         17984,
         17972,
+        18057,
         18057,
         18057,
         18057,
@@ -106,10 +106,10 @@
       "normalizedBattleTag": "园城寺怜",
       "score": 17589,
       "scoreHistory": [
-        17782,
         17638,
         17675,
         17736,
+        17589,
         17589,
         17589,
         17589
@@ -132,6 +132,21 @@
     },
     {
       "position": 9,
+      "battleTag": "斗鱼激情速八",
+      "normalizedBattleTag": "斗鱼激情速八",
+      "score": 17421,
+      "scoreHistory": [
+        17132,
+        17132,
+        17132,
+        17153,
+        17288,
+        17277,
+        17421
+      ]
+    },
+    {
+      "position": 10,
       "battleTag": "有局丨炮炮",
       "normalizedBattleTag": "有局炮炮",
       "score": 17366,
@@ -146,7 +161,7 @@
       ]
     },
     {
-      "position": 10,
+      "position": 11,
       "battleTag": "Zorgo",
       "normalizedBattleTag": "zorgo",
       "score": 17350,
@@ -161,7 +176,7 @@
       ]
     },
     {
-      "position": 11,
+      "position": 12,
       "battleTag": "毁灭炉石传说",
       "normalizedBattleTag": "毁灭炉石传说",
       "score": 17300,
@@ -176,14 +191,14 @@
       ]
     },
     {
-      "position": 12,
+      "position": 13,
       "battleTag": "郭枫荷",
       "normalizedBattleTag": "郭枫荷",
       "score": 17285,
       "scoreHistory": [
-        17209,
         17130,
         17242,
+        17285,
         17285,
         17285,
         17285,
@@ -191,37 +206,37 @@
       ]
     },
     {
-      "position": 13,
-      "battleTag": "斗鱼激情速八",
-      "normalizedBattleTag": "斗鱼激情速八",
-      "score": 17277,
+      "position": 14,
+      "battleTag": "幻之泪伤",
+      "normalizedBattleTag": "幻之泪伤",
+      "score": 17092,
       "scoreHistory": [
-        17132,
-        17132,
-        17132,
-        17132,
-        17153,
-        17288,
-        17277
+        16989,
+        16989,
+        16989,
+        16994,
+        16965,
+        16919,
+        17092
       ]
     },
     {
-      "position": 14,
+      "position": 15,
       "battleTag": "乐邦詹士",
       "normalizedBattleTag": "乐邦詹士",
       "score": 17076,
       "scoreHistory": [
-        16937,
         16911,
         16742,
         16882,
         16881,
         17057,
+        17076,
         17076
       ]
     },
     {
-      "position": 15,
+      "position": 16,
       "battleTag": "呜呜呜呜呜呜",
       "normalizedBattleTag": "呜呜呜呜呜呜",
       "score": 17037,
@@ -236,37 +251,37 @@
       ]
     },
     {
-      "position": 16,
-      "battleTag": "幻之泪伤",
-      "normalizedBattleTag": "幻之泪伤",
-      "score": 16919,
-      "scoreHistory": [
-        16989,
-        16989,
-        16989,
-        16989,
-        16994,
-        16965,
-        16919
-      ]
-    },
-    {
       "position": 17,
       "battleTag": "虎牙丶终离殇",
       "normalizedBattleTag": "虎牙终离殇",
-      "score": 16665,
+      "score": 16705,
       "scoreHistory": [
-        16476,
         16476,
         16476,
         16476,
         16476,
         16611,
-        16665
+        16665,
+        16705
       ]
     },
     {
       "position": 18,
+      "battleTag": "CoolGuy",
+      "normalizedBattleTag": "coolguy",
+      "score": 16643,
+      "scoreHistory": [
+        16378,
+        16458,
+        16500,
+        16500,
+        16561,
+        16561,
+        16643
+      ]
+    },
+    {
+      "position": 19,
       "battleTag": "抖音丨有局丨小狼",
       "normalizedBattleTag": "抖音有局小狼",
       "score": 16614,
@@ -281,63 +296,48 @@
       ]
     },
     {
-      "position": 19,
+      "position": 20,
+      "battleTag": "虎牙丨尖尖箭",
+      "normalizedBattleTag": "虎牙尖尖箭",
+      "score": 16601,
+      "scoreHistory": [
+        16430,
+        16430,
+        16402,
+        16409,
+        16492,
+        16509,
+        16601
+      ]
+    },
+    {
+      "position": 21,
       "battleTag": "彩虹丨溪流萤间",
       "normalizedBattleTag": "彩虹溪流萤间",
       "score": 16572,
       "scoreHistory": [
         16750,
-        16750,
         16767,
         16585,
+        16572,
         16572,
         16572,
         16572
       ]
     },
     {
-      "position": 20,
-      "battleTag": "CoolGuy",
-      "normalizedBattleTag": "coolguy",
-      "score": 16561,
-      "scoreHistory": [
-        16360,
-        16378,
-        16458,
-        16500,
-        16500,
-        16561,
-        16561
-      ]
-    },
-    {
-      "position": 21,
+      "position": 22,
       "battleTag": "抖音七只羊",
       "normalizedBattleTag": "抖音七只羊",
       "score": 16545,
       "scoreHistory": [
-        16319,
         16442,
         16442,
         16442,
         16402,
         16498,
+        16545,
         16545
-      ]
-    },
-    {
-      "position": 22,
-      "battleTag": "虎牙丨尖尖箭",
-      "normalizedBattleTag": "虎牙尖尖箭",
-      "score": 16509,
-      "scoreHistory": [
-        16430,
-        16430,
-        16430,
-        16402,
-        16409,
-        16492,
-        16509
       ]
     },
     {
@@ -364,9 +364,9 @@
         16098,
         16098,
         16098,
-        16098,
         16044,
         16282,
+        16337,
         16337
       ]
     },
@@ -376,10 +376,10 @@
       "normalizedBattleTag": "春日野穹",
       "score": 16325,
       "scoreHistory": [
-        16734,
         16786,
         16766,
         16441,
+        16325,
         16325,
         16325,
         16325
@@ -391,9 +391,9 @@
       "normalizedBattleTag": "大安庄园黄香蕉",
       "score": 16248,
       "scoreHistory": [
-        16279,
         16313,
         16291,
+        16248,
         16248,
         16248,
         16248,
@@ -421,12 +421,12 @@
       "normalizedBattleTag": "把把金铜须",
       "score": 16060,
       "scoreHistory": [
-        15815,
         15886,
         15860,
         15925,
         15874,
         16041,
+        16060,
         16060
       ]
     },
@@ -466,11 +466,11 @@
       "normalizedBattleTag": "冷静",
       "score": 15909,
       "scoreHistory": [
-        15342,
         15573,
         15618,
         15813,
         15924,
+        15909,
         15909,
         15909
       ]
@@ -484,7 +484,7 @@
         15799,
         15799,
         15799,
-        15799,
+        15821,
         15821,
         15821,
         15821
@@ -515,7 +515,7 @@
         15653,
         15653,
         15653,
-        15653,
+        15712,
         15712,
         15712
       ]
@@ -545,8 +545,8 @@
         15494,
         15494,
         15494,
-        15494,
         15525,
+        15607,
         15607
       ]
     },
@@ -571,9 +571,9 @@
       "normalizedBattleTag": "有局颖火虫",
       "score": 15524,
       "scoreHistory": [
-        15396,
         15488,
         15446,
+        15524,
         15524,
         15524,
         15524,
@@ -616,12 +616,12 @@
       "normalizedBattleTag": "哔哩哔哩暗影",
       "score": 15402,
       "scoreHistory": [
-        15076,
         15058,
         15099,
         15137,
         15149,
         15340,
+        15402,
         15402
       ]
     },
@@ -674,15 +674,15 @@
       "position": 45,
       "battleTag": "抖音丨梦境彼方",
       "normalizedBattleTag": "抖音梦境彼方",
-      "score": 15297,
+      "score": 15299,
       "scoreHistory": [
-        15158,
         15290,
         15290,
         15290,
         15290,
         15290,
-        15297
+        15297,
+        15299
       ]
     },
     {
@@ -721,7 +721,7 @@
       "normalizedBattleTag": "心苍",
       "score": 15265,
       "scoreHistory": [
-        15208,
+        15265,
         15265,
         15265,
         15265,
@@ -749,7 +749,7 @@
       "position": 50,
       "battleTag": "Boxi",
       "normalizedBattleTag": "boxi",
-      "score": 15123,
+      "score": 15194,
       "scoreHistory": [
         15123,
         15123,
@@ -757,7 +757,7 @@
         15123,
         15123,
         15123,
-        15123
+        15194
       ]
     },
     {
@@ -767,8 +767,8 @@
       "score": 15097,
       "scoreHistory": [
         15036,
-        15036,
         15003,
+        15097,
         15097,
         15097,
         15097,
@@ -792,21 +792,36 @@
     },
     {
       "position": 53,
+      "battleTag": "抖音炉指导",
+      "normalizedBattleTag": "抖音炉指导",
+      "score": 15030,
+      "scoreHistory": [
+        15095,
+        15095,
+        15095,
+        14888,
+        14921,
+        14983,
+        15030
+      ]
+    },
+    {
+      "position": 54,
       "battleTag": "洋葱",
       "normalizedBattleTag": "洋葱",
       "score": 15027,
       "scoreHistory": [
         15132,
-        15132,
         15035,
         15035,
         15035,
+        15027,
         15027,
         15027
       ]
     },
     {
-      "position": 54,
+      "position": 55,
       "battleTag": "对五不对铜须",
       "normalizedBattleTag": "对五不对铜须",
       "score": 15024,
@@ -821,7 +836,7 @@
       ]
     },
     {
-      "position": 55,
+      "position": 56,
       "battleTag": "吃我一发小火球",
       "normalizedBattleTag": "吃我一发小火球",
       "score": 15017,
@@ -833,21 +848,6 @@
         15017,
         15017,
         15017
-      ]
-    },
-    {
-      "position": 56,
-      "battleTag": "大嘟丨無我",
-      "normalizedBattleTag": "大嘟無我",
-      "score": 15012,
-      "scoreHistory": [
-        15548,
-        15548,
-        15246,
-        15084,
-        14963,
-        14960,
-        15012
       ]
     },
     {
@@ -867,21 +867,36 @@
     },
     {
       "position": 58,
-      "battleTag": "抖音炉指导",
-      "normalizedBattleTag": "抖音炉指导",
-      "score": 14983,
+      "battleTag": "大嘟丨無我",
+      "normalizedBattleTag": "大嘟無我",
+      "score": 14917,
       "scoreHistory": [
-        15095,
-        15095,
-        15095,
-        15095,
-        14888,
-        14921,
-        14983
+        15548,
+        15246,
+        15084,
+        14963,
+        14960,
+        15012,
+        14917
       ]
     },
     {
       "position": 59,
+      "battleTag": "弈星丶随便上万五",
+      "normalizedBattleTag": "弈星随便上万五",
+      "score": 14905,
+      "scoreHistory": [
+        15016,
+        15016,
+        14931,
+        14960,
+        14941,
+        14873,
+        14905
+      ]
+    },
+    {
+      "position": 60,
       "battleTag": "dobby",
       "normalizedBattleTag": "dobby",
       "score": 14901,
@@ -896,7 +911,7 @@
       ]
     },
     {
-      "position": 60,
+      "position": 61,
       "battleTag": "复旦丨酒馆研究生",
       "normalizedBattleTag": "复旦酒馆研究生",
       "score": 14891,
@@ -911,7 +926,7 @@
       ]
     },
     {
-      "position": 61,
+      "position": 62,
       "battleTag": "BeterBabbit",
       "normalizedBattleTag": "beterbabbit",
       "score": 14887,
@@ -926,14 +941,14 @@
       ]
     },
     {
-      "position": 62,
+      "position": 63,
       "battleTag": "寄生虫",
       "normalizedBattleTag": "寄生虫",
       "score": 14885,
       "scoreHistory": [
-        14801,
         14732,
         14820,
+        14885,
         14885,
         14885,
         14885,
@@ -941,22 +956,22 @@
       ]
     },
     {
-      "position": 63,
+      "position": 64,
       "battleTag": "我真有点吵吗",
       "normalizedBattleTag": "我真有点吵吗",
       "score": 14879,
       "scoreHistory": [
         14823,
         14823,
-        14823,
         14890,
+        14879,
         14879,
         14879,
         14879
       ]
     },
     {
-      "position": 64,
+      "position": 65,
       "battleTag": "第七页序",
       "normalizedBattleTag": "第七页序",
       "score": 14874,
@@ -971,28 +986,13 @@
       ]
     },
     {
-      "position": 65,
-      "battleTag": "弈星丶随便上万五",
-      "normalizedBattleTag": "弈星随便上万五",
-      "score": 14873,
-      "scoreHistory": [
-        15016,
-        15016,
-        15016,
-        14931,
-        14960,
-        14941,
-        14873
-      ]
-    },
-    {
       "position": 66,
       "battleTag": "南怀北瑾丨林川",
       "normalizedBattleTag": "南怀北瑾林川",
       "score": 14842,
       "scoreHistory": [
-        14898,
         14774,
+        14842,
         14842,
         14842,
         14842,
@@ -1036,9 +1036,9 @@
       "normalizedBattleTag": "金色传说",
       "score": 14806,
       "scoreHistory": [
-        14686,
         14825,
         14846,
+        14806,
         14806,
         14806,
         14806,
@@ -1051,7 +1051,7 @@
       "normalizedBattleTag": "北凉李火旺",
       "score": 14782,
       "scoreHistory": [
-        14591,
+        14782,
         14782,
         14782,
         14782,
@@ -1066,9 +1066,9 @@
       "normalizedBattleTag": "wincard",
       "score": 14780,
       "scoreHistory": [
-        14507,
         14606,
         14652,
+        14780,
         14780,
         14780,
         14780,
@@ -1096,7 +1096,7 @@
       "normalizedBattleTag": "无名之辈",
       "score": 14768,
       "scoreHistory": [
-        14735,
+        14768,
         14768,
         14768,
         14768,
@@ -1124,15 +1124,15 @@
       "position": 75,
       "battleTag": "半生浮歌半生梦",
       "normalizedBattleTag": "半生浮歌半生梦",
-      "score": 14712,
+      "score": 14703,
       "scoreHistory": [
-        14848,
         14848,
         14856,
         14956,
         14956,
         14956,
-        14712
+        14712,
+        14703
       ]
     },
     {
@@ -1154,15 +1154,15 @@
       "position": 77,
       "battleTag": "彩虹丨冰糖葫芦",
       "normalizedBattleTag": "彩虹冰糖葫芦",
-      "score": 14667,
+      "score": 14672,
       "scoreHistory": [
-        14681,
         14681,
         14749,
         14572,
         14572,
         14579,
-        14667
+        14667,
+        14672
       ]
     },
     {
@@ -1173,10 +1173,10 @@
       "scoreHistory": [
         14472,
         14472,
-        14472,
         14606,
         14629,
         14628,
+        14666,
         14666
       ]
     },
@@ -1186,7 +1186,7 @@
       "normalizedBattleTag": "彩虹坦诚的狼",
       "score": 14650,
       "scoreHistory": [
-        14592,
+        14650,
         14650,
         14650,
         14650,
@@ -1203,7 +1203,7 @@
       "scoreHistory": [
         14759,
         14759,
-        14759,
+        14648,
         14648,
         14648,
         14648,
@@ -1246,11 +1246,11 @@
       "normalizedBattleTag": "无敌佳佳豪",
       "score": 14628,
       "scoreHistory": [
-        14317,
         14468,
         14604,
         14673,
         14704,
+        14628,
         14628,
         14628
       ]
@@ -1272,32 +1272,32 @@
     },
     {
       "position": 85,
+      "battleTag": "甜喵轻灵",
+      "normalizedBattleTag": "甜喵轻灵",
+      "score": 14622,
+      "scoreHistory": [
+        14608,
+        14608,
+        14608,
+        14608,
+        14608,
+        14608,
+        14622
+      ]
+    },
+    {
+      "position": 86,
       "battleTag": "肥硕丨霸道肥鱼",
       "normalizedBattleTag": "肥硕霸道肥鱼",
       "score": 14616,
       "scoreHistory": [
-        14674,
         14563,
         14548,
         14548,
         14548,
         14548,
+        14616,
         14616
-      ]
-    },
-    {
-      "position": 86,
-      "battleTag": "甜喵轻灵",
-      "normalizedBattleTag": "甜喵轻灵",
-      "score": 14608,
-      "scoreHistory": [
-        14608,
-        14608,
-        14608,
-        14608,
-        14608,
-        14608,
-        14608
       ]
     },
     {
@@ -1306,9 +1306,9 @@
       "normalizedBattleTag": "niai256",
       "score": 14600,
       "scoreHistory": [
-        14486,
         14352,
         14368,
+        14251,
         14251,
         14251,
         14251,
@@ -1321,11 +1321,11 @@
       "normalizedBattleTag": "武陵喵捕鱼为业",
       "score": 14576,
       "scoreHistory": [
-        14561,
         14523,
         14523,
         14568,
         14650,
+        14576,
         14576,
         14576
       ]
@@ -1336,11 +1336,11 @@
       "normalizedBattleTag": "弈星蕴藉",
       "score": 14569,
       "scoreHistory": [
-        14443,
         14415,
         14415,
         14476,
         14531,
+        14569,
         14569,
         14569
       ]
@@ -1366,7 +1366,7 @@
       "normalizedBattleTag": "郭神问道小门徒",
       "score": 14509,
       "scoreHistory": [
-        14384,
+        14509,
         14509,
         14509,
         14509,
@@ -1377,12 +1377,27 @@
     },
     {
       "position": 92,
+      "battleTag": "蓝色狮子",
+      "normalizedBattleTag": "蓝色狮子",
+      "score": 14490,
+      "scoreHistory": [
+        14435,
+        14435,
+        14435,
+        14435,
+        14435,
+        14435,
+        14490
+      ]
+    },
+    {
+      "position": 93,
       "battleTag": "致命之足",
       "normalizedBattleTag": "致命之足",
       "score": 14488,
       "scoreHistory": [
-        14840,
         14643,
+        14488,
         14488,
         14488,
         14488,
@@ -1391,7 +1406,7 @@
       ]
     },
     {
-      "position": 93,
+      "position": 94,
       "battleTag": "嘞是丨狂徒",
       "normalizedBattleTag": "嘞是狂徒",
       "score": 14463,
@@ -1406,7 +1421,7 @@
       ]
     },
     {
-      "position": 94,
+      "position": 95,
       "battleTag": "人是物非",
       "normalizedBattleTag": "人是物非",
       "score": 14441,
@@ -1421,7 +1436,7 @@
       ]
     },
     {
-      "position": 95,
+      "position": 96,
       "battleTag": "野猪少爷",
       "normalizedBattleTag": "野猪少爷",
       "score": 14437,
@@ -1436,25 +1451,10 @@
       ]
     },
     {
-      "position": 96,
-      "battleTag": "蓝色狮子",
-      "normalizedBattleTag": "蓝色狮子",
-      "score": 14435,
-      "scoreHistory": [
-        14435,
-        14435,
-        14435,
-        14435,
-        14435,
-        14435,
-        14435
-      ]
-    },
-    {
       "position": 97,
       "battleTag": "RYAN",
       "normalizedBattleTag": "ryan",
-      "score": 14366,
+      "score": 14393,
       "scoreHistory": [
         14366,
         14366,
@@ -1462,7 +1462,7 @@
         14366,
         14366,
         14366,
-        14366
+        14393
       ]
     },
     {
@@ -1474,8 +1474,8 @@
         14305,
         14305,
         14305,
-        14305,
         14378,
+        14363,
         14363,
         14363
       ]
@@ -1490,34 +1490,19 @@
         14343,
         14343,
         14343,
-        14343,
+        14355,
         14355,
         14355
       ]
     },
     {
       "position": 100,
-      "battleTag": "温州吴彦祖",
-      "normalizedBattleTag": "温州吴彦祖",
-      "score": 14347,
-      "scoreHistory": [
-        14492,
-        14492,
-        14492,
-        14492,
-        14492,
-        14288,
-        14347
-      ]
-    },
-    {
-      "position": 101,
       "battleTag": "尘落",
       "normalizedBattleTag": "尘落",
       "score": 14335,
       "scoreHistory": [
-        14486,
         14464,
+        14335,
         14335,
         14335,
         14335,
@@ -1526,18 +1511,33 @@
       ]
     },
     {
-      "position": 102,
+      "position": 101,
       "battleTag": "彩虹丨雾子大王",
       "normalizedBattleTag": "彩虹雾子大王",
       "score": 14312,
       "scoreHistory": [
-        14259,
         14295,
         14295,
         14234,
         14312,
         14312,
+        14312,
         14312
+      ]
+    },
+    {
+      "position": 102,
+      "battleTag": "彩虹丨可妮兔",
+      "normalizedBattleTag": "彩虹可妮兔",
+      "score": 14305,
+      "scoreHistory": [
+        14209,
+        14346,
+        14283,
+        14283,
+        14283,
+        14283,
+        14305
       ]
     },
     {
@@ -1547,8 +1547,8 @@
       "score": 14286,
       "scoreHistory": [
         14124,
-        14124,
         14153,
+        14286,
         14286,
         14286,
         14286,
@@ -1557,21 +1557,6 @@
     },
     {
       "position": 104,
-      "battleTag": "彩虹丨可妮兔",
-      "normalizedBattleTag": "彩虹可妮兔",
-      "score": 14283,
-      "scoreHistory": [
-        14209,
-        14209,
-        14346,
-        14283,
-        14283,
-        14283,
-        14283
-      ]
-    },
-    {
-      "position": 105,
       "battleTag": "有局丨果壳丨清澈",
       "normalizedBattleTag": "有局果壳清澈",
       "score": 14276,
@@ -1586,44 +1571,44 @@
       ]
     },
     {
-      "position": 106,
+      "position": 105,
       "battleTag": "抖音丨学妹是娟子",
       "normalizedBattleTag": "抖音学妹是娟子",
       "score": 14272,
       "scoreHistory": [
-        13894,
         13959,
         13971,
         13971,
         14039,
         14272,
+        14272,
         14272
       ]
     },
     {
-      "position": 107,
-      "battleTag": "BlacKDuck",
-      "normalizedBattleTag": "blackduck",
-      "score": 14266,
+      "position": 106,
+      "battleTag": "温州吴彦祖",
+      "normalizedBattleTag": "温州吴彦祖",
+      "score": 14253,
       "scoreHistory": [
-        14312,
-        14390,
-        14390,
-        14390,
-        14390,
-        14390,
-        14266
+        14492,
+        14492,
+        14492,
+        14492,
+        14288,
+        14347,
+        14253
       ]
     },
     {
-      "position": 108,
+      "position": 107,
       "battleTag": "niai256",
       "normalizedBattleTag": "niai256",
       "score": 14251,
       "scoreHistory": [
-        14486,
         14352,
         14368,
+        14251,
         14251,
         14251,
         14251,
@@ -1631,7 +1616,7 @@
       ]
     },
     {
-      "position": 109,
+      "position": 108,
       "battleTag": "斯文禽兽",
       "normalizedBattleTag": "斯文禽兽",
       "score": 14203,
@@ -1643,6 +1628,21 @@
         14203,
         14203,
         14203
+      ]
+    },
+    {
+      "position": 109,
+      "battleTag": "BlacKDuck",
+      "normalizedBattleTag": "blackduck",
+      "score": 14200,
+      "scoreHistory": [
+        14390,
+        14390,
+        14390,
+        14390,
+        14390,
+        14266,
+        14200
       ]
     },
     {
@@ -1677,21 +1677,6 @@
     },
     {
       "position": 112,
-      "battleTag": "隐蔽鄀鲷",
-      "normalizedBattleTag": "隐蔽鄀鲷",
-      "score": 14169,
-      "scoreHistory": [
-        14169,
-        14169,
-        14169,
-        14169,
-        14169,
-        14169,
-        14169
-      ]
-    },
-    {
-      "position": 113,
       "battleTag": "那个东西有点大",
       "normalizedBattleTag": "那个东西有点大",
       "score": 14161,
@@ -1706,12 +1691,12 @@
       ]
     },
     {
-      "position": 114,
+      "position": 113,
       "battleTag": "yutongOvO",
       "normalizedBattleTag": "yutongovo",
       "score": 14161,
       "scoreHistory": [
-        14106,
+        14161,
         14161,
         14161,
         14161,
@@ -1721,7 +1706,7 @@
       ]
     },
     {
-      "position": 115,
+      "position": 114,
       "battleTag": "小神童",
       "normalizedBattleTag": "小神童",
       "score": 14140,
@@ -1736,7 +1721,7 @@
       ]
     },
     {
-      "position": 116,
+      "position": 115,
       "battleTag": "hatsunemiku",
       "normalizedBattleTag": "hatsunemiku",
       "score": 14131,
@@ -1751,7 +1736,7 @@
       ]
     },
     {
-      "position": 117,
+      "position": 116,
       "battleTag": "限制性核酸内切酶",
       "normalizedBattleTag": "限制性核酸内切酶",
       "score": 14129,
@@ -1766,22 +1751,22 @@
       ]
     },
     {
-      "position": 118,
-      "battleTag": "乖巧的阿德",
-      "normalizedBattleTag": "乖巧的阿德",
-      "score": 14128,
+      "position": 117,
+      "battleTag": "隐蔽鄀鲷",
+      "normalizedBattleTag": "隐蔽鄀鲷",
+      "score": 14127,
       "scoreHistory": [
-        14329,
-        14329,
-        14340,
-        14320,
-        14153,
-        14094,
-        14128
+        14169,
+        14169,
+        14169,
+        14169,
+        14169,
+        14169,
+        14127
       ]
     },
     {
-      "position": 119,
+      "position": 118,
       "battleTag": "弈星丶昨夜星辰",
       "normalizedBattleTag": "弈星昨夜星辰",
       "score": 14093,
@@ -1796,14 +1781,14 @@
       ]
     },
     {
-      "position": 120,
+      "position": 119,
       "battleTag": "沙耶家的杏子",
       "normalizedBattleTag": "沙耶家的杏子",
       "score": 14088,
       "scoreHistory": [
-        14082,
         14118,
         14141,
+        14088,
         14088,
         14088,
         14088,
@@ -1811,22 +1796,22 @@
       ]
     },
     {
-      "position": 121,
-      "battleTag": "春风若有怜花意",
-      "normalizedBattleTag": "春风若有怜花意",
-      "score": 14084,
+      "position": 120,
+      "battleTag": "flamingo1",
+      "normalizedBattleTag": "flamingo1",
+      "score": 14074,
       "scoreHistory": [
-        14080,
-        14080,
-        14080,
-        14080,
-        14080,
-        14127,
-        14084
+        14197,
+        14365,
+        14196,
+        14156,
+        13980,
+        14004,
+        14074
       ]
     },
     {
-      "position": 122,
+      "position": 121,
       "battleTag": "萧山萝卜干",
       "normalizedBattleTag": "萧山萝卜干",
       "score": 14073,
@@ -1841,17 +1826,32 @@
       ]
     },
     {
-      "position": 123,
+      "position": 122,
       "battleTag": "自在极意豪",
       "normalizedBattleTag": "自在极意豪",
       "score": 14068,
       "scoreHistory": [
-        14552,
         14427,
         14419,
         14050,
         14068,
         14068,
+        14068,
+        14068
+      ]
+    },
+    {
+      "position": 123,
+      "battleTag": "落花天意",
+      "normalizedBattleTag": "落花天意",
+      "score": 14068,
+      "scoreHistory": [
+        13764,
+        13764,
+        13764,
+        13878,
+        13955,
+        14052,
         14068
       ]
     },
@@ -1861,7 +1861,7 @@
       "normalizedBattleTag": "本间芽衣子",
       "score": 14066,
       "scoreHistory": [
-        14250,
+        14066,
         14066,
         14066,
         14066,
@@ -1902,17 +1902,17 @@
     },
     {
       "position": 127,
-      "battleTag": "落花天意",
-      "normalizedBattleTag": "落花天意",
-      "score": 14052,
+      "battleTag": "乖巧的阿德",
+      "normalizedBattleTag": "乖巧的阿德",
+      "score": 14051,
       "scoreHistory": [
-        13764,
-        13764,
-        13764,
-        13764,
-        13878,
-        13955,
-        14052
+        14329,
+        14340,
+        14320,
+        14153,
+        14094,
+        14128,
+        14051
       ]
     },
     {
@@ -1932,21 +1932,36 @@
     },
     {
       "position": 129,
+      "battleTag": "彩虹丨青空",
+      "normalizedBattleTag": "彩虹青空",
+      "score": 14039,
+      "scoreHistory": [
+        14042,
+        14042,
+        14042,
+        14042,
+        13923,
+        13958,
+        14039
+      ]
+    },
+    {
+      "position": 130,
       "battleTag": "ASSVAN",
       "normalizedBattleTag": "assvan",
       "score": 14037,
       "scoreHistory": [
         14249,
         14249,
-        14249,
         14148,
         14155,
+        14037,
         14037,
         14037
       ]
     },
     {
-      "position": 130,
+      "position": 131,
       "battleTag": "欧阳梦凡",
       "normalizedBattleTag": "欧阳梦凡",
       "score": 14030,
@@ -1961,14 +1976,14 @@
       ]
     },
     {
-      "position": 131,
+      "position": 132,
       "battleTag": "有局丨白兔",
       "normalizedBattleTag": "有局白兔",
       "score": 14024,
       "scoreHistory": [
-        14195,
         14163,
         14228,
+        14024,
         14024,
         14024,
         14024,
@@ -1976,33 +1991,18 @@
       ]
     },
     {
-      "position": 132,
-      "battleTag": "flamingo1",
-      "normalizedBattleTag": "flamingo1",
-      "score": 14004,
-      "scoreHistory": [
-        14376,
-        14197,
-        14365,
-        14196,
-        14156,
-        13980,
-        14004
-      ]
-    },
-    {
       "position": 133,
-      "battleTag": "之后",
-      "normalizedBattleTag": "之后",
-      "score": 13988,
+      "battleTag": "春风若有怜花意",
+      "normalizedBattleTag": "春风若有怜花意",
+      "score": 14020,
       "scoreHistory": [
-        14159,
-        14247,
-        14065,
-        14155,
-        13970,
-        13923,
-        13988
+        14080,
+        14080,
+        14080,
+        14080,
+        14127,
+        14084,
+        14020
       ]
     },
     {
@@ -2037,17 +2037,17 @@
     },
     {
       "position": 136,
-      "battleTag": "彩虹丨青空",
-      "normalizedBattleTag": "彩虹青空",
-      "score": 13958,
+      "battleTag": "小瑾老婆天天开心",
+      "normalizedBattleTag": "小瑾老婆天天开心",
+      "score": 13924,
       "scoreHistory": [
-        14042,
-        14042,
-        14042,
-        14042,
-        14042,
-        13923,
-        13958
+        13873,
+        13873,
+        13943,
+        13943,
+        13825,
+        13829,
+        13924
       ]
     },
     {
@@ -2112,6 +2112,21 @@
     },
     {
       "position": 141,
+      "battleTag": "之后",
+      "normalizedBattleTag": "之后",
+      "score": 13873,
+      "scoreHistory": [
+        14247,
+        14065,
+        14155,
+        13970,
+        13923,
+        13988,
+        13873
+      ]
+    },
+    {
+      "position": 142,
       "battleTag": "抖音丨八只羊",
       "normalizedBattleTag": "抖音八只羊",
       "score": 13871,
@@ -2126,33 +2141,18 @@
       ]
     },
     {
-      "position": 142,
+      "position": 143,
       "battleTag": "霸天邪神",
       "normalizedBattleTag": "霸天邪神",
       "score": 13844,
       "scoreHistory": [
         13794,
-        13794,
         13860,
         13844,
         13844,
         13844,
+        13844,
         13844
-      ]
-    },
-    {
-      "position": 143,
-      "battleTag": "小瑾老婆天天开心",
-      "normalizedBattleTag": "小瑾老婆天天开心",
-      "score": 13829,
-      "scoreHistory": [
-        13873,
-        13873,
-        13873,
-        13943,
-        13943,
-        13825,
-        13829
       ]
     },
     {
@@ -2165,7 +2165,7 @@
         13753,
         13753,
         13753,
-        13753,
+        13823,
         13823,
         13823
       ]
@@ -2176,11 +2176,11 @@
       "normalizedBattleTag": "天气预报",
       "score": 13820,
       "scoreHistory": [
-        13886,
         13828,
         13805,
         13816,
         13784,
+        13820,
         13820,
         13820
       ]
@@ -2191,9 +2191,9 @@
       "normalizedBattleTag": "duang",
       "score": 13811,
       "scoreHistory": [
-        13565,
         13773,
         13741,
+        13811,
         13811,
         13811,
         13811,
@@ -2207,10 +2207,10 @@
       "score": 13811,
       "scoreHistory": [
         13560,
-        13560,
         13606,
         13576,
         13720,
+        13811,
         13811,
         13811
       ]
@@ -2251,11 +2251,11 @@
       "normalizedBattleTag": "zet",
       "score": 13763,
       "scoreHistory": [
-        13725,
         13665,
         13665,
         13665,
         13751,
+        13763,
         13763,
         13763
       ]
@@ -2270,7 +2270,7 @@
         13829,
         13829,
         13829,
-        13829,
+        13753,
         13753,
         13753
       ]
@@ -2416,7 +2416,7 @@
       "normalizedBattleTag": "中二患者中一",
       "score": 13681,
       "scoreHistory": [
-        13773,
+        13681,
         13681,
         13681,
         13681,
@@ -2461,11 +2461,11 @@
       "normalizedBattleTag": "有局笑笑",
       "score": 13636,
       "scoreHistory": [
-        13426,
         13564,
         13516,
         13516,
         13555,
+        13636,
         13636,
         13636
       ]
@@ -2487,6 +2487,21 @@
     },
     {
       "position": 166,
+      "battleTag": "盛夏光年",
+      "normalizedBattleTag": "盛夏光年",
+      "score": 13607,
+      "scoreHistory": [
+        13123,
+        13179,
+        13390,
+        13463,
+        13503,
+        13536,
+        13607
+      ]
+    },
+    {
+      "position": 167,
       "battleTag": "虚妄之灵",
       "normalizedBattleTag": "虚妄之灵",
       "score": 13574,
@@ -2501,22 +2516,22 @@
       ]
     },
     {
-      "position": 167,
+      "position": 168,
       "battleTag": "荀彧丨憨憨的小卢",
       "normalizedBattleTag": "荀彧憨憨的小卢",
       "score": 13568,
       "scoreHistory": [
         13560,
         13560,
-        13560,
         13506,
+        13568,
         13568,
         13568,
         13568
       ]
     },
     {
-      "position": 168,
+      "position": 169,
       "battleTag": "彩虹丨小章鱼",
       "normalizedBattleTag": "彩虹小章鱼",
       "score": 13562,
@@ -2531,7 +2546,7 @@
       ]
     },
     {
-      "position": 169,
+      "position": 170,
       "battleTag": "白银之鹰",
       "normalizedBattleTag": "白银之鹰",
       "score": 13555,
@@ -2546,7 +2561,7 @@
       ]
     },
     {
-      "position": 170,
+      "position": 171,
       "battleTag": "北凉丨藿藿",
       "normalizedBattleTag": "北凉藿藿",
       "score": 13551,
@@ -2561,29 +2576,14 @@
       ]
     },
     {
-      "position": 171,
-      "battleTag": "盛夏光年",
-      "normalizedBattleTag": "盛夏光年",
-      "score": 13536,
-      "scoreHistory": [
-        13123,
-        13123,
-        13179,
-        13390,
-        13463,
-        13503,
-        13536
-      ]
-    },
-    {
       "position": 172,
       "battleTag": "抖音听山雨",
       "normalizedBattleTag": "抖音听山雨",
       "score": 13534,
       "scoreHistory": [
         13314,
-        13314,
         13463,
+        13534,
         13534,
         13534,
         13534,
@@ -2622,12 +2622,27 @@
     },
     {
       "position": 175,
+      "battleTag": "抖音恶魔波刚",
+      "normalizedBattleTag": "抖音恶魔波刚",
+      "score": 13520,
+      "scoreHistory": [
+        13203,
+        13203,
+        13203,
+        13353,
+        13359,
+        13389,
+        13520
+      ]
+    },
+    {
+      "position": 176,
       "battleTag": "炉石旅店0低调0",
       "normalizedBattleTag": "炉石旅店0低调0",
       "score": 13513,
       "scoreHistory": [
-        13460,
         13364,
+        13513,
         13513,
         13513,
         13513,
@@ -2636,7 +2651,7 @@
       ]
     },
     {
-      "position": 176,
+      "position": 177,
       "battleTag": "北凉丨黄呆不呆",
       "normalizedBattleTag": "北凉黄呆不呆",
       "score": 13511,
@@ -2651,7 +2666,7 @@
       ]
     },
     {
-      "position": 177,
+      "position": 178,
       "battleTag": "派派派派拉斯",
       "normalizedBattleTag": "派派派派拉斯",
       "score": 13511,
@@ -2666,33 +2681,18 @@
       ]
     },
     {
-      "position": 178,
+      "position": 179,
       "battleTag": "zzzm",
       "normalizedBattleTag": "zzzm",
       "score": 13510,
       "scoreHistory": [
-        13635,
         13487,
         13471,
         13510,
         13510,
         13510,
+        13510,
         13510
-      ]
-    },
-    {
-      "position": 179,
-      "battleTag": "弈星丶胡图图",
-      "normalizedBattleTag": "弈星胡图图",
-      "score": 13498,
-      "scoreHistory": [
-        13241,
-        13241,
-        13434,
-        13547,
-        13466,
-        13405,
-        13498
       ]
     },
     {
@@ -2712,21 +2712,36 @@
     },
     {
       "position": 181,
+      "battleTag": "弈星丶胡图图",
+      "normalizedBattleTag": "弈星胡图图",
+      "score": 13486,
+      "scoreHistory": [
+        13241,
+        13434,
+        13547,
+        13466,
+        13405,
+        13498,
+        13486
+      ]
+    },
+    {
+      "position": 182,
       "battleTag": "冷太阳",
       "normalizedBattleTag": "冷太阳",
       "score": 13479,
       "scoreHistory": [
         13768,
-        13768,
         13861,
         13619,
         13556,
+        13479,
         13479,
         13479
       ]
     },
     {
-      "position": 182,
+      "position": 183,
       "battleTag": "彩虹丨小朱朱葱",
       "normalizedBattleTag": "彩虹小朱朱葱",
       "score": 13478,
@@ -2741,13 +2756,13 @@
       ]
     },
     {
-      "position": 183,
+      "position": 184,
       "battleTag": "提姆鄧肯",
       "normalizedBattleTag": "提姆鄧肯",
       "score": 13441,
       "scoreHistory": [
-        13340,
         13421,
+        13441,
         13441,
         13441,
         13441,
@@ -2756,7 +2771,7 @@
       ]
     },
     {
-      "position": 184,
+      "position": 185,
       "battleTag": "呆呆的",
       "normalizedBattleTag": "呆呆的",
       "score": 13438,
@@ -2771,7 +2786,7 @@
       ]
     },
     {
-      "position": 185,
+      "position": 186,
       "battleTag": "Player",
       "normalizedBattleTag": "player",
       "score": 13434,
@@ -2786,7 +2801,7 @@
       ]
     },
     {
-      "position": 186,
+      "position": 187,
       "battleTag": "抖音丶摸鱼皮皮",
       "normalizedBattleTag": "抖音摸鱼皮皮",
       "score": 13428,
@@ -2801,7 +2816,7 @@
       ]
     },
     {
-      "position": 187,
+      "position": 188,
       "battleTag": "抖音丨告辞丨热巴",
       "normalizedBattleTag": "抖音告辞热巴",
       "score": 13423,
@@ -2816,7 +2831,7 @@
       ]
     },
     {
-      "position": 188,
+      "position": 189,
       "battleTag": "苦奶盖",
       "normalizedBattleTag": "苦奶盖",
       "score": 13412,
@@ -2831,7 +2846,7 @@
       ]
     },
     {
-      "position": 189,
+      "position": 190,
       "battleTag": "K9vendetta",
       "normalizedBattleTag": "k9vendetta",
       "score": 13405,
@@ -2846,7 +2861,7 @@
       ]
     },
     {
-      "position": 190,
+      "position": 191,
       "battleTag": "关我蛋治",
       "normalizedBattleTag": "关我蛋治",
       "score": 13392,
@@ -2858,21 +2873,6 @@
         13392,
         13392,
         13392
-      ]
-    },
-    {
-      "position": 191,
-      "battleTag": "抖音恶魔波刚",
-      "normalizedBattleTag": "抖音恶魔波刚",
-      "score": 13389,
-      "scoreHistory": [
-        13203,
-        13203,
-        13203,
-        13203,
-        13353,
-        13359,
-        13389
       ]
     },
     {
@@ -2892,32 +2892,32 @@
     },
     {
       "position": 193,
-      "battleTag": "zayuanyx",
-      "normalizedBattleTag": "zayuanyx",
-      "score": 13338,
-      "scoreHistory": [
-        13573,
-        13573,
-        13591,
-        13479,
-        13396,
-        13410,
-        13338
-      ]
-    },
-    {
-      "position": 194,
       "battleTag": "揪心的喜剧",
       "normalizedBattleTag": "揪心的喜剧",
-      "score": 13337,
+      "score": 13346,
       "scoreHistory": [
-        13184,
         13184,
         13184,
         13184,
         13215,
         13273,
-        13337
+        13337,
+        13346
+      ]
+    },
+    {
+      "position": 194,
+      "battleTag": "zayuanyx",
+      "normalizedBattleTag": "zayuanyx",
+      "score": 13338,
+      "scoreHistory": [
+        13573,
+        13591,
+        13479,
+        13396,
+        13410,
+        13338,
+        13338
       ]
     },
     {
@@ -2926,12 +2926,12 @@
       "normalizedBattleTag": "帕西法尔",
       "score": 13320,
       "scoreHistory": [
-        12944,
         12802,
         13002,
         13048,
         13110,
         13278,
+        13320,
         13320
       ]
     },
@@ -2942,10 +2942,10 @@
       "score": 13301,
       "scoreHistory": [
         13411,
-        13411,
         13379,
         13379,
         13379,
+        13301,
         13301,
         13301
       ]
@@ -3003,7 +3003,7 @@
       "scoreHistory": [
         13263,
         13263,
-        13263,
+        13280,
         13280,
         13280,
         13280,
@@ -3012,6 +3012,21 @@
     },
     {
       "position": 201,
+      "battleTag": "JashinChan",
+      "normalizedBattleTag": "jashinchan",
+      "score": 13266,
+      "scoreHistory": [
+        13188,
+        13188,
+        13188,
+        13188,
+        13188,
+        13261,
+        13266
+      ]
+    },
+    {
+      "position": 202,
       "battleTag": "飞向太空港",
       "normalizedBattleTag": "飞向太空港",
       "score": 13264,
@@ -3023,21 +3038,6 @@
         13264,
         13264,
         13264
-      ]
-    },
-    {
-      "position": 202,
-      "battleTag": "JashinChan",
-      "normalizedBattleTag": "jashinchan",
-      "score": 13261,
-      "scoreHistory": [
-        13188,
-        13188,
-        13188,
-        13188,
-        13188,
-        13188,
-        13261
       ]
     },
     {
@@ -3059,15 +3059,15 @@
       "position": 204,
       "battleTag": "Jaekun",
       "normalizedBattleTag": "jaekun",
-      "score": 13246,
+      "score": 13247,
       "scoreHistory": [
-        13161,
         13161,
         13161,
         13161,
         13160,
         13265,
-        13246
+        13246,
+        13247
       ]
     },
     {
@@ -3092,8 +3092,8 @@
       "score": 13238,
       "scoreHistory": [
         13119,
-        13119,
         13141,
+        13238,
         13238,
         13238,
         13238,
@@ -3117,6 +3117,21 @@
     },
     {
       "position": 208,
+      "battleTag": "彩虹丨廖三宁",
+      "normalizedBattleTag": "彩虹廖三宁",
+      "score": 13222,
+      "scoreHistory": [
+        13354,
+        13080,
+        13080,
+        13080,
+        13111,
+        13131,
+        13222
+      ]
+    },
+    {
+      "position": 209,
       "battleTag": "大曹同学",
       "normalizedBattleTag": "大曹同学",
       "score": 13214,
@@ -3131,7 +3146,7 @@
       ]
     },
     {
-      "position": 209,
+      "position": 210,
       "battleTag": "连跪忠",
       "normalizedBattleTag": "连跪忠",
       "score": 13211,
@@ -3146,14 +3161,14 @@
       ]
     },
     {
-      "position": 210,
+      "position": 211,
       "battleTag": "糖豆超人乌兹",
       "normalizedBattleTag": "糖豆超人乌兹",
       "score": 13208,
       "scoreHistory": [
-        13290,
         13255,
         13277,
+        13208,
         13208,
         13208,
         13208,
@@ -3161,33 +3176,18 @@
       ]
     },
     {
-      "position": 211,
+      "position": 212,
       "battleTag": "荀彧丨九筱",
       "normalizedBattleTag": "荀彧九筱",
       "score": 13197,
       "scoreHistory": [
         12991,
         12991,
-        12991,
         13123,
         13197,
         13197,
+        13197,
         13197
-      ]
-    },
-    {
-      "position": 212,
-      "battleTag": "清辉成影夜凝霜",
-      "normalizedBattleTag": "清辉成影夜凝霜",
-      "score": 13183,
-      "scoreHistory": [
-        13169,
-        13169,
-        13169,
-        13305,
-        13241,
-        13064,
-        13183
       ]
     },
     {
@@ -3227,10 +3227,10 @@
       "score": 13177,
       "scoreHistory": [
         13019,
-        13019,
         13284,
         13191,
         13187,
+        13177,
         13177,
         13177
       ]
@@ -3245,7 +3245,7 @@
         13209,
         13209,
         13209,
-        13209,
+        13172,
         13172,
         13172
       ]
@@ -3312,13 +3312,28 @@
     },
     {
       "position": 221,
+      "battleTag": "清辉成影夜凝霜",
+      "normalizedBattleTag": "清辉成影夜凝霜",
+      "score": 13158,
+      "scoreHistory": [
+        13169,
+        13169,
+        13305,
+        13241,
+        13064,
+        13183,
+        13158
+      ]
+    },
+    {
+      "position": 222,
       "battleTag": "大嘟丨慢漫",
       "normalizedBattleTag": "大嘟慢漫",
       "score": 13156,
       "scoreHistory": [
         13200,
         13200,
-        13200,
+        13156,
         13156,
         13156,
         13156,
@@ -3326,7 +3341,7 @@
       ]
     },
     {
-      "position": 222,
+      "position": 223,
       "battleTag": "彩虹丨涵雪",
       "normalizedBattleTag": "彩虹涵雪",
       "score": 13154,
@@ -3341,74 +3356,74 @@
       ]
     },
     {
-      "position": 223,
+      "position": 224,
       "battleTag": "Sohigh",
       "normalizedBattleTag": "sohigh",
       "score": 13153,
       "scoreHistory": [
         12713,
-        12713,
         12982,
         13204,
         13248,
+        13153,
         13153,
         13153
       ]
     },
     {
-      "position": 224,
+      "position": 225,
       "battleTag": "神梦一刀",
       "normalizedBattleTag": "神梦一刀",
       "score": 13139,
       "scoreHistory": [
-        12910,
         13062,
         13062,
         13062,
+        13139,
         13139,
         13139,
         13139
       ]
     },
     {
-      "position": 225,
+      "position": 226,
+      "battleTag": "抖音丨小光",
+      "normalizedBattleTag": "抖音小光",
+      "score": 13136,
+      "scoreHistory": [
+        13290,
+        13236,
+        12992,
+        13098,
+        12972,
+        12982,
+        13136
+      ]
+    },
+    {
+      "position": 227,
       "battleTag": "lightning",
       "normalizedBattleTag": "lightning",
       "score": 13133,
       "scoreHistory": [
         13049,
-        13049,
         13000,
         13050,
+        13133,
         13133,
         13133,
         13133
       ]
     },
     {
-      "position": 226,
-      "battleTag": "彩虹丨廖三宁",
-      "normalizedBattleTag": "彩虹廖三宁",
-      "score": 13131,
-      "scoreHistory": [
-        13376,
-        13354,
-        13080,
-        13080,
-        13080,
-        13111,
-        13131
-      ]
-    },
-    {
-      "position": 227,
+      "position": 228,
       "battleTag": "大安丨白凌",
       "normalizedBattleTag": "大安白凌",
       "score": 13124,
       "scoreHistory": [
-        13029,
         12989,
         12989,
+        13124,
         13124,
         13124,
         13124,
@@ -3416,29 +3431,14 @@
       ]
     },
     {
-      "position": 228,
+      "position": 229,
       "battleTag": "抖音丶炉石林可",
       "normalizedBattleTag": "抖音炉石林可",
       "score": 13102,
       "scoreHistory": [
-        13246,
         13179,
         13102,
         13102,
-        13102,
-        13102,
-        13102
-      ]
-    },
-    {
-      "position": 229,
-      "battleTag": "荀彧丨陈超",
-      "normalizedBattleTag": "荀彧陈超",
-      "score": 13102,
-      "scoreHistory": [
-        13033,
-        13033,
-        13033,
         13102,
         13102,
         13102,
@@ -3447,29 +3447,29 @@
     },
     {
       "position": 230,
+      "battleTag": "荀彧丨陈超",
+      "normalizedBattleTag": "荀彧陈超",
+      "score": 13102,
+      "scoreHistory": [
+        13033,
+        13033,
+        13102,
+        13102,
+        13102,
+        13102,
+        13102
+      ]
+    },
+    {
+      "position": 231,
       "battleTag": "大嘟丨霞之丘诗羽",
       "normalizedBattleTag": "大嘟霞之丘诗羽",
       "score": 13098,
       "scoreHistory": [
         13010,
         13010,
-        13010,
         13035,
         13009,
-        13098,
-        13098
-      ]
-    },
-    {
-      "position": 231,
-      "battleTag": "友利奈绪",
-      "normalizedBattleTag": "友利奈绪",
-      "score": 13098,
-      "scoreHistory": [
-        13140,
-        13140,
-        13140,
-        13117,
         13098,
         13098,
         13098
@@ -3477,28 +3477,43 @@
     },
     {
       "position": 232,
+      "battleTag": "友利奈绪",
+      "normalizedBattleTag": "友利奈绪",
+      "score": 13098,
+      "scoreHistory": [
+        13140,
+        13140,
+        13117,
+        13098,
+        13098,
+        13098,
+        13098
+      ]
+    },
+    {
+      "position": 233,
       "battleTag": "彩虹丨放假君",
       "normalizedBattleTag": "彩虹放假君",
       "score": 13092,
       "scoreHistory": [
-        13241,
         13117,
         13116,
         13209,
         13209,
         13092,
+        13092,
         13092
       ]
     },
     {
-      "position": 233,
+      "position": 234,
       "battleTag": "zzi",
       "normalizedBattleTag": "zzi",
       "score": 13090,
       "scoreHistory": [
         13192,
-        13192,
         13249,
+        13090,
         13090,
         13090,
         13090,
@@ -3506,13 +3521,13 @@
       ]
     },
     {
-      "position": 234,
+      "position": 235,
       "battleTag": "海森堡",
       "normalizedBattleTag": "海森堡",
       "score": 13074,
       "scoreHistory": [
-        13227,
         13207,
+        13074,
         13074,
         13074,
         13074,
@@ -3521,13 +3536,13 @@
       ]
     },
     {
-      "position": 235,
+      "position": 236,
       "battleTag": "接下来看我表演",
       "normalizedBattleTag": "接下来看我表演",
       "score": 13073,
       "scoreHistory": [
         12971,
-        12971,
+        13073,
         13073,
         13073,
         13073,
@@ -3536,14 +3551,29 @@
       ]
     },
     {
-      "position": 236,
+      "position": 237,
+      "battleTag": "目不转睛啊",
+      "normalizedBattleTag": "目不转睛啊",
+      "score": 13072,
+      "scoreHistory": [
+        13041,
+        13041,
+        13041,
+        13041,
+        13041,
+        13041,
+        13072
+      ]
+    },
+    {
+      "position": 238,
       "battleTag": "米大官人",
       "normalizedBattleTag": "米大官人",
       "score": 13063,
       "scoreHistory": [
-        12660,
         12715,
         12874,
+        13063,
         13063,
         13063,
         13063,
@@ -3551,27 +3581,27 @@
       ]
     },
     {
-      "position": 237,
+      "position": 239,
       "battleTag": "empty",
       "normalizedBattleTag": "empty",
       "score": 13054,
       "scoreHistory": [
-        12832,
         13136,
         13039,
         13054,
         12919,
         13054,
+        13054,
         13054
       ]
     },
     {
-      "position": 238,
+      "position": 240,
       "battleTag": "信马由缰",
       "normalizedBattleTag": "信马由缰",
       "score": 13051,
       "scoreHistory": [
-        13046,
+        13051,
         13051,
         13051,
         13051,
@@ -3581,14 +3611,14 @@
       ]
     },
     {
-      "position": 239,
+      "position": 241,
       "battleTag": "Moat",
       "normalizedBattleTag": "moat",
       "score": 13047,
       "scoreHistory": [
         13062,
-        13062,
         13069,
+        13047,
         13047,
         13047,
         13047,
@@ -3596,29 +3626,14 @@
       ]
     },
     {
-      "position": 240,
-      "battleTag": "目不转睛啊",
-      "normalizedBattleTag": "目不转睛啊",
-      "score": 13041,
-      "scoreHistory": [
-        13041,
-        13041,
-        13041,
-        13041,
-        13041,
-        13041,
-        13041
-      ]
-    },
-    {
-      "position": 241,
+      "position": 242,
       "battleTag": "醉溺星河",
       "normalizedBattleTag": "醉溺星河",
       "score": 13038,
       "scoreHistory": [
         13037,
         13037,
-        13037,
+        13038,
         13038,
         13038,
         13038,
@@ -3626,7 +3641,7 @@
       ]
     },
     {
-      "position": 242,
+      "position": 243,
       "battleTag": "Jrsdiekatze",
       "normalizedBattleTag": "jrsdiekatze",
       "score": 13036,
@@ -3641,7 +3656,7 @@
       ]
     },
     {
-      "position": 243,
+      "position": 244,
       "battleTag": "金色叶子",
       "normalizedBattleTag": "金色叶子",
       "score": 13036,
@@ -3656,7 +3671,7 @@
       ]
     },
     {
-      "position": 244,
+      "position": 245,
       "battleTag": "抖音丨阿哲",
       "normalizedBattleTag": "抖音阿哲",
       "score": 13035,
@@ -3671,7 +3686,7 @@
       ]
     },
     {
-      "position": 245,
+      "position": 246,
       "battleTag": "陛下心腹",
       "normalizedBattleTag": "陛下心腹",
       "score": 13034,
@@ -3686,7 +3701,7 @@
       ]
     },
     {
-      "position": 246,
+      "position": 247,
       "battleTag": "蛇夫",
       "normalizedBattleTag": "蛇夫",
       "score": 13029,
@@ -3701,22 +3716,22 @@
       ]
     },
     {
-      "position": 247,
+      "position": 248,
       "battleTag": "墨色熊猫",
       "normalizedBattleTag": "墨色熊猫",
       "score": 13028,
       "scoreHistory": [
         13352,
         13352,
-        13352,
         13086,
         13190,
         12886,
+        13028,
         13028
       ]
     },
     {
-      "position": 248,
+      "position": 249,
       "battleTag": "胆小",
       "normalizedBattleTag": "胆小",
       "score": 13028,
@@ -3731,7 +3746,7 @@
       ]
     },
     {
-      "position": 249,
+      "position": 250,
       "battleTag": "夜鸦",
       "normalizedBattleTag": "夜鸦",
       "score": 13024,
@@ -3746,7 +3761,7 @@
       ]
     },
     {
-      "position": 250,
+      "position": 251,
       "battleTag": "你这牌打的忒好了",
       "normalizedBattleTag": "你这牌打的忒好了",
       "score": 13021,
@@ -3754,22 +3769,7 @@
         13080,
         13080,
         13080,
-        13080,
         13071,
-        13021,
-        13021
-      ]
-    },
-    {
-      "position": 251,
-      "battleTag": "gotcha",
-      "normalizedBattleTag": "gotcha",
-      "score": 13021,
-      "scoreHistory": [
-        12852,
-        12852,
-        12875,
-        13021,
         13021,
         13021,
         13021
@@ -3777,6 +3777,21 @@
     },
     {
       "position": 252,
+      "battleTag": "gotcha",
+      "normalizedBattleTag": "gotcha",
+      "score": 13021,
+      "scoreHistory": [
+        12852,
+        12875,
+        13021,
+        13021,
+        13021,
+        13021,
+        13021
+      ]
+    },
+    {
+      "position": 253,
       "battleTag": "肥硕丨戴佳伟",
       "normalizedBattleTag": "肥硕戴佳伟",
       "score": 13020,
@@ -3791,7 +3806,7 @@
       ]
     },
     {
-      "position": 253,
+      "position": 254,
       "battleTag": "光明之锤",
       "normalizedBattleTag": "光明之锤",
       "score": 13019,
@@ -3806,7 +3821,22 @@
       ]
     },
     {
-      "position": 254,
+      "position": 255,
+      "battleTag": "锁鼠鼠",
+      "normalizedBattleTag": "锁鼠鼠",
+      "score": 13018,
+      "scoreHistory": [
+        12833,
+        12893,
+        12757,
+        12812,
+        12917,
+        12983,
+        13018
+      ]
+    },
+    {
+      "position": 256,
       "battleTag": "御剑舞清秋",
       "normalizedBattleTag": "御剑舞清秋",
       "score": 13013,
@@ -3821,7 +3851,7 @@
       ]
     },
     {
-      "position": 255,
+      "position": 257,
       "battleTag": "巨型的狼",
       "normalizedBattleTag": "巨型的狼",
       "score": 13007,
@@ -3836,7 +3866,7 @@
       ]
     },
     {
-      "position": 256,
+      "position": 258,
       "battleTag": "五香蛋",
       "normalizedBattleTag": "五香蛋",
       "score": 13006,
@@ -3851,7 +3881,7 @@
       ]
     },
     {
-      "position": 257,
+      "position": 259,
       "battleTag": "未成尘埃落定",
       "normalizedBattleTag": "未成尘埃落定",
       "score": 13005,
@@ -3866,22 +3896,22 @@
       ]
     },
     {
-      "position": 258,
+      "position": 260,
       "battleTag": "Lich",
       "normalizedBattleTag": "lich",
       "score": 13002,
       "scoreHistory": [
-        12740,
         12827,
         12827,
         12960,
         12922,
         13002,
+        13002,
         13002
       ]
     },
     {
-      "position": 259,
+      "position": 261,
       "battleTag": "零度",
       "normalizedBattleTag": "零度",
       "score": 12983,
@@ -3893,36 +3923,6 @@
         12983,
         12983,
         12983
-      ]
-    },
-    {
-      "position": 260,
-      "battleTag": "锁鼠鼠",
-      "normalizedBattleTag": "锁鼠鼠",
-      "score": 12983,
-      "scoreHistory": [
-        12869,
-        12833,
-        12893,
-        12757,
-        12812,
-        12917,
-        12983
-      ]
-    },
-    {
-      "position": 261,
-      "battleTag": "抖音丨小光",
-      "normalizedBattleTag": "抖音小光",
-      "score": 12982,
-      "scoreHistory": [
-        13176,
-        13290,
-        13236,
-        12992,
-        13098,
-        12972,
-        12982
       ]
     },
     {
@@ -3976,11 +3976,11 @@
       "normalizedBattleTag": "小郑",
       "score": 12962,
       "scoreHistory": [
-        12951,
         13020,
         13020,
         13049,
         13118,
+        12962,
         12962,
         12962
       ]
@@ -4037,11 +4037,11 @@
       "score": 12912,
       "scoreHistory": [
         12987,
-        12987,
         13014,
         12864,
         12947,
         12874,
+        12912,
         12912
       ]
     },
@@ -4052,8 +4052,8 @@
       "score": 12907,
       "scoreHistory": [
         13192,
-        13192,
         12919,
+        12907,
         12907,
         12907,
         12907,
@@ -4188,9 +4188,9 @@
       "scoreHistory": [
         12775,
         12775,
-        12775,
         12737,
         12731,
+        12858,
         12858,
         12858
       ]
@@ -4216,7 +4216,7 @@
       "normalizedBattleTag": "三旬",
       "score": 12848,
       "scoreHistory": [
-        12793,
+        12848,
         12848,
         12848,
         12848,
@@ -4272,6 +4272,21 @@
     },
     {
       "position": 285,
+      "battleTag": "看呆呆兽是种享受",
+      "normalizedBattleTag": "看呆呆兽是种享受",
+      "score": 12832,
+      "scoreHistory": [
+        12801,
+        12801,
+        12801,
+        12801,
+        12801,
+        12801,
+        12832
+      ]
+    },
+    {
+      "position": 286,
       "battleTag": "Trory",
       "normalizedBattleTag": "trory",
       "score": 12832,
@@ -4286,14 +4301,29 @@
       ]
     },
     {
-      "position": 286,
+      "position": 287,
+      "battleTag": "浮生一梦",
+      "normalizedBattleTag": "浮生一梦",
+      "score": 12829,
+      "scoreHistory": [
+        12749,
+        12749,
+        12796,
+        12796,
+        12796,
+        12796,
+        12829
+      ]
+    },
+    {
+      "position": 288,
       "battleTag": "南风知丶",
       "normalizedBattleTag": "南风知",
       "score": 12825,
       "scoreHistory": [
-        12842,
         12869,
         12917,
+        12825,
         12825,
         12825,
         12825,
@@ -4301,14 +4331,14 @@
       ]
     },
     {
-      "position": 287,
+      "position": 289,
       "battleTag": "有局丨洋芋",
       "normalizedBattleTag": "有局洋芋",
       "score": 12822,
       "scoreHistory": [
-        12713,
         12816,
         12816,
+        12822,
         12822,
         12822,
         12822,
@@ -4316,7 +4346,7 @@
       ]
     },
     {
-      "position": 288,
+      "position": 290,
       "battleTag": "幸运之虎",
       "normalizedBattleTag": "幸运之虎",
       "score": 12821,
@@ -4331,7 +4361,7 @@
       ]
     },
     {
-      "position": 289,
+      "position": 291,
       "battleTag": "麒麒",
       "normalizedBattleTag": "麒麒",
       "score": 12815,
@@ -4346,7 +4376,7 @@
       ]
     },
     {
-      "position": 290,
+      "position": 292,
       "battleTag": "至魔太一剑穹狂帝",
       "normalizedBattleTag": "至魔太一剑穹狂帝",
       "score": 12815,
@@ -4361,13 +4391,28 @@
       ]
     },
     {
-      "position": 291,
+      "position": 293,
+      "battleTag": "一只宝宝",
+      "normalizedBattleTag": "一只宝宝",
+      "score": 12813,
+      "scoreHistory": [
+        13083,
+        12731,
+        12519,
+        12618,
+        12659,
+        12659,
+        12813
+      ]
+    },
+    {
+      "position": 294,
       "battleTag": "我看你像九加一",
       "normalizedBattleTag": "我看你像九加一",
       "score": 12806,
       "scoreHistory": [
         12660,
-        12660,
+        12806,
         12806,
         12806,
         12806,
@@ -4376,22 +4421,7 @@
       ]
     },
     {
-      "position": 292,
-      "battleTag": "看呆呆兽是种享受",
-      "normalizedBattleTag": "看呆呆兽是种享受",
-      "score": 12801,
-      "scoreHistory": [
-        12801,
-        12801,
-        12801,
-        12801,
-        12801,
-        12801,
-        12801
-      ]
-    },
-    {
-      "position": 293,
+      "position": 295,
       "battleTag": "LuckyBob",
       "normalizedBattleTag": "luckybob",
       "score": 12800,
@@ -4399,29 +4429,14 @@
         12837,
         12837,
         12837,
-        12837,
         12752,
+        12800,
         12800,
         12800
       ]
     },
     {
-      "position": 294,
-      "battleTag": "浮生一梦",
-      "normalizedBattleTag": "浮生一梦",
-      "score": 12796,
-      "scoreHistory": [
-        12749,
-        12749,
-        12749,
-        12796,
-        12796,
-        12796,
-        12796
-      ]
-    },
-    {
-      "position": 295,
+      "position": 296,
       "battleTag": "林老板",
       "normalizedBattleTag": "林老板",
       "score": 12789,
@@ -4436,7 +4451,7 @@
       ]
     },
     {
-      "position": 296,
+      "position": 297,
       "battleTag": "爱吃香菜",
       "normalizedBattleTag": "爱吃香菜",
       "score": 12784,
@@ -4451,7 +4466,7 @@
       ]
     },
     {
-      "position": 297,
+      "position": 298,
       "battleTag": "抖音丨最马的脸",
       "normalizedBattleTag": "抖音最马的脸",
       "score": 12784,
@@ -4466,7 +4481,7 @@
       ]
     },
     {
-      "position": 298,
+      "position": 299,
       "battleTag": "大嘟庄园欢迎您",
       "normalizedBattleTag": "大嘟庄园欢迎您",
       "score": 12777,
@@ -4481,7 +4496,7 @@
       ]
     },
     {
-      "position": 299,
+      "position": 300,
       "battleTag": "冰上梅露露",
       "normalizedBattleTag": "冰上梅露露",
       "score": 12773,
@@ -4496,14 +4511,29 @@
       ]
     },
     {
-      "position": 300,
+      "position": 301,
+      "battleTag": "BPPGIM",
+      "normalizedBattleTag": "bppgim",
+      "score": 12759,
+      "scoreHistory": [
+        12782,
+        12782,
+        12633,
+        12703,
+        12778,
+        12634,
+        12759
+      ]
+    },
+    {
+      "position": 302,
       "battleTag": "北凉丨暴躁大叔",
       "normalizedBattleTag": "北凉暴躁大叔",
       "score": 12743,
       "scoreHistory": [
-        12826,
         12879,
         12770,
+        12743,
         12743,
         12743,
         12743,
@@ -4511,7 +4541,7 @@
       ]
     },
     {
-      "position": 301,
+      "position": 303,
       "battleTag": "告辞丨青草包饭",
       "normalizedBattleTag": "告辞青草包饭",
       "score": 12739,
@@ -4526,22 +4556,22 @@
       ]
     },
     {
-      "position": 302,
+      "position": 304,
       "battleTag": "先说慌的人",
       "normalizedBattleTag": "先说慌的人",
       "score": 12732,
       "scoreHistory": [
-        12820,
         12831,
         12857,
         12857,
         12857,
         12732,
+        12732,
         12732
       ]
     },
     {
-      "position": 303,
+      "position": 305,
       "battleTag": "曹宪咬我",
       "normalizedBattleTag": "曹宪咬我",
       "score": 12726,
@@ -4556,14 +4586,14 @@
       ]
     },
     {
-      "position": 304,
+      "position": 306,
       "battleTag": "望源梅",
       "normalizedBattleTag": "望源梅",
       "score": 12723,
       "scoreHistory": [
         12788,
-        12788,
         12682,
+        12723,
         12723,
         12723,
         12723,
@@ -4571,7 +4601,7 @@
       ]
     },
     {
-      "position": 305,
+      "position": 307,
       "battleTag": "FNNCSA",
       "normalizedBattleTag": "fnncsa",
       "score": 12717,
@@ -4586,7 +4616,7 @@
       ]
     },
     {
-      "position": 306,
+      "position": 308,
       "battleTag": "执笔执笔执笔丶",
       "normalizedBattleTag": "执笔执笔执笔",
       "score": 12705,
@@ -4601,7 +4631,7 @@
       ]
     },
     {
-      "position": 307,
+      "position": 309,
       "battleTag": "棋王",
       "normalizedBattleTag": "棋王",
       "score": 12704,
@@ -4616,14 +4646,14 @@
       ]
     },
     {
-      "position": 308,
+      "position": 310,
       "battleTag": "自由的橄榄色法师",
       "normalizedBattleTag": "自由的橄榄色法师",
       "score": 12692,
       "scoreHistory": [
-        12638,
         12550,
         12577,
+        12692,
         12692,
         12692,
         12692,
@@ -4631,13 +4661,13 @@
       ]
     },
     {
-      "position": 309,
+      "position": 311,
       "battleTag": "pluto",
       "normalizedBattleTag": "pluto",
       "score": 12689,
       "scoreHistory": [
         12762,
-        12762,
+        12689,
         12689,
         12689,
         12689,
@@ -4646,22 +4676,22 @@
       ]
     },
     {
-      "position": 310,
+      "position": 312,
       "battleTag": "黄庄丨有奶便是娘",
       "normalizedBattleTag": "黄庄有奶便是娘",
       "score": 12688,
       "scoreHistory": [
-        12703,
         12641,
         12641,
         12553,
         12553,
         12688,
+        12688,
         12688
       ]
     },
     {
-      "position": 311,
+      "position": 313,
       "battleTag": "Letting",
       "normalizedBattleTag": "letting",
       "score": 12685,
@@ -4676,13 +4706,13 @@
       ]
     },
     {
-      "position": 312,
+      "position": 314,
       "battleTag": "TCTopo",
       "normalizedBattleTag": "tctopo",
       "score": 12675,
       "scoreHistory": [
-        12353,
         12508,
+        12675,
         12675,
         12675,
         12675,
@@ -4691,13 +4721,28 @@
       ]
     },
     {
-      "position": 313,
+      "position": 315,
+      "battleTag": "抖音天真",
+      "normalizedBattleTag": "抖音天真",
+      "score": 12674,
+      "scoreHistory": [
+        12512,
+        12512,
+        12512,
+        12512,
+        12589,
+        12536,
+        12674
+      ]
+    },
+    {
+      "position": 316,
       "battleTag": "汤圆圆",
       "normalizedBattleTag": "汤圆圆",
       "score": 12662,
       "scoreHistory": [
         12757,
-        12757,
+        12662,
         12662,
         12662,
         12662,
@@ -4706,7 +4751,7 @@
       ]
     },
     {
-      "position": 314,
+      "position": 317,
       "battleTag": "有局丨云川宝宝",
       "normalizedBattleTag": "有局云川宝宝",
       "score": 12660,
@@ -4721,22 +4766,7 @@
       ]
     },
     {
-      "position": 315,
-      "battleTag": "一只宝宝",
-      "normalizedBattleTag": "一只宝宝",
-      "score": 12659,
-      "scoreHistory": [
-        13072,
-        13083,
-        12731,
-        12519,
-        12618,
-        12659,
-        12659
-      ]
-    },
-    {
-      "position": 316,
+      "position": 318,
       "battleTag": "反季雨",
       "normalizedBattleTag": "反季雨",
       "score": 12638,
@@ -4751,46 +4781,16 @@
       ]
     },
     {
-      "position": 317,
-      "battleTag": "BPPGIM",
-      "normalizedBattleTag": "bppgim",
-      "score": 12634,
-      "scoreHistory": [
-        12671,
-        12782,
-        12782,
-        12633,
-        12703,
-        12778,
-        12634
-      ]
-    },
-    {
-      "position": 318,
-      "battleTag": "随机都是烂名字",
-      "normalizedBattleTag": "随机都是烂名字",
-      "score": 12627,
-      "scoreHistory": [
-        12619,
-        12619,
-        12619,
-        12619,
-        12619,
-        12605,
-        12627
-      ]
-    },
-    {
       "position": 319,
       "battleTag": "俺霸天下",
       "normalizedBattleTag": "俺霸天下",
       "score": 12613,
       "scoreHistory": [
         12393,
-        12393,
         12312,
         12397,
         12546,
+        12613,
         12613,
         12613
       ]
@@ -4801,10 +4801,10 @@
       "normalizedBattleTag": "肥硕埃提耶什",
       "score": 12613,
       "scoreHistory": [
-        12583,
         12638,
         12792,
         12759,
+        12613,
         12613,
         12613,
         12613
@@ -4812,21 +4812,6 @@
     },
     {
       "position": 321,
-      "battleTag": "魔法城堡",
-      "normalizedBattleTag": "魔法城堡",
-      "score": 12612,
-      "scoreHistory": [
-        12564,
-        12692,
-        12644,
-        12669,
-        12669,
-        12710,
-        12612
-      ]
-    },
-    {
-      "position": 322,
       "battleTag": "告辞丨可爱小冷猫",
       "normalizedBattleTag": "告辞可爱小冷猫",
       "score": 12611,
@@ -4835,24 +4820,39 @@
         12547,
         12547,
         12547,
-        12547,
+        12611,
+        12611,
+        12611
+      ]
+    },
+    {
+      "position": 322,
+      "battleTag": "彩虹丨流星",
+      "normalizedBattleTag": "彩虹流星",
+      "score": 12611,
+      "scoreHistory": [
+        12873,
+        12723,
+        12723,
+        12723,
+        12717,
         12611,
         12611
       ]
     },
     {
       "position": 323,
-      "battleTag": "彩虹丨流星",
-      "normalizedBattleTag": "彩虹流星",
-      "score": 12611,
+      "battleTag": "随机都是烂名字",
+      "normalizedBattleTag": "随机都是烂名字",
+      "score": 12603,
       "scoreHistory": [
-        12893,
-        12873,
-        12723,
-        12723,
-        12723,
-        12717,
-        12611
+        12619,
+        12619,
+        12619,
+        12619,
+        12605,
+        12627,
+        12603
       ]
     },
     {
@@ -4861,9 +4861,9 @@
       "normalizedBattleTag": "彩虹韶想",
       "score": 12602,
       "scoreHistory": [
-        12539,
         12614,
         12614,
+        12602,
         12602,
         12602,
         12602,
@@ -4893,7 +4893,7 @@
       "scoreHistory": [
         12607,
         12607,
-        12607,
+        12601,
         12601,
         12601,
         12601,
@@ -4932,21 +4932,51 @@
     },
     {
       "position": 329,
+      "battleTag": "魔法城堡",
+      "normalizedBattleTag": "魔法城堡",
+      "score": 12571,
+      "scoreHistory": [
+        12692,
+        12644,
+        12669,
+        12669,
+        12710,
+        12612,
+        12571
+      ]
+    },
+    {
+      "position": 330,
+      "battleTag": "庄园杀手",
+      "normalizedBattleTag": "庄园杀手",
+      "score": 12569,
+      "scoreHistory": [
+        12419,
+        12419,
+        12419,
+        12419,
+        12419,
+        12419,
+        12569
+      ]
+    },
+    {
+      "position": 331,
       "battleTag": "乖乖龙儿宝",
       "normalizedBattleTag": "乖乖龙儿宝",
       "score": 12565,
       "scoreHistory": [
-        12778,
         12786,
         12805,
         12688,
+        12565,
         12565,
         12565,
         12565
       ]
     },
     {
-      "position": 330,
+      "position": 332,
       "battleTag": "荀彧丨答案",
       "normalizedBattleTag": "荀彧答案",
       "score": 12564,
@@ -4961,7 +4991,7 @@
       ]
     },
     {
-      "position": 331,
+      "position": 333,
       "battleTag": "心碎丨冠军",
       "normalizedBattleTag": "心碎冠军",
       "score": 12554,
@@ -4976,7 +5006,7 @@
       ]
     },
     {
-      "position": 332,
+      "position": 334,
       "battleTag": "哔站卡比与菠萝崽",
       "normalizedBattleTag": "哔站卡比与菠萝崽",
       "score": 12552,
@@ -4991,7 +5021,7 @@
       ]
     },
     {
-      "position": 333,
+      "position": 335,
       "battleTag": "鲍勃丶我的铜须呢",
       "normalizedBattleTag": "鲍勃我的铜须呢",
       "score": 12551,
@@ -4999,14 +5029,14 @@
         12435,
         12435,
         12435,
-        12435,
         12552,
+        12551,
         12551,
         12551
       ]
     },
     {
-      "position": 334,
+      "position": 336,
       "battleTag": "ButterFly",
       "normalizedBattleTag": "butterfly",
       "score": 12548,
@@ -5021,7 +5051,7 @@
       ]
     },
     {
-      "position": 335,
+      "position": 337,
       "battleTag": "wumiao",
       "normalizedBattleTag": "wumiao",
       "score": 12547,
@@ -5036,22 +5066,22 @@
       ]
     },
     {
-      "position": 336,
+      "position": 338,
       "battleTag": "彩虹丨速八写作业",
       "normalizedBattleTag": "彩虹速八写作业",
       "score": 12547,
       "scoreHistory": [
-        12460,
         12597,
         12629,
         12408,
+        12547,
         12547,
         12547,
         12547
       ]
     },
     {
-      "position": 337,
+      "position": 339,
       "battleTag": "罗尼的军师",
       "normalizedBattleTag": "罗尼的军师",
       "score": 12547,
@@ -5066,29 +5096,29 @@
       ]
     },
     {
-      "position": 338,
+      "position": 340,
       "battleTag": "双剑华斩",
       "normalizedBattleTag": "双剑华斩",
       "score": 12543,
       "scoreHistory": [
-        12233,
         12280,
         12280,
         12463,
+        12543,
         12543,
         12543,
         12543
       ]
     },
     {
-      "position": 339,
+      "position": 341,
       "battleTag": "嫑脸",
       "normalizedBattleTag": "嫑脸",
       "score": 12539,
       "scoreHistory": [
-        12304,
         12302,
         12468,
+        12539,
         12539,
         12539,
         12539,
@@ -5096,7 +5126,7 @@
       ]
     },
     {
-      "position": 340,
+      "position": 342,
       "battleTag": "田北七",
       "normalizedBattleTag": "田北七",
       "score": 12538,
@@ -5111,7 +5141,7 @@
       ]
     },
     {
-      "position": 341,
+      "position": 343,
       "battleTag": "白水煮一切",
       "normalizedBattleTag": "白水煮一切",
       "score": 12536,
@@ -5126,28 +5156,13 @@
       ]
     },
     {
-      "position": 342,
-      "battleTag": "抖音天真",
-      "normalizedBattleTag": "抖音天真",
-      "score": 12536,
-      "scoreHistory": [
-        12512,
-        12512,
-        12512,
-        12512,
-        12512,
-        12589,
-        12536
-      ]
-    },
-    {
-      "position": 343,
+      "position": 344,
       "battleTag": "kxmd123",
       "normalizedBattleTag": "kxmd123",
       "score": 12534,
       "scoreHistory": [
-        12590,
         12547,
+        12534,
         12534,
         12534,
         12534,
@@ -5156,27 +5171,27 @@
       ]
     },
     {
-      "position": 344,
+      "position": 345,
       "battleTag": "我不是于善鹏",
       "normalizedBattleTag": "我不是于善鹏",
       "score": 12533,
       "scoreHistory": [
         12287,
-        12287,
         12367,
         12582,
+        12533,
         12533,
         12533,
         12533
       ]
     },
     {
-      "position": 345,
+      "position": 346,
       "battleTag": "六成",
       "normalizedBattleTag": "六成",
       "score": 12529,
       "scoreHistory": [
-        12403,
+        12529,
         12529,
         12529,
         12529,
@@ -5186,42 +5201,42 @@
       ]
     },
     {
-      "position": 346,
+      "position": 347,
       "battleTag": "夜裁星河",
       "normalizedBattleTag": "夜裁星河",
       "score": 12527,
       "scoreHistory": [
         12053,
         12053,
-        12053,
         12208,
         12319,
+        12527,
         12527,
         12527
       ]
     },
     {
-      "position": 347,
+      "position": 348,
       "battleTag": "大嘟丨秋叶思琪",
       "normalizedBattleTag": "大嘟秋叶思琪",
       "score": 12525,
       "scoreHistory": [
-        12219,
         12350,
         12566,
         12474,
+        12525,
         12525,
         12525,
         12525
       ]
     },
     {
-      "position": 348,
+      "position": 349,
       "battleTag": "弈星丶幻夜梦屿",
       "normalizedBattleTag": "弈星幻夜梦屿",
       "score": 12519,
       "scoreHistory": [
-        12449,
+        12519,
         12519,
         12519,
         12519,
@@ -5231,7 +5246,7 @@
       ]
     },
     {
-      "position": 349,
+      "position": 350,
       "battleTag": "逆神之歌",
       "normalizedBattleTag": "逆神之歌",
       "score": 12517,
@@ -5246,7 +5261,7 @@
       ]
     },
     {
-      "position": 350,
+      "position": 351,
       "battleTag": "周杰伦",
       "normalizedBattleTag": "周杰伦",
       "score": 12516,
@@ -5261,7 +5276,7 @@
       ]
     },
     {
-      "position": 351,
+      "position": 352,
       "battleTag": "抖音丨彩虹丨忆棠",
       "normalizedBattleTag": "抖音彩虹忆棠",
       "score": 12514,
@@ -5276,7 +5291,7 @@
       ]
     },
     {
-      "position": 352,
+      "position": 353,
       "battleTag": "冰封赤泪",
       "normalizedBattleTag": "冰封赤泪",
       "score": 12508,
@@ -5291,7 +5306,7 @@
       ]
     },
     {
-      "position": 353,
+      "position": 354,
       "battleTag": "沐希",
       "normalizedBattleTag": "沐希",
       "score": 12502,
@@ -5306,7 +5321,7 @@
       ]
     },
     {
-      "position": 354,
+      "position": 355,
       "battleTag": "顶级手法",
       "normalizedBattleTag": "顶级手法",
       "score": 12494,
@@ -5321,22 +5336,22 @@
       ]
     },
     {
-      "position": 355,
+      "position": 356,
       "battleTag": "Krystal",
       "normalizedBattleTag": "krystal",
       "score": 12491,
       "scoreHistory": [
         12602,
         12602,
-        12602,
         12435,
         12421,
+        12491,
         12491,
         12491
       ]
     },
     {
-      "position": 356,
+      "position": 357,
       "battleTag": "鲨鱼苏",
       "normalizedBattleTag": "鲨鱼苏",
       "score": 12488,
@@ -5351,7 +5366,7 @@
       ]
     },
     {
-      "position": 357,
+      "position": 358,
       "battleTag": "丶临也",
       "normalizedBattleTag": "临也",
       "score": 12482,
@@ -5366,13 +5381,13 @@
       ]
     },
     {
-      "position": 358,
+      "position": 359,
       "battleTag": "弈星丶螺旋飞狗",
       "normalizedBattleTag": "弈星螺旋飞狗",
       "score": 12482,
       "scoreHistory": [
-        12354,
         12411,
+        12482,
         12482,
         12482,
         12482,
@@ -5381,7 +5396,7 @@
       ]
     },
     {
-      "position": 359,
+      "position": 360,
       "battleTag": "告辞丨江南步兵",
       "normalizedBattleTag": "告辞江南步兵",
       "score": 12478,
@@ -5396,7 +5411,7 @@
       ]
     },
     {
-      "position": 360,
+      "position": 361,
       "battleTag": "陆离",
       "normalizedBattleTag": "陆离",
       "score": 12476,
@@ -5411,7 +5426,7 @@
       ]
     },
     {
-      "position": 361,
+      "position": 362,
       "battleTag": "有局丨快转运",
       "normalizedBattleTag": "有局快转运",
       "score": 12468,
@@ -5426,7 +5441,7 @@
       ]
     },
     {
-      "position": 362,
+      "position": 363,
       "battleTag": "Gentleman",
       "normalizedBattleTag": "gentleman",
       "score": 12466,
@@ -5441,7 +5456,7 @@
       ]
     },
     {
-      "position": 363,
+      "position": 364,
       "battleTag": "Player",
       "normalizedBattleTag": "player",
       "score": 12464,
@@ -5456,7 +5471,7 @@
       ]
     },
     {
-      "position": 364,
+      "position": 365,
       "battleTag": "水阔山长雁字迟",
       "normalizedBattleTag": "水阔山长雁字迟",
       "score": 12451,
@@ -5471,13 +5486,13 @@
       ]
     },
     {
-      "position": 365,
+      "position": 366,
       "battleTag": "独断万古周天帝",
       "normalizedBattleTag": "独断万古周天帝",
       "score": 12451,
       "scoreHistory": [
-        12433,
         12480,
+        12451,
         12451,
         12451,
         12451,
@@ -5486,7 +5501,7 @@
       ]
     },
     {
-      "position": 366,
+      "position": 367,
       "battleTag": "鲍勃亲戚",
       "normalizedBattleTag": "鲍勃亲戚",
       "score": 12449,
@@ -5501,7 +5516,7 @@
       ]
     },
     {
-      "position": 367,
+      "position": 368,
       "battleTag": "米米",
       "normalizedBattleTag": "米米",
       "score": 12447,
@@ -5516,7 +5531,7 @@
       ]
     },
     {
-      "position": 368,
+      "position": 369,
       "battleTag": "告辞丨繁星",
       "normalizedBattleTag": "告辞繁星",
       "score": 12446,
@@ -5531,7 +5546,7 @@
       ]
     },
     {
-      "position": 369,
+      "position": 370,
       "battleTag": "断幺诗人",
       "normalizedBattleTag": "断幺诗人",
       "score": 12443,
@@ -5546,33 +5561,18 @@
       ]
     },
     {
-      "position": 370,
+      "position": 371,
       "battleTag": "鲍勃做个人",
       "normalizedBattleTag": "鲍勃做个人",
       "score": 12443,
       "scoreHistory": [
-        12417,
         12377,
         12443,
         12443,
         12443,
         12443,
+        12443,
         12443
-      ]
-    },
-    {
-      "position": 371,
-      "battleTag": "喵的演出",
-      "normalizedBattleTag": "喵的演出",
-      "score": 12442,
-      "scoreHistory": [
-        13059,
-        13059,
-        13059,
-        12975,
-        12818,
-        12442,
-        12442
       ]
     },
     {
@@ -5596,7 +5596,7 @@
       "normalizedBattleTag": "北凉叹春迟",
       "score": 12428,
       "scoreHistory": [
-        12458,
+        12428,
         12428,
         12428,
         12428,
@@ -5611,10 +5611,10 @@
       "normalizedBattleTag": "yin",
       "score": 12426,
       "scoreHistory": [
-        12188,
         12345,
         12364,
         12462,
+        12426,
         12426,
         12426,
         12426
@@ -5627,8 +5627,8 @@
       "score": 12426,
       "scoreHistory": [
         12299,
-        12299,
         12377,
+        12426,
         12426,
         12426,
         12426,
@@ -5642,9 +5642,9 @@
       "score": 12424,
       "scoreHistory": [
         12445,
-        12445,
         12358,
         12426,
+        12424,
         12424,
         12424,
         12424
@@ -5689,9 +5689,9 @@
         12305,
         12305,
         12305,
-        12305,
         12358,
         12349,
+        12421,
         12421
       ]
     },
@@ -5716,10 +5716,10 @@
       "normalizedBattleTag": "没考上清华北大",
       "score": 12421,
       "scoreHistory": [
-        12568,
         12591,
         12591,
         12593,
+        12421,
         12421,
         12421,
         12421
@@ -5727,28 +5727,13 @@
     },
     {
       "position": 382,
-      "battleTag": "风轻云淡",
-      "normalizedBattleTag": "风轻云淡",
-      "score": 12420,
-      "scoreHistory": [
-        12659,
-        12659,
-        12659,
-        12558,
-        12508,
-        12404,
-        12420
-      ]
-    },
-    {
-      "position": 383,
       "battleTag": "爱摸鱼的无毛喵",
       "normalizedBattleTag": "爱摸鱼的无毛喵",
       "score": 12420,
       "scoreHistory": [
         12808,
-        12808,
         12458,
+        12420,
         12420,
         12420,
         12420,
@@ -5756,22 +5741,7 @@
       ]
     },
     {
-      "position": 384,
-      "battleTag": "庄园杀手",
-      "normalizedBattleTag": "庄园杀手",
-      "score": 12419,
-      "scoreHistory": [
-        12419,
-        12419,
-        12419,
-        12419,
-        12419,
-        12419,
-        12419
-      ]
-    },
-    {
-      "position": 385,
+      "position": 383,
       "battleTag": "零秒出手",
       "normalizedBattleTag": "零秒出手",
       "score": 12414,
@@ -5786,7 +5756,7 @@
       ]
     },
     {
-      "position": 386,
+      "position": 384,
       "battleTag": "心里有火",
       "normalizedBattleTag": "心里有火",
       "score": 12412,
@@ -5801,22 +5771,22 @@
       ]
     },
     {
-      "position": 387,
+      "position": 385,
       "battleTag": "橙星星",
       "normalizedBattleTag": "橙星星",
       "score": 12411,
       "scoreHistory": [
         12365,
         12365,
-        12365,
         12323,
+        12411,
         12411,
         12411,
         12411
       ]
     },
     {
-      "position": 388,
+      "position": 386,
       "battleTag": "东窗笑",
       "normalizedBattleTag": "东窗笑",
       "score": 12410,
@@ -5831,7 +5801,7 @@
       ]
     },
     {
-      "position": 389,
+      "position": 387,
       "battleTag": "柔情",
       "normalizedBattleTag": "柔情",
       "score": 12410,
@@ -5846,7 +5816,7 @@
       ]
     },
     {
-      "position": 390,
+      "position": 388,
       "battleTag": "北桥一刀",
       "normalizedBattleTag": "北桥一刀",
       "score": 12407,
@@ -5861,7 +5831,7 @@
       ]
     },
     {
-      "position": 391,
+      "position": 389,
       "battleTag": "KidXaviera",
       "normalizedBattleTag": "kidxaviera",
       "score": 12401,
@@ -5876,7 +5846,7 @@
       ]
     },
     {
-      "position": 392,
+      "position": 390,
       "battleTag": "心剑玄月",
       "normalizedBattleTag": "心剑玄月",
       "score": 12400,
@@ -5891,7 +5861,7 @@
       ]
     },
     {
-      "position": 393,
+      "position": 391,
       "battleTag": "下雨了",
       "normalizedBattleTag": "下雨了",
       "score": 12389,
@@ -5906,7 +5876,7 @@
       ]
     },
     {
-      "position": 394,
+      "position": 392,
       "battleTag": "你好我很菜请上本",
       "normalizedBattleTag": "你好我很菜请上本",
       "score": 12388,
@@ -5921,22 +5891,22 @@
       ]
     },
     {
-      "position": 395,
+      "position": 393,
       "battleTag": "荀彧丨炉石丨低调",
       "normalizedBattleTag": "荀彧炉石低调",
       "score": 12388,
       "scoreHistory": [
         12442,
         12442,
-        12442,
         12428,
+        12388,
         12388,
         12388,
         12388
       ]
     },
     {
-      "position": 396,
+      "position": 394,
       "battleTag": "还我号来",
       "normalizedBattleTag": "还我号来",
       "score": 12385,
@@ -5951,18 +5921,48 @@
       ]
     },
     {
-      "position": 397,
+      "position": 395,
+      "battleTag": "VAN",
+      "normalizedBattleTag": "van",
+      "score": 12385,
+      "scoreHistory": [
+        12341,
+        12341,
+        12341,
+        12341,
+        12341,
+        12341,
+        12385
+      ]
+    },
+    {
+      "position": 396,
       "battleTag": "弈星丶帝之呼吸",
       "normalizedBattleTag": "弈星帝之呼吸",
       "score": 12380,
       "scoreHistory": [
         12276,
-        12276,
         12421,
         12469,
         12380,
         12380,
+        12380,
         12380
+      ]
+    },
+    {
+      "position": 397,
+      "battleTag": "喵的演出",
+      "normalizedBattleTag": "喵的演出",
+      "score": 12377,
+      "scoreHistory": [
+        13059,
+        13059,
+        12975,
+        12818,
+        12442,
+        12442,
+        12377
       ]
     },
     {
@@ -5986,7 +5986,7 @@
       "normalizedBattleTag": "niconico",
       "score": 12376,
       "scoreHistory": [
-        12364,
+        12376,
         12376,
         12376,
         12376,
@@ -6046,10 +6046,10 @@
       "normalizedBattleTag": "初淮洲",
       "score": 12368,
       "scoreHistory": [
-        12413,
         12318,
         12318,
         12318,
+        12368,
         12368,
         12368,
         12368
@@ -6076,11 +6076,11 @@
       "normalizedBattleTag": "荀彧他不是苟或",
       "score": 12344,
       "scoreHistory": [
-        12115,
         12270,
         12270,
         12270,
         12270,
+        12344,
         12344,
         12344
       ]
@@ -6091,9 +6091,9 @@
       "normalizedBattleTag": "孙悟饭",
       "score": 12341,
       "scoreHistory": [
-        12587,
         12432,
         12291,
+        12341,
         12341,
         12341,
         12341,
@@ -6102,21 +6102,6 @@
     },
     {
       "position": 407,
-      "battleTag": "VAN",
-      "normalizedBattleTag": "van",
-      "score": 12341,
-      "scoreHistory": [
-        12350,
-        12341,
-        12341,
-        12341,
-        12341,
-        12341,
-        12341
-      ]
-    },
-    {
-      "position": 408,
       "battleTag": "pizzaboy",
       "normalizedBattleTag": "pizzaboy",
       "score": 12330,
@@ -6131,12 +6116,12 @@
       ]
     },
     {
-      "position": 409,
+      "position": 408,
       "battleTag": "彩虹丨同尘",
       "normalizedBattleTag": "彩虹同尘",
       "score": 12328,
       "scoreHistory": [
-        12429,
+        12328,
         12328,
         12328,
         12328,
@@ -6146,7 +6131,7 @@
       ]
     },
     {
-      "position": 410,
+      "position": 409,
       "battleTag": "darger",
       "normalizedBattleTag": "darger",
       "score": 12328,
@@ -6158,6 +6143,21 @@
         12328,
         12328,
         12328
+      ]
+    },
+    {
+      "position": 410,
+      "battleTag": "风轻云淡",
+      "normalizedBattleTag": "风轻云淡",
+      "score": 12327,
+      "scoreHistory": [
+        12659,
+        12659,
+        12558,
+        12508,
+        12404,
+        12420,
+        12327
       ]
     },
     {
@@ -6181,8 +6181,8 @@
       "normalizedBattleTag": "贪婪的蝙蝠",
       "score": 12319,
       "scoreHistory": [
-        12488,
         12451,
+        12319,
         12319,
         12319,
         12319,
@@ -6259,8 +6259,8 @@
         12496,
         12496,
         12496,
-        12496,
         12298,
+        12301,
         12301,
         12301
       ]
@@ -6318,7 +6318,7 @@
       "scoreHistory": [
         12220,
         12220,
-        12220,
+        12297,
         12297,
         12297,
         12297,
@@ -6364,8 +6364,8 @@
         12149,
         12149,
         12149,
-        12149,
         12206,
+        12286,
         12286,
         12286
       ]
@@ -6396,6 +6396,7 @@
         12068,
         12153,
         12256,
+        12279,
         12279
       ]
     },
@@ -6405,9 +6406,9 @@
       "normalizedBattleTag": "jf0rsakenj",
       "score": 12275,
       "scoreHistory": [
-        12115,
         12167,
         12230,
+        12275,
         12275,
         12275,
         12275,
@@ -6450,10 +6451,10 @@
       "normalizedBattleTag": "弈星精灵",
       "score": 12269,
       "scoreHistory": [
-        12119,
         12201,
         12257,
         12310,
+        12269,
         12269,
         12269,
         12269
@@ -6570,9 +6571,9 @@
       "normalizedBattleTag": "十八罗汉杠上花",
       "score": 12243,
       "scoreHistory": [
-        12193,
         12167,
         12270,
+        12243,
         12243,
         12243,
         12243,
@@ -6602,7 +6603,7 @@
       "scoreHistory": [
         12174,
         12174,
-        12174,
+        12232,
         12232,
         12232,
         12232,
@@ -6616,8 +6617,8 @@
       "score": 12222,
       "scoreHistory": [
         12099,
-        12099,
         12116,
+        12222,
         12222,
         12222,
         12222,
@@ -6647,6 +6648,7 @@
       "scoreHistory": [
         12087,
         12166,
+        12218,
         12218
       ]
     },
@@ -6658,9 +6660,9 @@
       "scoreHistory": [
         12123,
         12123,
-        12123,
         12202,
         12135,
+        12212,
         12212,
         12212
       ]
@@ -6671,11 +6673,11 @@
       "normalizedBattleTag": "chsh",
       "score": 12212,
       "scoreHistory": [
-        12065,
         12141,
         12141,
         12141,
         12141,
+        12212,
         12212,
         12212
       ]
@@ -6718,9 +6720,9 @@
       "scoreHistory": [
         12165,
         12165,
-        12165,
         12217,
         12341,
+        12207,
         12207,
         12207
       ]
@@ -6731,11 +6733,11 @@
       "normalizedBattleTag": "彩虹炉石真好玩",
       "score": 12204,
       "scoreHistory": [
-        12320,
         12231,
         12262,
         12364,
         12292,
+        12204,
         12204,
         12204
       ]
@@ -6777,10 +6779,10 @@
       "score": 12191,
       "scoreHistory": [
         12105,
-        12105,
         12064,
         12065,
         12078,
+        12191,
         12191,
         12191
       ]
@@ -6793,7 +6795,7 @@
       "scoreHistory": [
         12129,
         12129,
-        12129,
+        12187,
         12187,
         12187,
         12187,
@@ -6802,6 +6804,15 @@
     },
     {
       "position": 454,
+      "battleTag": "到黄昏尽头",
+      "normalizedBattleTag": "到黄昏尽头",
+      "score": 12185,
+      "scoreHistory": [
+        12185
+      ]
+    },
+    {
+      "position": 455,
       "battleTag": "沈书帆",
       "normalizedBattleTag": "沈书帆",
       "score": 12184,
@@ -6811,11 +6822,12 @@
         12184,
         12184,
         12184,
+        12184,
         12184
       ]
     },
     {
-      "position": 455,
+      "position": 456,
       "battleTag": "弈星丶摆烂崽",
       "normalizedBattleTag": "弈星摆烂崽",
       "score": 12181,
@@ -6823,11 +6835,12 @@
         12098,
         12181,
         12181,
+        12181,
         12181
       ]
     },
     {
-      "position": 456,
+      "position": 457,
       "battleTag": "光明殿下",
       "normalizedBattleTag": "光明殿下",
       "score": 12178,
@@ -6835,11 +6848,12 @@
         12178,
         12178,
         12178,
+        12178,
         12178
       ]
     },
     {
-      "position": 457,
+      "position": 458,
       "battleTag": "荀彧丨躞蹀之翼",
       "normalizedBattleTag": "荀彧躞蹀之翼",
       "score": 12175,
@@ -6854,7 +6868,7 @@
       ]
     },
     {
-      "position": 458,
+      "position": 459,
       "battleTag": "西红柿别炒蛋",
       "normalizedBattleTag": "西红柿别炒蛋",
       "score": 12173,
@@ -6869,7 +6883,7 @@
       ]
     },
     {
-      "position": 459,
+      "position": 460,
       "battleTag": "荀彧丨胡桃翭",
       "normalizedBattleTag": "荀彧胡桃翭",
       "score": 12159,
@@ -6884,7 +6898,7 @@
       ]
     },
     {
-      "position": 460,
+      "position": 461,
       "battleTag": "Player",
       "normalizedBattleTag": "player",
       "score": 12158,
@@ -6899,14 +6913,14 @@
       ]
     },
     {
-      "position": 461,
+      "position": 462,
       "battleTag": "天上的一只鸟",
       "normalizedBattleTag": "天上的一只鸟",
       "score": 12155,
       "scoreHistory": [
         12045,
         12045,
-        12045,
+        12155,
         12155,
         12155,
         12155,
@@ -6914,7 +6928,31 @@
       ]
     },
     {
-      "position": 462,
+      "position": 463,
+      "battleTag": "黑黑的很可爱",
+      "normalizedBattleTag": "黑黑的很可爱",
+      "score": 12153,
+      "scoreHistory": [
+        12067,
+        12067,
+        12067,
+        12067,
+        12067,
+        12095,
+        12153
+      ]
+    },
+    {
+      "position": 464,
+      "battleTag": "鲍勃最爱的指挥官",
+      "normalizedBattleTag": "鲍勃最爱的指挥官",
+      "score": 12149,
+      "scoreHistory": [
+        12149
+      ]
+    },
+    {
+      "position": 465,
       "battleTag": "RMsonny",
       "normalizedBattleTag": "rmsonny",
       "score": 12149,
@@ -6929,7 +6967,7 @@
       ]
     },
     {
-      "position": 463,
+      "position": 466,
       "battleTag": "yougettoyz",
       "normalizedBattleTag": "yougettoyz",
       "score": 12144,
@@ -6944,7 +6982,7 @@
       ]
     },
     {
-      "position": 464,
+      "position": 467,
       "battleTag": "向家村村长",
       "normalizedBattleTag": "向家村村长",
       "score": 12142,
@@ -6959,7 +6997,7 @@
       ]
     },
     {
-      "position": 465,
+      "position": 468,
       "battleTag": "Yato",
       "normalizedBattleTag": "yato",
       "score": 12135,
@@ -6974,7 +7012,7 @@
       ]
     },
     {
-      "position": 466,
+      "position": 469,
       "battleTag": "抱走小鳄鱼丶",
       "normalizedBattleTag": "抱走小鳄鱼",
       "score": 12129,
@@ -6983,13 +7021,13 @@
         12059,
         12059,
         12059,
-        12059,
+        12129,
         12129,
         12129
       ]
     },
     {
-      "position": 467,
+      "position": 470,
       "battleTag": "凤鸣湖",
       "normalizedBattleTag": "凤鸣湖",
       "score": 12122,
@@ -6998,11 +7036,12 @@
         12122,
         12122,
         12122,
+        12122,
         12122
       ]
     },
     {
-      "position": 468,
+      "position": 471,
       "battleTag": "德纳修斯大帝",
       "normalizedBattleTag": "德纳修斯大帝",
       "score": 12121,
@@ -7017,12 +7056,12 @@
       ]
     },
     {
-      "position": 469,
+      "position": 472,
       "battleTag": "Beok",
       "normalizedBattleTag": "beok",
       "score": 12117,
       "scoreHistory": [
-        12166,
+        12117,
         12117,
         12117,
         12117,
@@ -7032,7 +7071,7 @@
       ]
     },
     {
-      "position": 470,
+      "position": 473,
       "battleTag": "大嘟丨下雨了",
       "normalizedBattleTag": "大嘟下雨了",
       "score": 12116,
@@ -7047,7 +7086,7 @@
       ]
     },
     {
-      "position": 471,
+      "position": 474,
       "battleTag": "彩虹丨七里秋",
       "normalizedBattleTag": "彩虹七里秋",
       "score": 12113,
@@ -7062,22 +7101,22 @@
       ]
     },
     {
-      "position": 472,
+      "position": 475,
       "battleTag": "蛮力之兽",
       "normalizedBattleTag": "蛮力之兽",
       "score": 12111,
       "scoreHistory": [
         12186,
-        12186,
         12183,
         12145,
         12210,
+        12111,
         12111,
         12111
       ]
     },
     {
-      "position": 473,
+      "position": 476,
       "battleTag": "北冥皇渊",
       "normalizedBattleTag": "北冥皇渊",
       "score": 12110,
@@ -7092,7 +7131,7 @@
       ]
     },
     {
-      "position": 474,
+      "position": 477,
       "battleTag": "衣锦夜行的学徒",
       "normalizedBattleTag": "衣锦夜行的学徒",
       "score": 12110,
@@ -7107,7 +7146,7 @@
       ]
     },
     {
-      "position": 475,
+      "position": 478,
       "battleTag": "AlphaGo",
       "normalizedBattleTag": "alphago",
       "score": 12107,
@@ -7122,7 +7161,7 @@
       ]
     },
     {
-      "position": 476,
+      "position": 479,
       "battleTag": "顽皮小哈",
       "normalizedBattleTag": "顽皮小哈",
       "score": 12105,
@@ -7137,7 +7176,7 @@
       ]
     },
     {
-      "position": 477,
+      "position": 480,
       "battleTag": "有局丨班长",
       "normalizedBattleTag": "有局班长",
       "score": 12103,
@@ -7152,17 +7191,18 @@
       ]
     },
     {
-      "position": 478,
+      "position": 481,
       "battleTag": "弈星丶修狗",
       "normalizedBattleTag": "弈星修狗",
       "score": 12102,
       "scoreHistory": [
         12102,
+        12102,
         12102
       ]
     },
     {
-      "position": 479,
+      "position": 482,
       "battleTag": "结城昨日奈",
       "normalizedBattleTag": "结城昨日奈",
       "score": 12100,
@@ -7177,17 +7217,18 @@
       ]
     },
     {
-      "position": 480,
+      "position": 483,
       "battleTag": "云边有个小卖部",
       "normalizedBattleTag": "云边有个小卖部",
       "score": 12100,
       "scoreHistory": [
         12100,
+        12100,
         12100
       ]
     },
     {
-      "position": 481,
+      "position": 484,
       "battleTag": "天雨儿",
       "normalizedBattleTag": "天雨儿",
       "score": 12097,
@@ -7202,22 +7243,7 @@
       ]
     },
     {
-      "position": 482,
-      "battleTag": "黑黑的很可爱",
-      "normalizedBattleTag": "黑黑的很可爱",
-      "score": 12095,
-      "scoreHistory": [
-        12067,
-        12067,
-        12067,
-        12067,
-        12067,
-        12067,
-        12095
-      ]
-    },
-    {
-      "position": 483,
+      "position": 485,
       "battleTag": "移星易宿",
       "normalizedBattleTag": "移星易宿",
       "score": 12092,
@@ -7225,16 +7251,17 @@
         12092,
         12092,
         12092,
+        12092,
         12092
       ]
     },
     {
-      "position": 484,
+      "position": 486,
       "battleTag": "系列098",
       "normalizedBattleTag": "系列098",
       "score": 12087,
       "scoreHistory": [
-        12196,
+        12087,
         12087,
         12087,
         12087,
@@ -7244,32 +7271,12 @@
       ]
     },
     {
-      "position": 485,
-      "battleTag": "夕阳红棋牌室",
-      "normalizedBattleTag": "夕阳红棋牌室",
-      "score": 12086,
-      "scoreHistory": [
-        12086,
-        12086,
-        12086,
-        12086
-      ]
-    },
-    {
-      "position": 486,
-      "battleTag": "荀彧丨大骂",
-      "normalizedBattleTag": "荀彧大骂",
-      "score": 12083,
-      "scoreHistory": [
-        12083
-      ]
-    },
-    {
       "position": 487,
       "battleTag": "大嘟丨碧琪",
       "normalizedBattleTag": "大嘟碧琪",
       "score": 12083,
       "scoreHistory": [
+        12083,
         12083,
         12083,
         12083,
@@ -7297,8 +7304,8 @@
       "normalizedBattleTag": "flow",
       "score": 12077,
       "scoreHistory": [
-        12095,
         12091,
+        12077,
         12077,
         12077,
         12077,
@@ -7357,6 +7364,7 @@
       "normalizedBattleTag": "北凉告辞鸡饲料",
       "score": 12064,
       "scoreHistory": [
+        12064,
         12064,
         12064,
         12064,
@@ -7419,6 +7427,7 @@
         12052,
         12052,
         12052,
+        12052,
         12052
       ]
     },
@@ -7428,6 +7437,7 @@
       "normalizedBattleTag": "三重刘德华",
       "score": 12051,
       "scoreHistory": [
+        12051,
         12051,
         12051,
         12051,
@@ -7442,6 +7452,7 @@
       "scoreHistory": [
         12044,
         12044,
+        12044,
         12044
       ]
     },
@@ -7451,6 +7462,7 @@
       "normalizedBattleTag": "hideonbush",
       "score": 12043,
       "scoreHistory": [
+        12043,
         12043
       ]
     }
