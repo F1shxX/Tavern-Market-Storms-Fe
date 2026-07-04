@@ -12,6 +12,32 @@ const { chromium } = require("playwright");
       logs.push(`console: ${message.text()}`);
     }
   });
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "tavern-market-storms-auth-v1",
+      JSON.stringify({
+        token: "test-token",
+        expiresAt: "2099-01-01T00:00:00.000Z",
+        player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人" }
+      })
+    );
+  });
+  await page.route("**/api/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        ok: true,
+        data: {
+          player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人", balance: 100000 },
+          balance: 100000,
+          holdings: [{ targetId: "stock-001", quantity: 100, averageCost: 7.1 }],
+          orders: []
+        }
+      })
+    })
+  );
 
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "行情", exact: true }).click();
@@ -119,6 +145,32 @@ const { chromium } = require("playwright");
   await page.locator(".detail-group-card").filter({ hasText: "炮炮婚庆" }).waitFor({ timeout: 3000 });
 
   const desktop = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+  await desktop.addInitScript(() => {
+    localStorage.setItem(
+      "tavern-market-storms-auth-v1",
+      JSON.stringify({
+        token: "test-token",
+        expiresAt: "2099-01-01T00:00:00.000Z",
+        player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人" }
+      })
+    );
+  });
+  await desktop.route("**/api/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        ok: true,
+        data: {
+          player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人", balance: 100000 },
+          balance: 100000,
+          holdings: [{ targetId: "stock-001", quantity: 100, averageCost: 7.1 }],
+          orders: []
+        }
+      })
+    })
+  );
   await desktop.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await desktop.getByRole("button", { name: "行情", exact: true }).click();
   await desktop.getByText("主播指数榜").waitFor({ timeout: 3000 });

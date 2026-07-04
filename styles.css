@@ -45,6 +45,12 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.25);
+  opacity: 0.62;
+}
+
 #app {
   width: min(100%, var(--app-width));
   height: 100dvh;
@@ -85,6 +91,89 @@ button {
 .screen.no-nav {
   height: 100dvh;
   padding-bottom: 28px;
+}
+
+.login-screen {
+  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 20px;
+}
+
+.login-panel {
+  width: 100%;
+  padding: 28px 22px;
+  border: 2px solid rgba(255, 210, 104, 0.76);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(88, 45, 26, 0.93), rgba(27, 14, 12, 0.94)),
+    rgba(34, 18, 12, 0.96);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 239, 173, 0.2),
+    0 16px 34px rgba(0, 0, 0, 0.42);
+}
+
+.login-brand {
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.login-brand h1 {
+  margin: 0;
+  color: var(--gold-1);
+  font-size: 34px;
+  text-shadow: var(--text-outline);
+}
+
+.login-brand h2 {
+  margin: 6px 0 0;
+  color: #f7d68d;
+  font-size: 14px;
+}
+
+.login-field {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--gold-2);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.login-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 2px solid rgba(255, 205, 91, 0.7);
+  border-radius: 10px;
+  outline: none;
+  background: rgba(15, 9, 9, 0.72);
+  color: var(--cream-bright);
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.login-input:focus {
+  border-color: var(--gold-1);
+  box-shadow: 0 0 0 3px rgba(255, 211, 106, 0.18);
+}
+
+.login-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.login-note {
+  margin: 14px 0 0;
+  color: #e6c48d;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .home-screen {

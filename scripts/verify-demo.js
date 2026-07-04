@@ -5,9 +5,91 @@ const { chromium } = require("playwright");
   const browser = await chromium.launch({ executablePath });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true });
   const logs = [];
+  let orderCalls = 0;
   page.on("pageerror", (error) => logs.push(`pageerror: ${error.message}`));
   page.on("console", (message) => {
     if (message.type() === "error") logs.push(`console: ${message.text()}`);
+  });
+  const portfolio = {
+    player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人", balance: 100000 },
+    balance: 100000,
+    holdings: [{ targetId: "stock-001", quantity: 100, averageCost: 7.1 }],
+    orders: []
+  };
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "tavern-market-storms-auth-v1",
+      JSON.stringify({
+        token: "test-token",
+        expiresAt: "2099-01-01T00:00:00.000Z",
+        player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人" }
+      })
+    );
+  });
+  await page.route("**/api/me", (route) => {
+    if (route.request().method() === "OPTIONS") {
+      route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "GET, POST, OPTIONS",
+          "access-control-allow-headers": "content-type, authorization"
+        }
+      });
+      return;
+    }
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({ ok: true, data: portfolio })
+    });
+  });
+  await page.route("**/api/orders", async (route) => {
+    if (route.request().method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "GET, POST, OPTIONS",
+          "access-control-allow-headers": "content-type, authorization"
+        }
+      });
+      return;
+    }
+    const order = route.request().postDataJSON();
+    orderCalls += 1;
+    const existing = portfolio.holdings.find((holding) => holding.targetId === order.targetId);
+    if (order.side === "BUY") {
+      portfolio.balance -= order.price * order.quantity * 1.001;
+      if (existing) {
+        existing.averageCost = ((existing.averageCost * existing.quantity) + (order.price * order.quantity)) / (existing.quantity + order.quantity);
+        existing.quantity += order.quantity;
+      } else {
+        portfolio.holdings.push({ targetId: order.targetId, quantity: order.quantity, averageCost: order.price });
+      }
+    } else if (existing) {
+      portfolio.balance += order.price * order.quantity * 0.999;
+      existing.quantity -= order.quantity;
+      if (existing.quantity <= 0) {
+        portfolio.holdings = portfolio.holdings.filter((holding) => holding !== existing);
+      }
+    }
+    portfolio.orders.unshift({
+      id: `order-${portfolio.orders.length + 1}`,
+      type: order.side,
+      targetId: order.targetId,
+      quantity: order.quantity,
+      price: order.price,
+      fee: order.price * order.quantity * 0.001,
+      createdAt: new Date().toISOString()
+    });
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({ ok: true, data: { result: {}, portfolio } })
+    });
   });
 
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
@@ -41,7 +123,10 @@ const { chromium } = require("playwright");
   }
   await page.locator("#buyQty").fill("20");
   await page.getByRole("button", { name: "买入" }).last().click();
-  await page.getByText("买入成功").waitFor({ timeout: 3000 });
+  await page.waitForFunction(() => {
+    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
+    return saved?.holdings?.["stock-001"]?.quantity >= 120;
+  });
   await page.getByRole("button", { name: "卖出" }).click();
   const initialSellEstimate = await page.locator("#sellEstimate").textContent();
   await page.locator("#sellQty").fill("20");
@@ -62,7 +147,10 @@ const { chromium } = require("playwright");
   }
   await page.locator("#sellQty").fill("10");
   await page.getByRole("button", { name: "卖出" }).last().click();
-  await page.getByText("卖出成功").waitFor({ timeout: 3000 });
+  await page.waitForFunction(() => {
+    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
+    return saved?.holdings?.["stock-001"]?.quantity <= 110;
+  });
   await page.getByRole("button", { name: "← 返回" }).click();
   await page.getByRole("button", { name: "← 返回" }).click();
   await page.getByRole("button", { name: "持仓", exact: true }).click();
@@ -99,6 +187,9 @@ const { chromium } = require("playwright");
     throw new Error("Ranking page should not expose raw coin totals.");
   }
   await page.screenshot({ path: "demo-mobile-check.png", fullPage: true });
+  if (orderCalls < 2) {
+    throw new Error(`Expected buy and sell API calls, got ${orderCalls}.`);
+  }
 
   await browser.close();
   if (logs.length) {

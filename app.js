@@ -7,6 +7,7 @@ const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.h
   : "";
 const API_BASE_URL = window.TMS_API_BASE_URL || LOCAL_API_BASE_URL;
 const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
+const AUTH_STORAGE_KEY = "tavern-market-storms-auth-v1";
 const SITE_DOMAIN = "luzhidao123.cn";
 const ICP_BEIAN = "浙ICP备2026047968号-1";
 const portraitAvatars = {
@@ -1140,6 +1141,10 @@ const defaultState = {
 };
 
 let state = loadState();
+state.auth = loadAuth();
+state.authStep = "phone";
+state.authBusy = false;
+state.loginPhone = "";
 
 function loadState() {
   try {
@@ -1152,6 +1157,91 @@ function loadState() {
     });
   } catch {
     return structuredClone(defaultState);
+  }
+}
+
+function loadAuth() {
+  try {
+    const auth = JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY));
+    if (!auth?.token) return null;
+    return auth;
+  } catch {
+    return null;
+  }
+}
+
+function saveAuth(auth) {
+  if (!auth?.token) {
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    state.auth = null;
+    return;
+  }
+  state.auth = auth;
+  localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(auth));
+}
+
+function authHeaders() {
+  return state.auth?.token ? { authorization: `Bearer ${state.auth.token}` } : {};
+}
+
+async function apiRequest(path, options = {}) {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    ...options,
+    headers: {
+      "content-type": "application/json",
+      ...authHeaders(),
+      ...(options.headers || {})
+    }
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || payload.ok === false) {
+    throw new Error(payload.message || payload.error || `Request failed: ${response.status}`);
+  }
+  return payload.data ?? payload;
+}
+
+function orderTime(order) {
+  const date = order.createdAt ? new Date(order.createdAt) : new Date();
+  return date.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
+}
+
+function applyPortfolio(portfolio) {
+  if (!portfolio) return;
+  state.balance = Number(portfolio.balance ?? portfolio.player?.balance ?? state.balance);
+  state.holdings = {};
+  for (const holding of portfolio.holdings || []) {
+    if (holding.quantity > 0) {
+      state.holdings[holding.targetId] = {
+        quantity: holding.quantity,
+        averageCost: holding.averageCost
+      };
+    }
+  }
+  state.orders = (portfolio.orders || []).map((order) => ({
+    type: order.type,
+    targetId: order.targetId,
+    quantity: order.quantity,
+    price: order.price,
+    fee: order.fee,
+    time: orderTime(order)
+  }));
+  if (portfolio.player && state.auth) {
+    saveAuth({ ...state.auth, player: portfolio.player });
+  }
+  saveState();
+}
+
+async function loadRemotePortfolio({ silent = false } = {}) {
+  if (!state.auth?.token) return;
+  try {
+    const portfolio = await apiRequest("/api/me");
+    applyPortfolio(portfolio);
+    render();
+  } catch (error) {
+    console.warn("Failed to load player portfolio.", error);
+    saveAuth(null);
+    if (!silent) showToast("登录已失效，请重新验证手机号。");
+    render();
   }
 }
 
@@ -1387,73 +1477,73 @@ function showToast(message) {
   }, 1800);
 }
 
-function buy(targetId, quantity) {
+async function buy(targetId, quantity) {
+  if (!state.auth?.token) {
+    showToast("?????????");
+    return;
+  }
   const target = getTarget(targetId);
   const maxQty = buyMaxQuantity(target);
   const qty = clampQuantity(quantity, maxQty);
   if (qty <= 0) {
-    showToast("超过单股 25% 投入上限或金币不足。");
+    showToast("???? 25% ??????????");
     return;
   }
   const gross = target.price * qty;
   const fee = gross * FEE_RATE;
   const cost = gross + fee;
   if (cost > state.balance) {
-    showToast("金币不足，无法买入这笔委托。");
+    showToast("??????????????");
     return;
   }
 
-  const holding = getHolding(targetId);
-  const totalCost = holding.averageCost * holding.quantity + gross;
-  const nextQty = holding.quantity + qty;
-  state.holdings[targetId] = {
-    quantity: nextQty,
-    averageCost: totalCost / nextQty
-  };
-  state.balance -= cost;
-  state.orders.unshift({
-    type: "BUY",
-    targetId,
-    quantity: qty,
-    price: target.price,
-    fee,
-    time: new Date().toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })
-  });
-  saveState();
-  showToast(`买入成功：${target.name} ${qty} 股`);
+  try {
+    const data = await apiRequest("/api/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        side: "BUY",
+        targetId,
+        quantity: qty,
+        price: target.price
+      })
+    });
+    applyPortfolio(data.portfolio);
+    showToast(`?????${target.name} ${qty} ?`);
+    render();
+  } catch (error) {
+    showToast(error.message || "?????");
+  }
 }
 
-function sell(targetId, quantity) {
+async function sell(targetId, quantity) {
+  if (!state.auth?.token) {
+    showToast("?????????");
+    return;
+  }
   const target = getTarget(targetId);
   const holding = getHolding(targetId);
   const qty = clampQuantity(quantity, holding.quantity);
   if (qty <= 0) {
-    showToast("持仓不足，无法卖出这笔委托。");
+    showToast("??????????????");
     return;
   }
 
-  const gross = target.price * qty;
-  const fee = gross * FEE_RATE;
-  state.balance += gross - fee;
-  const nextQty = holding.quantity - qty;
-  if (nextQty <= 0) {
-    delete state.holdings[targetId];
-  } else {
-    state.holdings[targetId] = {
-      quantity: nextQty,
-      averageCost: holding.averageCost
-    };
+  try {
+    const data = await apiRequest("/api/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        side: "SELL",
+        targetId,
+        quantity: qty,
+        price: target.price
+      })
+    });
+    applyPortfolio(data.portfolio);
+    showToast(`?????${target.name} ${qty} ?`);
+    render();
+  } catch (error) {
+    showToast(error.message || "?????");
   }
-  state.orders.unshift({
-    type: "SELL",
-    targetId,
-    quantity: qty,
-    price: target.price,
-    fee,
-    time: new Date().toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })
-  });
-  saveState();
-  showToast(`卖出成功：${target.name} ${qty} 股`);
 }
 
 function simulateMarket() {
@@ -1620,9 +1710,83 @@ function maybeAutoSyncMarket() {
   });
 }
 
+async function requestOtp() {
+  const phoneInput = document.getElementById("loginPhone");
+  const phone = phoneInput?.value?.trim() || state.loginPhone;
+  if (!phone) {
+    showToast("请输入手机号。");
+    return;
+  }
+  state.authBusy = true;
+  state.loginPhone = phone;
+  render();
+  try {
+    const data = await apiRequest("/api/auth/request-otp", {
+      method: "POST",
+      body: JSON.stringify({ phone })
+    });
+    state.authStep = "code";
+    state.authBusy = false;
+    state.loginPhone = phone;
+    render();
+    showToast(data.debugCode ? `验证码：${data.debugCode}` : "验证码已发送。");
+  } catch (error) {
+    state.authBusy = false;
+    render();
+    showToast(error.message || "验证码发送失败。");
+  }
+}
+
+async function verifyOtp() {
+  const phone = document.getElementById("loginPhone")?.value?.trim() || state.loginPhone;
+  const code = document.getElementById("loginCode")?.value?.trim();
+  if (!phone || !code) {
+    showToast("请输入手机号和验证码。");
+    return;
+  }
+  state.authBusy = true;
+  render();
+  try {
+    const data = await apiRequest("/api/auth/verify-otp", {
+      method: "POST",
+      body: JSON.stringify({ phone, code })
+    });
+    saveAuth({
+      token: data.token,
+      expiresAt: data.expiresAt,
+      player: data.player
+    });
+    state.authBusy = false;
+    state.authStep = "phone";
+    state.loginPhone = "";
+    await loadRemotePortfolio({ silent: true });
+    setView("home", "home");
+    showToast("登录成功。");
+  } catch (error) {
+    state.authBusy = false;
+    render();
+    showToast(error.message || "登录失败。");
+  }
+}
+
+async function logout() {
+  try {
+    await apiRequest("/api/auth/logout", { method: "POST", body: "{}" });
+  } catch (error) {
+    console.warn("Logout request failed.", error);
+  }
+  saveAuth(null);
+  state.authStep = "phone";
+  render();
+}
+
 function resetDemo() {
   state = structuredClone(defaultState);
   state.targets = structuredClone(seedTargets);
+  state.auth = loadAuth();
+  state.authStep = "phone";
+  state.authBusy = false;
+  state.loginPhone = "";
   saveState();
   showToast("Demo 已重置。");
 }
@@ -1659,17 +1823,57 @@ function updateTradeEstimate(input, shouldClamp = false) {
 }
 
 function renderTopbar(title, subtitle = "Streamer Stock Trade") {
+  const player = state.auth?.player;
   return `
     <div class="topbar">
       <div class="brand">
         <h1 class="hero-title">${title}</h1>
-        <h2>${subtitle}</h2>
+        <h2>${player ? `${subtitle} ? ${player.displayName || player.phone}` : subtitle}</h2>
       </div>
       <div class="balance-pill">
-        <span>可用金币</span>
+        <span>????</span>
         <strong>${money(state.balance)}</strong>
       </div>
     </div>
+  `;
+}
+
+function renderLogin() {
+  const busy = state.authBusy ? "disabled" : "";
+  return `
+    <section class="screen login-screen">
+      <div class="login-panel">
+        <div class="login-brand">
+          <h1 class="hero-title">????</h1>
+          <h2>????????????</h2>
+        </div>
+        <label class="login-field">
+          <span>???</span>
+          <input id="loginPhone" class="login-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="??????" value="${state.loginPhone || ""}" />
+        </label>
+        ${
+          state.authStep === "code"
+            ? `
+              <label class="login-field">
+                <span>???</span>
+                <input id="loginCode" class="login-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6 ????" />
+              </label>
+            `
+            : ""
+        }
+        <div class="login-actions">
+          ${
+            state.authStep === "code"
+              ? `<button class="btn btn-green btn-wide" data-action="verify-otp" ${busy}>??</button>
+                 <button class="btn btn-blue btn-wide" data-action="request-otp" ${busy}>????</button>`
+              : `<button class="btn btn-green btn-wide" data-action="request-otp" ${busy}>?????</button>`
+          }
+        </div>
+        <p class="login-note">????????????????????????????</p>
+      </div>
+      ${renderSiteFiling()}
+      ${renderToast()}
+    </section>
   `;
 }
 
@@ -2252,7 +2456,8 @@ function renderAnnouncements() {
         }</p>
       </article>
       ${renderInteractionDialog()}
-      <button class="btn btn-red btn-wide" data-action="reset">重置 Demo 数据</button>
+      <button class="btn btn-blue btn-wide" data-action="reload-profile">??????</button>
+      <button class="btn btn-red btn-wide" data-action="logout">????</button>
       ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}
@@ -2266,6 +2471,10 @@ function renderToast() {
 
 function render() {
   const app = document.getElementById("app");
+  if (!state.auth?.token) {
+    app.innerHTML = renderLogin();
+    return;
+  }
   const views = {
     home: renderHome,
     markets: renderMarkets,
@@ -2286,6 +2495,18 @@ document.addEventListener("click", (event) => {
 
   if (action === "tab") {
     setView(element.dataset.tab, element.dataset.tab);
+  }
+  if (action === "request-otp") {
+    requestOtp();
+  }
+  if (action === "verify-otp") {
+    verifyOtp();
+  }
+  if (action === "logout") {
+    logout();
+  }
+  if (action === "reload-profile") {
+    loadRemotePortfolio();
   }
   if (action === "detail") {
     setView("detail", state.activeTab, id || state.selectedId);
@@ -2334,4 +2555,7 @@ if (!state.targets) {
 }
 
 render();
+if (state.auth?.token) {
+  loadRemotePortfolio({ silent: true });
+}
 maybeAutoSyncMarket();
