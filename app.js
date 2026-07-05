@@ -1240,7 +1240,7 @@ async function loadRemotePortfolio({ silent = false } = {}) {
   } catch (error) {
     console.warn("Failed to load player portfolio.", error);
     saveAuth(null);
-    if (!silent) showToast("Session expired. Please sign in again.");
+    if (!silent) showToast("\u767b\u5f55\u5df2\u5931\u6548\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002");
     render();
   }
 }
@@ -1728,7 +1728,7 @@ async function submitCredentials(mode = state.authMode) {
   const displayName = document.getElementById("loginDisplayName")?.value?.trim() || "";
 
   if (!username || !password) {
-    showToast("Enter username and password.");
+    showToast("\u8bf7\u8f93\u5165\u7528\u6237\u540d\u548c\u5bc6\u7801\u3002");
     return;
   }
 
@@ -1757,11 +1757,11 @@ async function submitCredentials(mode = state.authMode) {
     state.loginDisplayName = "";
     await loadRemotePortfolio({ silent: true });
     setView("home", "home");
-    showToast(mode === "register" ? "Account created." : "Signed in.");
+    showToast(mode === "register" ? "\u8d26\u53f7\u5df2\u521b\u5efa\u3002" : "\u767b\u5f55\u6210\u529f\u3002");
   } catch (error) {
     state.authBusy = false;
     render();
-    showToast(error.message || "Sign in failed.");
+    showToast(error.message || "\u767b\u5f55\u5931\u8d25\u3002");
   }
 }
 
@@ -1848,36 +1848,36 @@ function renderLogin() {
     <section class="screen login-screen">
       <div class="login-panel">
         <div class="login-brand">
-          <h1 class="hero-title">Tavern Market</h1>
-          <h2>${isRegister ? "Create an account to play" : "Sign in to play"}</h2>
+          <h1 class="hero-title">\u7089\u5e02\u98ce\u4e91</h1>
+          <h2>${isRegister ? "\u6ce8\u518c\u8d26\u53f7\u5f00\u59cb\u6e38\u620f" : "\u767b\u5f55\u540e\u5f00\u59cb\u6e38\u620f"}</h2>
         </div>
         <form class="login-form" data-auth-form="${isRegister ? "register" : "login"}">
           <label class="login-field">
-            <span>Username</span>
-            <input id="loginUsername" class="login-input" type="text" autocomplete="username" maxlength="20" placeholder="3-20 letters, numbers, _" value="${state.loginUsername || ""}" />
+            <span>\u7528\u6237\u540d</span>
+            <input id="loginUsername" class="login-input" type="text" autocomplete="username" maxlength="20" placeholder="3-20\u4f4d\u5b57\u6bcd/\u6570\u5b57/\u4e0b\u5212\u7ebf" value="${state.loginUsername || ""}" />
           </label>
           ${
             isRegister
               ? `
                 <label class="login-field">
-                  <span>Display name</span>
-                  <input id="loginDisplayName" class="login-input" type="text" autocomplete="nickname" maxlength="24" placeholder="Shown in rankings" value="${state.loginDisplayName || ""}" />
+                  <span>\u6635\u79f0</span>
+                  <input id="loginDisplayName" class="login-input" type="text" autocomplete="nickname" maxlength="24" placeholder="\u6392\u884c\u699c\u663e\u793a\u540d\u79f0" value="${state.loginDisplayName || ""}" />
                 </label>
               `
               : ""
           }
           <label class="login-field">
-            <span>Password</span>
-            <input id="loginPassword" class="login-input" type="password" autocomplete="${isRegister ? "new-password" : "current-password"}" minlength="8" maxlength="72" placeholder="At least 8 characters" />
+            <span>\u5bc6\u7801</span>
+            <input id="loginPassword" class="login-input" type="password" autocomplete="${isRegister ? "new-password" : "current-password"}" minlength="8" maxlength="72" placeholder="\u81f3\u5c118\u4f4d\u5b57\u7b26" />
           </label>
           <div class="login-actions">
-            <button class="btn btn-green btn-wide" type="submit" ${busy}>${isRegister ? "Create Account" : "Sign In"}</button>
+            <button class="btn btn-green btn-wide" type="submit" ${busy}>${isRegister ? "\u6ce8\u518c\u8d26\u53f7" : "\u767b\u5f55"}</button>
             <button class="btn btn-blue btn-wide" type="button" data-action="auth-mode" data-mode="${isRegister ? "login" : "register"}" ${busy}>
-              ${isRegister ? "Use Existing Account" : "Create New Account"}
+              ${isRegister ? "\u4f7f\u7528\u5df2\u6709\u8d26\u53f7" : "\u521b\u5efa\u65b0\u8d26\u53f7"}
             </button>
           </div>
         </form>
-        <p class="login-note">Your account, coins, holdings, and orders are saved to the database.</p>
+        <p class="login-note">\u8d26\u53f7\u3001\u91d1\u5e01\u3001\u6301\u4ed3\u548c\u8ba2\u5355\u4f1a\u4fdd\u5b58\u5230\u6570\u636e\u5e93\u3002</p>
       </div>
       ${renderSiteFiling()}
       ${renderToast()}
