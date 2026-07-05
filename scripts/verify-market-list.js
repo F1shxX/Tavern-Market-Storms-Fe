@@ -78,7 +78,7 @@ const { chromium } = require("playwright");
   if (rowCount !== 44) {
     throw new Error(`Expected 44 table rows, found ${rowCount}.`);
   }
-  await page.getByText("44 支暂定股票").waitFor({ timeout: 3000 });
+  await page.getByText("44 支股票").waitFor({ timeout: 3000 });
   await page.locator(".group-card").filter({ hasText: "达安集团" }).waitFor({ timeout: 3000 });
   await page.locator(".group-card").filter({ hasText: "高磁集团" }).waitFor({ timeout: 3000 });
   await page.locator(".group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
@@ -139,7 +139,6 @@ const { chromium } = require("playwright");
   if (detailNavImages !== 5) {
     throw new Error(`Detail page should keep the 5 bottom navigation buttons visible, found ${detailNavImages}.`);
   }
-  await page.locator(".detail-code").filter({ hasText: "标绿股票的均值" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "小浪宠物" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "炮炮婚庆" }).waitFor({ timeout: 3000 });

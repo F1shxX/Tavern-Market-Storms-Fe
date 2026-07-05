@@ -176,9 +176,9 @@ const { chromium } = require("playwright");
   await page.getByRole("button", { name: "持仓", exact: true }).click();
   await page.getByText("总资产").waitFor({ timeout: 3000 });
   await page.locator(".nav button").nth(3).click();
-  await page.getByText("Player Leaderboard").waitFor({ timeout: 3000 });
-  await page.getByText("Top Players").waitFor({ timeout: 3000 });
-  await page.getByText("Nearby Rank").waitFor({ timeout: 3000 });
+  await page.getByText("玩家资产榜").waitFor({ timeout: 3000 });
+  await page.getByText("前三名").waitFor({ timeout: 3000 });
+  await page.getByText("附近排名").waitFor({ timeout: 3000 });
 
   const topCount = await page.locator(".rank-top-list .rank-row").count();
   if (topCount !== 3) {
@@ -196,7 +196,7 @@ const { chromium } = require("playwright");
     throw new Error(`Current account should be centered in nearby rankings, found at index ${selfIndex}.`);
   }
   const rankingText = await page.locator(".screen").textContent();
-  if (!/ID 100001/.test(rankingText) || !/Current account/.test(rankingText)) {
+  if (!/编号 100001/.test(rankingText) || !/当前账号/.test(rankingText)) {
     throw new Error("Ranking page should show the current account public id.");
   }
   if (!/150,?000/.test(rankingText) || !/100,?000/.test(rankingText)) {

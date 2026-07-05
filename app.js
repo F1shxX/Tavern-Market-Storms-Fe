@@ -58,7 +58,7 @@ const seedTargets = [
     "volume": 2630,
     "heat": 55,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       7.19,
       7.28,
@@ -81,7 +81,7 @@ const seedTargets = [
     "volume": 3060,
     "heat": 62,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       8.92,
       9.0,
@@ -104,7 +104,7 @@ const seedTargets = [
     "volume": 3490,
     "heat": 69,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       8.8,
       8.79,
@@ -118,8 +118,8 @@ const seedTargets = [
   {
     "id": "stock-004",
     "code": "TM-004",
-    "name": "L灯业",
-    "alias": "lighting",
+    "name": "亮灯业",
+    "alias": "亮灯",
     "gameName": "Lighting",
     "price": 10.92,
     "prevClose": 10.79,
@@ -127,7 +127,7 @@ const seedTargets = [
     "volume": 3920,
     "heat": 76,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       10.63,
       10.68,
@@ -141,7 +141,7 @@ const seedTargets = [
   {
     "id": "stock-005",
     "code": "TM-005",
-    "name": "幻领IT",
+    "name": "幻领科技",
     "alias": "幻林",
     "gameName": "幻之泪伤",
     "price": 12.1,
@@ -150,7 +150,7 @@ const seedTargets = [
     "volume": 3050,
     "heat": 83,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       11.1,
       11.26,
@@ -173,7 +173,7 @@ const seedTargets = [
     "volume": 3480,
     "heat": 90,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       13.35,
       13.5,
@@ -196,7 +196,7 @@ const seedTargets = [
     "volume": 3910,
     "heat": 50,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       12.89,
       12.93,
@@ -219,7 +219,7 @@ const seedTargets = [
     "volume": 4340,
     "heat": 57,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       15.61,
       15.7,
@@ -242,7 +242,7 @@ const seedTargets = [
     "volume": 4770,
     "heat": 64,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       6.74,
       6.77,
@@ -265,7 +265,7 @@ const seedTargets = [
     "volume": 3900,
     "heat": 71,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       7.4,
       7.51,
@@ -288,7 +288,7 @@ const seedTargets = [
     "volume": 4330,
     "heat": 78,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       8.59,
       8.63,
@@ -302,8 +302,8 @@ const seedTargets = [
   {
     "id": "stock-012",
     "code": "TM-012",
-    "name": "AgO科技",
-    "alias": "阿尔法go",
+    "name": "阿狗科技",
+    "alias": "阿尔法狗",
     "gameName": "Zorgo",
     "price": 10.29,
     "prevClose": 10.85,
@@ -311,7 +311,7 @@ const seedTargets = [
     "volume": 4760,
     "heat": 85,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       10.43,
       10.53,
@@ -334,7 +334,7 @@ const seedTargets = [
     "volume": 5190,
     "heat": 92,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       10.47,
       10.54,
@@ -357,7 +357,7 @@ const seedTargets = [
     "volume": 5620,
     "heat": 52,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       12.97,
       13.02,
@@ -380,7 +380,7 @@ const seedTargets = [
     "volume": 4750,
     "heat": 59,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       13.35,
       13.46,
@@ -403,7 +403,7 @@ const seedTargets = [
     "volume": 5180,
     "heat": 66,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       14.43,
       14.6,
@@ -418,7 +418,7 @@ const seedTargets = [
     "id": "stock-017",
     "code": "TM-017",
     "name": "杰弗英语",
-    "alias": "jeff",
+    "alias": "杰夫",
     "gameName": "jeff",
     "price": 16.19,
     "prevClose": 16.05,
@@ -426,7 +426,7 @@ const seedTargets = [
     "volume": 5610,
     "heat": 73,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       15.46,
       15.6,
@@ -449,7 +449,7 @@ const seedTargets = [
     "volume": 6040,
     "heat": 80,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       7.52,
       7.58,
@@ -472,7 +472,7 @@ const seedTargets = [
     "volume": 6470,
     "heat": 87,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       8.21,
       8.17,
@@ -495,7 +495,7 @@ const seedTargets = [
     "volume": 5600,
     "heat": 94,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       8.73,
       8.86,
@@ -518,7 +518,7 @@ const seedTargets = [
     "volume": 6030,
     "heat": 54,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       9.65,
       9.77,
@@ -541,7 +541,7 @@ const seedTargets = [
     "volume": 6460,
     "heat": 61,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       11.89,
       11.99,
@@ -564,7 +564,7 @@ const seedTargets = [
     "volume": 6890,
     "heat": 68,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       13.07,
       13.08,
@@ -587,7 +587,7 @@ const seedTargets = [
     "volume": 7320,
     "heat": 75,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       14.96,
       15.02,
@@ -610,7 +610,7 @@ const seedTargets = [
     "volume": 6450,
     "heat": 82,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       14.45,
       14.65,
@@ -633,7 +633,7 @@ const seedTargets = [
     "volume": 6880,
     "heat": 89,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       15.57,
       15.75,
@@ -656,7 +656,7 @@ const seedTargets = [
     "volume": 7310,
     "heat": 49,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       7.01,
       7.0,
@@ -679,7 +679,7 @@ const seedTargets = [
     "volume": 7740,
     "heat": 56,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       9.12,
       9.18,
@@ -702,7 +702,7 @@ const seedTargets = [
     "volume": 8170,
     "heat": 63,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       10.33,
       10.37,
@@ -725,7 +725,7 @@ const seedTargets = [
     "volume": 7300,
     "heat": 70,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       11.3,
       11.46,
@@ -748,7 +748,7 @@ const seedTargets = [
     "volume": 7730,
     "heat": 77,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       11.89,
       11.95,
@@ -771,7 +771,7 @@ const seedTargets = [
     "volume": 8160,
     "heat": 84,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       13.07,
       13.19,
@@ -794,7 +794,7 @@ const seedTargets = [
     "volume": 8590,
     "heat": 91,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       14.22,
       14.31,
@@ -817,7 +817,7 @@ const seedTargets = [
     "volume": 9020,
     "heat": 51,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       14.8,
       14.85,
@@ -840,7 +840,7 @@ const seedTargets = [
     "volume": 8150,
     "heat": 58,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       16.89,
       17.05,
@@ -863,7 +863,7 @@ const seedTargets = [
     "volume": 8580,
     "heat": 65,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       8.41,
       8.51,
@@ -886,7 +886,7 @@ const seedTargets = [
     "volume": 9010,
     "heat": 72,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       9.34,
       9.43,
@@ -909,7 +909,7 @@ const seedTargets = [
     "volume": 9440,
     "heat": 79,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       10.41,
       10.48,
@@ -932,7 +932,7 @@ const seedTargets = [
     "volume": 9870,
     "heat": 86,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       12.47,
       12.44,
@@ -946,7 +946,7 @@ const seedTargets = [
   {
     "id": "stock-040",
     "code": "TM-040",
-    "name": "EM苹果乐园",
+    "name": "恶魔苹果乐园",
     "alias": "恶魔苹果",
     "gameName": "抖音丶恶魔苹果",
     "price": 13.12,
@@ -955,7 +955,7 @@ const seedTargets = [
     "volume": 9000,
     "heat": 93,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       12.01,
       12.19,
@@ -978,7 +978,7 @@ const seedTargets = [
     "volume": 9430,
     "heat": 53,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       12.74,
       12.88,
@@ -992,8 +992,8 @@ const seedTargets = [
   {
     "id": "stock-042",
     "code": "TM-042",
-    "name": "KK拳击馆",
-    "alias": "Kimmy",
+    "name": "凯凯拳击馆",
+    "alias": "凯米",
     "gameName": "自在极意豪",
     "price": 15.48,
     "prevClose": 16.06,
@@ -1001,7 +1001,7 @@ const seedTargets = [
     "volume": 9860,
     "heat": 60,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       15.49,
       15.62,
@@ -1024,7 +1024,7 @@ const seedTargets = [
     "volume": 10290,
     "heat": 67,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       16.69,
       16.72,
@@ -1047,7 +1047,7 @@ const seedTargets = [
     "volume": 10720,
     "heat": 74,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "Official leaderboard synced index.",
+    "quote": "已同步官网积分。",
     "trend": [
       19.01,
       19.08,
@@ -1195,9 +1195,23 @@ async function apiRequest(path, options = {}) {
   });
   const payload = await response.json().catch(() => ({}));
   if (!response.ok || payload.ok === false) {
-    throw new Error(payload.message || payload.error || `Request failed: ${response.status}`);
+    const error = new Error(payload.message || payload.error || `请求失败：${response.status}`);
+    error.code = payload.error;
+    throw error;
   }
   return payload.data ?? payload;
+}
+
+function userFacingError(error, fallback = "操作失败，请稍后再试。") {
+  const raw = String(error?.code || error?.message || "");
+  if (/USERNAME_TAKEN/i.test(raw) || /Username is already taken/i.test(raw)) return "用户名已被占用。";
+  if (/LOGIN_INVALID/i.test(raw) || /Username or password is incorrect/i.test(raw)) return "用户名或密码不正确。";
+  if (/USERNAME_INVALID/i.test(raw) || /Username must be/i.test(raw)) return "用户名需为 3-20 位中文、字母、数字或下划线。";
+  if (/PASSWORD_INVALID/i.test(raw) || /Password must be/i.test(raw)) return "密码需为 8-72 位字符。";
+  if (/DISPLAY_NAME_INVALID/i.test(raw) || /Display name must be/i.test(raw)) return "昵称不能超过 24 个字符。";
+  if (/INSUFFICIENT|BALANCE|HOLDING/i.test(raw)) return "余额或持仓不足。";
+  if (/leaderboard|upstream|snapshot/i.test(raw)) return "官网积分暂时无法同步。";
+  return fallback;
 }
 
 function orderTime(order) {
@@ -1256,7 +1270,7 @@ async function loadRankings({ silent = false } = {}) {
   } catch (error) {
     console.warn("Failed to load rankings.", error);
     state.rankingsBusy = false;
-    if (!silent) showToast(error.message || "Rankings unavailable.");
+    if (!silent) showToast(userFacingError(error, "排行榜暂时无法加载。"));
     render();
   }
 }
@@ -1495,21 +1509,21 @@ function showToast(message) {
 
 async function buy(targetId, quantity) {
   if (!state.auth?.token) {
-    showToast("Please sign in first.");
+    showToast("请先登录。");
     return;
   }
   const target = getTarget(targetId);
   const maxQty = buyMaxQuantity(target);
   const qty = clampQuantity(quantity, maxQty);
   if (qty <= 0) {
-    showToast("Order exceeds the 25% limit or balance is insufficient.");
+    showToast("买入数量超过 25% 限制，或可用金币不足。");
     return;
   }
   const gross = target.price * qty;
   const fee = gross * FEE_RATE;
   const cost = gross + fee;
   if (cost > state.balance) {
-    showToast("Insufficient balance.");
+    showToast("可用金币不足。");
     return;
   }
 
@@ -1524,23 +1538,23 @@ async function buy(targetId, quantity) {
       })
     });
     applyPortfolio(data.portfolio);
-    showToast(`Buy filled: ${target.name} ${qty}`);
+    showToast(`买入成功：${target.name} ${qty} 股`);
     render();
   } catch (error) {
-    showToast(error.message || "Buy failed.");
+    showToast(userFacingError(error, "买入失败。"));
   }
 }
 
 async function sell(targetId, quantity) {
   if (!state.auth?.token) {
-    showToast("Please sign in first.");
+    showToast("请先登录。");
     return;
   }
   const target = getTarget(targetId);
   const holding = getHolding(targetId);
   const qty = clampQuantity(quantity, holding.quantity);
   if (qty <= 0) {
-    showToast("Insufficient holding.");
+    showToast("当前持仓不足。");
     return;
   }
 
@@ -1555,10 +1569,10 @@ async function sell(targetId, quantity) {
       })
     });
     applyPortfolio(data.portfolio);
-    showToast(`Sell filled: ${target.name} ${qty}`);
+    showToast(`卖出成功：${target.name} ${qty} 股`);
     render();
   } catch (error) {
-    showToast(error.message || "Sell failed.");
+    showToast(userFacingError(error, "卖出失败。"));
   }
 }
 
@@ -1665,7 +1679,7 @@ async function refreshMarketData() {
   try {
     state.marketSync = {
       status: "syncing",
-      message: "Syncing official leaderboard...",
+      message: "正在同步官网积分...",
       syncedAt: new Date().toISOString()
     };
     saveState();
@@ -1675,7 +1689,7 @@ async function refreshMarketData() {
     console.warn("Leaderboard sync failed.", error);
     state.marketSync = {
       status: "error",
-      message: "Official leaderboard sync failed. Keeping the last real snapshot.",
+      message: "官网积分同步失败，已保留上一次真实快照。",
       syncedAt: new Date().toISOString()
     };
     saveState();
@@ -1694,7 +1708,7 @@ function maybeAutoSyncMarket() {
   if (state.view !== "markets" || !shouldAutoSyncMarket()) return;
   state.marketSync = {
     status: "syncing",
-    message: "Syncing official leaderboard...",
+    message: "正在同步官网积分...",
     syncedAt: new Date().toISOString()
   };
   saveState();
@@ -1703,7 +1717,7 @@ function maybeAutoSyncMarket() {
     console.warn("Leaderboard auto sync failed.", error);
     state.marketSync = {
       status: "error",
-      message: "Official leaderboard sync failed. Keeping the last real snapshot.",
+      message: "官网积分同步失败，已保留上一次真实快照。",
       syncedAt: new Date().toISOString()
     };
     saveState();
@@ -1761,7 +1775,7 @@ async function submitCredentials(mode = state.authMode) {
   } catch (error) {
     state.authBusy = false;
     render();
-    showToast(error.message || "\u767b\u5f55\u5931\u8d25\u3002");
+    showToast(userFacingError(error, "\u767b\u5f55\u5931\u8d25\u3002"));
   }
 }
 
@@ -1785,7 +1799,7 @@ function resetLocalState() {
   state.loginUsername = "";
   state.loginDisplayName = "";
   saveState();
-  showToast("Local state reset.");
+  showToast("本地状态已重置。");
 }
 
 function setView(view, tab = view, selectedId = state.selectedId) {
@@ -1822,7 +1836,7 @@ function updateTradeEstimate(input, shouldClamp = false) {
   return qty;
 }
 
-function renderTopbar(title, subtitle = "Streamer Stock Trade") {
+function renderTopbar(title, subtitle = "炉市风云") {
   const player = state.auth?.player;
   const playerLabel = player
     ? `${player.displayName || player.username}${player.publicId ? ` #${player.publicId}` : ""}`
@@ -1831,10 +1845,10 @@ function renderTopbar(title, subtitle = "Streamer Stock Trade") {
     <div class="topbar">
       <div class="brand">
         <h1 class="hero-title">${title}</h1>
-        <h2>${player ? `${subtitle} - ${playerLabel}` : subtitle}</h2>
+        <h2>${player ? `${subtitle} · ${playerLabel}` : subtitle}</h2>
       </div>
       <div class="balance-pill">
-        <span>Coins</span>
+        <span>金币</span>
         <strong>${money(state.balance)}</strong>
       </div>
     </div>
@@ -1908,7 +1922,8 @@ function renderNav() {
         .map(
           ([key, label, image]) => `
             <button class="nav-image-button ${state.activeTab === key ? "active" : ""}" data-action="tab" data-tab="${key}" aria-label="${label}">
-              <img class="nav-button-img" src="${image}" alt="" />
+              <img class="nav-button-img" src="${image}" alt="" loading="eager" decoding="sync" />
+              <span class="nav-fallback-label">${label}</span>
             </button>
           `
         )
@@ -1962,8 +1977,8 @@ function renderHome() {
           <div class="index-change ${indexMove >= 0 ? "up" : "down"}">${indexMove >= 0 ? "+" : ""}${price(indexMove)}% ${indexMove >= 0 ? "⬆" : "⬇"}</div>
         </div>
         <div class="home-rank-grid">
-          ${renderHomeRankList("涨幅榜", "TOP5", gainers, "up")}
-          ${renderHomeRankList("跌幅榜", "TOP5", losers, "down")}
+          ${renderHomeRankList("涨幅榜", "前五", gainers, "up")}
+          ${renderHomeRankList("跌幅榜", "前五", losers, "down")}
         </div>
       </div>
 
@@ -2089,11 +2104,11 @@ function renderMarkets() {
   const stockCount = targets().length;
   return `
     <section class="screen market-table-screen">
-      ${renderTopbar("Market", "行情大厅")}
+      ${renderTopbar("行情", "行情大厅")}
       <div class="section-heading table-heading">
         <div>
           <div class="section-title">主播指数榜</div>
-          <div class="table-note">${stockCount} 支暂定股票 · 表格模式</div>
+          <div class="table-note">${stockCount} 支股票 · 官网积分同步</div>
           ${renderMarketSyncNote()}
         </div>
         ${renderImageButton({ className: "market-sync-button", action: "simulate", label: "同步官网积分", image: buttonAssets.marketSync })}
@@ -2142,7 +2157,7 @@ function renderDetail() {
         <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
         <div>
           <div class="detail-name gold-text">${target.name}</div>
-          <div class="detail-code">代码：${target.code}${target.gameName ? ` · 对应：${target.gameName}` : ""}</div>
+          <div class="detail-code">代码：${target.code}</div>
           <div class="detail-price">${price(target.price)}</div>
           <div class="change ${change >= 0 ? "up" : "down"}">${change >= 0 ? "+" : ""}${price(change)}% ${change >= 0 ? "↑" : "↓"}</div>
         </div>
@@ -2151,7 +2166,7 @@ function renderDetail() {
       <div class="panel chart-card">
         <div class="section-title" style="text-align:center">近7日走势</div>
         <div class="chart-wrap">${renderChart(target)}</div>
-        <p class="detail-copy">${target.quote} | 场均热度 ${target.heat}</p>
+        <p class="detail-copy">${target.quote} · 场均热度 ${target.heat}</p>
       </div>
 
       ${groupInfo ? renderDetailGroupContext(groupInfo) : ""}
@@ -2177,16 +2192,16 @@ function renderDetail() {
 function renderMarketSyncNote() {
   const sync = state.marketSync;
   if (!sync) {
-    return `<div class="market-sync-note">Waiting for official leaderboard sync</div>`;
+    return `<div class="market-sync-note">等待同步官网积分</div>`;
   }
   if (sync.status === "syncing") {
-    return `<div class="market-sync-note">Syncing official leaderboard...</div>`;
+    return `<div class="market-sync-note">正在同步官网积分...</div>`;
   }
   if (sync.status === "synced") {
     const time = new Date(sync.syncedAt).toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
     return `<div class="market-sync-note">已同步 ${sync.source} · 命中 ${sync.matched} 支 · 500名门槛 ${money(sync.floorScore)} · ${time}</div>`;
   }
-  return `<div class="market-sync-note warn">${sync.message || "官网同步失败 · 本地演示行情"}</div>`;
+  return `<div class="market-sync-note warn">${sync.message || "官网同步失败 · 保留上次真实行情"}</div>`;
 }
 
 function renderDetailGroupContext(groupInfo) {
@@ -2270,7 +2285,7 @@ function renderTrade() {
         <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
         <div>
           <div class="detail-name gold-text">${target.name}</div>
-          <div class="detail-code">${target.code}${target.gameName ? ` · ${target.gameName}` : ""}</div>
+          <div class="detail-code">代码：${target.code}</div>
           <div class="detail-price">${price(target.price)}</div>
         </div>
       </div>
@@ -2323,7 +2338,7 @@ function renderHoldings() {
   const ids = Object.keys(state.holdings).filter((id) => state.holdings[id].quantity > 0);
   return `
     <section class="screen">
-      ${renderTopbar("Holdings", "我的持仓")}
+      ${renderTopbar("持仓", "我的持仓")}
       <div class="dashboard-grid">
         <div class="panel stat-box">
           <div class="stat-label">总资产</div>
@@ -2385,15 +2400,15 @@ function nearbyRankingRows(rows, size = 5) {
   return rows.slice(start, end);
 }
 
-function renderRankRow(row, variant = '') {
+function renderRankRow(row, variant = "") {
   return `
-    <article class="rank-row ${variant} ${row.self ? 'self' : ''}">
+    <article class="rank-row ${variant} ${row.self ? "self" : ""}">
       <div class="rank-medal">${row.rank}</div>
       <div>
         <div class="market-name gold-text">${row.displayName || row.username}</div>
-        <div class="market-code">ID ${row.publicId}${row.self ? ' - Current account' : ''}</div>
+        <div class="market-code">编号 ${row.publicId}${row.self ? " · 当前账号" : ""}</div>
       </div>
-      <div class="rank-score">${money(row.totalAssets)}<br>Coins</div>
+      <div class="rank-score">${money(row.totalAssets)}<br>金币</div>
     </article>
   `;
 }
@@ -2405,17 +2420,17 @@ function renderRankings() {
   const empty = !state.rankingsBusy && rows.length === 0;
   return `
     <section class="screen">
-      ${renderTopbar('Ranking', 'Player Leaderboard')}
+      ${renderTopbar("排行榜", "玩家资产榜")}
       <div class="ranking-section">
-        <div class="ranking-section-title">Top Players</div>
+        <div class="ranking-section-title">前三名</div>
         <div class="rank-top-list">
-          ${state.rankingsBusy ? '<div class="panel empty">Loading rankings...</div>' : leaders.map((row) => renderRankRow(row, 'top-three')).join('')}
+          ${state.rankingsBusy ? '<div class="panel empty">排行榜加载中...</div>' : leaders.map((row) => renderRankRow(row, "top-three")).join("")}
         </div>
       </div>
       <div class="ranking-section">
-        <div class="ranking-section-title">Nearby Rank</div>
+        <div class="ranking-section-title">附近排名</div>
         <div class="rank-nearby-list">
-          ${empty ? '<div class="panel empty">No ranked players yet.</div>' : nearby.map((row) => renderRankRow(row)).join('')}
+          ${empty ? '<div class="panel empty">暂无排行数据。</div>' : nearby.map((row) => renderRankRow(row)).join("")}
         </div>
       </div>
       ${renderSiteFiling()}
@@ -2429,10 +2444,10 @@ function renderAnnouncements() {
   const latestOrder = state.orders[0];
   return `
     <section class="screen">
-      ${renderTopbar("Notice", "官方公告")}
+      ${renderTopbar("公告", "官方公告")}
       <article class="announcement">
         <h3>【成盟总结】大盘播报</h3>
-        <p>今日酒馆指数波动 ${price(marketMove())}% ，热门标的成交活跃。请注意，本 Live 所有金币均为虚拟数值。</p>
+        <p>今日酒馆指数波动 ${price(marketMove())}% ，热门标的成交活跃。请注意，本游戏所有金币均为虚拟数值。</p>
       </article>
       <article class="announcement">
         <h3>【活动】首次交易奖励</h3>
@@ -2447,8 +2462,8 @@ function renderAnnouncements() {
         }</p>
       </article>
       ${renderInteractionDialog()}
-      <button class="btn btn-blue btn-wide" data-action="reload-profile">Refresh Account</button>
-      <button class="btn btn-red btn-wide" data-action="logout">Sign Out</button>
+      <button class="btn btn-blue btn-wide" data-action="reload-profile">刷新账号</button>
+      <button class="btn btn-red btn-wide" data-action="logout">退出登录</button>
       ${renderSiteFiling()}
       ${renderNav()}
       ${renderToast()}

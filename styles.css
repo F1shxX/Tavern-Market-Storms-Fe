@@ -676,20 +676,26 @@ button:disabled {
 
 .trade-side-image-button {
   width: 100%;
-  min-height: 46px;
+  min-height: 56px;
 }
 
 .trade-side-image-button .image-button-img {
-  max-height: 46px;
+  height: 54px;
+  max-height: none;
+  object-fit: fill;
 }
 
 .order-image-button {
   width: 100%;
-  min-height: 48px;
+  min-height: 66px;
+  margin-top: 4px;
+  padding: 0 4px;
 }
 
 .order-image-button .image-button-img {
-  max-height: 48px;
+  height: 62px;
+  max-height: none;
+  object-fit: fill;
 }
 
 .dashboard-grid {
@@ -935,32 +941,32 @@ button:disabled {
 
 .stock-table th:nth-child(1),
 .stock-table td:nth-child(1) {
-  width: 28px;
+  width: 26px;
 }
 
 .stock-table th:nth-child(3),
 .stock-table td:nth-child(3) {
-  width: 47px;
+  width: 52px;
 }
 
 .stock-table th:nth-child(4),
 .stock-table td:nth-child(4) {
-  width: 50px;
+  width: 56px;
 }
 
 .stock-table th:nth-child(5),
 .stock-table td:nth-child(5) {
-  width: 48px;
+  display: none;
 }
 
 .stock-table th:nth-child(6),
 .stock-table td:nth-child(6) {
-  width: 34px;
+  display: none;
 }
 
 .stock-table th:nth-child(7),
 .stock-table td:nth-child(7) {
-  width: 56px;
+  width: 58px;
 }
 
 .stock-table th {
@@ -983,7 +989,7 @@ button:disabled {
 }
 
 .stock-table td {
-  height: 38px;
+  height: 44px;
   padding: 5px 4px;
   border-bottom: 1px solid rgba(223, 163, 78, 0.28);
   color: #ffe9b1;
@@ -1031,7 +1037,7 @@ button:disabled {
 }
 
 .col-name {
-  min-width: 156px;
+  min-width: 0;
 }
 
 .stock-name-btn {
@@ -1047,25 +1053,27 @@ button:disabled {
 }
 
 .stock-name-btn strong {
-  display: flex;
-  gap: 5px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  align-items: start;
   overflow: hidden;
   font-size: 13px;
   line-height: 1.2;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .stock-title-text {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .group-badge {
-  flex: 0 0 auto;
-  max-width: 48px;
+  justify-self: start;
+  max-width: 68px;
   padding: 1px 4px;
   border-radius: 6px;
   overflow: hidden;
@@ -1101,6 +1109,11 @@ button:disabled {
 .stock-name-btn .stock-title-text {
   color: #fff0ba;
   font-size: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.18;
+  white-space: normal;
 }
 
 .stock-name-btn .group-badge {
@@ -1149,12 +1162,12 @@ button:disabled {
 }
 
 .image-table-action {
-  width: 52px;
-  min-height: 39px;
+  width: 54px;
+  min-height: 40px;
 }
 
 .image-table-action .image-button-img {
-  max-height: 39px;
+  max-height: 40px;
 }
 
 .table-action.primary {
@@ -1667,29 +1680,31 @@ button:disabled {
   left: max(4px, calc((100vw - var(--app-width)) / 2 + 4px));
   right: max(4px, calc((100vw - var(--app-width)) / 2 + 4px));
   bottom: max(6px, env(safe-area-inset-bottom));
-  z-index: 3;
+  z-index: 20;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1px;
-  height: 58px;
-  padding: 3px;
+  height: 62px;
+  padding: 4px;
   border-radius: 14px;
   background:
     linear-gradient(180deg, rgba(50, 28, 17, 0.72), rgba(14, 8, 6, 0.82));
   border: 1px solid rgba(255, 205, 101, 0.28);
   box-shadow: 0 -5px 18px rgba(0, 0, 0, 0.36);
+  isolation: isolate;
 }
 
 .nav button {
+  position: relative;
   width: 100%;
   min-width: 0;
-  height: 52px;
+  height: 54px;
   min-height: 0;
   padding: 0;
   border-radius: 7px;
   overflow: hidden;
   background: transparent;
-  color: transparent;
+  color: #ffe8ad;
   border: 0;
   filter: saturate(0.92) brightness(0.88);
 }
@@ -1705,11 +1720,30 @@ button:disabled {
 }
 
 .nav-button-img {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 58px;
+  height: 54px;
+  max-height: none;
   object-fit: contain;
+  pointer-events: none;
+}
+
+.nav-fallback-label {
+  position: absolute;
+  inset: 3px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background:
+    linear-gradient(180deg, rgba(83, 45, 22, 0.92), rgba(20, 10, 7, 0.96));
+  color: #ffe8ad;
+  font-size: 12px;
+  font-weight: 1000;
+  line-height: 1;
+  text-shadow: var(--text-outline-soft);
   pointer-events: none;
 }
 
