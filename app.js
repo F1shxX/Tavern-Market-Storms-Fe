@@ -1,4 +1,4 @@
-const STORAGE_KEY = "tavern-market-storms-demo-state-v3";
+const STORAGE_KEY = "tavern-market-storms-state-v4";
 const FEE_RATE = 0.001;
 const SINGLE_STOCK_BUY_LIMIT = 0.25;
 const TREND_WINDOW = 7;
@@ -58,7 +58,7 @@ const seedTargets = [
     "volume": 2630,
     "heat": 55,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "炉石豆哥 / 炉石豆哥 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       7.19,
       7.28,
@@ -81,7 +81,7 @@ const seedTargets = [
     "volume": 3060,
     "heat": 62,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "林可 / 抖音丶炉石林可 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       8.92,
       9.0,
@@ -104,7 +104,7 @@ const seedTargets = [
     "volume": 3490,
     "heat": 69,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "郭风荷 / 郭枫荷 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       8.8,
       8.79,
@@ -127,7 +127,7 @@ const seedTargets = [
     "volume": 3920,
     "heat": 76,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "lighting / Lighting 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       10.63,
       10.68,
@@ -150,7 +150,7 @@ const seedTargets = [
     "volume": 3050,
     "heat": 83,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "幻林 / 幻之泪伤 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       11.1,
       11.26,
@@ -173,7 +173,7 @@ const seedTargets = [
     "volume": 3480,
     "heat": 90,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "大安庄园 / 标蓝股票的均值 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       13.35,
       13.5,
@@ -196,7 +196,7 @@ const seedTargets = [
     "volume": 3910,
     "heat": 50,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "安德罗妮 / 无耻之徒 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       12.89,
       12.93,
@@ -219,7 +219,7 @@ const seedTargets = [
     "volume": 4340,
     "heat": 57,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "风的二次救赎 / 风的二次救赎 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       15.61,
       15.7,
@@ -242,7 +242,7 @@ const seedTargets = [
     "volume": 4770,
     "heat": 64,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "呆呆兽 / 仙居呆呆兽 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       6.74,
       6.77,
@@ -265,7 +265,7 @@ const seedTargets = [
     "volume": 3900,
     "heat": 71,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "学妹 / 抖音丨学妹是娟子 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       7.4,
       7.51,
@@ -288,7 +288,7 @@ const seedTargets = [
     "volume": 4330,
     "heat": 78,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "黄香蕉 / 大安庄园黄香蕉 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       8.59,
       8.63,
@@ -311,7 +311,7 @@ const seedTargets = [
     "volume": 4760,
     "heat": 85,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "阿尔法go / Zorgo 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       10.43,
       10.53,
@@ -334,7 +334,7 @@ const seedTargets = [
     "volume": 5190,
     "heat": 92,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "虎牙终离殇 / 虎牙丶终离殇 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       10.47,
       10.54,
@@ -357,7 +357,7 @@ const seedTargets = [
     "volume": 5620,
     "heat": 52,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "激情速八 / 斗鱼激情速八 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       12.97,
       13.02,
@@ -380,7 +380,7 @@ const seedTargets = [
     "volume": 4750,
     "heat": 59,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "刀锋上的荣耀 / 刀锋上的荣耀 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       13.35,
       13.46,
@@ -403,7 +403,7 @@ const seedTargets = [
     "volume": 5180,
     "heat": 66,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "小狼 / 抖音|有局|小狼 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       14.43,
       14.6,
@@ -426,7 +426,7 @@ const seedTargets = [
     "volume": 5610,
     "heat": 73,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "jeff / jeff 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       15.46,
       15.6,
@@ -449,7 +449,7 @@ const seedTargets = [
     "volume": 6040,
     "heat": 80,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "布鲁斯 / DouyinBruise 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       7.52,
       7.58,
@@ -472,7 +472,7 @@ const seedTargets = [
     "volume": 6470,
     "heat": 87,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "尖尖箭 / 虎牙|尖尖箭 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       8.21,
       8.17,
@@ -495,7 +495,7 @@ const seedTargets = [
     "volume": 5600,
     "heat": 94,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "211 / 呜呜呜呜呜呜 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       8.73,
       8.86,
@@ -518,7 +518,7 @@ const seedTargets = [
     "volume": 6030,
     "heat": 54,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "溪流萤间 / 彩虹|溪流萤间 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       9.65,
       9.77,
@@ -541,7 +541,7 @@ const seedTargets = [
     "volume": 6460,
     "heat": 61,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "小马 / 乐邦詹士 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       11.89,
       11.99,
@@ -564,7 +564,7 @@ const seedTargets = [
     "volume": 6890,
     "heat": 68,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "基格沃斯 / 告辞|基格沃斯 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       13.07,
       13.08,
@@ -587,7 +587,7 @@ const seedTargets = [
     "volume": 7320,
     "heat": 75,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "有局炮炮 / 有局|炮炮 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       14.96,
       15.02,
@@ -610,7 +610,7 @@ const seedTargets = [
     "volume": 6450,
     "heat": 82,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "在乎 / 在乎 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       14.45,
       14.65,
@@ -633,7 +633,7 @@ const seedTargets = [
     "volume": 6880,
     "heat": 89,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "炉指导 / 抖音炉指导 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       15.57,
       15.75,
@@ -656,7 +656,7 @@ const seedTargets = [
     "volume": 7310,
     "heat": 49,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "春日野琼 / 春日野穹 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       7.01,
       7.0,
@@ -679,7 +679,7 @@ const seedTargets = [
     "volume": 7740,
     "heat": 56,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "梦境彼方 / 抖音丨梦境彼方 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       9.12,
       9.18,
@@ -702,7 +702,7 @@ const seedTargets = [
     "volume": 8170,
     "heat": 63,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "七只羊 / 抖音七只羊 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       10.33,
       10.37,
@@ -725,7 +725,7 @@ const seedTargets = [
     "volume": 7300,
     "heat": 70,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "瓦莉拉 / 把把金铜须 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       11.3,
       11.46,
@@ -748,7 +748,7 @@ const seedTargets = [
     "volume": 7730,
     "heat": 77,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "安德罗妮的学徒 / 抖音安德罗妮学徒 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       11.89,
       11.95,
@@ -771,7 +771,7 @@ const seedTargets = [
     "volume": 8160,
     "heat": 84,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "米奇 / 告辞丨米奇猪猪 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       13.07,
       13.19,
@@ -794,7 +794,7 @@ const seedTargets = [
     "volume": 8590,
     "heat": 91,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "小糯米 / 抖音小糯米 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       14.22,
       14.31,
@@ -817,7 +817,7 @@ const seedTargets = [
     "volume": 9020,
     "heat": 51,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "新娘 / 虎牙丨吨吨盾 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       14.8,
       14.85,
@@ -840,7 +840,7 @@ const seedTargets = [
     "volume": 8150,
     "heat": 58,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "白羽 / 抖音|炉石白羽 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       16.89,
       17.05,
@@ -863,7 +863,7 @@ const seedTargets = [
     "volume": 8580,
     "heat": 65,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "吹哥 / 南怀北瑾|林川 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       8.41,
       8.51,
@@ -886,7 +886,7 @@ const seedTargets = [
     "volume": 9010,
     "heat": 72,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "阿紫 / 抖音|阿紫 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       9.34,
       9.43,
@@ -909,7 +909,7 @@ const seedTargets = [
     "volume": 9440,
     "heat": 79,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "胖枫 / 夕尘残枫 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       10.41,
       10.48,
@@ -932,7 +932,7 @@ const seedTargets = [
     "volume": 9870,
     "heat": 86,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "告辞集团 / 标黄股票的均值 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       12.47,
       12.44,
@@ -955,7 +955,7 @@ const seedTargets = [
     "volume": 9000,
     "heat": 93,
     "avatar": "./assets/avatars/stormbard.svg",
-    "quote": "恶魔苹果 / 抖音丶恶魔苹果 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       12.01,
       12.19,
@@ -978,7 +978,7 @@ const seedTargets = [
     "volume": 9430,
     "heat": 53,
     "avatar": "./assets/avatars/evenlock.svg",
-    "quote": "里子 / 云黎子昭 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       12.74,
       12.88,
@@ -1001,7 +1001,7 @@ const seedTargets = [
     "volume": 9860,
     "heat": 60,
     "avatar": "./assets/avatars/bronzebeard.svg",
-    "quote": "Kimmy / 自在极意豪 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       15.49,
       15.62,
@@ -1024,7 +1024,7 @@ const seedTargets = [
     "volume": 10290,
     "heat": 67,
     "avatar": "./assets/avatars/moonfox.svg",
-    "quote": "乔奇乔 / 抖音乔奇乔 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       16.69,
       16.72,
@@ -1047,7 +1047,7 @@ const seedTargets = [
     "volume": 10720,
     "heat": 74,
     "avatar": "./assets/avatars/embercat.svg",
-    "quote": "有局 / 标绿股票的均值 相关模拟指数，当前用于炉市风云 Demo 展示。",
+    "quote": "Official leaderboard synced index.",
     "trend": [
       19.01,
       19.08,
@@ -1129,22 +1129,22 @@ const leaderboardNameAliases = {
 
 const defaultState = {
   balance: 100000,
-  holdings: {
-    "stock-001": { quantity: 100, averageCost: 7.1 }
-  },
+  holdings: {},
   orders: [],
   activeTab: "home",
   selectedId: "stock-001",
   view: "home",
   toast: "",
-  marketSync: null
+  marketSync: null,
+  rankings: null
 };
 
 let state = loadState();
 state.auth = loadAuth();
-state.authStep = "phone";
+state.authMode = "login";
 state.authBusy = false;
-state.loginPhone = "";
+state.loginUsername = "";
+state.loginDisplayName = "";
 
 function loadState() {
   try {
@@ -1240,7 +1240,23 @@ async function loadRemotePortfolio({ silent = false } = {}) {
   } catch (error) {
     console.warn("Failed to load player portfolio.", error);
     saveAuth(null);
-    if (!silent) showToast("登录已失效，请重新验证手机号。");
+    if (!silent) showToast("Session expired. Please sign in again.");
+    render();
+  }
+}
+
+async function loadRankings({ silent = false } = {}) {
+  if (!state.auth?.token) return;
+  state.rankingsBusy = true;
+  try {
+    const data = await apiRequest("/api/rankings");
+    state.rankings = Array.isArray(data.rows) ? data.rows : [];
+    state.rankingsBusy = false;
+    render();
+  } catch (error) {
+    console.warn("Failed to load rankings.", error);
+    state.rankingsBusy = false;
+    if (!silent) showToast(error.message || "Rankings unavailable.");
     render();
   }
 }
@@ -1479,7 +1495,7 @@ function showToast(message) {
 
 async function buy(targetId, quantity) {
   if (!state.auth?.token) {
-    showToast("Please sign in with your phone first.");
+    showToast("Please sign in first.");
     return;
   }
   const target = getTarget(targetId);
@@ -1517,7 +1533,7 @@ async function buy(targetId, quantity) {
 
 async function sell(targetId, quantity) {
   if (!state.auth?.token) {
-    showToast("Please sign in with your phone first.");
+    showToast("Please sign in first.");
     return;
   }
   const target = getTarget(targetId);
@@ -1544,22 +1560,6 @@ async function sell(targetId, quantity) {
   } catch (error) {
     showToast(error.message || "Sell failed.");
   }
-}
-
-function simulateMarket() {
-  targets().forEach((target, index) => {
-    const swing = Math.sin(Date.now() / 900000 + index) * 0.015 + (Math.random() - 0.45) * 0.04;
-    const next = Math.max(3, target.price * (1 + swing));
-    target.prevClose = target.price;
-    target.price = Number(next.toFixed(2));
-    target.score = Math.round(target.price * 1000);
-    target.volume = Math.max(900, Math.round(target.volume * (1 + Math.abs(swing) * 2)));
-    target.heat = Math.max(35, Math.min(99, Math.round(target.heat + swing * 120)));
-    target.trend = [...target.trend.slice(-6), target.price];
-  });
-  recalculateGroupIndexTargets();
-  saveState();
-  showToast("行情已刷新，K线和持仓收益已更新。");
 }
 
 function recalculateGroupIndexTargets() {
@@ -1665,20 +1665,21 @@ async function refreshMarketData() {
   try {
     state.marketSync = {
       status: "syncing",
-      message: "正在同步官网积分...",
+      message: "Syncing official leaderboard...",
       syncedAt: new Date().toISOString()
     };
     saveState();
     render();
     await syncMarketFromLeaderboard();
   } catch (error) {
-    console.warn("Leaderboard sync failed, using local simulation.", error);
+    console.warn("Leaderboard sync failed.", error);
     state.marketSync = {
-      status: "fallback",
-      message: "官网同步失败，已使用本地随机行情",
+      status: "error",
+      message: "Official leaderboard sync failed. Keeping the last real snapshot.",
       syncedAt: new Date().toISOString()
     };
-    simulateMarket();
+    saveState();
+    render();
   }
 }
 
@@ -1693,7 +1694,7 @@ function maybeAutoSyncMarket() {
   if (state.view !== "markets" || !shouldAutoSyncMarket()) return;
   state.marketSync = {
     status: "syncing",
-    message: "正在同步官网积分...",
+    message: "Syncing official leaderboard...",
     syncedAt: new Date().toISOString()
   };
   saveState();
@@ -1701,8 +1702,8 @@ function maybeAutoSyncMarket() {
   syncMarketFromLeaderboard({ silent: true }).catch((error) => {
     console.warn("Leaderboard auto sync failed.", error);
     state.marketSync = {
-      status: "fallback",
-      message: "官网同步失败，保留本地演示行情",
+      status: "error",
+      message: "Official leaderboard sync failed. Keeping the last real snapshot.",
       syncedAt: new Date().toISOString()
     };
     saveState();
@@ -1710,46 +1711,40 @@ function maybeAutoSyncMarket() {
   });
 }
 
-async function requestOtp() {
-  const phoneInput = document.getElementById("loginPhone");
-  const phone = phoneInput?.value?.trim() || state.loginPhone;
-  if (!phone) {
-    showToast("请输入手机号。");
-    return;
-  }
-  state.authBusy = true;
-  state.loginPhone = phone;
-  render();
-  try {
-    const data = await apiRequest("/api/auth/request-otp", {
-      method: "POST",
-      body: JSON.stringify({ phone })
-    });
-    state.authStep = "code";
-    state.authBusy = false;
-    state.loginPhone = phone;
-    render();
-    showToast(data.debugCode ? `验证码：${data.debugCode}` : "验证码已发送。");
-  } catch (error) {
-    state.authBusy = false;
-    render();
-    showToast(error.message || "验证码发送失败。");
-  }
+function captureLoginFields() {
+  state.loginUsername = document.getElementById("loginUsername")?.value?.trim() || state.loginUsername || "";
+  state.loginDisplayName = document.getElementById("loginDisplayName")?.value?.trim() || state.loginDisplayName || "";
 }
 
-async function verifyOtp() {
-  const phone = document.getElementById("loginPhone")?.value?.trim() || state.loginPhone;
-  const code = document.getElementById("loginCode")?.value?.trim();
-  if (!phone || !code) {
-    showToast("请输入手机号和验证码。");
+function setAuthMode(mode) {
+  captureLoginFields();
+  state.authMode = mode;
+  render();
+}
+
+async function submitCredentials(mode = state.authMode) {
+  const username = document.getElementById("loginUsername")?.value?.trim() || "";
+  const password = document.getElementById("loginPassword")?.value || "";
+  const displayName = document.getElementById("loginDisplayName")?.value?.trim() || "";
+
+  if (!username || !password) {
+    showToast("Enter username and password.");
     return;
   }
+
   state.authBusy = true;
+  state.loginUsername = username;
+  state.loginDisplayName = displayName;
   render();
+
   try {
-    const data = await apiRequest("/api/auth/verify-otp", {
+    const data = await apiRequest(mode === "register" ? "/api/auth/register" : "/api/auth/login", {
       method: "POST",
-      body: JSON.stringify({ phone, code })
+      body: JSON.stringify({
+        username,
+        password,
+        ...(mode === "register" && displayName ? { displayName } : {})
+      })
     });
     saveAuth({
       token: data.token,
@@ -1757,15 +1752,16 @@ async function verifyOtp() {
       player: data.player
     });
     state.authBusy = false;
-    state.authStep = "phone";
-    state.loginPhone = "";
+    state.authMode = "login";
+    state.loginUsername = "";
+    state.loginDisplayName = "";
     await loadRemotePortfolio({ silent: true });
     setView("home", "home");
-    showToast("登录成功。");
+    showToast(mode === "register" ? "Account created." : "Signed in.");
   } catch (error) {
     state.authBusy = false;
     render();
-    showToast(error.message || "登录失败。");
+    showToast(error.message || "Sign in failed.");
   }
 }
 
@@ -1776,19 +1772,20 @@ async function logout() {
     console.warn("Logout request failed.", error);
   }
   saveAuth(null);
-  state.authStep = "phone";
+  state.authMode = "login";
   render();
 }
 
-function resetDemo() {
+function resetLocalState() {
   state = structuredClone(defaultState);
   state.targets = structuredClone(seedTargets);
   state.auth = loadAuth();
-  state.authStep = "phone";
+  state.authMode = "login";
   state.authBusy = false;
-  state.loginPhone = "";
+  state.loginUsername = "";
+  state.loginDisplayName = "";
   saveState();
-  showToast("Demo 已重置。");
+  showToast("Local state reset.");
 }
 
 function setView(view, tab = view, selectedId = state.selectedId) {
@@ -1798,6 +1795,9 @@ function setView(view, tab = view, selectedId = state.selectedId) {
   saveState();
   render();
   maybeAutoSyncMarket();
+  if (view === "rankings") {
+    loadRankings({ silent: true });
+  }
 }
 
 function tradeQuantityLimit(input) {
@@ -1824,11 +1824,14 @@ function updateTradeEstimate(input, shouldClamp = false) {
 
 function renderTopbar(title, subtitle = "Streamer Stock Trade") {
   const player = state.auth?.player;
+  const playerLabel = player
+    ? `${player.displayName || player.username}${player.publicId ? ` #${player.publicId}` : ""}`
+    : subtitle;
   return `
     <div class="topbar">
       <div class="brand">
         <h1 class="hero-title">${title}</h1>
-        <h2>${player ? `${subtitle} - ${player.displayName || player.phone}` : subtitle}</h2>
+        <h2>${player ? `${subtitle} - ${playerLabel}` : subtitle}</h2>
       </div>
       <div class="balance-pill">
         <span>Coins</span>
@@ -1840,35 +1843,40 @@ function renderTopbar(title, subtitle = "Streamer Stock Trade") {
 
 function renderLogin() {
   const busy = state.authBusy ? "disabled" : "";
+  const isRegister = state.authMode === "register";
   return `
     <section class="screen login-screen">
       <div class="login-panel">
         <div class="login-brand">
           <h1 class="hero-title">Tavern Market</h1>
-          <h2>Sign in with phone to play</h2>
+          <h2>${isRegister ? "Create an account to play" : "Sign in to play"}</h2>
         </div>
-        <label class="login-field">
-          <span>Phone</span>
-          <input id="loginPhone" class="login-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="Phone number" value="${state.loginPhone || ""}" />
-        </label>
-        ${
-          state.authStep === "code"
-            ? `
-              <label class="login-field">
-                <span>OTP</span>
-                <input id="loginCode" class="login-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code" />
-              </label>
-            `
-            : ""
-        }
-        <div class="login-actions">
+        <form class="login-form" data-auth-form="${isRegister ? "register" : "login"}">
+          <label class="login-field">
+            <span>Username</span>
+            <input id="loginUsername" class="login-input" type="text" autocomplete="username" maxlength="20" placeholder="3-20 letters, numbers, _" value="${state.loginUsername || ""}" />
+          </label>
           ${
-            state.authStep === "code"
-              ? `<button class="btn btn-green btn-wide" data-action="verify-otp" ${busy}>Sign In</button>
-                 <button class="btn btn-blue btn-wide" data-action="request-otp" ${busy}>Resend Code</button>`
-              : `<button class="btn btn-green btn-wide" data-action="request-otp" ${busy}>Send Code</button>`
+            isRegister
+              ? `
+                <label class="login-field">
+                  <span>Display name</span>
+                  <input id="loginDisplayName" class="login-input" type="text" autocomplete="nickname" maxlength="24" placeholder="Shown in rankings" value="${state.loginDisplayName || ""}" />
+                </label>
+              `
+              : ""
           }
-        </div>
+          <label class="login-field">
+            <span>Password</span>
+            <input id="loginPassword" class="login-input" type="password" autocomplete="${isRegister ? "new-password" : "current-password"}" minlength="8" maxlength="72" placeholder="At least 8 characters" />
+          </label>
+          <div class="login-actions">
+            <button class="btn btn-green btn-wide" type="submit" ${busy}>${isRegister ? "Create Account" : "Sign In"}</button>
+            <button class="btn btn-blue btn-wide" type="button" data-action="auth-mode" data-mode="${isRegister ? "login" : "register"}" ${busy}>
+              ${isRegister ? "Use Existing Account" : "Create New Account"}
+            </button>
+          </div>
+        </form>
         <p class="login-note">Your account, coins, holdings, and orders are saved to the database.</p>
       </div>
       ${renderSiteFiling()}
@@ -2169,10 +2177,10 @@ function renderDetail() {
 function renderMarketSyncNote() {
   const sync = state.marketSync;
   if (!sync) {
-    return `<div class="market-sync-note">未同步官网积分 · 本地演示行情</div>`;
+    return `<div class="market-sync-note">Waiting for official leaderboard sync</div>`;
   }
   if (sync.status === "syncing") {
-    return `<div class="market-sync-note">正在同步官网积分...</div>`;
+    return `<div class="market-sync-note">Syncing official leaderboard...</div>`;
   }
   if (sync.status === "synced") {
     const time = new Date(sync.syncedAt).toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
@@ -2362,21 +2370,7 @@ function renderHoldingCard(target) {
 }
 
 function rankingRows() {
-  const playerScore = Math.round(totalAssets());
-  return [
-    { name: "张兰", score: 150000 },
-    { name: "李四", score: 120000 },
-    { name: "陈掌柜", score: 105600 },
-    { name: "夜航商人", score: 102400 },
-    { name: "我方酒客", score: playerScore, self: true },
-    { name: "月夜粉团", score: 98400 },
-    { name: "荧火掌柜", score: 96150 },
-    { name: "木桶旅人", score: 93520 },
-    { name: "晨星账房", score: 91080 },
-    { name: "铜杯骑士", score: 88700 }
-  ]
-    .sort((a, b) => b.score - a.score)
-    .map((row, index) => ({ ...row, rank: index + 1 }));
+  return Array.isArray(state.rankings) ? state.rankings : [];
 }
 
 function nearbyRankingRows(rows, size = 5) {
@@ -2391,19 +2385,15 @@ function nearbyRankingRows(rows, size = 5) {
   return rows.slice(start, end);
 }
 
-function maskedRankScore() {
-  return "XXXX<br>金币";
-}
-
-function renderRankRow(row, variant = "") {
+function renderRankRow(row, variant = '') {
   return `
-    <article class="rank-row ${variant} ${row.self ? "self" : ""}">
+    <article class="rank-row ${variant} ${row.self ? 'self' : ''}">
       <div class="rank-medal">${row.rank}</div>
       <div>
-        <div class="market-name gold-text">${row.name}</div>
-        <div class="market-code">${row.self ? "当前账号" : "模拟玩家"}</div>
+        <div class="market-name gold-text">${row.displayName || row.username}</div>
+        <div class="market-code">ID ${row.publicId}${row.self ? ' - Current account' : ''}</div>
       </div>
-      <div class="rank-score" aria-label="金币已隐藏">${maskedRankScore()}</div>
+      <div class="rank-score">${money(row.totalAssets)}<br>Coins</div>
     </article>
   `;
 }
@@ -2412,19 +2402,20 @@ function renderRankings() {
   const rows = rankingRows();
   const leaders = rows.slice(0, 3);
   const nearby = nearbyRankingRows(rows);
+  const empty = !state.rankingsBusy && rows.length === 0;
   return `
     <section class="screen">
-      ${renderTopbar("Ranking", "玩家收益榜")}
+      ${renderTopbar('Ranking', 'Player Leaderboard')}
       <div class="ranking-section">
-        <div class="ranking-section-title">前三名</div>
+        <div class="ranking-section-title">Top Players</div>
         <div class="rank-top-list">
-          ${leaders.map((row) => renderRankRow(row, "top-three")).join("")}
+          ${state.rankingsBusy ? '<div class="panel empty">Loading rankings...</div>' : leaders.map((row) => renderRankRow(row, 'top-three')).join('')}
         </div>
       </div>
       <div class="ranking-section">
-        <div class="ranking-section-title">我的附近排名</div>
+        <div class="ranking-section-title">Nearby Rank</div>
         <div class="rank-nearby-list">
-          ${nearby.map((row) => renderRankRow(row)).join("")}
+          ${empty ? '<div class="panel empty">No ranked players yet.</div>' : nearby.map((row) => renderRankRow(row)).join('')}
         </div>
       </div>
       ${renderSiteFiling()}
@@ -2441,7 +2432,7 @@ function renderAnnouncements() {
       ${renderTopbar("Notice", "官方公告")}
       <article class="announcement">
         <h3>【成盟总结】大盘播报</h3>
-        <p>今日酒馆指数波动 ${price(marketMove())}% ，热门标的成交活跃。请注意，本 Demo 所有金币均为虚拟数值。</p>
+        <p>今日酒馆指数波动 ${price(marketMove())}% ，热门标的成交活跃。请注意，本 Live 所有金币均为虚拟数值。</p>
       </article>
       <article class="announcement">
         <h3>【活动】首次交易奖励</h3>
@@ -2496,11 +2487,14 @@ document.addEventListener("click", (event) => {
   if (action === "tab") {
     setView(element.dataset.tab, element.dataset.tab);
   }
-  if (action === "request-otp") {
-    requestOtp();
+  if (action === "auth-mode") {
+    setAuthMode(element.dataset.mode || "login");
   }
-  if (action === "verify-otp") {
-    verifyOtp();
+  if (action === "login") {
+    submitCredentials("login");
+  }
+  if (action === "register") {
+    submitCredentials("register");
   }
   if (action === "logout") {
     logout();
@@ -2527,7 +2521,7 @@ document.addEventListener("click", (event) => {
     refreshMarketData();
   }
   if (action === "reset") {
-    resetDemo();
+    resetLocalState();
   }
   if (action === "step") {
     const input = document.getElementById(element.dataset.input);
@@ -2535,6 +2529,13 @@ document.addEventListener("click", (event) => {
     input.value = (Number(input.value) || 0) + step;
     updateTradeEstimate(input, true);
   }
+});
+
+document.addEventListener("submit", (event) => {
+  const form = event.target.closest("[data-auth-form]");
+  if (!form) return;
+  event.preventDefault();
+  submitCredentials(form.dataset.authForm || state.authMode);
 });
 
 document.addEventListener("input", (event) => {

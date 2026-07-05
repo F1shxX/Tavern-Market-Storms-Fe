@@ -11,7 +11,7 @@ const { chromium } = require("playwright");
     if (message.type() === "error") logs.push(`console: ${message.text()}`);
   });
   const portfolio = {
-    player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人", balance: 100000 },
+    player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "Test Traveler", balance: 100000 },
     balance: 100000,
     holdings: [{ targetId: "stock-001", quantity: 100, averageCost: 7.1 }],
     orders: []
@@ -22,7 +22,7 @@ const { chromium } = require("playwright");
       JSON.stringify({
         token: "test-token",
         expiresAt: "2099-01-01T00:00:00.000Z",
-        player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人" }
+        player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "Test Traveler" }
       })
     );
   });
@@ -92,6 +92,26 @@ const { chromium } = require("playwright");
     });
   });
 
+  await page.route("**/api/rankings", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        ok: true,
+        data: {
+          rows: [
+            { rank: 1, publicId: 100004, username: "alpha", displayName: "Alpha", totalAssets: 150000 },
+            { rank: 2, publicId: 100002, username: "bravo", displayName: "Bravo", totalAssets: 120000 },
+            { rank: 3, publicId: 100001, username: "testuser", displayName: "Test Traveler", totalAssets: 100000, self: true },
+            { rank: 4, publicId: 100003, username: "delta", displayName: "Delta", totalAssets: 98000 },
+            { rank: 5, publicId: 100005, username: "echo", displayName: "Echo", totalAssets: 96000 }
+          ]
+        }
+      })
+    })
+  );
+
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.locator(".stock-name-btn").first().click();
@@ -124,7 +144,7 @@ const { chromium } = require("playwright");
   await page.locator("#buyQty").fill("20");
   await page.getByRole("button", { name: "买入" }).last().click();
   await page.waitForFunction(() => {
-    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
+    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-state-v4"));
     return saved?.holdings?.["stock-001"]?.quantity >= 120;
   });
   await page.getByRole("button", { name: "卖出" }).click();
@@ -148,17 +168,17 @@ const { chromium } = require("playwright");
   await page.locator("#sellQty").fill("10");
   await page.getByRole("button", { name: "卖出" }).last().click();
   await page.waitForFunction(() => {
-    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
+    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-state-v4"));
     return saved?.holdings?.["stock-001"]?.quantity <= 110;
   });
   await page.getByRole("button", { name: "← 返回" }).click();
   await page.getByRole("button", { name: "← 返回" }).click();
   await page.getByRole("button", { name: "持仓", exact: true }).click();
   await page.getByText("总资产").waitFor({ timeout: 3000 });
-  await page.getByRole("button", { name: "排名", exact: true }).click();
-  await page.getByText("玩家收益榜").waitFor({ timeout: 3000 });
-  await page.getByText("前三名").waitFor({ timeout: 3000 });
-  await page.getByText("我的附近排名").waitFor({ timeout: 3000 });
+  await page.locator(".nav button").nth(3).click();
+  await page.getByText("Player Leaderboard").waitFor({ timeout: 3000 });
+  await page.getByText("Top Players").waitFor({ timeout: 3000 });
+  await page.getByText("Nearby Rank").waitFor({ timeout: 3000 });
 
   const topCount = await page.locator(".rank-top-list .rank-row").count();
   if (topCount !== 3) {
@@ -175,18 +195,14 @@ const { chromium } = require("playwright");
   if (nearbyCount >= 5 && selfIndex !== 2) {
     throw new Error(`Current account should be centered in nearby rankings, found at index ${selfIndex}.`);
   }
-  const scoreTexts = await page.locator(".rank-score").evaluateAll((elements) =>
-    elements.map((element) => (element.textContent || "").replace(/\s/g, ""))
-  );
-  const unmaskedScore = scoreTexts.find((text) => text !== "XXXX金币");
-  if (unmaskedScore) {
-    throw new Error(`Ranking score should be masked as XXXX金币, found ${unmaskedScore}.`);
-  }
   const rankingText = await page.locator(".screen").textContent();
-  if (/150,?000|120,?000|105,?600|102,?400|98,?400/.test(rankingText)) {
-    throw new Error("Ranking page should not expose raw coin totals.");
+  if (!/ID 100001/.test(rankingText) || !/Current account/.test(rankingText)) {
+    throw new Error("Ranking page should show the current account public id.");
   }
-  await page.screenshot({ path: "demo-mobile-check.png", fullPage: true });
+  if (!/150,?000/.test(rankingText) || !/100,?000/.test(rankingText)) {
+    throw new Error("Ranking page should show ranking totals from the API.");
+  }
+  await page.screenshot({ path: "tms-mobile-check.png", fullPage: true });
   if (orderCalls < 2) {
     throw new Error(`Expected buy and sell API calls, got ${orderCalls}.`);
   }
@@ -196,5 +212,5 @@ const { chromium } = require("playwright");
     console.error(logs.join("\n"));
     process.exit(1);
   }
-  console.log("Demo flow verified");
+  console.log("Flow verified");
 })();

@@ -18,7 +18,7 @@ const { chromium } = require("playwright");
       JSON.stringify({
         token: "test-token",
         expiresAt: "2099-01-01T00:00:00.000Z",
-        player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人" }
+        player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "Test Traveler" }
       })
     );
   });
@@ -30,7 +30,7 @@ const { chromium } = require("playwright");
       body: JSON.stringify({
         ok: true,
         data: {
-          player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人", balance: 100000 },
+          player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "Test Traveler", balance: 100000 },
           balance: 100000,
           holdings: [{ targetId: "stock-001", quantity: 100, averageCost: 7.1 }],
           orders: []
@@ -45,7 +45,7 @@ const { chromium } = require("playwright");
   await page.getByText(/已同步 .*第13赛季/).waitFor({ timeout: 20000 });
   await page.getByText(/500名门槛/).waitFor({ timeout: 3000 });
   const syncState = await page.evaluate(() => {
-    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-demo-state-v3"));
+    const saved = JSON.parse(localStorage.getItem("tavern-market-storms-state-v4"));
     return {
       marketSync: saved.marketSync,
       syncedTarget: saved.targets.find((target) => target.id === "stock-004"),
@@ -130,7 +130,7 @@ const { chromium } = require("playwright");
   if (lastRowBox.bottom < screenBox.y || lastRowBox.y > screenBox.y + screenBox.height) {
     throw new Error("The 44th stock is not reachable after scrolling the market page.");
   }
-  await page.screenshot({ path: "demo-market-list-check.png", fullPage: true });
+  await page.screenshot({ path: "tms-market-list-check.png", fullPage: true });
 
   await lastRow.locator(".stock-name-btn").click();
   await page.getByText("优巨集团").first().waitFor({ timeout: 3000 });
@@ -151,7 +151,7 @@ const { chromium } = require("playwright");
       JSON.stringify({
         token: "test-token",
         expiresAt: "2099-01-01T00:00:00.000Z",
-        player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人" }
+        player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "Test Traveler" }
       })
     );
   });
@@ -163,7 +163,7 @@ const { chromium } = require("playwright");
       body: JSON.stringify({
         ok: true,
         data: {
-          player: { id: "test-player", phone: "+86138****0000", displayName: "测试旅人", balance: 100000 },
+          player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "Test Traveler", balance: 100000 },
           balance: 100000,
           holdings: [{ targetId: "stock-001", quantity: 100, averageCost: 7.1 }],
           orders: []
@@ -182,7 +182,7 @@ const { chromium } = require("playwright");
   if (appBox.width > 431) {
     throw new Error(`Market page should stay mobile portrait width on desktop, found ${appBox.width}px.`);
   }
-  await desktop.screenshot({ path: "demo-market-table-desktop-check.png", fullPage: true });
+  await desktop.screenshot({ path: "tms-market-table-desktop-check.png", fullPage: true });
   await desktop.close();
 
   await browser.close();

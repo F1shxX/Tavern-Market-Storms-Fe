@@ -32,7 +32,7 @@ const { chromium } = require("playwright");
   if (!app || nav.x < app.x || nav.x + nav.width > app.x + app.width + 1) {
     throw new Error("Bottom image navigation overflows the app shell.");
   }
-  await page.screenshot({ path: "demo-home-scroll-check.png", fullPage: true });
+  await page.screenshot({ path: "tms-home-scroll-check.png", fullPage: true });
   await browser.close();
   console.log("Home scroll verified");
 })();

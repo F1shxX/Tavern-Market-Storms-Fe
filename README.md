@@ -10,19 +10,20 @@ Frontend repository for Tavern Market Storms.
 - [API Contract Draft](docs/API_CONTRACT_DRAFT.md)
 - [OpenSpec Workflow](docs/OPENSPEC_WORKFLOW.md)
 
-## Demo
+## Runtime
 
-The current repository includes a static mobile trading demo.
+The frontend is a mobile-first trading game client for Tavern Market Storms.
 
 Open `index.html` directly in a browser, or serve the folder with any static web server.
 
-Demo features:
+Runtime features:
 
 - Home dashboard
 - Market list
 - Target detail with 7-day trend
-- Buy and sell flow
-- Holdings and profit/loss calculation
-- Ranking page
+- Username/password account login
+- Buy and sell flow through the backend API
+- Holdings, orders, and balance persisted in Supabase
+- Ranking page from real player records
 - Announcements
-- Local state persistence with `localStorage`
+- Market sync from the backend leaderboard endpoint, with the static captured snapshot only as a real-data fallback
