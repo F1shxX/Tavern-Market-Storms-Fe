@@ -15,6 +15,7 @@
   --white: #f7fbff;
   --muted: #b8d4f5;
   --shadow: rgba(0, 0, 0, 0.45);
+  --nav-space: 84px;
 }
 
 * {
@@ -79,10 +80,11 @@ button:disabled {
 .screen {
   position: relative;
   z-index: 1;
-  height: calc(100dvh - 74px);
+  height: calc(100dvh - var(--nav-space));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 16px 14px 36px;
+  overscroll-behavior: contain;
+  padding: 16px 14px calc(var(--nav-space) + 20px);
   background:
     radial-gradient(circle at 50% 0%, rgba(243, 183, 78, 0.14), transparent 14rem),
     linear-gradient(180deg, rgba(48, 25, 13, 0.54), rgba(8, 5, 4, 0.1));
@@ -677,6 +679,27 @@ button:disabled {
 .trade-side-image-button {
   width: 100%;
   min-height: 56px;
+}
+
+.trade-screen {
+  overflow-y: scroll;
+  touch-action: pan-y;
+  padding-bottom: calc(var(--nav-space) + 118px);
+}
+
+@supports (height: 100svh) {
+  #app {
+    height: 100svh;
+  }
+
+  .screen {
+    height: calc(100svh - var(--nav-space));
+  }
+
+  .login-screen {
+    height: 100svh;
+    min-height: 100svh;
+  }
 }
 
 .trade-side-image-button .image-button-img {
@@ -1676,9 +1699,9 @@ button:disabled {
 }
 
 .nav {
-  position: fixed;
-  left: max(4px, calc((100vw - var(--app-width)) / 2 + 4px));
-  right: max(4px, calc((100vw - var(--app-width)) / 2 + 4px));
+  position: absolute;
+  left: 4px;
+  right: 4px;
   bottom: max(6px, env(safe-area-inset-bottom));
   z-index: 20;
   display: grid;

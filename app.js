@@ -1771,7 +1771,12 @@ async function submitCredentials(mode = state.authMode) {
     state.loginDisplayName = "";
     await loadRemotePortfolio({ silent: true });
     setView("home", "home");
-    showToast(mode === "register" ? "\u8d26\u53f7\u5df2\u521b\u5efa\u3002" : "\u767b\u5f55\u6210\u529f\u3002");
+    const reward = data.loginReward;
+    if (reward?.awarded && reward.amount > 0) {
+      showToast(`${mode === "register" ? "\u8d26\u53f7\u5df2\u521b\u5efa" : "\u767b\u5f55\u6210\u529f"}，今日登录奖励 +${money(reward.amount)} 金币。`);
+    } else {
+      showToast(mode === "register" ? "\u8d26\u53f7\u5df2\u521b\u5efa\u3002" : "\u767b\u5f55\u6210\u529f\u3002");
+    }
   } catch (error) {
     state.authBusy = false;
     render();
@@ -1986,7 +1991,6 @@ function renderHome() {
         纯娱乐模拟数据，不涉及充值、提现或真实金融交易。
       </div>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2135,7 +2139,6 @@ function renderMarkets() {
         </table>
       </div>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2183,7 +2186,6 @@ function renderDetail() {
         <div class="summary-pill">可用金币<strong>${money(state.balance)}</strong></div>
       </div>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2277,7 +2279,7 @@ function renderTrade() {
   const buyValue = estimateBuy(target, buyQty);
   const sellValue = estimateSell(target, sellQty);
   return `
-    <section class="screen">
+    <section class="screen trade-screen">
       <div class="topbar">
         ${renderImageButton({ className: "back-image-button", action: "detail", id: target.id, label: "← 返回", image: buttonAssets.back })}
       </div>
@@ -2328,7 +2330,6 @@ function renderTrade() {
         <div class="notice-line"><b>当前持仓：</b><span>${holding.quantity} 股，均价 ${price(holding.averageCost)}</span></div>
       </div>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2359,7 +2360,6 @@ function renderHoldings() {
         }
       </div>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2434,7 +2434,6 @@ function renderRankings() {
         </div>
       </div>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2465,7 +2464,6 @@ function renderAnnouncements() {
       <button class="btn btn-blue btn-wide" data-action="reload-profile">刷新账号</button>
       <button class="btn btn-red btn-wide" data-action="logout">退出登录</button>
       ${renderSiteFiling()}
-      ${renderNav()}
       ${renderToast()}
     </section>
   `;
@@ -2490,7 +2488,10 @@ function render() {
     rankings: renderRankings,
     announcements: renderAnnouncements
   };
-  app.innerHTML = (views[state.view] || renderHome)();
+  app.innerHTML = `
+    ${(views[state.view] || renderHome)()}
+    ${renderNav()}
+  `;
 }
 
 document.addEventListener("click", (event) => {
