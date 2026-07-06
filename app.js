@@ -1947,12 +1947,13 @@ function renderSiteFiling() {
 }
 
 function renderInteractionDialog() {
+  const move = marketMove();
   return `
     <section class="interaction-dialog" aria-label="互动对话">
       <div class="interaction-speaker">旅店老板</div>
-      <p>后续互动内容将在这里展示：任务提示、股票事件、角色对话和确认操作都会使用这个文本框。</p>
+      <p>今日大盘波动 ${move >= 0 ? "+" : ""}${price(move)}%，交易前留意标的热度、涨跌幅和单股买入上限。</p>
       <div class="interaction-actions">
-        <button class="interaction-choice" type="button" disabled>即将开放</button>
+        <button class="interaction-choice" type="button" disabled>互动待开放</button>
       </div>
     </section>
   `;
@@ -1967,7 +1968,7 @@ function renderHome() {
     <section class="screen home-screen">
       <header class="market-header">
         ${renderImageButton({ className: "back-chip refresh-image-button", action: "simulate", label: "刷新", image: buttonAssets.refresh })}
-        <div class="home-title gold-text">炉石股神</div>
+        <div class="home-title game-logo-title">炉市风云</div>
         <div class="home-date">2026.06.15</div>
         <div class="home-balance">
           <span>${money(state.balance)}</span>
@@ -1990,6 +1991,7 @@ function renderHome() {
       <div class="home-disclaimer">
         纯娱乐模拟数据，不涉及充值、提现或真实金融交易。
       </div>
+      ${renderInteractionDialog()}
       ${renderSiteFiling()}
       ${renderToast()}
     </section>

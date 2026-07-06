@@ -5,10 +5,37 @@ const { chromium } = require("playwright");
     executablePath: "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
   });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true });
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "tavern-market-storms-auth-v1",
+      JSON.stringify({
+        token: "test-token",
+        expiresAt: "2099-01-01T00:00:00.000Z",
+        player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "测试玩家" }
+      })
+    );
+  });
+  await page.route("**/api/me", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        ok: true,
+        data: {
+          player: { id: "test-player", publicId: 100001, username: "testuser", displayName: "测试玩家", balance: 100000 },
+          balance: 100000,
+          holdings: [],
+          orders: []
+        }
+      })
+    })
+  );
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByText("实时大盘总指数").waitFor({ timeout: 3000 });
   await page.getByText("涨幅榜").waitFor({ timeout: 3000 });
   await page.getByText("跌幅榜").waitFor({ timeout: 3000 });
+  await page.getByText("旅店老板").waitFor({ timeout: 3000 });
   await page.getByRole("button", { name: "排名", exact: true }).waitFor({ timeout: 3000 });
   const navImages = await page.locator(".nav .nav-button-img").count();
   if (navImages !== 5) {

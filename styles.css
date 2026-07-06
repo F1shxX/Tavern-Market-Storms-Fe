@@ -15,7 +15,7 @@
   --white: #f7fbff;
   --muted: #b8d4f5;
   --shadow: rgba(0, 0, 0, 0.45);
-  --nav-space: 84px;
+  --nav-space: 72px;
 }
 
 * {
@@ -84,7 +84,7 @@ button:disabled {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  padding: 16px 14px calc(var(--nav-space) + 20px);
+  padding: 16px 14px 18px;
   background:
     radial-gradient(circle at 50% 0%, rgba(243, 183, 78, 0.14), transparent 14rem),
     linear-gradient(180deg, rgba(48, 25, 13, 0.54), rgba(8, 5, 4, 0.1));
@@ -179,8 +179,9 @@ button:disabled {
 }
 
 .home-screen {
-  padding-top: 14px;
-  overflow: hidden;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  overflow-y: auto;
 }
 
 .market-table-screen {
@@ -348,13 +349,13 @@ button:disabled {
 
 .market-header {
   display: grid;
-  grid-template-columns: 70px 1fr auto;
+  grid-template-columns: 66px 1fr auto;
   grid-template-areas:
     "back title balance"
     "back date balance";
   align-items: center;
   gap: 4px 10px;
-  margin: 2px 0 12px;
+  margin: 0 0 8px;
 }
 
 .back-chip {
@@ -365,15 +366,47 @@ button:disabled {
 
 .home-title {
   grid-area: title;
-  font-size: 36px;
+  font-size: 42px;
   line-height: 1;
   font-weight: 1000;
+}
+
+.home-title.game-logo-title {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  transform: skewX(-7deg);
+  color: #fff4a3;
+  -webkit-text-stroke: 1.1px #7b1708;
+  text-shadow:
+    0 2px 0 #ff8a00,
+    0 4px 0 #9b1908,
+    2px 7px 0 rgba(92, 13, 5, 0.95),
+    -2px 0 0 #ff3c00,
+    0 0 12px rgba(255, 197, 55, 0.65),
+    0 0 22px rgba(255, 67, 0, 0.5);
+}
+
+.home-title.game-logo-title::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: -16px;
+  width: 34px;
+  height: 42px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 58% 20%, #fff7a2 0 9%, transparent 10%),
+    radial-gradient(circle at 44% 68%, #ffd23c 0 31%, transparent 32%),
+    linear-gradient(152deg, transparent 0 20%, #ffb300 21% 38%, #ff5a00 39% 66%, #d60d04 67% 100%);
+  clip-path: polygon(48% 0, 68% 26%, 96% 9%, 78% 42%, 100% 50%, 68% 60%, 72% 100%, 47% 72%, 20% 100%, 27% 61%, 0 50%, 25% 38%, 13% 11%, 37% 27%);
+  filter: drop-shadow(0 3px 0 #8b1806) drop-shadow(0 0 7px rgba(255, 140, 0, 0.72));
 }
 
 .home-date {
   grid-area: date;
   color: #fff5bd;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 1000;
   text-shadow: 0 2px 0 #5b2913;
 }
@@ -392,17 +425,17 @@ button:disabled {
 }
 
 .home-balance span {
-  font-size: 27px;
+  font-size: 25px;
   line-height: 1;
 }
 
 .home-balance strong {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .market-board {
-  margin-top: 8px;
-  padding: 12px;
+  margin-top: 6px;
+  padding: 10px;
   border-radius: 24px;
   border-color: rgba(255, 203, 99, 0.64);
   background:
@@ -410,11 +443,11 @@ button:disabled {
 }
 
 .index-card {
-  min-height: 164px;
+  min-height: 128px;
   display: grid;
   place-items: center;
   align-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   border: 2px solid rgba(255, 204, 95, 0.56);
   border-radius: 20px;
   background:
@@ -426,13 +459,13 @@ button:disabled {
 }
 
 .index-label {
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 1000;
 }
 
 .index-value {
   color: var(--gold-2);
-  font-size: clamp(54px, 18vw, 78px);
+  font-size: clamp(48px, 15vw, 66px);
   line-height: 0.98;
   font-weight: 1000;
   text-shadow:
@@ -442,19 +475,19 @@ button:disabled {
 
 .index-change {
   margin-top: 2px;
-  font-size: 27px;
+  font-size: 23px;
   font-weight: 1000;
 }
 
 .home-rank-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .home-rank-panel {
   min-width: 0;
-  padding: 0 0 8px;
+  padding: 0 0 4px;
   overflow: hidden;
   border: 2px solid rgba(255, 203, 99, 0.42);
   border-radius: 16px;
@@ -463,12 +496,12 @@ button:disabled {
 }
 
 .home-rank-title {
-  min-height: 42px;
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   background:
     linear-gradient(180deg, rgba(81, 45, 23, 0.95), rgba(25, 14, 10, 0.95));
   color: var(--gold-1);
@@ -476,17 +509,17 @@ button:disabled {
 }
 
 .home-rank-title span {
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 1000;
 }
 
 .home-rank-title b {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .home-rank-item {
   width: 100%;
-  min-height: 58px;
+  min-height: 44px;
   display: grid;
   grid-template-columns: 24px 1fr;
   grid-template-areas:
@@ -494,7 +527,7 @@ button:disabled {
     "idx data";
   gap: 0 4px;
   align-items: center;
-  padding: 6px 8px;
+  padding: 3px 7px;
   border-top: 1px solid rgba(109, 181, 241, 0.16);
   background: transparent;
   text-align: left;
@@ -504,7 +537,7 @@ button:disabled {
   grid-area: idx;
   align-self: start;
   padding-top: 4px;
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 1000;
 }
 
@@ -513,7 +546,7 @@ button:disabled {
   min-width: 0;
   overflow: hidden;
   color: var(--white);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 1000;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -522,7 +555,7 @@ button:disabled {
 .home-rank-price,
 .home-rank-change {
   grid-area: data;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 1000;
 }
 
@@ -545,9 +578,9 @@ button:disabled {
 }
 
 .home-disclaimer {
-  margin-top: 9px;
+  margin-top: 6px;
   color: rgba(216, 235, 255, 0.76);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   text-align: center;
 }
@@ -557,7 +590,7 @@ button:disabled {
   flex-wrap: wrap;
   justify-content: center;
   gap: 4px 8px;
-  margin: 10px 0 4px;
+  margin: 6px 0 2px;
   color: rgba(255, 239, 188, 0.76);
   font-size: 10px;
   font-weight: 800;
@@ -1642,9 +1675,9 @@ button:disabled {
 }
 
 .interaction-dialog {
-  min-height: 164px;
-  margin: 12px 0;
-  padding: 34px 34px 28px;
+  min-height: 132px;
+  margin: 8px 0 0;
+  padding: 28px 30px 22px;
   border: 0;
   border-radius: 18px;
   background:
@@ -1658,15 +1691,15 @@ button:disabled {
 
 .interaction-speaker {
   color: var(--gold-1);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 1000;
   text-shadow: var(--text-outline);
 }
 
 .interaction-dialog p {
-  margin: 10px auto 0;
-  max-width: 280px;
-  font-size: 13px;
+  margin: 8px auto 0;
+  max-width: 300px;
+  font-size: 12px;
   font-weight: 900;
   line-height: 1.45;
 }
@@ -1674,12 +1707,12 @@ button:disabled {
 .interaction-actions {
   display: flex;
   justify-content: center;
-  margin-top: 12px;
+  margin-top: 9px;
 }
 
 .interaction-choice {
   min-width: 116px;
-  min-height: 30px;
+  min-height: 28px;
   padding: 5px 14px;
   border: 1px solid rgba(255, 226, 106, 0.74);
   border-radius: 8px;
@@ -1700,20 +1733,19 @@ button:disabled {
 
 .nav {
   position: absolute;
-  left: 4px;
-  right: 4px;
-  bottom: max(6px, env(safe-area-inset-bottom));
+  left: 9px;
+  right: 9px;
+  bottom: max(10px, env(safe-area-inset-bottom));
   z-index: 20;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  height: 62px;
-  padding: 4px;
-  border-radius: 14px;
-  background:
-    linear-gradient(180deg, rgba(50, 28, 17, 0.72), rgba(14, 8, 6, 0.82));
-  border: 1px solid rgba(255, 205, 101, 0.28);
-  box-shadow: 0 -5px 18px rgba(0, 0, 0, 0.36);
+  gap: 3px;
+  height: 48px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
   isolation: isolate;
 }
 
@@ -1721,20 +1753,20 @@ button:disabled {
   position: relative;
   width: 100%;
   min-width: 0;
-  height: 54px;
+  height: 48px;
   min-height: 0;
   padding: 0;
-  border-radius: 7px;
+  border-radius: 6px;
   overflow: hidden;
   background: transparent;
   color: #ffe8ad;
   border: 0;
-  filter: saturate(0.92) brightness(0.88);
+  filter: saturate(0.98) brightness(0.96) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
 }
 
 .nav button.active {
   filter: saturate(1.16) brightness(1.1) drop-shadow(0 0 7px rgba(255, 234, 163, 0.78));
-  transform: translateY(-3px) scale(1.04);
+  transform: translateY(-2px) scale(1.04);
 }
 
 .nav-image-button {
@@ -1747,7 +1779,7 @@ button:disabled {
   z-index: 2;
   display: block;
   width: 100%;
-  height: 54px;
+  height: 48px;
   max-height: none;
   object-fit: contain;
   pointer-events: none;
@@ -1755,11 +1787,11 @@ button:disabled {
 
 .nav-fallback-label {
   position: absolute;
-  inset: 3px;
+  inset: 2px;
   z-index: 1;
   display: grid;
   place-items: center;
-  border-radius: 7px;
+  border-radius: 6px;
   background:
     linear-gradient(180deg, rgba(83, 45, 22, 0.92), rgba(20, 10, 7, 0.96));
   color: #ffe8ad;
@@ -2056,8 +2088,112 @@ body {
     padding-right: 10px;
   }
 
+  .home-screen {
+    padding-top: 10px;
+    padding-bottom: 4px;
+  }
+
+  .market-header {
+    grid-template-columns: 62px 1fr auto;
+    gap: 2px 8px;
+    margin-bottom: 6px;
+  }
+
   .hero-title {
     font-size: 30px;
+  }
+
+  .home-title.game-logo-title {
+    font-size: 34px;
+  }
+
+  .home-date {
+    font-size: 13px;
+  }
+
+  .home-balance span {
+    font-size: 22px;
+  }
+
+  .home-balance strong {
+    font-size: 15px;
+  }
+
+  .market-board {
+    padding: 8px;
+    margin-top: 4px;
+  }
+
+  .index-card {
+    min-height: 116px;
+    margin-bottom: 7px;
+  }
+
+  .index-label {
+    font-size: 18px;
+  }
+
+  .index-value {
+    font-size: 50px;
+  }
+
+  .index-change {
+    font-size: 20px;
+  }
+
+  .home-rank-grid {
+    gap: 7px;
+  }
+
+  .home-rank-title {
+    min-height: 32px;
+    padding: 5px 7px;
+  }
+
+  .home-rank-title span {
+    font-size: 16px;
+  }
+
+  .home-rank-title b {
+    font-size: 12px;
+  }
+
+  .home-rank-item {
+    min-height: 40px;
+    grid-template-columns: 22px 1fr;
+    padding: 2px 6px;
+  }
+
+  .home-rank-index {
+    font-size: 17px;
+  }
+
+  .home-rank-name {
+    font-size: 13px;
+  }
+
+  .home-rank-price,
+  .home-rank-change {
+    font-size: 11px;
+  }
+
+  .interaction-dialog {
+    min-height: 122px;
+    padding: 25px 24px 18px;
+  }
+
+  .interaction-speaker {
+    font-size: 16px;
+  }
+
+  .interaction-dialog p {
+    font-size: 11px;
+    line-height: 1.38;
+  }
+
+  .interaction-choice {
+    min-height: 26px;
+    font-size: 11px;
   }
 
   .detail-name {
