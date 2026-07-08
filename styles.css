@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "TMS Noto Sans SC";
+  src: url("./assets/fonts/tms-noto-sans-sc-medium.woff2") format("woff2");
+  font-weight: 500 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg-0: #160b07;
   --bg-1: #2d170d;
@@ -33,7 +41,7 @@ body {
     radial-gradient(circle at 50% 0%, rgba(170, 103, 34, 0.32), transparent 26rem),
     linear-gradient(180deg, #1b100b 0%, #060403 100%);
   color: var(--white);
-  font-family: "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
+  font-family: "TMS Noto Sans SC", "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
 }
 
 button,
@@ -1853,7 +1861,7 @@ button:disabled {
 
 body {
   color: var(--cream);
-  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
+  font-family: "TMS Noto Sans SC", "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
   font-weight: 900;
 }
 
