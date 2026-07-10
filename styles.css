@@ -28,6 +28,7 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(255, 226, 106, 0.18);
 }
 
 html,
@@ -52,12 +53,18 @@ input {
 button {
   border: 0;
   cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
 }
 
 button:disabled {
   cursor: not-allowed;
-  filter: grayscale(0.25);
-  opacity: 0.62;
+  filter: grayscale(0.18) brightness(0.88);
+  opacity: 0.72;
+}
+
+button:disabled:active {
+  transform: none;
 }
 
 #app {
@@ -660,6 +667,7 @@ button:disabled {
 }
 
 .image-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -672,10 +680,15 @@ button:disabled {
   text-shadow: none;
   -webkit-text-stroke: 0;
   line-height: 0;
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    opacity 120ms ease;
 }
 
 .image-button:active {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.985);
+  filter: brightness(1.08) saturate(1.08);
 }
 
 .image-button-img {
@@ -684,6 +697,27 @@ button:disabled {
   height: auto;
   object-fit: contain;
   pointer-events: none;
+}
+
+.image-button.is-busy {
+  color: var(--cream-bright);
+  text-shadow: var(--text-outline-soft);
+  -webkit-text-stroke: 0.25px var(--ink-outline);
+}
+
+.image-button.is-busy::after {
+  content: attr(data-busy-label);
+  position: absolute;
+  inset: 10px 18px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(34, 17, 10, 0.72);
+  color: var(--cream-bright);
+  font-size: 15px;
+  font-weight: 1000;
+  line-height: 1;
 }
 
 .refresh-image-button {
@@ -1347,10 +1381,15 @@ button:disabled {
     inset 0 3px 0 rgba(255, 255, 255, 0.24),
     inset 0 -4px 0 rgba(0, 0, 0, 0.16),
     0 8px 16px rgba(0, 0, 0, 0.34);
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    opacity 120ms ease;
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.99);
+  filter: brightness(1.08);
 }
 
 .btn-blue {
@@ -1525,6 +1564,10 @@ button:disabled {
   text-align: center;
   font-size: 20px;
   font-weight: 1000;
+  transition:
+    border-color 120ms ease,
+    filter 120ms ease,
+    opacity 120ms ease;
 }
 
 .qty-step {
@@ -1535,6 +1578,15 @@ button:disabled {
   font-size: 20px;
   font-weight: 1000;
   border: 1px solid rgba(255, 217, 129, 0.6);
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    opacity 120ms ease;
+}
+
+.qty-step:active {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(1.08);
 }
 
 .trade-meta {
@@ -1770,11 +1822,24 @@ button:disabled {
   color: #ffe8ad;
   border: 0;
   filter: saturate(0.98) brightness(0.96) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+  transition:
+    transform 140ms ease,
+    filter 140ms ease,
+    opacity 140ms ease;
+}
+
+.nav button:active {
+  transform: translateY(1px) scale(0.98);
+  filter: saturate(1.08) brightness(1.08) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.48));
 }
 
 .nav button.active {
   filter: saturate(1.16) brightness(1.1) drop-shadow(0 0 7px rgba(255, 234, 163, 0.78));
   transform: translateY(-2px) scale(1.04);
+}
+
+.nav button.active:active {
+  transform: translateY(-1px) scale(1.02);
 }
 
 .nav-image-button {

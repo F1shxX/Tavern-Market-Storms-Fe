@@ -1143,6 +1143,7 @@ let state = loadState();
 state.auth = loadAuth();
 state.authMode = "login";
 state.authBusy = false;
+state.orderBusy = null;
 state.loginUsername = "";
 state.loginDisplayName = "";
 
@@ -1507,7 +1508,20 @@ function showToast(message) {
   }, 1800);
 }
 
+function setOrderBusy(side, targetId) {
+  state.orderBusy = side ? { side, targetId } : null;
+}
+
+function isOrderBusy(side = "", targetId = "") {
+  const busy = state.orderBusy;
+  if (!busy) return false;
+  if (side && busy.side !== side) return false;
+  if (targetId && busy.targetId !== targetId) return false;
+  return true;
+}
+
 async function buy(targetId, quantity) {
+  if (isOrderBusy()) return;
   if (!state.auth?.token) {
     showToast("请先登录。");
     return;
@@ -1528,6 +1542,8 @@ async function buy(targetId, quantity) {
   }
 
   try {
+    setOrderBusy("buy", targetId);
+    showToast(`正在买入：${target.name} ${qty} 股...`);
     const data = await apiRequest("/api/orders", {
       method: "POST",
       body: JSON.stringify({
@@ -1538,14 +1554,16 @@ async function buy(targetId, quantity) {
       })
     });
     applyPortfolio(data.portfolio);
+    setOrderBusy(null);
     showToast(`买入成功：${target.name} ${qty} 股`);
-    render();
   } catch (error) {
+    setOrderBusy(null);
     showToast(userFacingError(error, "买入失败。"));
   }
 }
 
 async function sell(targetId, quantity) {
+  if (isOrderBusy()) return;
   if (!state.auth?.token) {
     showToast("请先登录。");
     return;
@@ -1559,6 +1577,8 @@ async function sell(targetId, quantity) {
   }
 
   try {
+    setOrderBusy("sell", targetId);
+    showToast(`正在卖出：${target.name} ${qty} 股...`);
     const data = await apiRequest("/api/orders", {
       method: "POST",
       body: JSON.stringify({
@@ -1569,9 +1589,10 @@ async function sell(targetId, quantity) {
       })
     });
     applyPortfolio(data.portfolio);
+    setOrderBusy(null);
     showToast(`卖出成功：${target.name} ${qty} 股`);
-    render();
   } catch (error) {
+    setOrderBusy(null);
     showToast(userFacingError(error, "卖出失败。"));
   }
 }
@@ -1904,10 +1925,12 @@ function renderLogin() {
   `;
 }
 
-function renderImageButton({ className = "", action, id = "", label, image }) {
+function renderImageButton({ className = "", action, id = "", label, image, disabled = false, busyLabel = "" }) {
   const idAttribute = id ? ` data-id="${id}"` : "";
+  const disabledAttribute = disabled ? " disabled" : "";
+  const busyAttribute = busyLabel ? ` aria-busy="true" data-busy-label="${busyLabel}"` : "";
   return `
-    <button class="image-button ${className}" data-action="${action}"${idAttribute} aria-label="${label}">
+    <button class="image-button ${className}${busyLabel ? " is-busy" : ""}" data-action="${action}"${idAttribute} aria-label="${label}"${busyAttribute}${disabledAttribute}>
       <img class="image-button-img" src="${image}" alt="${label}" />
     </button>
   `;
@@ -2290,6 +2313,9 @@ function renderChart(target) {
 function renderTrade() {
   const target = getTarget(state.selectedId);
   const holding = getHolding(target.id);
+  const tradeBusy = isOrderBusy();
+  const buyBusy = isOrderBusy("buy", target.id);
+  const sellBusy = isOrderBusy("sell", target.id);
   const maxBuyQty = buyMaxQuantity(target);
   const maxSellQty = sellMaxQuantity(target.id);
   const buyQty = clampQuantity(10, maxBuyQty);
@@ -2314,30 +2340,30 @@ function renderTrade() {
         <div class="trade-card">
           <div class="trade-title">买入</div>
           <div class="qty-row">
-            <button class="qty-step" data-action="step" data-input="buyQty" data-step="-10">-</button>
-            <input id="buyQty" type="number" min="${maxBuyQty > 0 ? 1 : 0}" max="${maxBuyQty}" step="10" value="${buyQty}" inputmode="numeric" data-estimate="buyEstimate" data-side="buy" />
-            <button class="qty-step" data-action="step" data-input="buyQty" data-step="10">+</button>
+            <button class="qty-step" data-action="step" data-input="buyQty" data-step="-10" ${tradeBusy ? "disabled" : ""}>-</button>
+            <input id="buyQty" type="number" min="${maxBuyQty > 0 ? 1 : 0}" max="${maxBuyQty}" step="10" value="${buyQty}" inputmode="numeric" data-estimate="buyEstimate" data-side="buy" ${tradeBusy ? "disabled" : ""} />
+            <button class="qty-step" data-action="step" data-input="buyQty" data-step="10" ${tradeBusy ? "disabled" : ""}>+</button>
           </div>
           <div class="trade-meta">
             <div>价格<strong>${price(target.price)}</strong></div>
             <div>预估消耗<strong id="buyEstimate">${money(buyValue)} 金币</strong></div>
             <div>买入上限<strong>${maxBuyQty} 股</strong></div>
           </div>
-          ${renderImageButton({ className: "order-image-button", action: "buy", id: target.id, label: "买入", image: buttonAssets.buy })}
+          ${renderImageButton({ className: "order-image-button", action: "buy", id: target.id, label: "买入", image: buttonAssets.buy, disabled: tradeBusy, busyLabel: buyBusy ? "买入中..." : "" })}
         </div>
 
         <div class="trade-card">
           <div class="trade-title">卖出</div>
           <div class="qty-row">
-            <button class="qty-step" data-action="step" data-input="sellQty" data-step="-10">-</button>
-            <input id="sellQty" type="number" min="${maxSellQty > 0 ? 1 : 0}" max="${maxSellQty}" step="10" value="${sellQty}" inputmode="numeric" data-estimate="sellEstimate" data-side="sell" />
-            <button class="qty-step" data-action="step" data-input="sellQty" data-step="10">+</button>
+            <button class="qty-step" data-action="step" data-input="sellQty" data-step="-10" ${tradeBusy ? "disabled" : ""}>-</button>
+            <input id="sellQty" type="number" min="${maxSellQty > 0 ? 1 : 0}" max="${maxSellQty}" step="10" value="${sellQty}" inputmode="numeric" data-estimate="sellEstimate" data-side="sell" ${tradeBusy ? "disabled" : ""} />
+            <button class="qty-step" data-action="step" data-input="sellQty" data-step="10" ${tradeBusy ? "disabled" : ""}>+</button>
           </div>
           <div class="trade-meta">
             <div>持仓<strong>${holding.quantity} 股</strong></div>
             <div>预估到账<strong id="sellEstimate">${money(sellValue)} 金币</strong></div>
           </div>
-          ${renderImageButton({ className: "order-image-button", action: "sell", id: target.id, label: "卖出", image: buttonAssets.sell })}
+          ${renderImageButton({ className: "order-image-button", action: "sell", id: target.id, label: "卖出", image: buttonAssets.sell, disabled: tradeBusy, busyLabel: sellBusy ? "卖出中..." : "" })}
         </div>
       </div>
 
@@ -2515,6 +2541,7 @@ function render() {
 document.addEventListener("click", (event) => {
   const element = event.target.closest("[data-action]");
   if (!element) return;
+  if (element.disabled || element.getAttribute("aria-disabled") === "true") return;
   const action = element.dataset.action;
   const id = element.dataset.id;
 
