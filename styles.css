@@ -23,7 +23,8 @@
   --white: #f7fbff;
   --muted: #b8d4f5;
   --shadow: rgba(0, 0, 0, 0.45);
-  --nav-space: 72px;
+  --nav-space: 84px;
+  --nav-height: 58px;
 }
 
 * {
@@ -1735,18 +1736,17 @@ button:disabled:active {
 }
 
 .interaction-dialog {
-  min-height: 132px;
-  margin: 8px 0 0;
-  padding: 28px 30px 22px;
+  min-height: 128px;
+  margin: 8px auto 0;
+  padding: 28px 34px 21px;
   border: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   background:
-    linear-gradient(180deg, rgba(21, 13, 31, 0.82), rgba(55, 31, 72, 0.78)),
-    url("./assets/ui/dialog-frame.webp") center / 100% 100% no-repeat;
+    url("./assets/ui/dialog-frame-wide.webp") center / 100% 100% no-repeat;
   color: var(--cream-bright);
   text-align: center;
   text-shadow: var(--text-outline-soft);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.26);
 }
 
 .interaction-speaker {
@@ -1757,17 +1757,17 @@ button:disabled:active {
 }
 
 .interaction-dialog p {
-  margin: 8px auto 0;
-  max-width: 300px;
+  margin: 6px auto 0;
+  max-width: 286px;
   font-size: 12px;
   font-weight: 900;
-  line-height: 1.45;
+  line-height: 1.42;
 }
 
 .interaction-actions {
   display: flex;
   justify-content: center;
-  margin-top: 9px;
+  margin-top: 8px;
 }
 
 .interaction-choice {
@@ -1793,14 +1793,14 @@ button:disabled:active {
 
 .nav {
   position: absolute;
-  left: 9px;
-  right: 9px;
-  bottom: max(10px, env(safe-area-inset-bottom));
+  left: 4px;
+  right: 4px;
+  bottom: max(6px, env(safe-area-inset-bottom));
   z-index: 20;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 3px;
-  height: 48px;
+  height: var(--nav-height);
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -1813,7 +1813,7 @@ button:disabled:active {
   position: relative;
   width: 100%;
   min-width: 0;
-  height: 48px;
+  height: var(--nav-height);
   min-height: 0;
   padding: 0;
   border-radius: 6px;
@@ -1852,7 +1852,7 @@ button:disabled:active {
   z-index: 2;
   display: block;
   width: 100%;
-  height: 48px;
+  height: var(--nav-height);
   max-height: none;
   object-fit: contain;
   pointer-events: none;
@@ -2251,8 +2251,8 @@ body {
   }
 
   .interaction-dialog {
-    min-height: 122px;
-    padding: 25px 24px 18px;
+    min-height: 120px;
+    padding: 25px 28px 18px;
   }
 
   .interaction-speaker {
