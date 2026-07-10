@@ -8,6 +8,14 @@ const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.h
 const API_BASE_URL = window.TMS_API_BASE_URL || LOCAL_API_BASE_URL;
 const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
 const AUTH_STORAGE_KEY = "tavern-market-storms-auth-v1";
+const NAME_REVIEW_PATTERNS = [
+  /admin|root|system|official|moderator|support|gm|客服|官方|管理员|版主|系统|平台|运营/i,
+  /共产党|中共|政府|公安|警察|法院|检察|军队|主席|总统|领导人/,
+  /赌博|博彩|彩票|赌场|下注|现金网|庄家|代充|外挂|脚本/,
+  /色情|黄赌毒|卖淫|嫖|约炮|援交|女优|黄片|av/i,
+  /毒品|冰毒|大麻|海洛因|枪支|炸弹|爆炸|恐怖|诈骗|洗钱/,
+  /傻逼|煞笔|妈的|草你|操你|fuck|shit|nazi|hitler/i
+];
 const SITE_DOMAIN = "luzhidao123.cn";
 const ICP_BEIAN = "浙ICP备2026047968号-1";
 const portraitAvatars = {
@@ -1208,6 +1216,7 @@ function userFacingError(error, fallback = "操作失败，请稍后再试。") 
   if (/USERNAME_TAKEN/i.test(raw) || /Username is already taken/i.test(raw)) return "用户名已被占用。";
   if (/LOGIN_INVALID/i.test(raw) || /Username or password is incorrect/i.test(raw)) return "用户名或密码不正确。";
   if (/USERNAME_INVALID/i.test(raw) || /Username must be/i.test(raw)) return "用户名需为 3-20 位中文、字母、数字或下划线。";
+  if (/NAME_BLOCKED|DISPLAY_NAME_BLOCKED/i.test(raw) || /not allowed|inappropriate/i.test(raw)) return "用户名或昵称含有不合适内容，请更换。";
   if (/PASSWORD_INVALID/i.test(raw) || /Password must be/i.test(raw)) return "密码需为 8-72 位字符。";
   if (/DISPLAY_NAME_INVALID/i.test(raw) || /Display name must be/i.test(raw)) return "昵称不能超过 24 个字符。";
   if (/INSUFFICIENT|BALANCE|HOLDING/i.test(raw)) return "余额或持仓不足。";
@@ -1326,6 +1335,41 @@ function money(value) {
 
 function price(value) {
   return Number(value).toFixed(2);
+}
+
+function roundedPercent(value) {
+  const percent = Math.round((Number(value) || 0) * 100) / 100;
+  return Object.is(percent, -0) ? 0 : percent;
+}
+
+function percentTone(value) {
+  const percent = roundedPercent(value);
+  if (percent > 0) return "up";
+  if (percent < 0) return "down";
+  return "flat";
+}
+
+function percentLabel(value, { arrow = false } = {}) {
+  const percent = roundedPercent(value);
+  if (percent === 0) return arrow ? "持平" : "持平";
+  const direction = percent > 0 ? "+" : "";
+  const suffix = arrow ? (percent > 0 ? " ↑" : " ↓") : "";
+  return `${direction}${price(percent)}%${suffix}`;
+}
+
+function hasBlockedNameContent(value) {
+  const normalized = String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s._\-|·•,，。:：;；'"]/g, "");
+  return normalized ? NAME_REVIEW_PATTERNS.some((pattern) => pattern.test(normalized)) : false;
+}
+
+function validateRegisterNames(username, displayName) {
+  if (hasBlockedNameContent(username) || hasBlockedNameContent(displayName)) {
+    return "用户名或昵称含有不合适内容，请更换后再注册。";
+  }
+  return "";
 }
 
 function normalizeLeaderboardName(value) {
@@ -1767,6 +1811,14 @@ async function submitCredentials(mode = state.authMode) {
     return;
   }
 
+  if (mode === "register") {
+    const nameError = validateRegisterNames(username, displayName);
+    if (nameError) {
+      showToast(nameError);
+      return;
+    }
+  }
+
   state.authBusy = true;
   state.loginUsername = username;
   state.loginDisplayName = displayName;
@@ -1974,7 +2026,7 @@ function renderInteractionDialog() {
   return `
     <section class="interaction-dialog" aria-label="互动对话">
       <div class="interaction-speaker">旅店老板</div>
-      <p>今日大盘波动 ${move >= 0 ? "+" : ""}${price(move)}%，交易前留意标的热度、涨跌幅和单股买入上限。</p>
+      <p>今日大盘波动 ${percentLabel(move)}，交易前留意标的热度、涨跌幅和单股买入上限。</p>
       <div class="interaction-actions">
         <button class="interaction-choice" type="button" disabled>互动待开放</button>
       </div>
@@ -1987,6 +2039,7 @@ function renderHome() {
   const losers = topLosers();
   const indexValue = totalMarketIndex();
   const indexMove = marketMove();
+  const indexTone = percentTone(indexMove);
   return `
     <section class="screen home-screen">
       <header class="market-header">
@@ -2003,7 +2056,7 @@ function renderHome() {
         <div class="index-card">
           <div class="index-label gold-text">实时大盘总指数</div>
           <div class="index-value">${price(indexValue)}</div>
-          <div class="index-change ${indexMove >= 0 ? "up" : "down"}">${indexMove >= 0 ? "+" : ""}${price(indexMove)}% ${indexMove >= 0 ? "⬆" : "⬇"}</div>
+          <div class="index-change ${indexTone}">${percentLabel(indexMove, { arrow: true })}</div>
         </div>
         <div class="home-rank-grid">
           ${renderHomeRankList("涨幅榜", "前五", gainers, "up")}
@@ -2048,12 +2101,13 @@ function renderHomeRankList(title, badge, items, tone) {
       ${items
         .map((item, index) => {
           const change = changePercent(item);
+          const tone = percentTone(change);
           return `
             <button class="home-rank-item" data-action="detail" data-id="${item.id}">
               <span class="home-rank-index">${index + 1}.</span>
               <span class="home-rank-name">${item.name}</span>
               <span class="home-rank-price">${price(item.price)}</span>
-              <span class="home-rank-change">${change >= 0 ? "+" : ""}${price(change)}%</span>
+              <span class="home-rank-change ${tone}">${percentLabel(change)}</span>
             </button>
           `;
         })
@@ -2081,12 +2135,13 @@ function renderMarketGroupCard(group) {
   const indexTarget = getTarget(group.indexId);
   const members = groupMembers(group);
   const avgMove = members.reduce((sum, target) => sum + changePercent(target), 0) / members.length;
+  const avgTone = percentTone(avgMove);
   return `
     <article class="group-card group-${group.tone}">
       <button class="group-main" data-action="detail" data-id="${indexTarget.id}">
         <span>${group.name}</span>
         <strong>${price(indexTarget.price)}</strong>
-        <em class="${avgMove >= 0 ? "up" : "down"}">${avgMove >= 0 ? "+" : ""}${price(avgMove)}%</em>
+        <em class="${avgTone}">${percentLabel(avgMove)}</em>
         <small>${members.length} 支成员</small>
       </button>
       <div class="group-members" aria-label="${group.name}成员">
@@ -2106,7 +2161,7 @@ function renderMarketGroupCard(group) {
 
 function renderMarketRow(target, index) {
   const change = changePercent(target);
-  const tone = change >= 0 ? "up" : "down";
+  const tone = percentTone(change);
   const groupInfo = marketGroupForTarget(target.id);
   const groupLabel =
     groupInfo && groupInfo.role === "index" ? `${groupInfo.group.shortName}指数` : groupInfo?.group.shortName;
@@ -2119,7 +2174,7 @@ function renderMarketRow(target, index) {
         </button>
       </td>
       <td class="col-price">${price(target.price)}</td>
-      <td class="col-change ${tone}">${change >= 0 ? "+" : ""}${price(change)}%</td>
+      <td class="col-change ${tone}">${percentLabel(change)}</td>
       <td class="col-volume">${money(target.volume)}</td>
       <td class="col-heat">${target.heat}</td>
       <td class="col-actions">
@@ -2174,6 +2229,7 @@ function renderDetail() {
   const holding = getHolding(target.id);
   const pnl = holdingProfit(target.id);
   const change = changePercent(target);
+  const tone = percentTone(change);
   const groupInfo = marketGroupForTarget(target.id);
   return `
     <section class="screen">
@@ -2187,7 +2243,7 @@ function renderDetail() {
           <div class="detail-name gold-text">${target.name}</div>
           <div class="detail-code">代码：${target.code}</div>
           <div class="detail-price">${price(target.price)}</div>
-          <div class="change ${change >= 0 ? "up" : "down"}">${change >= 0 ? "+" : ""}${price(change)}% ${change >= 0 ? "↑" : "↓"}</div>
+          <div class="change ${tone}">${percentLabel(change, { arrow: true })}</div>
         </div>
       </div>
 
@@ -2490,7 +2546,7 @@ function renderAnnouncements() {
       ${renderTopbar("公告", "官方公告")}
       <article class="announcement">
         <h3>【成盟总结】大盘播报</h3>
-        <p>今日酒馆指数波动 ${price(marketMove())}% ，热门标的成交活跃。请注意，本游戏所有金币均为虚拟数值。</p>
+        <p>今日酒馆指数波动 ${percentLabel(marketMove())}，热门标的成交活跃。请注意，本游戏所有金币均为虚拟数值。</p>
       </article>
       <article class="announcement">
         <h3>【活动】首次交易奖励</h3>

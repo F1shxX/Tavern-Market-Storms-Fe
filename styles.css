@@ -495,6 +495,10 @@ button:disabled:active {
   font-weight: 1000;
 }
 
+.index-change.flat {
+  color: #f2d89c;
+}
+
 .home-rank-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -591,6 +595,10 @@ button:disabled:active {
 .home-rank-panel.down .home-rank-index,
 .home-rank-panel.down .home-rank-change {
   color: var(--green);
+}
+
+.home-rank-panel .home-rank-change.flat {
+  color: #f2d89c;
 }
 
 .home-disclaimer {
@@ -987,6 +995,10 @@ button:disabled:active {
   text-align: right;
 }
 
+.group-main em.flat {
+  color: #f2d89c;
+}
+
 .group-main small {
   color: #f0cd91;
   font-size: 11px;
@@ -1234,6 +1246,10 @@ button:disabled:active {
   color: #3fe07b;
 }
 
+.col-change.flat {
+  color: #f2d89c;
+}
+
 .col-volume,
 .col-heat {
   color: #e6c895 !important;
@@ -1362,6 +1378,10 @@ button:disabled:active {
 
 .change.down {
   color: var(--green);
+}
+
+.change.flat {
+  color: #f2d89c;
 }
 
 .quick-actions {
@@ -1736,9 +1756,9 @@ button:disabled:active {
 }
 
 .interaction-dialog {
-  min-height: 128px;
+  min-height: 134px;
   margin: 8px auto 0;
-  padding: 28px 34px 21px;
+  padding: 28px 34px 18px;
   border: 0;
   border-radius: 16px;
   background:
@@ -1757,7 +1777,7 @@ button:disabled:active {
 }
 
 .interaction-dialog p {
-  margin: 6px auto 0;
+  margin: 7px auto 0;
   max-width: 286px;
   font-size: 12px;
   font-weight: 900;
@@ -1767,7 +1787,7 @@ button:disabled:active {
 .interaction-actions {
   display: flex;
   justify-content: center;
-  margin-top: 8px;
+  margin-top: 7px;
 }
 
 .interaction-choice {
@@ -2251,8 +2271,8 @@ body {
   }
 
   .interaction-dialog {
-    min-height: 120px;
-    padding: 25px 28px 18px;
+    min-height: 126px;
+    padding: 26px 28px 17px;
   }
 
   .interaction-speaker {
