@@ -2208,6 +2208,21 @@ function renderMarketSyncNote() {
   return `<div class="market-sync-note warn">${sync.message || "官网同步失败 · 保留上次真实行情"}</div>`;
 }
 
+function chartEndDate() {
+  const syncedAt = state.marketSync?.updatedAt || state.marketSync?.syncedAt;
+  const date = syncedAt ? new Date(syncedAt) : new Date();
+  return Number.isFinite(date.getTime()) ? date : new Date();
+}
+
+function trendDateLabels(count) {
+  const end = chartEndDate();
+  return Array.from({ length: count }, (_, index) => {
+    const date = new Date(end);
+    date.setDate(end.getDate() - (count - 1 - index));
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  });
+}
+
 function renderDetailGroupContext(groupInfo) {
   const { group, role } = groupInfo;
   const members = groupMembers(group);
@@ -2234,6 +2249,7 @@ function renderDetailGroupContext(groupInfo) {
 
 function renderChart(target) {
   const values = target.trend;
+  const labels = trendDateLabels(values.length);
   const max = Math.max(...values) * 1.06;
   const min = Math.min(...values) * 0.94;
   const range = max - min || 1;
@@ -2257,7 +2273,7 @@ function renderChart(target) {
       return `
         <line x1="${point.x}" y1="${highY}" x2="${point.x}" y2="${lowY}" stroke="${color}" stroke-width="3" />
         <rect x="${point.x - 12}" y="${top}" width="24" height="${height}" rx="3" fill="${color}" opacity="0.92" />
-        <text x="${point.x}" y="160" text-anchor="middle" fill="#fff7bf" font-size="12" font-weight="800">日${index + 1}</text>
+        <text x="${point.x}" y="160" text-anchor="middle" fill="#fff7bf" font-size="12" font-weight="800">${labels[index]}</text>
       `;
     })
     .join("");

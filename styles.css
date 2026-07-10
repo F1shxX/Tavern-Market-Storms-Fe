@@ -41,7 +41,7 @@ body {
     radial-gradient(circle at 50% 0%, rgba(170, 103, 34, 0.32), transparent 26rem),
     linear-gradient(180deg, #1b100b 0%, #060403 100%);
   color: var(--white);
-  font-family: "TMS Noto Sans SC", "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "TMS Noto Sans SC", "Noto Sans SC", "PingFang SC", "Arial", sans-serif;
 }
 
 button,
@@ -1861,7 +1861,7 @@ button:disabled {
 
 body {
   color: var(--cream);
-  font-family: "TMS Noto Sans SC", "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Arial", sans-serif;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "TMS Noto Sans SC", "Noto Sans SC", "PingFang SC", "Arial", sans-serif;
   font-weight: 900;
 }
 
