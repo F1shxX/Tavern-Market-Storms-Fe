@@ -5,9 +5,12 @@ const TREND_WINDOW = 7;
 const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.hostname)
   ? "http://127.0.0.1:3101"
   : "";
-const API_BASE_URL = window.TMS_API_BASE_URL || LOCAL_API_BASE_URL;
+const API_BASE_URL = (window.TMS_API_BASE_URL || LOCAL_API_BASE_URL).replace(/\/$/, "");
 const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
 const AUTH_STORAGE_KEY = "tavern-market-storms-auth-v1";
+const MARKET_SYNC_COOLDOWN_MS = 2 * 60 * 1000;
+const OUTSIDE_SCORE_BUCKET_MS = 12 * 60 * 60 * 1000;
+const OUTSIDE_SCORE_VARIANCE = 80;
 const NAME_REVIEW_PATTERNS = [
   /admin|root|system|official|moderator|support|gm|客服|官方|管理员|版主|系统|平台|运营/i,
   /共产党|中共|政府|公安|警察|法院|检察|军队|主席|总统|领导人/,
@@ -1193,8 +1196,12 @@ function authHeaders() {
   return state.auth?.token ? { authorization: `Bearer ${state.auth.token}` } : {};
 }
 
+function apiUrl(path) {
+  return `${API_BASE_URL}${path}`;
+}
+
 async function apiRequest(path, options = {}) {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
+  const response = await fetch(apiUrl(path), {
     ...options,
     headers: {
       "content-type": "application/json",
@@ -1206,6 +1213,7 @@ async function apiRequest(path, options = {}) {
   if (!response.ok || payload.ok === false) {
     const error = new Error(payload.message || payload.error || `请求失败：${response.status}`);
     error.code = payload.error;
+    error.status = response.status;
     throw error;
   }
   return payload.data ?? payload;
@@ -1263,8 +1271,12 @@ async function loadRemotePortfolio({ silent = false } = {}) {
     render();
   } catch (error) {
     console.warn("Failed to load player portfolio.", error);
-    saveAuth(null);
-    if (!silent) showToast("\u767b\u5f55\u5df2\u5931\u6548\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002");
+    if (error?.status === 401 || /AUTH_REQUIRED|SESSION_INVALID/i.test(String(error?.code || error?.message || ""))) {
+      saveAuth(null);
+      if (!silent) showToast("\u767b\u5f55\u5df2\u5931\u6548\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002");
+    } else if (!silent) {
+      showToast("账号数据暂时无法加载，请稍后重试。");
+    }
     render();
   }
 }
@@ -1399,12 +1411,17 @@ function findLeaderboardRow(target, rowMap) {
 }
 
 function deterministicOutsideScore(target, floorScore) {
-  const currentScore = Math.round((target.score || target.price * 1000 || 9000));
   const safeFloor = Math.max(5000, Number(floorScore) || 11000);
+  const seedTarget = seedTargets.find((item) => item.id === target.id) || target;
+  const rawAnchorScore = Math.round(seedTarget.score || seedTarget.price * 1000 || 9000);
   const seed = [...target.id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  const swing = Math.round(Math.sin(Date.now() / 3600000 + seed) * 140 + (seed % 97) - 48);
-  const lower = Math.max(3000, safeFloor - Math.max(900, Math.round(safeFloor * 0.1)));
-  const next = Math.max(lower, Math.min(safeFloor - 1, currentScore + swing));
+  const bucket = Math.floor(Date.now() / OUTSIDE_SCORE_BUCKET_MS);
+  const cap = Math.max(3000, safeFloor - 1);
+  const anchorScore = rawAnchorScore >= safeFloor
+    ? Math.max(3000, safeFloor - 180 - (seed % 520))
+    : rawAnchorScore;
+  const swing = Math.round(Math.sin(bucket + seed) * OUTSIDE_SCORE_VARIANCE + (seed % 41) - 20);
+  const next = Math.max(3000, Math.min(cap, anchorScore + swing));
   return Math.round(next);
 }
 
@@ -1421,6 +1438,17 @@ function normalizedScoreHistory(scores, fallbackScore) {
   const recent = values.slice(-TREND_WINDOW);
   if (!recent.length && Number.isFinite(nextFallback) && nextFallback > 0) return [nextFallback];
   return recent;
+}
+
+function outsideScoreHistory(target, nextScore) {
+  const seedTarget = seedTargets.find((item) => item.id === target.id) || target;
+  const sourceTrend = Array.isArray(seedTarget.trend) && seedTarget.trend.length ? seedTarget.trend : [seedTarget.price || priceFromScore(nextScore)];
+  const sourceScores = sourceTrend.slice(-TREND_WINDOW).map((priceValue) => Math.round(Number(priceValue) * 1000));
+  const padded = sourceScores.length >= TREND_WINDOW
+    ? sourceScores
+    : Array.from({ length: TREND_WINDOW - sourceScores.length }, () => sourceScores[0] || nextScore).concat(sourceScores);
+  padded[padded.length - 1] = Math.round(nextScore);
+  return padded;
 }
 
 function buildScoreTrend(target, scoreHistory, nextScore) {
@@ -1661,20 +1689,18 @@ function recalculateGroupIndexTargets() {
 }
 
 async function fetchLeaderboardSnapshot() {
-  if (API_BASE_URL) {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/leaderboard/battlegrounds`);
-      if (!response.ok) {
-        throw new Error(`leaderboard ${response.status}`);
-      }
-      const payload = await response.json();
-      if (!payload.ok || !payload.data) {
-        throw new Error(payload.message || "leaderboard unavailable");
-      }
-      return payload.data;
-    } catch (error) {
-      console.warn("Backend leaderboard sync failed, trying static snapshot.", error);
+  try {
+    const response = await fetch(apiUrl("/api/leaderboard/battlegrounds"), { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`leaderboard ${response.status}`);
     }
+    const payload = await response.json();
+    if (!payload.ok || !payload.data) {
+      throw new Error(payload.message || "leaderboard unavailable");
+    }
+    return payload.data;
+  } catch (error) {
+    console.warn("Backend leaderboard sync failed, trying static snapshot.", error);
   }
 
   const response = await fetch(`${STATIC_LEADERBOARD_URL}?v=${Date.now()}`, { cache: "no-store" });
@@ -1711,11 +1737,12 @@ async function syncMarketFromLeaderboard({ silent = false } = {}) {
       });
     } else {
       unmatched += 1;
-      applyTargetScore(target, deterministicOutsideScore(target, snapshot.floorScore), {
+      const nextScore = deterministicOutsideScore(target, snapshot.floorScore);
+      applyTargetScore(target, nextScore, {
         source: "outside-top-500",
         matched: false,
         floorScore: snapshot.floorScore,
-        scoreHistory: target.sync?.source === "outside-top-500" ? target.sync.scoreHistory : null
+        scoreHistory: outsideScoreHistory(target, nextScore)
       });
     }
   });
@@ -1729,6 +1756,8 @@ async function syncMarketFromLeaderboard({ silent = false } = {}) {
     unmatched,
     floorScore: snapshot.floorScore,
     floorRank: snapshot.floorRank,
+    fetched: snapshot.fetched,
+    total: snapshot.total,
     cached: snapshot.cached
   };
   saveState();
@@ -1741,6 +1770,11 @@ async function syncMarketFromLeaderboard({ silent = false } = {}) {
 }
 
 async function refreshMarketData() {
+  const lastSyncedAt = state.marketSync?.syncedAt ? new Date(state.marketSync.syncedAt).getTime() : 0;
+  if (state.marketSync?.status === "synced" && Number.isFinite(lastSyncedAt) && Date.now() - lastSyncedAt < MARKET_SYNC_COOLDOWN_MS) {
+    showToast("官网积分刚刚同步过，请稍后再刷新。");
+    return;
+  }
   try {
     state.marketSync = {
       status: "syncing",
@@ -2282,7 +2316,9 @@ function renderMarketSyncNote() {
   }
   if (sync.status === "synced") {
     const time = new Date(sync.syncedAt).toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
-    return `<div class="market-sync-note">已同步 ${sync.source} · 命中 ${sync.matched} 支 · 500名门槛 ${money(sync.floorScore)} · ${time}</div>`;
+    const sourceLabel = sync.cached ? "官网缓存" : "官网实时";
+    const countLabel = sync.fetched ? `${sync.fetched}名` : "500名";
+    return `<div class="market-sync-note">已同步${sourceLabel} ${sync.source} · 命中 ${sync.matched} 支 · ${countLabel}门槛 ${money(sync.floorScore)} · ${time}</div>`;
   }
   return `<div class="market-sync-note warn">${sync.message || "官网同步失败 · 保留上次真实行情"}</div>`;
 }

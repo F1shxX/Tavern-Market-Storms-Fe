@@ -42,7 +42,7 @@ const { chromium } = require("playwright");
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.getByText("主播指数榜").waitFor({ timeout: 3000 });
-  await page.getByText(/已同步 .*第13赛季/).waitFor({ timeout: 20000 });
+  await page.getByText(/已同步.*第13赛季/).waitFor({ timeout: 20000 });
   await page.getByText(/500名门槛/).waitFor({ timeout: 3000 });
   const syncState = await page.evaluate(() => {
     const saved = JSON.parse(localStorage.getItem("tavern-market-storms-state-v4"));
@@ -57,6 +57,23 @@ const { chromium } = require("playwright");
   });
   if (!syncState.marketSync || syncState.marketSync.status !== "synced") {
     throw new Error("Market should store synced leaderboard metadata.");
+  }
+  if (!syncState.marketSync.fetched || syncState.marketSync.fetched < 500) {
+    throw new Error(`Market sync should expose the official leaderboard row count, got ${syncState.marketSync.fetched}.`);
+  }
+  const outsideScoreCheck = await page.evaluate(() => {
+    const lowSeedTarget = { id: "stock-001", price: 7.38, score: 7380 };
+    const anchoredScore = deterministicOutsideScore(lowSeedTarget, 12183);
+    lowSeedTarget.score = 20000;
+    lowSeedTarget.price = 20;
+    const repeatedScore = deterministicOutsideScore(lowSeedTarget, 12183);
+    return { anchoredScore, repeatedScore };
+  });
+  if (outsideScoreCheck.anchoredScore !== outsideScoreCheck.repeatedScore) {
+    throw new Error(`Outside-top-500 score should not depend on the current refreshed score: ${JSON.stringify(outsideScoreCheck)}.`);
+  }
+  if (Math.abs(outsideScoreCheck.anchoredScore - 7380) > 250) {
+    throw new Error(`Outside-top-500 low-price stock should stay near its seed score, got ${outsideScoreCheck.anchoredScore}.`);
   }
   if (syncState.marketSync.floorScore !== 11440 && syncState.marketSync.floorScore < 10000) {
     throw new Error(`Unexpected leaderboard floor score: ${syncState.marketSync.floorScore}.`);
@@ -173,7 +190,7 @@ const { chromium } = require("playwright");
   await desktop.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await desktop.getByRole("button", { name: "行情", exact: true }).click();
   await desktop.getByText("主播指数榜").waitFor({ timeout: 3000 });
-  await desktop.getByText(/已同步 .*第13赛季/).waitFor({ timeout: 20000 });
+  await desktop.getByText(/已同步.*第13赛季/).waitFor({ timeout: 20000 });
   const appBox = await desktop.locator("#app").boundingBox();
   if (!appBox) {
     throw new Error("Could not measure desktop app shell.");
