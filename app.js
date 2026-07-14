@@ -8,6 +8,7 @@ const LOCAL_API_BASE_URL = ["127.0.0.1", "localhost"].includes(window.location.h
 const API_BASE_URL = (window.TMS_API_BASE_URL || LOCAL_API_BASE_URL).replace(/\/$/, "");
 const STATIC_LEADERBOARD_URL = "./data/battlegrounds-leaderboard.json";
 const AUTH_STORAGE_KEY = "tavern-market-storms-auth-v1";
+const DEVICE_STORAGE_KEY = "tavern-market-storms-device-v1";
 const MARKET_SYNC_COOLDOWN_MS = 2 * 60 * 1000;
 const OUTSIDE_SCORE_BUCKET_MS = 12 * 60 * 60 * 1000;
 const OUTSIDE_SCORE_VARIANCE = 80;
@@ -1192,6 +1193,32 @@ function saveAuth(auth) {
   localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(auth));
 }
 
+function randomDeviceId() {
+  const browserCrypto = globalThis.crypto;
+  if (browserCrypto?.randomUUID) return browserCrypto.randomUUID();
+  const bytes = new Uint8Array(16);
+  if (browserCrypto?.getRandomValues) {
+    browserCrypto.getRandomValues(bytes);
+  } else {
+    bytes.forEach((_, index) => {
+      bytes[index] = Math.floor(Math.random() * 256);
+    });
+  }
+  return [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function deviceId() {
+  try {
+    const saved = localStorage.getItem(DEVICE_STORAGE_KEY);
+    if (/^[a-zA-Z0-9:_-]{12,128}$/.test(saved || "")) return saved;
+    const next = randomDeviceId();
+    localStorage.setItem(DEVICE_STORAGE_KEY, next);
+    return next;
+  } catch {
+    return "";
+  }
+}
+
 function authHeaders() {
   return state.auth?.token ? { authorization: `Bearer ${state.auth.token}` } : {};
 }
@@ -1223,6 +1250,10 @@ function userFacingError(error, fallback = "操作失败，请稍后再试。") 
   const raw = String(error?.code || error?.message || "");
   if (/USERNAME_TAKEN/i.test(raw) || /Username is already taken/i.test(raw)) return "用户名已被占用。";
   if (/LOGIN_INVALID/i.test(raw) || /Username or password is incorrect/i.test(raw)) return "用户名或密码不正确。";
+  if (/RATE_LIMIT_REGISTER_DEVICE/i.test(raw)) return "当前设备今天已注册过账号，请明天再试。";
+  if (/RATE_LIMIT_REGISTER_IP/i.test(raw)) return "当前网络今天注册账号较多，请明天再试。";
+  if (/RATE_LIMIT_REGISTER_ATTEMPT/i.test(raw)) return "注册请求过于频繁，请稍后再试。";
+  if (/LOGIN_LOCKED|LOGIN_IP_LOCKED/i.test(raw)) return "登录失败次数过多，请 15 分钟后再试。";
   if (/USERNAME_INVALID/i.test(raw) || /Username must be/i.test(raw)) return "用户名需为 3-20 位中文、字母、数字或下划线。";
   if (/NAME_BLOCKED|DISPLAY_NAME_BLOCKED/i.test(raw) || /not allowed|inappropriate/i.test(raw)) return "用户名或昵称含有不合适内容，请更换。";
   if (/PASSWORD_INVALID/i.test(raw) || /Password must be/i.test(raw)) return "密码需为 8-72 位字符。";
@@ -1864,6 +1895,7 @@ async function submitCredentials(mode = state.authMode) {
       body: JSON.stringify({
         username,
         password,
+        deviceId: deviceId(),
         ...(mode === "register" && displayName ? { displayName } : {})
       })
     });
