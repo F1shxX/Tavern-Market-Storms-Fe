@@ -609,6 +609,43 @@ button:disabled:active {
   text-align: center;
 }
 
+.home-ornate-dialog {
+  width: min(70%, 278px);
+  aspect-ratio: 1074 / 1464;
+  display: grid;
+  place-items: center;
+  margin: 8px auto 0;
+  padding: 18% 12% 17%;
+  background: url("./assets/ui/purple-ornate-frame.webp") center / contain no-repeat;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.34));
+}
+
+.home-ornate-dialog .interaction-dialog {
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 17px 14px 13px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(152, 82, 219, 0.22), transparent 5.5rem),
+    linear-gradient(180deg, rgba(43, 24, 65, 0.84), rgba(20, 10, 32, 0.78));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 236, 176, 0.2),
+    inset 0 12px 22px rgba(255, 239, 197, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.28);
+}
+
+.home-ornate-dialog .interaction-dialog p {
+  max-width: none;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.home-ornate-dialog .interaction-choice {
+  min-width: 104px;
+  background: linear-gradient(180deg, rgba(87, 42, 139, 0.95), rgba(36, 18, 68, 0.95));
+}
+
 .site-filing {
   display: flex;
   flex-wrap: wrap;
@@ -2270,9 +2307,20 @@ body {
     font-size: 11px;
   }
 
+  .home-ornate-dialog {
+    width: min(66%, 232px);
+    margin-top: 7px;
+    padding: 17% 11% 16%;
+  }
+
   .interaction-dialog {
     min-height: 126px;
     padding: 26px 28px 17px;
+  }
+
+  .home-ornate-dialog .interaction-dialog {
+    min-height: 0;
+    padding: 15px 12px 12px;
   }
 
   .interaction-speaker {

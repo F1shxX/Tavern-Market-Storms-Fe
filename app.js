@@ -2164,7 +2164,9 @@ function renderHome() {
       <div class="home-disclaimer">
         纯娱乐模拟数据，不涉及充值、提现或真实金融交易。
       </div>
-      ${renderInteractionDialog()}
+      <div class="home-ornate-dialog">
+        ${renderInteractionDialog()}
+      </div>
       ${renderSiteFiling()}
       ${renderToast()}
     </section>
