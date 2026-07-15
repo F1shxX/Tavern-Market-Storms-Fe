@@ -1148,7 +1148,8 @@ const defaultState = {
   view: "home",
   toast: "",
   marketSync: null,
-  rankings: null
+  rankings: null,
+  scrollPositions: {}
 };
 
 let state = loadState();
@@ -1946,12 +1947,42 @@ function resetLocalState() {
   showToast("本地状态已重置。");
 }
 
-function setView(view, tab = view, selectedId = state.selectedId) {
+function screenElement() {
+  return document.querySelector(".screen");
+}
+
+function saveCurrentScrollPosition() {
+  const screen = screenElement();
+  if (!screen || !state.view) return;
+  state.scrollPositions = {
+    ...(state.scrollPositions || {}),
+    [state.view]: Math.max(0, Math.round(screen.scrollTop || 0))
+  };
+}
+
+function restoreScrollPosition(view) {
+  const screen = screenElement();
+  if (!screen) return;
+  const nextTop = Number(state.scrollPositions?.[view] || 0);
+  if (!Number.isFinite(nextTop) || nextTop <= 0) return;
+  requestAnimationFrame(() => {
+    const currentScreen = screenElement();
+    if (!currentScreen || state.view !== view) return;
+    currentScreen.scrollTop = Math.min(nextTop, currentScreen.scrollHeight);
+  });
+}
+
+function setView(view, tab = view, selectedId = state.selectedId, options = {}) {
+  const shouldSaveScroll = options.saveScroll !== false;
+  if (shouldSaveScroll) {
+    saveCurrentScrollPosition();
+  }
   state.view = view;
   state.activeTab = tab || state.activeTab || "home";
   state.selectedId = selectedId;
   saveState();
   render();
+  restoreScrollPosition(view);
   maybeAutoSyncMarket();
   if (view === "rankings") {
     loadRankings({ silent: true });

@@ -159,6 +159,16 @@ const { chromium } = require("playwright");
   await page.locator(".detail-group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "小浪宠物" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "炮炮婚庆" }).waitFor({ timeout: 3000 });
+  await page.getByRole("button", { name: "← 返回" }).click();
+  await page.getByText("主播指数榜").waitFor({ timeout: 3000 });
+  const restoredScroll = await screen.evaluate((element) => element.scrollTop);
+  if (restoredScroll < screenBox.height * 0.6) {
+    throw new Error(`Market page should restore the previous scroll position after returning from detail, got ${restoredScroll}.`);
+  }
+  const restoredLastRowBox = await lastRow.boundingBox();
+  if (!restoredLastRowBox || restoredLastRowBox.bottom < screenBox.y || restoredLastRowBox.y > screenBox.y + screenBox.height) {
+    throw new Error("The previously viewed lower market row should remain visible after returning from detail.");
+  }
 
   const desktop = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   await desktop.addInitScript(() => {
