@@ -1422,6 +1422,13 @@ function roundedPercent(value) {
   return Object.is(percent, -0) ? 0 : percent;
 }
 
+function signedDecimal(value) {
+  const numeric = Number(value);
+  const rounded = Number.isFinite(numeric) ? Number(numeric.toFixed(2)) : 0;
+  const normalized = Object.is(rounded, -0) ? 0 : rounded;
+  return `${normalized > 0 ? "+" : ""}${normalized.toFixed(2)}`;
+}
+
 function percentTone(value) {
   const percent = roundedPercent(value);
   if (percent > 0) return "up";
@@ -1431,10 +1438,8 @@ function percentTone(value) {
 
 function percentLabel(value, { arrow = false } = {}) {
   const percent = roundedPercent(value);
-  if (percent === 0) return arrow ? "持平" : "持平";
-  const direction = percent > 0 ? "+" : "";
-  const suffix = arrow ? (percent > 0 ? " ↑" : " ↓") : "";
-  return `${direction}${price(percent)}%${suffix}`;
+  const suffix = arrow && percent !== 0 ? (percent > 0 ? " ↑" : " ↓") : "";
+  return `${signedDecimal(percent)}%${suffix}`;
 }
 
 function hasBlockedNameContent(value) {
@@ -1610,6 +1615,19 @@ function estimateSell(target, quantity) {
 
 function changePercent(target) {
   return ((target.price - target.prevClose) / target.prevClose) * 100;
+}
+
+function priceChange(target) {
+  return Number((Number(target.price) - Number(target.prevClose)).toFixed(2));
+}
+
+function aShareMoveLabel(target, { stacked = false, arrow = false } = {}) {
+  const amount = signedDecimal(priceChange(target));
+  const percent = percentLabel(changePercent(target), { arrow });
+  if (stacked) {
+    return `<span class="change-amount">${amount}</span><small class="change-percent">${percent}</small>`;
+  }
+  return `${amount}（${percent}）`;
 }
 
 function holdingValue(id) {
@@ -2248,7 +2266,7 @@ function renderHomeRankList(title, badge, items, tone) {
               <span class="home-rank-index">${index + 1}.</span>
               <span class="home-rank-name">${item.name}</span>
               <span class="home-rank-price">${price(item.price)}</span>
-              <span class="home-rank-change ${tone}">${percentLabel(change)}</span>
+              <span class="home-rank-change ${tone}">${aShareMoveLabel(item, { stacked: true })}</span>
             </button>
           `;
         })
@@ -2275,14 +2293,14 @@ function renderMarketGroups() {
 function renderMarketGroupCard(group) {
   const indexTarget = getTarget(group.indexId);
   const members = groupMembers(group);
-  const avgMove = members.reduce((sum, target) => sum + changePercent(target), 0) / members.length;
-  const avgTone = percentTone(avgMove);
+  const indexMove = changePercent(indexTarget);
+  const indexTone = percentTone(indexMove);
   return `
     <article class="group-card group-${group.tone}">
       <button class="group-main" data-action="detail" data-id="${indexTarget.id}">
         <span>${group.name}</span>
         <strong>${price(indexTarget.price)}</strong>
-        <em class="${avgTone}">${percentLabel(avgMove)}</em>
+        <em class="${indexTone}">${aShareMoveLabel(indexTarget)}</em>
         <small>${members.length} 支成员</small>
       </button>
       <div class="group-members" aria-label="${group.name}成员">
@@ -2315,7 +2333,7 @@ function renderMarketRow(target, index) {
         </button>
       </td>
       <td class="col-price">${price(target.price)}</td>
-      <td class="col-change ${tone}">${percentLabel(change)}</td>
+      <td class="col-change ${tone}">${aShareMoveLabel(target, { stacked: true })}</td>
       <td class="col-volume">${money(target.volume)}</td>
       <td class="col-heat">${target.heat}</td>
       <td class="col-actions">
@@ -2384,7 +2402,7 @@ function renderDetail() {
           <div class="detail-name gold-text">${target.name}</div>
           <div class="detail-code">代码：${target.code}</div>
           <div class="detail-price">${price(target.price)}</div>
-          <div class="change ${tone}">${percentLabel(change, { arrow: true })}</div>
+          <div class="change ${tone}">${aShareMoveLabel(target, { arrow: true })}</div>
         </div>
       </div>
 
