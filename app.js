@@ -12,6 +12,9 @@ const DEVICE_STORAGE_KEY = "tavern-market-storms-device-v1";
 const MARKET_SYNC_COOLDOWN_MS = 2 * 60 * 1000;
 const OUTSIDE_SCORE_BUCKET_MS = 12 * 60 * 60 * 1000;
 const OUTSIDE_SCORE_VARIANCE = 80;
+const API_REQUEST_TIMEOUT_MS = 12000;
+const USERNAME_PATTERN = /^[\p{L}\p{N}_]{3,20}$/u;
+const DISPLAY_NAME_PATTERN = /^[\p{L}\p{N}_\-\s·•]{1,24}$/u;
 const NAME_REVIEW_PATTERNS = [
   /admin|root|system|official|moderator|support|gm|客服|官方|管理员|版主|系统|平台|运营/i,
   /共产党|中共|政府|公安|警察|法院|检察|军队|主席|总统|领导人/,
@@ -1228,14 +1231,35 @@ function apiUrl(path) {
   return `${API_BASE_URL}${path}`;
 }
 
-async function apiRequest(path, options = {}) {
-  const response = await fetch(apiUrl(path), {
-    ...options,
-    headers: {
-      "content-type": "application/json",
-      ...authHeaders(),
-      ...(options.headers || {})
+async function fetchWithTimeout(url, options = {}, timeoutMs = API_REQUEST_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } catch (error) {
+    if (controller.signal.aborted) {
+      const timeoutError = new Error("请求超时，请检查网络后重试。");
+      timeoutError.code = "REQUEST_TIMEOUT";
+      throw timeoutError;
     }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function apiRequest(path, options = {}) {
+  const headers = {
+    ...authHeaders(),
+    ...(options.headers || {})
+  };
+  const hasContentType = Object.keys(headers).some((name) => name.toLowerCase() === "content-type");
+  if (options.body !== undefined && options.body !== null && !hasContentType) {
+    headers["content-type"] = "application/json";
+  }
+  const response = await fetchWithTimeout(apiUrl(path), {
+    ...options,
+    headers
   });
   const payload = await response.json().catch(() => ({}));
   if (!response.ok || payload.ok === false) {
@@ -1258,8 +1282,10 @@ function userFacingError(error, fallback = "操作失败，请稍后再试。") 
   if (/USERNAME_INVALID/i.test(raw) || /Username must be/i.test(raw)) return "用户名需为 3-20 位中文、字母、数字或下划线。";
   if (/NAME_BLOCKED|DISPLAY_NAME_BLOCKED/i.test(raw) || /not allowed|inappropriate/i.test(raw)) return "用户名或昵称含有不合适内容，请更换。";
   if (/PASSWORD_INVALID/i.test(raw) || /Password must be/i.test(raw)) return "密码需为 8-72 位字符。";
-  if (/DISPLAY_NAME_INVALID/i.test(raw) || /Display name must be/i.test(raw)) return "昵称不能超过 24 个字符。";
+  if (/DISPLAY_NAME_INVALID/i.test(raw) || /Display name must be/i.test(raw)) return "昵称格式不正确，请使用 24 位以内的中文、字母、数字或常用分隔符。";
   if (/INSUFFICIENT|BALANCE|HOLDING/i.test(raw)) return "余额或持仓不足。";
+  if (/ORDER_EXPOSURE_LIMIT/i.test(raw)) return "单支股票持仓不能超过总资产的 25%。";
+  if (/REQUEST_TIMEOUT/i.test(raw)) return "请求超时，请检查网络后重试。";
   if (/leaderboard|upstream|snapshot/i.test(raw)) return "官网积分暂时无法同步。";
   return fallback;
 }
@@ -1377,6 +1403,16 @@ function money(value) {
   return Math.round(value).toLocaleString("zh-CN");
 }
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
 function price(value) {
   return Number(value).toFixed(2);
 }
@@ -1384,6 +1420,13 @@ function price(value) {
 function roundedPercent(value) {
   const percent = Math.round((Number(value) || 0) * 100) / 100;
   return Object.is(percent, -0) ? 0 : percent;
+}
+
+function signedDecimal(value) {
+  const numeric = Number(value);
+  const rounded = Number.isFinite(numeric) ? Number(numeric.toFixed(2)) : 0;
+  const normalized = Object.is(rounded, -0) ? 0 : rounded;
+  return `${normalized > 0 ? "+" : ""}${normalized.toFixed(2)}`;
 }
 
 function percentTone(value) {
@@ -1395,10 +1438,8 @@ function percentTone(value) {
 
 function percentLabel(value, { arrow = false } = {}) {
   const percent = roundedPercent(value);
-  if (percent === 0) return arrow ? "持平" : "持平";
-  const direction = percent > 0 ? "+" : "";
-  const suffix = arrow ? (percent > 0 ? " ↑" : " ↓") : "";
-  return `${direction}${price(percent)}%${suffix}`;
+  const suffix = arrow && percent !== 0 ? (percent > 0 ? " ↑" : " ↓") : "";
+  return `${signedDecimal(percent)}%${suffix}`;
 }
 
 function hasBlockedNameContent(value) {
@@ -1410,6 +1451,12 @@ function hasBlockedNameContent(value) {
 }
 
 function validateRegisterNames(username, displayName) {
+  if (!USERNAME_PATTERN.test(username)) {
+    return "用户名需为 3-20 位中文、字母、数字或下划线。";
+  }
+  if (displayName && !DISPLAY_NAME_PATTERN.test(displayName)) {
+    return "昵称仅支持中文、字母、数字、空格、下划线、短横线和间隔号，且不超过 24 位。";
+  }
   if (hasBlockedNameContent(username) || hasBlockedNameContent(displayName)) {
     return "用户名或昵称含有不合适内容，请更换后再注册。";
   }
@@ -1570,6 +1617,19 @@ function changePercent(target) {
   return ((target.price - target.prevClose) / target.prevClose) * 100;
 }
 
+function priceChange(target) {
+  return Number((Number(target.price) - Number(target.prevClose)).toFixed(2));
+}
+
+function aShareMoveLabel(target, { stacked = false, arrow = false } = {}) {
+  const amount = signedDecimal(priceChange(target));
+  const percent = percentLabel(changePercent(target), { arrow });
+  if (stacked) {
+    return `<span class="change-amount">${amount}</span><small class="change-percent">${percent}</small>`;
+  }
+  return `${amount}（${percent}）`;
+}
+
 function holdingValue(id) {
   const target = getTarget(id);
   const holding = getHolding(id);
@@ -1722,7 +1782,7 @@ function recalculateGroupIndexTargets() {
 
 async function fetchLeaderboardSnapshot() {
   try {
-    const response = await fetch(apiUrl("/api/leaderboard/battlegrounds"), { cache: "no-store" });
+    const response = await fetchWithTimeout(apiUrl("/api/leaderboard/battlegrounds"), { cache: "no-store" });
     if (!response.ok) {
       throw new Error(`leaderboard ${response.status}`);
     }
@@ -1735,7 +1795,7 @@ async function fetchLeaderboardSnapshot() {
     console.warn("Backend leaderboard sync failed, trying static snapshot.", error);
   }
 
-  const response = await fetch(`${STATIC_LEADERBOARD_URL}?v=${Date.now()}`, { cache: "no-store" });
+  const response = await fetchWithTimeout(STATIC_LEADERBOARD_URL, { cache: "force-cache" });
   if (!response.ok) {
     throw new Error(`leaderboard snapshot ${response.status}`);
   }
@@ -2019,8 +2079,8 @@ function renderTopbar(title, subtitle = "炉市风云") {
   return `
     <div class="topbar">
       <div class="brand">
-        <h1 class="hero-title">${title}</h1>
-        <h2>${player ? `${subtitle} · ${playerLabel}` : subtitle}</h2>
+        <h1 class="hero-title">${escapeHtml(title)}</h1>
+        <h2>${escapeHtml(player ? `${subtitle} · ${playerLabel}` : subtitle)}</h2>
       </div>
       <div class="balance-pill">
         <span>金币</span>
@@ -2043,14 +2103,14 @@ function renderLogin() {
         <form class="login-form" data-auth-form="${isRegister ? "register" : "login"}">
           <label class="login-field">
             <span>\u7528\u6237\u540d</span>
-            <input id="loginUsername" class="login-input" type="text" autocomplete="username" maxlength="20" placeholder="3-20\u4f4d\u5b57\u6bcd/\u6570\u5b57/\u4e0b\u5212\u7ebf" value="${state.loginUsername || ""}" />
+            <input id="loginUsername" class="login-input" type="text" autocomplete="username" maxlength="20" placeholder="3-20\u4f4d\u5b57\u6bcd/\u6570\u5b57/\u4e0b\u5212\u7ebf" value="${escapeHtml(state.loginUsername)}" />
           </label>
           ${
             isRegister
               ? `
                 <label class="login-field">
                   <span>\u6635\u79f0</span>
-                  <input id="loginDisplayName" class="login-input" type="text" autocomplete="nickname" maxlength="24" placeholder="\u6392\u884c\u699c\u663e\u793a\u540d\u79f0" value="${state.loginDisplayName || ""}" />
+                  <input id="loginDisplayName" class="login-input" type="text" autocomplete="nickname" maxlength="24" placeholder="\u6392\u884c\u699c\u663e\u793a\u540d\u79f0" value="${escapeHtml(state.loginDisplayName)}" />
                 </label>
               `
               : ""
@@ -2075,12 +2135,12 @@ function renderLogin() {
 }
 
 function renderImageButton({ className = "", action, id = "", label, image, disabled = false, busyLabel = "" }) {
-  const idAttribute = id ? ` data-id="${id}"` : "";
+  const idAttribute = id ? ` data-id="${escapeHtml(id)}"` : "";
   const disabledAttribute = disabled ? " disabled" : "";
-  const busyAttribute = busyLabel ? ` aria-busy="true" data-busy-label="${busyLabel}"` : "";
+  const busyAttribute = busyLabel ? ` aria-busy="true" data-busy-label="${escapeHtml(busyLabel)}"` : "";
   return `
-    <button class="image-button ${className}${busyLabel ? " is-busy" : ""}" data-action="${action}"${idAttribute} aria-label="${label}"${busyAttribute}${disabledAttribute}>
-      <img class="image-button-img" src="${image}" alt="${label}" />
+    <button class="image-button ${escapeHtml(className)}${busyLabel ? " is-busy" : ""}" data-action="${escapeHtml(action)}"${idAttribute} aria-label="${escapeHtml(label)}"${busyAttribute}${disabledAttribute}>
+      <img class="image-button-img" src="${escapeHtml(image)}" alt="${escapeHtml(label)}" />
     </button>
   `;
 }
@@ -2206,7 +2266,7 @@ function renderHomeRankList(title, badge, items, tone) {
               <span class="home-rank-index">${index + 1}.</span>
               <span class="home-rank-name">${item.name}</span>
               <span class="home-rank-price">${price(item.price)}</span>
-              <span class="home-rank-change ${tone}">${percentLabel(change)}</span>
+              <span class="home-rank-change ${tone}">${aShareMoveLabel(item, { stacked: true })}</span>
             </button>
           `;
         })
@@ -2233,14 +2293,14 @@ function renderMarketGroups() {
 function renderMarketGroupCard(group) {
   const indexTarget = getTarget(group.indexId);
   const members = groupMembers(group);
-  const avgMove = members.reduce((sum, target) => sum + changePercent(target), 0) / members.length;
-  const avgTone = percentTone(avgMove);
+  const indexMove = changePercent(indexTarget);
+  const indexTone = percentTone(indexMove);
   return `
     <article class="group-card group-${group.tone}">
       <button class="group-main" data-action="detail" data-id="${indexTarget.id}">
         <span>${group.name}</span>
         <strong>${price(indexTarget.price)}</strong>
-        <em class="${avgTone}">${percentLabel(avgMove)}</em>
+        <em class="${indexTone}">${aShareMoveLabel(indexTarget)}</em>
         <small>${members.length} 支成员</small>
       </button>
       <div class="group-members" aria-label="${group.name}成员">
@@ -2273,7 +2333,7 @@ function renderMarketRow(target, index) {
         </button>
       </td>
       <td class="col-price">${price(target.price)}</td>
-      <td class="col-change ${tone}">${percentLabel(change)}</td>
+      <td class="col-change ${tone}">${aShareMoveLabel(target, { stacked: true })}</td>
       <td class="col-volume">${money(target.volume)}</td>
       <td class="col-heat">${target.heat}</td>
       <td class="col-actions">
@@ -2342,7 +2402,7 @@ function renderDetail() {
           <div class="detail-name gold-text">${target.name}</div>
           <div class="detail-code">代码：${target.code}</div>
           <div class="detail-price">${price(target.price)}</div>
-          <div class="change ${tone}">${percentLabel(change, { arrow: true })}</div>
+          <div class="change ${tone}">${aShareMoveLabel(target, { arrow: true })}</div>
         </div>
       </div>
 
@@ -2383,9 +2443,9 @@ function renderMarketSyncNote() {
     const time = new Date(sync.syncedAt).toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
     const sourceLabel = sync.cached ? "官网缓存" : "官网实时";
     const countLabel = sync.fetched ? `${sync.fetched}名` : "500名";
-    return `<div class="market-sync-note">已同步${sourceLabel} ${sync.source} · 命中 ${sync.matched} 支 · ${countLabel}门槛 ${money(sync.floorScore)} · ${time}</div>`;
+    return `<div class="market-sync-note">已同步${sourceLabel} ${escapeHtml(sync.source)} · 命中 ${sync.matched} 支 · ${countLabel}门槛 ${money(sync.floorScore)} · ${time}</div>`;
   }
-  return `<div class="market-sync-note warn">${sync.message || "官网同步失败 · 保留上次真实行情"}</div>`;
+  return `<div class="market-sync-note warn">${escapeHtml(sync.message || "官网同步失败 · 保留上次真实行情")}</div>`;
 }
 
 function chartEndDate() {
@@ -2606,7 +2666,7 @@ function renderRankRow(row, variant = "") {
     <article class="rank-row ${variant} ${row.self ? "self" : ""}">
       <div class="rank-medal">${row.rank}</div>
       <div>
-        <div class="market-name gold-text">${row.displayName || row.username}</div>
+        <div class="market-name gold-text">${escapeHtml(row.displayName || row.username)}</div>
         <div class="market-code">编号 ${row.publicId}${row.self ? " · 当前账号" : ""}</div>
       </div>
       <div class="rank-score">${money(row.totalAssets)}<br>金币</div>
@@ -2671,7 +2731,7 @@ function renderAnnouncements() {
 }
 
 function renderToast() {
-  return `<div class="toast ${state.toast ? "show" : ""}">${state.toast}</div>`;
+  return `<div class="toast ${state.toast ? "show" : ""}">${escapeHtml(state.toast)}</div>`;
 }
 
 function render() {

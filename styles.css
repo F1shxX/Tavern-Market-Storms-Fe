@@ -23,8 +23,8 @@
   --white: #f7fbff;
   --muted: #b8d4f5;
   --shadow: rgba(0, 0, 0, 0.45);
-  --nav-space: 84px;
-  --nav-height: 58px;
+  --nav-space: 92px;
+  --nav-height: 64px;
 }
 
 * {
@@ -560,12 +560,12 @@ button:disabled:active {
 
 .home-rank-item {
   width: 100%;
-  min-height: 44px;
+  min-height: 50px;
   display: grid;
-  grid-template-columns: 24px 1fr;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
   grid-template-areas:
-    "idx name"
-    "idx data";
+    "idx name change"
+    "idx data change";
   gap: 0 4px;
   align-items: center;
   padding: 3px 7px;
@@ -605,7 +605,10 @@ button:disabled:active {
 }
 
 .home-rank-change {
+  grid-area: change;
   justify-self: end;
+  text-align: right;
+  line-height: 1.18;
 }
 
 .home-rank-panel.up .home-rank-index,
@@ -788,14 +791,14 @@ button:disabled:active {
 }
 
 .refresh-image-button {
-  width: 78px;
-  min-height: 32px;
+  width: 88px;
+  min-height: 40px;
 }
 
 .market-sync-button {
   flex: 0 0 auto;
-  width: 126px;
-  min-height: 42px;
+  width: 142px;
+  min-height: 50px;
 }
 
 .holding-image-button {
@@ -805,22 +808,22 @@ button:disabled:active {
 
 .holding-image-button .image-button-img,
 .market-sync-button .image-button-img {
-  max-height: 42px;
+  max-height: 50px;
 }
 
 .back-image-button {
   flex: 0 0 auto;
-  width: 96px;
-  min-height: 48px;
+  width: 110px;
+  min-height: 54px;
 }
 
 .back-image-button .image-button-img {
-  max-height: 48px;
+  max-height: 54px;
 }
 
 .trade-side-image-button {
   width: 100%;
-  min-height: 56px;
+  min-height: 64px;
 }
 
 .trade-screen {
@@ -845,20 +848,20 @@ button:disabled:active {
 }
 
 .trade-side-image-button .image-button-img {
-  height: 54px;
+  height: 62px;
   max-height: none;
   object-fit: fill;
 }
 
 .order-image-button {
   width: 100%;
-  min-height: 66px;
+  min-height: 74px;
   margin-top: 4px;
   padding: 0 4px;
 }
 
 .order-image-button .image-button-img {
-  height: 62px;
+  height: 70px;
   max-height: none;
   object-fit: fill;
 }
@@ -1314,7 +1317,7 @@ button:disabled:active {
 }
 
 .col-actions {
-  width: 56px;
+  width: 64px;
   text-align: center !important;
 }
 
@@ -1335,12 +1338,12 @@ button:disabled:active {
 }
 
 .image-table-action {
-  width: 54px;
-  min-height: 40px;
+  width: 60px;
+  min-height: 44px;
 }
 
 .image-table-action .image-button-img {
-  max-height: 40px;
+  max-height: 44px;
 }
 
 .table-action.primary {
@@ -1627,7 +1630,7 @@ button:disabled:active {
 
 .qty-row {
   display: grid;
-  grid-template-columns: 42px 1fr 42px;
+  grid-template-columns: 48px 1fr 48px;
   gap: 8px;
   align-items: center;
   margin: 12px 0;
@@ -1635,7 +1638,7 @@ button:disabled:active {
 
 .qty-row input {
   min-width: 0;
-  height: 46px;
+  height: 52px;
   border: 2px solid rgba(255, 211, 106, 0.75);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.94);
@@ -1650,7 +1653,7 @@ button:disabled:active {
 }
 
 .qty-step {
-  height: 42px;
+  height: 48px;
   border-radius: 12px;
   background: linear-gradient(180deg, #2c88d4, #0b4384);
   color: var(--white);
@@ -1951,6 +1954,19 @@ button:disabled:active {
   line-height: 1;
   text-shadow: var(--text-outline-soft);
   pointer-events: none;
+}
+
+.change-amount,
+.change-percent {
+  display: block;
+  white-space: nowrap;
+}
+
+.change-percent {
+  margin-top: 1px;
+  font-size: 0.84em;
+  font-style: normal;
+  opacity: 0.9;
 }
 
 .toast {

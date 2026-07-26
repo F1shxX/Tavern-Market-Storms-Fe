@@ -64,6 +64,35 @@ const { chromium } = require("playwright");
     throw new Error("An explicit auth failure should clear the saved login token.");
   }
 
+  await page.evaluate(() => {
+    state.loginUsername = '\"><img src=x onerror="window.__tmsXss = true">';
+    render();
+  });
+  const escapedInput = await page.locator("#loginUsername").inputValue();
+  const injectedNodes = await page.locator(".login-form img").count();
+  const xssTriggered = await page.evaluate(() => Boolean(window.__tmsXss));
+  if (escapedInput !== '\"><img src=x onerror="window.__tmsXss = true">' || injectedNodes || xssTriggered) {
+    throw new Error("Login field values must be rendered as text, never as HTML.");
+  }
+
+  const escapedRanking = await page.evaluate(() => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = renderRankRow({
+      rank: 1,
+      publicId: 100001,
+      displayName: '<img src=x onerror="window.__tmsRankingXss = true">',
+      totalAssets: 100000
+    });
+    return {
+      imageCount: wrapper.querySelectorAll("img").length,
+      text: wrapper.textContent,
+      triggered: Boolean(window.__tmsRankingXss)
+    };
+  });
+  if (escapedRanking.imageCount || escapedRanking.triggered || !escapedRanking.text.includes("<img src=x")) {
+    throw new Error("Ranking names must be rendered as text, never as HTML.");
+  }
+
   await browser.close();
   if (logs.length) {
     console.error(logs.join("\n"));

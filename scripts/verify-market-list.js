@@ -40,8 +40,22 @@ const { chromium } = require("playwright");
   );
 
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
+  const aShareMoveLabels = await page.evaluate(() => ({
+    flat: aShareMoveLabel({ price: 10, prevClose: 10 }),
+    rising: aShareMoveLabel({ price: 10.25, prevClose: 10 })
+  }));
+  if (aShareMoveLabels.flat.includes("持平") || !aShareMoveLabels.flat.includes("0.00") || !aShareMoveLabels.rising.includes("+0.25")) {
+    throw new Error(`Market movements should use A-share-style numeric labels, got ${JSON.stringify(aShareMoveLabels)}.`);
+  }
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.getByText("主播指数榜").waitFor({ timeout: 3000 });
+  const [syncButtonBox, navButtonBox] = await Promise.all([
+    page.locator(".market-sync-button").boundingBox(),
+    page.locator(".nav-image-button").first().boundingBox()
+  ]);
+  if (!syncButtonBox || syncButtonBox.height < 50 || !navButtonBox || navButtonBox.height < 64) {
+    throw new Error("High-frequency market and navigation buttons should use enlarged tap targets.");
+  }
   await page.getByText(/已同步.*第13赛季/).waitFor({ timeout: 20000 });
   await page.getByText(/500名门槛/).waitFor({ timeout: 3000 });
   const syncState = await page.evaluate(() => {

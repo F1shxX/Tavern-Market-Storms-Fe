@@ -27,3 +27,8 @@ Runtime features:
 - Ranking page from real player records
 - Announcements
 - Market sync from the backend leaderboard endpoint, with the static captured snapshot only as a real-data fallback
+- Request timeouts, safe text rendering for player-provided data, and browser-side validation that matches backend account rules
+
+## Deployment
+
+Use `deploy/nginx-static-cache.conf` inside the Nginx `server` block. It configures cache lifetimes and a restrictive Content Security Policy for this self-contained app. The `index.html` CSS/JS version suffix is the release cache-buster; update it when publishing a new static release.
