@@ -1885,7 +1885,7 @@ button:disabled:active {
   border: 0;
   background: none;
   color: #ded8c8;
-  text-align: left;
+  text-align: center;
   text-shadow: none;
   box-shadow: none;
 }
@@ -1908,7 +1908,7 @@ button:disabled:active {
 
 .interaction-actions {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 10px;
 }
 
