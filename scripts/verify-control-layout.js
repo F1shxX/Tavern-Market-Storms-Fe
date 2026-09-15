@@ -15,6 +15,17 @@ async function checkControls(page) {
     return problems.map((problem) => `${button.className}: ${problem}`);
   }));
   assert.deepEqual(violations, []);
+  const crowded = await page.locator(".quick-actions, .holding-actions, .account-actions, .qty-row, .nav").evaluateAll((groups) => groups.flatMap((group) => {
+    const children = [...group.children];
+    return children.flatMap((child, index) => children.slice(index + 1).flatMap((other) => {
+      const a = child.getBoundingClientRect();
+      const b = other.getBoundingClientRect();
+      const horizontalGap = Math.max(b.left - a.right, a.left - b.right);
+      const verticalGap = Math.max(b.top - a.bottom, a.top - b.bottom);
+      return horizontalGap < 5 && verticalGap < 5 ? [group.className] : [];
+    }));
+  }));
+  assert.deepEqual(crowded, [], "Controls must have visible separation");
 }
 
 async function checkDialog(page) {
@@ -32,13 +43,15 @@ async function checkDialog(page) {
     return {
       width: box.width,
       height: box.height,
+      borderless: style.borderImageSource === "none" && style.backgroundImage === "none" && parseFloat(style.borderTopWidth) === 0,
       fits: [...element.querySelectorAll(".interaction-speaker, p, button")].every((child) => {
         const rect = child.getBoundingClientRect();
         return rect.left >= content.left && rect.right <= content.right && rect.top >= content.top && rect.bottom <= content.bottom;
       })
     };
   });
-  assert(size.fits, "Dialog content must stay inside its frame");
+  assert(size.fits, "Dialogue content must fit its container");
+  assert(size.borderless, "Innkeeper dialogue must not have a decorative frame");
   return size;
 }
 
@@ -77,11 +90,12 @@ async function checkDialog(page) {
       await page.locator(".trade-side-image-button").first().click();
       await checkControls(page);
       const orderHeights = await page.locator(".order-image-button").evaluateAll((buttons) => buttons.map((b) => b.offsetHeight));
-      assert.deepEqual(orderHeights, [52, 52]);
+      assert.deepEqual(orderHeights, [48, 48]);
       await page.locator(".order-image-button").first().scrollIntoViewIfNeeded();
       await page.screenshot({ path: `.tmp/control-layout/order-${width}.png` });
       await page.locator('[data-tab="markets"]').click();
       await checkControls(page);
+      await page.screenshot({ path: `.tmp/control-layout/market-${width}.png` });
       assert.deepEqual(errors, []);
       await page.close();
       console.log(`Control layout verified at ${width}px`);

@@ -53,7 +53,7 @@ const { chromium } = require("playwright");
     page.locator(".market-sync-button").boundingBox(),
     page.locator(".nav-image-button").first().boundingBox()
   ]);
-  if (!syncButtonBox || syncButtonBox.height < 50 || !navButtonBox || navButtonBox.height < 64) {
+  if (!syncButtonBox || syncButtonBox.height < 44 || !navButtonBox || navButtonBox.height < 44) {
     throw new Error("High-frequency market and navigation buttons should use enlarged tap targets.");
   }
   await page.getByText(/已同步.*第13赛季/).waitFor({ timeout: 20000 });

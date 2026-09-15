@@ -2188,7 +2188,7 @@ function renderInteractionDialog() {
       <div class="interaction-speaker">旅店老板</div>
       <p>今日大盘波动 ${percentLabel(move)}，交易前留意标的热度、涨跌幅和单股买入上限。</p>
       <div class="interaction-actions">
-        <button class="interaction-choice" type="button" disabled>互动待开放</button>
+        <span class="interaction-status">互动待开放</span>
       </div>
     </section>
   `;
