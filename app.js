@@ -1224,7 +1224,9 @@ function deviceId() {
 }
 
 function authHeaders() {
-  return state.auth?.token ? { authorization: `Bearer ${state.auth.token}` } : {};
+  const headers = { "x-tms-device-id": deviceId() };
+  if (state.auth?.token) headers.authorization = `Bearer ${state.auth.token}`;
+  return headers;
 }
 
 function apiUrl(path) {
@@ -1266,6 +1268,7 @@ async function apiRequest(path, options = {}) {
     const error = new Error(payload.message || payload.error || `请求失败：${response.status}`);
     error.code = payload.error;
     error.status = response.status;
+    error.details = payload.details || null;
     throw error;
   }
   return payload.data ?? payload;
