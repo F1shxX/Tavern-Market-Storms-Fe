@@ -166,9 +166,9 @@ const { chromium } = require("playwright");
   await lastRow.locator(".stock-name-btn").click();
   await page.getByText("优巨集团").first().waitFor({ timeout: 3000 });
   await page.getByText(/代码：TM-044/).waitFor({ timeout: 3000 });
-  const detailNavImages = await page.locator(".nav .nav-button-img").count();
-  if (detailNavImages !== 5) {
-    throw new Error(`Detail page should keep the 5 bottom navigation buttons visible, found ${detailNavImages}.`);
+  const detailNavButtons = await page.locator(".nav button:visible").count();
+  if (detailNavButtons !== 5) {
+    throw new Error(`Detail page should keep the 5 bottom navigation buttons visible, found ${detailNavButtons}.`);
   }
   await page.locator(".detail-group-card").filter({ hasText: "优巨集团" }).waitFor({ timeout: 3000 });
   await page.locator(".detail-group-card").filter({ hasText: "小浪宠物" }).waitFor({ timeout: 3000 });

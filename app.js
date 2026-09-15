@@ -2137,33 +2137,33 @@ function renderLogin() {
   `;
 }
 
-function renderImageButton({ className = "", action, id = "", label, image, disabled = false, busyLabel = "" }) {
+function renderActionButton({ className = "", action, id = "", label, image, disabled = false, busyLabel = "" }) {
   const idAttribute = id ? ` data-id="${escapeHtml(id)}"` : "";
   const disabledAttribute = disabled ? " disabled" : "";
   const busyAttribute = busyLabel ? ` aria-busy="true" data-busy-label="${escapeHtml(busyLabel)}"` : "";
+  const tone = image === buttonAssets.buy ? "buy" : image === buttonAssets.sell ? "sell" : "default";
   return `
-    <button class="image-button ${escapeHtml(className)}${busyLabel ? " is-busy" : ""}" data-action="${escapeHtml(action)}"${idAttribute} aria-label="${escapeHtml(label)}"${busyAttribute}${disabledAttribute}>
-      <img class="image-button-img" src="${escapeHtml(image)}" alt="${escapeHtml(label)}" />
+    <button type="button" class="action-button tone-${tone} ${escapeHtml(className)}${busyLabel ? " is-busy" : ""}" data-action="${escapeHtml(action)}"${idAttribute} aria-label="${escapeHtml(label)}"${busyAttribute}${disabledAttribute}>
+      <span>${escapeHtml(busyLabel || label)}</span>
     </button>
   `;
 }
 
 function renderNav() {
   const tabs = [
-    ["home", "交易", "./assets/nav/nav-trade-lite.png"],
-    ["markets", "行情", "./assets/nav/nav-market-lite.png"],
-    ["holdings", "持仓", "./assets/nav/nav-holdings-lite.png"],
-    ["rankings", "排名", "./assets/nav/nav-rankings-lite.png"],
-    ["announcements", "社区", "./assets/nav/nav-community-lite.png"]
+    ["home", "交易"],
+    ["markets", "行情"],
+    ["holdings", "持仓"],
+    ["rankings", "排名"],
+    ["announcements", "社区"]
   ];
   return `
     <nav class="nav">
       ${tabs
         .map(
-          ([key, label, image]) => `
-            <button class="nav-image-button ${state.activeTab === key ? "active" : ""}" data-action="tab" data-tab="${key}" aria-label="${label}">
-              <img class="nav-button-img" src="${image}" alt="" loading="eager" decoding="sync" />
-              <span class="nav-fallback-label">${label}</span>
+          ([key, label]) => `
+            <button type="button" class="nav-image-button ${state.activeTab === key ? "active" : ""}" data-action="tab" data-tab="${key}" aria-label="${label}" ${state.activeTab === key ? 'aria-current="page"' : ""}>
+              <span class="nav-label">${label}</span>
             </button>
           `
         )
@@ -2203,7 +2203,7 @@ function renderHome() {
   return `
     <section class="screen home-screen">
       <header class="market-header">
-        ${renderImageButton({ className: "back-chip refresh-image-button", action: "simulate", label: "刷新", image: buttonAssets.refresh })}
+        ${renderActionButton({ className: "back-chip refresh-image-button", action: "simulate", label: "刷新", image: buttonAssets.refresh })}
         <div class="home-title game-logo-title">炉市风云</div>
         <div class="home-date">2026.06.15</div>
         <div class="home-balance">
@@ -2227,9 +2227,7 @@ function renderHome() {
       <div class="home-disclaimer">
         纯娱乐模拟数据，不涉及充值、提现或真实金融交易。
       </div>
-      <div class="home-ornate-dialog">
-        ${renderInteractionDialog()}
-      </div>
+      ${renderInteractionDialog()}
       ${renderSiteFiling()}
       ${renderToast()}
     </section>
@@ -2340,7 +2338,7 @@ function renderMarketRow(target, index) {
       <td class="col-volume">${money(target.volume)}</td>
       <td class="col-heat">${target.heat}</td>
       <td class="col-actions">
-        ${renderImageButton({ className: "table-action image-table-action", action: "trade", id: target.id, label: "交易", image: buttonAssets.marketTrade })}
+        ${renderActionButton({ className: "table-action image-table-action", action: "trade", id: target.id, label: "交易", image: buttonAssets.marketTrade })}
       </td>
     </tr>
   `;
@@ -2357,7 +2355,7 @@ function renderMarkets() {
           <div class="table-note">${stockCount} 支股票 · 官网积分同步</div>
           ${renderMarketSyncNote()}
         </div>
-        ${renderImageButton({ className: "market-sync-button", action: "simulate", label: "同步官网积分", image: buttonAssets.marketSync })}
+        ${renderActionButton({ className: "market-sync-button", action: "simulate", label: "同步官网积分", image: buttonAssets.marketSync })}
       </div>
       ${renderMarketGroups()}
       <div class="stock-table-wrap">
@@ -2396,8 +2394,8 @@ function renderDetail() {
   return `
     <section class="screen">
       <div class="topbar">
-        ${renderImageButton({ className: "back-image-button", action: "back", label: "← 返回", image: buttonAssets.back })}
-        ${renderImageButton({ className: "refresh-image-button", action: "simulate", label: "刷新行情", image: buttonAssets.refresh })}
+        ${renderActionButton({ className: "back-image-button", action: "back", label: "← 返回", image: buttonAssets.back })}
+        ${renderActionButton({ className: "refresh-image-button", action: "simulate", label: "刷新行情", image: buttonAssets.refresh })}
       </div>
       <div class="detail-head">
         <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
@@ -2418,8 +2416,8 @@ function renderDetail() {
       ${groupInfo ? renderDetailGroupContext(groupInfo) : ""}
 
       <div class="detail-actions">
-        ${renderImageButton({ className: "trade-side-image-button", action: "trade", id: target.id, label: "买入", image: buttonAssets.buy })}
-        ${renderImageButton({ className: "trade-side-image-button", action: "trade", id: target.id, label: "卖出", image: buttonAssets.sell })}
+        ${renderActionButton({ className: "trade-side-image-button", action: "trade", id: target.id, label: "买入", image: buttonAssets.buy })}
+        ${renderActionButton({ className: "trade-side-image-button", action: "trade", id: target.id, label: "卖出", image: buttonAssets.sell })}
       </div>
 
       <div class="holding-summary">
@@ -2545,7 +2543,7 @@ function renderTrade() {
   return `
     <section class="screen trade-screen">
       <div class="topbar">
-        ${renderImageButton({ className: "back-image-button", action: "detail", id: target.id, label: "← 返回", image: buttonAssets.back })}
+        ${renderActionButton({ className: "back-image-button", action: "detail", id: target.id, label: "← 返回", image: buttonAssets.back })}
       </div>
       <div class="trade-target panel">
         <img class="${avatarClassFor(target, "large")}" src="${avatarFor(target)}" alt="${target.name}" />
@@ -2569,7 +2567,7 @@ function renderTrade() {
             <div>预估消耗<strong id="buyEstimate">${money(buyValue)} 金币</strong></div>
             <div>买入上限<strong>${maxBuyQty} 股</strong></div>
           </div>
-          ${renderImageButton({ className: "order-image-button", action: "buy", id: target.id, label: "买入", image: buttonAssets.buy, disabled: tradeBusy, busyLabel: buyBusy ? "买入中..." : "" })}
+          ${renderActionButton({ className: "order-image-button", action: "buy", id: target.id, label: "买入", image: buttonAssets.buy, disabled: tradeBusy, busyLabel: buyBusy ? "买入中..." : "" })}
         </div>
 
         <div class="trade-card">
@@ -2583,7 +2581,7 @@ function renderTrade() {
             <div>持仓<strong>${holding.quantity} 股</strong></div>
             <div>预估到账<strong id="sellEstimate">${money(sellValue)} 金币</strong></div>
           </div>
-          ${renderImageButton({ className: "order-image-button", action: "sell", id: target.id, label: "卖出", image: buttonAssets.sell, disabled: tradeBusy, busyLabel: sellBusy ? "卖出中..." : "" })}
+          ${renderActionButton({ className: "order-image-button", action: "sell", id: target.id, label: "卖出", image: buttonAssets.sell, disabled: tradeBusy, busyLabel: sellBusy ? "卖出中..." : "" })}
         </div>
       </div>
 
@@ -2641,8 +2639,8 @@ function renderHoldingCard(target) {
         <p class="${pnl >= 0 ? "profit" : "loss"}">收益 ${formatSignedCoins(pnl)}</p>
       </div>
       <div class="holding-actions">
-        ${renderImageButton({ className: "holding-image-button", action: "detail", id: target.id, label: "查看详情", image: buttonAssets.holdingDetail })}
-        ${renderImageButton({ className: "holding-image-button", action: "trade", id: target.id, label: "继续交易", image: buttonAssets.holdingTrade })}
+        ${renderActionButton({ className: "holding-image-button", action: "detail", id: target.id, label: "查看详情", image: buttonAssets.holdingDetail })}
+        ${renderActionButton({ className: "holding-image-button", action: "trade", id: target.id, label: "继续交易", image: buttonAssets.holdingTrade })}
       </div>
     </article>
   `;
@@ -2725,8 +2723,10 @@ function renderAnnouncements() {
         }</p>
       </article>
       ${renderInteractionDialog()}
+      <div class="account-actions">
       <button class="btn btn-blue btn-wide" data-action="reload-profile">刷新账号</button>
       <button class="btn btn-red btn-wide" data-action="logout">退出登录</button>
+      </div>
       ${renderSiteFiling()}
       ${renderToast()}
     </section>

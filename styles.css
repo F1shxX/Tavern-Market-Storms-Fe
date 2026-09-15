@@ -149,6 +149,7 @@ body {
 
 .toast { border: 1px solid rgba(197,154,82,.5); border-radius: 12px; background: rgba(11,23,33,.96); }
 
+
 button:hover:not(:disabled) {
   filter: brightness(1.12) saturate(1.06);
   transform: translateY(-1px);
@@ -719,42 +720,6 @@ button:disabled:active {
   text-align: center;
 }
 
-.home-ornate-dialog {
-  width: min(70%, 278px);
-  aspect-ratio: 1074 / 1464;
-  display: grid;
-  place-items: center;
-  margin: 8px auto 0;
-  padding: 18% 12% 17%;
-  background: url("./assets/ui/purple-ornate-frame.webp") center / contain no-repeat;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.34));
-}
-
-.home-ornate-dialog .interaction-dialog {
-  width: 100%;
-  min-height: 0;
-  margin: 0;
-  padding: 17px 14px 13px;
-  border-radius: 14px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(152, 82, 219, 0.22), transparent 5.5rem),
-    linear-gradient(180deg, rgba(43, 24, 65, 0.84), rgba(20, 10, 32, 0.78));
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 236, 176, 0.2),
-    inset 0 12px 22px rgba(255, 239, 197, 0.08),
-    0 8px 16px rgba(0, 0, 0, 0.28);
-}
-
-.home-ornate-dialog .interaction-dialog p {
-  max-width: none;
-  font-size: 11px;
-  line-height: 1.4;
-}
-
-.home-ornate-dialog .interaction-choice {
-  min-width: 104px;
-  background: linear-gradient(180deg, rgba(87, 42, 139, 0.95), rgba(36, 18, 68, 0.95));
-}
 
 .site-filing {
   display: flex;
@@ -1914,13 +1879,12 @@ button:disabled:active {
 }
 
 .interaction-dialog {
-  min-height: 134px;
-  margin: 8px auto 0;
-  padding: 28px 34px 18px;
-  border: 0;
-  border-radius: 16px;
-  background:
-    url("./assets/ui/dialog-frame-wide.webp") center / 100% 100% no-repeat;
+  width: 100%;
+  margin: 16px auto;
+  padding: 10px 8px;
+  border: solid transparent;
+  border-width: 24px 30px;
+  border-image: url("./assets/ui/dialog-frame-wide.webp") 60 100 fill / 24px 30px stretch;
   color: var(--cream-bright);
   text-align: center;
   text-shadow: var(--text-outline-soft);
@@ -1937,9 +1901,10 @@ button:disabled:active {
 .interaction-dialog p {
   margin: 7px auto 0;
   max-width: 286px;
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1.42;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .interaction-actions {
@@ -2441,35 +2406,11 @@ body {
     font-size: 11px;
   }
 
-  .home-ornate-dialog {
-    width: min(66%, 232px);
-    margin-top: 7px;
-    padding: 17% 11% 16%;
-  }
-
-  .interaction-dialog {
-    min-height: 126px;
-    padding: 26px 28px 17px;
-  }
-
-  .home-ornate-dialog .interaction-dialog {
-    min-height: 0;
-    padding: 15px 12px 12px;
-  }
 
   .interaction-speaker {
     font-size: 16px;
   }
 
-  .interaction-dialog p {
-    font-size: 11px;
-    line-height: 1.38;
-  }
-
-  .interaction-choice {
-    min-height: 26px;
-    font-size: 11px;
-  }
 
   .detail-name {
     font-size: 25px;
@@ -2518,3 +2459,85 @@ body {
 .stock-table th { color: #d9b873; background: rgba(197,154,82,.08); }
 .stock-table tbody tr:hover td { background: rgba(91,132,155,.12); }
 .toast { border: 1px solid rgba(197,154,82,.5); border-radius: 12px; background: rgba(11,23,33,.96); }
+
+/* Shared control geometry; labels no longer inherit bitmap proportions. */
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 6px 12px;
+  border: 1px solid #b79555;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #347c9e, #1d4b65);
+  box-shadow: inset 0 1px 0 #ffffff30, 0 2px 3px #00000030;
+  color: #fff4d1;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-shadow: 0 1px 1px #00000060;
+  -webkit-text-stroke: 0;
+}
+
+.action-button.tone-buy {
+  background: linear-gradient(180deg, #f0c96f, #d7a64c);
+  color: #352609;
+  text-shadow: none;
+}
+
+.action-button.tone-sell {
+  background: linear-gradient(180deg, #ba514e, #913b40);
+}
+
+.action-button.refresh-image-button,
+.action-button.back-image-button { width: 88px; }
+.market-header .action-button { width: 100%; align-self: center; padding-inline: 4px; }
+.action-button.market-sync-button { width: 142px; height: 52px; min-height: 52px; }
+.action-button.image-table-action { width: 60px; height: 44px; min-height: 44px; padding: 4px; font-size: 13px; }
+.action-button.holding-image-button { width: 100%; }
+.action-button.trade-side-image-button,
+.action-button.order-image-button { width: 100%; height: 52px; min-height: 52px; font-size: 16px; }
+.action-button.is-busy { cursor: wait; }
+.action-button:disabled { transform: none; }
+.quick-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.qty-row { grid-template-columns: 48px minmax(0, 1fr) 48px; }
+.qty-row input, .qty-step { height: 48px; border-radius: 8px; }
+.account-actions { display: grid; gap: 12px; margin-block: 16px; }
+.btn { min-height: 48px; border-radius: 8px; font-size: 16px; line-height: 1.4; }
+.btn-green { background: linear-gradient(180deg, #358275, #226459); }
+.interaction-choice { min-height: 44px; min-width: 120px; font-size: 12px; }
+
+.nav { height: 76px; }
+.nav button { height: 64px; min-height: 64px; }
+.nav button.active,
+.nav button:hover:not(:disabled) { transform: none; }
+.nav button:active:not(:disabled),
+.nav button.active:active { transform: translateY(1px); }
+
+.nav .nav-label {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #c6cdd2;
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+.nav button.active .nav-label { color: #ffe3a0; }
+.nav button.active { box-shadow: inset 0 3px 0 #d8b565; filter: none; }
+
+@media (max-width: 370px) {
+  .market-header {
+    grid-template-areas: "title title balance" "back date balance";
+    grid-template-columns: 62px minmax(0, 1fr) auto;
+    gap: 6px 8px;
+  }
+  .home-title.game-logo-title { font-size: 30px; white-space: nowrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button { transition: none !important; }
+}

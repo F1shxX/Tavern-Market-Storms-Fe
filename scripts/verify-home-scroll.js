@@ -37,9 +37,9 @@ const { chromium } = require("playwright");
   await page.getByText("跌幅榜").waitFor({ timeout: 3000 });
   await page.getByText("旅店老板").waitFor({ timeout: 3000 });
   await page.getByRole("button", { name: "排名", exact: true }).waitFor({ timeout: 3000 });
-  const navImages = await page.locator(".nav .nav-button-img").count();
-  if (navImages !== 5) {
-    throw new Error(`Bottom navigation should render 5 image buttons, found ${navImages}.`);
+  const navButtons = await page.locator(".nav button:visible").count();
+  if (navButtons !== 5) {
+    throw new Error(`Bottom navigation should render 5 buttons, found ${navButtons}.`);
   }
   const activeNavLabel = await page.locator(".nav button.active").getAttribute("aria-label");
   if (activeNavLabel !== "交易") {

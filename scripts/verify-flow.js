@@ -33,7 +33,7 @@ const { chromium } = require("playwright");
         headers: {
           "access-control-allow-origin": "*",
           "access-control-allow-methods": "GET, POST, OPTIONS",
-          "access-control-allow-headers": "content-type, authorization"
+          "access-control-allow-headers": "content-type, authorization, x-tms-device-id"
         }
       });
       return;
@@ -52,7 +52,7 @@ const { chromium } = require("playwright");
         headers: {
           "access-control-allow-origin": "*",
           "access-control-allow-methods": "GET, POST, OPTIONS",
-          "access-control-allow-headers": "content-type, authorization"
+          "access-control-allow-headers": "content-type, authorization, x-tms-device-id"
         }
       });
       return;
@@ -112,13 +112,19 @@ const { chromium } = require("playwright");
     })
   );
 
+  await page.route("**/api/leaderboard/battlegrounds", (route) => route.fulfill({
+    status: 200,
+    contentType: "application/json",
+    headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ ok: true, data: require("../data/battlegrounds-leaderboard.json") })
+  }));
   await page.goto("http://127.0.0.1:5178/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.locator(".stock-name-btn").first().click();
   await page.getByRole("button", { name: "买入" }).click();
-  const tradeNavImages = await page.locator(".nav .nav-button-img").count();
-  if (tradeNavImages !== 5) {
-    throw new Error(`Trade page should keep the 5 bottom navigation buttons visible, found ${tradeNavImages}.`);
+  const tradeNavButtons = await page.locator(".nav button:visible").count();
+  if (tradeNavButtons !== 5) {
+    throw new Error(`Trade page should keep the 5 bottom navigation buttons visible, found ${tradeNavButtons}.`);
   }
   await page.getByRole("button", { name: "行情", exact: true }).click();
   await page.getByText("主播指数榜").waitFor({ timeout: 3000 });

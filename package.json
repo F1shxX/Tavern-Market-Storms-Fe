@@ -6,7 +6,8 @@
     "start": "python -m http.server 5178",
     "snapshot:leaderboard": "node scripts/generate-leaderboard-snapshot.js",
     "verify": "node scripts/verify-flow.js && node scripts/verify-market-list.js && node scripts/verify-auth-retry.js",
-    "verify:market": "node scripts/verify-market-list.js"
+    "verify:market": "node scripts/verify-market-list.js",
+    "verify:layout": "node scripts/verify-control-layout.js"
   },
   "devDependencies": {
     "playwright": "^1.60.0"
